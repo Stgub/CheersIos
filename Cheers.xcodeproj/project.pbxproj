@@ -14,6 +14,8 @@
 		19FBCB8F1E635FE500AA10B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19FBCB8D1E635FE500AA10B5 /* LaunchScreen.storyboard */; };
 		19FBCB9A1E635FE500AA10B5 /* CheersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FBCB991E635FE500AA10B5 /* CheersTests.swift */; };
 		19FBCBA51E635FE500AA10B5 /* CheersUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FBCBA41E635FE500AA10B5 /* CheersUITests.swift */; };
+		19FBCBB81E6379A600AA10B5 /* Shadow&RoundBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FBCBB71E6379A600AA10B5 /* Shadow&RoundBtn.swift */; };
+		19FBCBBA1E6379E200AA10B5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FBCBB91E6379E200AA10B5 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		19FBCBA01E635FE500AA10B5 /* CheersUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CheersUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		19FBCBA41E635FE500AA10B5 /* CheersUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheersUITests.swift; sourceTree = "<group>"; };
 		19FBCBA61E635FE500AA10B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		19FBCBB71E6379A600AA10B5 /* Shadow&RoundBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shadow&RoundBtn.swift"; sourceTree = "<group>"; };
+		19FBCBB91E6379E200AA10B5 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,8 +101,12 @@
 		19FBCB831E635FE500AA10B5 /* Cheers */ = {
 			isa = PBXGroup;
 			children = (
+				19FBCBB21E6378A700AA10B5 /* Services */,
+				19FBCBB31E6378AE00AA10B5 /* Utilities */,
+				19FBCBB41E6378B600AA10B5 /* Model */,
+				19FBCBB61E6378C200AA10B5 /* Controller */,
+				19FBCBB51E6378BC00AA10B5 /* View */,
 				19FBCB841E635FE500AA10B5 /* AppDelegate.swift */,
-				19FBCB861E635FE500AA10B5 /* ViewController.swift */,
 				19FBCB881E635FE500AA10B5 /* Main.storyboard */,
 				19FBCB8B1E635FE500AA10B5 /* Assets.xcassets */,
 				19FBCB8D1E635FE500AA10B5 /* LaunchScreen.storyboard */,
@@ -123,6 +131,44 @@
 				19FBCBA61E635FE500AA10B5 /* Info.plist */,
 			);
 			path = CheersUITests;
+			sourceTree = "<group>";
+		};
+		19FBCBB21E6378A700AA10B5 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		19FBCBB31E6378AE00AA10B5 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				19FBCBB91E6379E200AA10B5 /* Constants.swift */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		19FBCBB41E6378B600AA10B5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		19FBCBB51E6378BC00AA10B5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				19FBCBB71E6379A600AA10B5 /* Shadow&RoundBtn.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		19FBCBB61E6378C200AA10B5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				19FBCB861E635FE500AA10B5 /* ViewController.swift */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,6 +310,8 @@
 			files = (
 				19FBCB871E635FE500AA10B5 /* ViewController.swift in Sources */,
 				19FBCB851E635FE500AA10B5 /* AppDelegate.swift in Sources */,
+				19FBCBB81E6379A600AA10B5 /* Shadow&RoundBtn.swift in Sources */,
+				19FBCBBA1E6379E200AA10B5 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
