@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,7 +13,7 @@
         <!--signIn-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" userLabel="signIn" customClass="ViewController" customModule="Cheers" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FirstLoginVC" id="BYZ-38-t0r" userLabel="signIn" customClass="FirstLoginVC" customModule="Cheers" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -69,6 +69,9 @@
                                 <state key="normal" title="Facebook">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
+                                <connections>
+                                    <action selector="fbBtnTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qdd-JX-e23"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Nj-dI-YJz" customClass="Shadow_RoundBtn" customModule="Cheers" customModuleProvider="target">
                                 <rect key="frame" x="63.5" y="415.5" width="248" height="48"/>
@@ -127,7 +130,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="32.799999999999997" y="37.331334332833585"/>
+            <point key="canvasLocation" x="33" y="36"/>
         </scene>
         <!--logInSignUp-->
         <scene sceneID="1Fd-iX-CSv">
@@ -490,7 +493,7 @@
         <!--feed-->
         <scene sceneID="tMz-o6-qG9">
             <objects>
-                <viewController id="stK-Uc-ckb" userLabel="feed" customClass="ViewController" customModule="Cheers" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BarFeedVC" id="stK-Uc-ckb" userLabel="feed" customClass="BarFeedVC" customModule="Cheers" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Tee-XJ-kOd"/>
                         <viewControllerLayoutGuide type="bottom" id="o2v-sm-Wbd"/>
@@ -622,11 +625,11 @@
                                 <rect key="frame" x="0.0" y="179" width="375" height="488"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="87" id="e1n-h0-460">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BarTableViewCell" rowHeight="87" id="e1n-h0-460" customClass="BarTableViewCell" customModule="Cheers" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e1n-h0-460" id="dRF-Zo-fkb">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="86"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="87"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEw-oq-9uQ">
@@ -689,6 +692,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="stK-Uc-ckb" id="ld9-Sg-nXm"/>
+                                    <outlet property="delegate" destination="stK-Uc-ckb" id="uIU-TH-DZg"/>
+                                </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4TO-1e-mLo">
                                 <rect key="frame" x="119" y="95" width="56" height="15"/>
@@ -739,6 +746,10 @@
                             <constraint firstAttribute="trailing" secondItem="WBt-Ae-gyT" secondAttribute="trailing" id="zdV-ed-kZG"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="doG-Rr-BCS" id="5ue-ge-8mQ"/>
+                        <outlet property="userImageView" destination="Ruh-zk-ykB" id="wu6-Ve-fFf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aTR-ML-kOu" sceneMemberID="firstResponder"/>
             </objects>
@@ -747,7 +758,7 @@
         <!--account-->
         <scene sceneID="Otw-T8-FuJ">
             <objects>
-                <viewController id="ecw-P9-59P" userLabel="account" customClass="ViewController" customModule="Cheers" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ecw-P9-59P" userLabel="account" customClass="AccountVC" customModule="Cheers" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="k6L-OJ-t1k"/>
                         <viewControllerLayoutGuide type="bottom" id="7KB-V2-hsC"/>
@@ -768,6 +779,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HzC-yU-B9v">
                                         <rect key="frame" x="16" y="28" width="18" height="24"/>
                                         <state key="normal" image="LogoSquare"/>
+                                        <connections>
+                                            <action selector="backBtnTapped:" destination="ecw-P9-59P" eventType="touchUpInside" id="s5R-T4-Qlj"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -796,6 +810,9 @@
                                 <state key="normal" title="Log Out">
                                     <color key="titleColor" red="1" green="0.65490196079999996" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
+                                <connections>
+                                    <action selector="logOutBtnTapped:" destination="ecw-P9-59P" eventType="touchUpInside" id="U94-Lq-PKA"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eWW-CH-rih">
                                 <rect key="frame" x="0.0" y="97" width="375" height="30"/>
@@ -915,7 +932,7 @@
         <!--feed-->
         <scene sceneID="dfY-mT-RZm">
             <objects>
-                <viewController id="Evp-ht-W1Q" userLabel="feed" customClass="ViewController" customModule="Cheers" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Evp-ht-W1Q" userLabel="feed" customClass="HistoryVC" customModule="Cheers" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="m6H-Mo-Qzk"/>
                         <viewControllerLayoutGuide type="bottom" id="Smo-ZC-1lo"/>
@@ -936,6 +953,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKR-Ev-sGx">
                                         <rect key="frame" x="333" y="28" width="18" height="24"/>
                                         <state key="normal" image="LogoSquare"/>
+                                        <connections>
+                                            <action selector="backBtnTapped:" destination="Evp-ht-W1Q" eventType="touchUpInside" id="xls-Fp-qVA"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1019,7 +1039,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6H3-6P-WFP" id="UeR-X4-UaQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="86"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="87"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32P-ih-Bfi">
@@ -1141,7 +1161,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XOO-DX-iGM" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1359" y="-913"/>
+            <point key="canvasLocation" x="-1244" y="-154"/>
         </scene>
     </scenes>
     <resources>
