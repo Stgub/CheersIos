@@ -51,6 +51,15 @@ class FirstLoginVC: UIViewController {
                                 print("Chuck: Result from FB graph request - \(result)")
                                 if let result = result as? NSDictionary {
                                     if let birthday = result["birthday"] as? String{
+                                        let dateFormatter = DateFormatter()
+                                        dateFormatter.dateFormat = "dd/MM/yyyy"
+                                        let date = dateFormatter.date(from: birthday)
+                                        print("birthday day formatted")
+                                        let age = (date?.timeIntervalSinceNow)! / (60 * 60 * 24 * 365)
+                                        if age > -21 {
+                                            presentUIAlert(sender: self, title: "Does not meet age requirements", message: "User must be over 21 to use")
+                                            return
+                                        }
                                         userData[userDataTypes.birthday] = birthday
                                     } else { print("Chuck: Could'nt grab FB birthday")}
                                     if let email = result["email"] as? String{
@@ -76,15 +85,11 @@ class FirstLoginVC: UIViewController {
                                                     userImage = image
                                                     print("Chuck: successfully got facebook image")
                                                 } else { print("Chuck: Could not get facebook image from data") }
-                                            } else {
-                                                print("Chuck: error with loading facebook image")
-                                            }
+                                            } else {  print("Chuck: error with loading facebook image") }
                                         }
                                     } else { print("Chuck : No facebook image grabbed") }
                                     
-                                } else {
-                                    print("Chuck: Could'nt cast result to NSDictionary")
-                                }
+                                } else { print("Chuck: Could'nt cast result to NSDictionary") }
                             }
                             self.firebaseAuth(credential,userData:userData)
                     })
@@ -100,7 +105,7 @@ class FirstLoginVC: UIViewController {
     func firebaseAuth(_ credential: FIRAuthCredential , userData:Dictionary<String, String>){
         FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
             if error != nil {
-                print("Chuck: Unabe to authenticate with Firebase - \(error)")
+                print("Chuck: Unable to authenticate with Firebase - \(error)")
             } else {
                 print("Chuck: Succesfully authenticated with Firebase")
                 if let user = user {
@@ -112,11 +117,31 @@ class FirstLoginVC: UIViewController {
     }
     func completeSignIn(id:String, userData:Dictionary<String, String>){
         // for automatic sign in
+        //Check if there is a user with ID
+        DataService.ds.REF_USERS.observeSingleEvent(of: .value, with:{
+            (snapshot) in
+            if snapshot.hasChild(id) {
+            
+            } else {
+                //If there is not a user with ID but this device is already associated with an account, don't let them create multiple accounts on device
+                 DataService.ds.REF_DEVICE_IDS.observeSingleEvent(of: .value, with: {
+                    (deviceSnapshot) in
+                    let deviceId = UIDevice.current.identifierForVendor!.uuidString
+                    if deviceSnapshot.hasChild(deviceId) {
+                        presentUIAlert(sender: self, title: "Device is already associated with an account", message: "Please contact support at support@TheDrinkClub.com")
+                        return
+                    }
+                })
+            }
+        })
+        
         DataService.ds.createFirebaseDBUser(uid: id, userData: userData)
         let KeychainResult = KeychainWrapper.standard.set(id, forKey: KEY_UID)
         print("Chuck: Data saved to keycahain \(KeychainResult)")
         presentBarFeedVC(sender: self)
     }
+
+
 
     /*
     // MARK: - Navigation

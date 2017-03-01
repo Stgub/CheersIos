@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -706,6 +706,11 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="sEw-oq-9uQ" secondAttribute="bottom" id="xb9-r9-s3u"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="barImageView" destination="Ov4-Lr-QQU" id="eEe-tw-tG4"/>
+                                            <outlet property="barNameLabel" destination="qeI-wa-mkA" id="rxh-qG-lJZ"/>
+                                            <outlet property="barStreetLabel" destination="fDV-dp-hLD" id="o33-EX-LTj"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -765,6 +770,7 @@
                     <connections>
                         <outlet property="tableView" destination="doG-Rr-BCS" id="5ue-ge-8mQ"/>
                         <outlet property="userImageView" destination="Ruh-zk-ykB" id="wu6-Ve-fFf"/>
+                        <segue destination="FUQ-Ai-nDG" kind="show" identifier="toBarDetailSegue" id="PpL-oT-CxO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aTR-ML-kOu" sceneMemberID="firstResponder"/>
@@ -1193,7 +1199,7 @@
         <!--redeemDrink-->
         <scene sceneID="c8r-rw-QUK">
             <objects>
-                <viewController id="FUQ-Ai-nDG" userLabel="redeemDrink" sceneMemberID="viewController">
+                <viewController id="FUQ-Ai-nDG" userLabel="redeemDrink" customClass="BarDetailVC" customModule="Cheers" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sCf-TC-bcU"/>
                         <viewControllerLayoutGuide type="bottom" id="Ng8-Gs-i1d"/>
@@ -1208,6 +1214,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bLr-xQ-24W">
                                         <rect key="frame" x="24" y="29" width="12" height="22"/>
                                         <state key="normal" image="backBtnBlack"/>
+                                        <connections>
+                                            <action selector="backBtnTapped:" destination="FUQ-Ai-nDG" eventType="touchUpInside" id="bmX-K0-yQv"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Redeem your drink" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q1E-Q4-j84">
                                         <rect key="frame" x="84" y="30" width="153" height="20"/>
@@ -1249,8 +1258,8 @@
                                     <constraint firstAttribute="height" constant="56" id="riI-ig-MFm"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Steven" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfV-W5-FcB">
-                                <rect key="frame" x="80" y="73" width="55" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bar Nun" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfV-W5-FcB">
+                                <rect key="frame" x="80" y="73" width="66" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="rE2-Oh-tcm"/>
                                 </constraints>
@@ -1404,7 +1413,12 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="userImageView" destination="dkK-OB-sDY" id="dvJ-Hc-rdN"/>
+                        <outlet property="barDescriptLabel" destination="WXm-ib-lDC" id="2dk-Kt-0w6"/>
+                        <outlet property="barDrinksLabel" destination="Obi-Sp-7if" id="LqG-Qu-ioG"/>
+                        <outlet property="barImageView" destination="dkK-OB-sDY" id="gN3-T9-VBL"/>
+                        <outlet property="barNameLabel" destination="gfV-W5-FcB" id="sQx-iM-xvV"/>
+                        <outlet property="barPhoneNumLabel" destination="YXR-aD-7YD" id="uaU-YD-RtZ"/>
+                        <outlet property="barStreetLabel" destination="lRh-j4-9s6" id="vMg-bU-rFu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9aO-x1-X0c" sceneMemberID="firstResponder"/>

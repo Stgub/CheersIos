@@ -9,7 +9,11 @@
 import UIKit
 
 class BarTableViewCell: UITableViewCell {
-
+    var bar:Bar!
+    @IBOutlet weak var barNameLabel: UILabel!
+    @IBOutlet weak var barImageView: UIImageView!
+    @IBOutlet weak var barStreetLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
