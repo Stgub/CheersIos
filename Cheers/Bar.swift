@@ -20,6 +20,7 @@ class Bar {
     var location:String!
     var img:UIImage!
     var imgUrl:String!
+    var hasBeenUsed:Bool!
     
     init(barKey:String, dataDict:Dictionary<String,AnyObject>){
         self.key = barKey

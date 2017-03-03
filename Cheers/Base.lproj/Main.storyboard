@@ -637,15 +637,25 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.87" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4TO-1e-mLo">
+                                <rect key="frame" x="119" y="95" width="56" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="WPa-qp-Jxe"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                <state key="normal" title="Premium">
+                                    <color key="titleColor" red="1" green="0.65490196079999996" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="87" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="doG-Rr-BCS">
                                 <rect key="frame" x="0.0" y="179" width="320" height="389"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BarTableViewCell" rowHeight="87" id="e1n-h0-460" customClass="BarTableViewCell" customModule="Cheers" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="BarTableViewCell" rowHeight="87" id="e1n-h0-460" customClass="BarTableViewCell" customModule="Cheers" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e1n-h0-460" id="dRF-Zo-fkb">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="87"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="86"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEw-oq-9uQ">
@@ -685,6 +695,16 @@
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.54000000000000004" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YbA-Jd-vzT">
+                                                            <rect key="frame" x="207" y="20" width="97" height="30"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <state key="normal" title="Free Drink">
+                                                                <color key="titleColor" red="1" green="0.65490196079999996" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="redeemBtnTapped:" destination="e1n-h0-460" eventType="touchUpInside" id="0P7-C0-zZC"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -694,8 +714,10 @@
                                                         <constraint firstItem="dTn-As-l8a" firstAttribute="top" secondItem="fDV-dp-hLD" secondAttribute="bottom" constant="2" id="S77-ZV-0JL"/>
                                                         <constraint firstItem="fDV-dp-hLD" firstAttribute="leading" secondItem="qeI-wa-mkA" secondAttribute="leading" id="akS-fU-u9m"/>
                                                         <constraint firstItem="Ov4-Lr-QQU" firstAttribute="leading" secondItem="sEw-oq-9uQ" secondAttribute="leading" constant="8" id="bUv-yB-2A7"/>
+                                                        <constraint firstItem="YbA-Jd-vzT" firstAttribute="centerY" secondItem="sEw-oq-9uQ" secondAttribute="centerY" id="hiL-mU-NUV"/>
                                                         <constraint firstItem="dTn-As-l8a" firstAttribute="bottom" secondItem="Ov4-Lr-QQU" secondAttribute="bottom" id="tyd-Wf-Hn7"/>
                                                         <constraint firstItem="dTn-As-l8a" firstAttribute="leading" secondItem="fDV-dp-hLD" secondAttribute="leading" id="xNf-L8-olB"/>
+                                                        <constraint firstAttribute="trailing" secondItem="YbA-Jd-vzT" secondAttribute="trailing" constant="8" id="yQ7-h8-s2q"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -710,6 +732,7 @@
                                             <outlet property="barImageView" destination="Ov4-Lr-QQU" id="eEe-tw-tG4"/>
                                             <outlet property="barNameLabel" destination="qeI-wa-mkA" id="rxh-qG-lJZ"/>
                                             <outlet property="barStreetLabel" destination="fDV-dp-hLD" id="o33-EX-LTj"/>
+                                            <outlet property="freeDrinkBtn" destination="YbA-Jd-vzT" id="pPN-8b-S4e"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -718,16 +741,6 @@
                                     <outlet property="delegate" destination="stK-Uc-ckb" id="uIU-TH-DZg"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4TO-1e-mLo">
-                                <rect key="frame" x="119" y="95" width="56" height="15"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="15" id="WPa-qp-Jxe"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                <state key="normal" title="Premium">
-                                    <color key="titleColor" red="1" green="0.65490196079999996" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -1061,7 +1074,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6H3-6P-WFP" id="UeR-X4-UaQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="87"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="86"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32P-ih-Bfi">
@@ -1422,6 +1435,7 @@
                         <outlet property="barNameLabel" destination="gfV-W5-FcB" id="sQx-iM-xvV"/>
                         <outlet property="barPhoneNumLabel" destination="YXR-aD-7YD" id="uaU-YD-RtZ"/>
                         <outlet property="barStreetLabel" destination="lRh-j4-9s6" id="vMg-bU-rFu"/>
+                        <outlet property="redeemDrinkBtn" destination="HSS-Ga-u1A" id="iaF-Rw-C1T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9aO-x1-X0c" sceneMemberID="firstResponder"/>
