@@ -75,20 +75,10 @@ class FirstLoginVC: UIViewController {
                                     if let picture = result["picture"] as? NSDictionary {
                                         let data = picture["data"] as! NSDictionary
                                         let imgURL = data["url"]
-                                        let url = NSURL(string:imgURL as! String)
-                                        let urlRequest = NSURLRequest(url: url! as URL)
+                                        print("setting URL")
+                                        userData[userDataTypes.imgUrl] = imgURL as! String?
                                         
-                                        NSURLConnection.sendAsynchronousRequest(urlRequest as URLRequest, queue: OperationQueue.main) {
-                                            (response:URLResponse?, data:Data?, error:Error?) -> Void in
-                                            if error == nil {
-                                                if let image = UIImage(data: data!) {
-                                                    userImage = image
-                                                    print("Chuck: successfully got facebook image")
-                                                } else { print("Chuck: Could not get facebook image from data") }
-                                            } else {  print("Chuck: error with loading facebook image") }
-                                        }
                                     } else { print("Chuck : No facebook image grabbed") }
-                                    
                                 } else { print("Chuck: Could'nt cast result to NSDictionary") }
                             }
                             self.firebaseAuth(credential,userData:userData)
@@ -106,10 +96,10 @@ class FirstLoginVC: UIViewController {
         FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
             if error != nil {
                 print("Chuck: Unable to authenticate with Firebase - \(error)")
+                
             } else {
                 print("Chuck: Succesfully authenticated with Firebase")
                 if let user = user {
-                    
                     self.completeSignIn(id: user.uid,userData: userData)
                 }
             }

@@ -8,8 +8,7 @@
 
 import UIKit
 import Firebase
-
-var userImage:UIImage!
+var currentUser:User!
 class BarFeedVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var userImageView: UIImageView!
@@ -18,52 +17,33 @@ class BarFeedVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var selectedBar:Bar!
     override func viewDidLoad() {
         super.viewDidLoad()
- 
-        userImageView.image = userImage
+        
+        getCurrentUserInfo { 
+            if let user = currentUser{
+                user.getUserImg(returnBlock: { (image) in
+                    DispatchQueue.main.async {
+                        self.userImageView.image = image
+                    }
+                
+                })
+            } else { print( "CHUCK: No current user") }
+        }
+
         DataService.ds.REF_BARS.observeSingleEvent(of: .value, with: {
             (snapshot) in
             if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
                 for snap in snapshots {
                     print("CHUCK: SNAP - \(snap)")
-                    let newBar = Bar()
-                    
                     if let barData = snap.value as? Dictionary<String, AnyObject>{
-                        let barName = snap.key
-                        newBar.name = barName
-                        if let location = barData[Bar.dataTypes.location] as? String{
-                            print("Location = \(location)")
-                            newBar.location = location
+                        let newBar = Bar(barKey: snap.key, dataDict: barData)
+                        newBar.getImage(){
+                            self.bars.append(newBar)
                             self.tableView.reloadData()
-                            
                         }
-                        
-                        if let imgUrl = barData[Bar.dataTypes.imgUrl] as? String{
-                            print("Image URL = \(imgUrl)")
-                            let ref = FIRStorage.storage().reference(forURL: imgUrl)
-                            ref.data(withMaxSize: 2 * 1024 * 1024, completion: { (data, error) in
-                                if error != nil {
-                                    print("Chuck: Error downloading img -\(error)")
-                                    
-                                } else {
-                                    print("Chuck: Img downloaded from Firebase storage")
-                                    if let imgData = data {
-                                        if let img = UIImage(data: imgData) {
-                                            newBar.img = img
-                                            self.bars.append(newBar)
-                                            self.tableView.reloadData()
-                                        } else { print("Could not load image from data")}
-                                    }
-                                }
-                            })
-
-                        }
-
                     }
                 }
             }
-            
         })
-        
     }
     
     //MARK: Table View functions
@@ -77,7 +57,7 @@ class BarFeedVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell (withIdentifier: "BarTableViewCell") as! BarTableViewCell
         let bar = bars[indexPath.row]
         cell.bar = bar
-        if let barName = bar.name {
+        if let barName = bar.barName {
             cell.barNameLabel.text = barName
         }
         if let barLocation = bar.location {
@@ -101,14 +81,29 @@ class BarFeedVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         switch(dest){
         case is hasBarVar:
             var destVC = dest as! hasBarVar
-            if let bar = selectedBar {
-                destVC.bar = selectedBar
+            if let selBar = selectedBar {
+                destVC.bar = selBar
             }
         default:
             print("Segue to default controller type")
         }
     }
-
+    
+    func setUserImage(){
+        if let userImage = currentUser.usersImage {
+            print("Have current users image")
+            userImageView.image = userImage
+        } else {
+            print("Have not downloaded current users image")
+            currentUser.getUserImg(){
+                userImage in
+                self.userImageView.image = userImage
+            }
+        }
+    }
+    
+    
+ 
 
 }
 
