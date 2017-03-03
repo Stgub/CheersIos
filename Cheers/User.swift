@@ -24,7 +24,7 @@ struct userDataTypes {
 class User{
     var userKey:String!
     var name:String!
-    var barsUsed:[String]!
+    var barsUsed:Dictionary<String,String>!
     var key:String!
     var imgUrl:String!
     var usersImage:UIImage!
@@ -40,9 +40,15 @@ class User{
         if let imgUrl = userData[userDataTypes.imgUrl] as? String {
             self.imgUrl = imgUrl
         }
+        if let barsUsed = userData[userDataTypes.barsUsed] as? Dictionary<String,String>{
+            print("Bars used - \(barsUsed)")
+            self.barsUsed = barsUsed
+        } else {
+            print("No bars used")
+            barsUsed  = [:]
+        }
     
     }
-
     func getUserImg(returnBlock:((UIImage)->Void)?){
         print("CHUCK: getUserImg()")
         if let url = self.imgUrl {

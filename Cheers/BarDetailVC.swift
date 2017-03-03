@@ -17,7 +17,8 @@ class BarDetailVC: UIViewController, hasBarVar {
     @IBOutlet weak var barDescriptLabel: UILabel!
     @IBOutlet weak var barPhoneNumLabel: UILabel!
     @IBOutlet weak var barDrinksLabel: UILabel!
-
+    @IBOutlet weak var redeemDrinkBtn: UIButton!
+    
     @IBAction func backBtnTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -33,6 +34,8 @@ class BarDetailVC: UIViewController, hasBarVar {
                 print("Chuck: Error redeeming -\(error)")
             } else {
                 print("Successfully redeemed")
+                currentUser.barsUsed[self.bar.key] = currentDateString
+                self.bar.hasBeenUsed = true
                 self.dismiss(animated: true, completion: nil)
             }
         }
@@ -49,6 +52,12 @@ class BarDetailVC: UIViewController, hasBarVar {
         }
         if let barStreet = bar.location{
             barStreetLabel.text = barStreet
+        }
+        if let barUsed = bar.hasBeenUsed{
+            if barUsed {
+                redeemDrinkBtn.setTitle("Already redeemed drink", for: .normal)
+                redeemDrinkBtn.isUserInteractionEnabled = false
+            }
         }
         // Do any additional setup after loading the view.
     }
