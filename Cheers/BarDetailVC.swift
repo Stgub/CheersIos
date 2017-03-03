@@ -21,9 +21,27 @@ class BarDetailVC: UIViewController, hasBarVar {
     @IBAction func backBtnTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    @IBAction func redeemDrinkBtnTapped(_ sender: Any) {
+        let currentDate = Date()
+        let dateFormater = DateFormatter()
+        dateFormater.dateFormat = "MM-dd-yyyy"
+        let currentDateString = dateFormater.string(from: currentDate)
+        print("CHUCK: User redeemed bar -\(bar.barName)")
+        DataService.ds.REF_USER_CURRENT.child(userDataTypes.barsUsed).child(bar.key).setValue(currentDateString) {
+            (error, ref) in
+            if error != nil {
+                print("Chuck: Error redeeming -\(error)")
+            } else {
+                print("Successfully redeemed")
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let barName = bar.name{
+        if let barName = bar.barName{
             barNameLabel.text = barName
         }
         if let barImage = bar.img{
