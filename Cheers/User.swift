@@ -20,8 +20,14 @@ struct userDataTypes {
     static let imgUrl = "imgUrl"
    // static let pictureUrl = "pictureUrl"
 }
+struct membershipLevels {
+    static let basic = "basic"
+    static let premium = "premium"
+}
 
 class User{
+    var membership:String!
+    var drinksLeft:Int!
     var userKey:String!
     var name:String!
     var barsUsed:Dictionary<String,String>!

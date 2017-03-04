@@ -25,7 +25,7 @@ class BarDetailVC: UIViewController, hasBarVar {
     @IBAction func redeemDrinkBtnTapped(_ sender: Any) {
         let currentDate = Date()
         let dateFormater = DateFormatter()
-        dateFormater.dateFormat = "MM-dd-yyyy"
+        dateFormater.dateFormat = "MM/dd/yyyy"
         let currentDateString = dateFormater.string(from: currentDate)
         print("CHUCK: User redeemed bar -\(bar.barName)")
         DataService.ds.REF_USER_CURRENT.child(userDataTypes.barsUsed).child(bar.key).setValue(currentDateString) {
@@ -50,7 +50,7 @@ class BarDetailVC: UIViewController, hasBarVar {
         if let barImage = bar.img{
             barImageView.image = barImage
         }
-        if let barStreet = bar.location{
+        if let barStreet = bar.locationStreet{
             barStreetLabel.text = barStreet
         }
         if let barUsed = bar.hasBeenUsed{

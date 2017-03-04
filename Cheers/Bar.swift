@@ -11,13 +11,21 @@ import Firebase
 
 class Bar {
     struct dataTypes{
-        static let location = "Location"
         static let imgUrl = "ImgUrl"
         static let barName = "barName"
+        
+        static let locationStreet = "LocationStreet"
+        static let locationCity = "LocationCity"
+        static let locationState = "LocationState"
+        static let locationZipCode = "LocationZipCode"
+
     }
     var key:String!
     var barName:String!
-    var location:String!
+    var locationStreet:String!
+    var locationCity:String!
+    var locationState:String!
+    var locationZipCode:String!
     var img:UIImage!
     var imgUrl:String!
     var hasBeenUsed:Bool!
@@ -27,8 +35,17 @@ class Bar {
         if let barName = dataDict[dataTypes.barName] as? String {
             self.barName = barName
         }
-        if let location = dataDict[dataTypes.location] as? String{
-            self.location = location
+        if let locationStreet = dataDict[dataTypes.locationStreet] as? String{
+            self.locationStreet = locationStreet
+        }
+        if let locationCity = dataDict[dataTypes.locationCity] as? String{
+            self.locationCity = locationCity
+        }
+        if let locationState = dataDict[dataTypes.locationState] as? String{
+            self.locationState = locationState
+        }
+        if let locationZipCode = dataDict[dataTypes.locationZipCode] as? String{
+            self.locationZipCode = locationZipCode
         }
         if let imgUrl = dataDict[Bar.dataTypes.imgUrl] as? String{
             self.imgUrl = imgUrl
@@ -46,6 +63,7 @@ class Bar {
                 print("Chuck: Img downloaded from Firebase storage")
                 if let imgData = data {
                     if let img = UIImage(data: imgData) {
+                            imageCache.setObject(img, forKey: self.imgUrl as NSString)
                             self.img = img
                             returnBlock()
                     } else { print("Could not load image from data")}

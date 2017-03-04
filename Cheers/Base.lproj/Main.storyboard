@@ -574,13 +574,6 @@
                                     <constraint firstAttribute="height" constant="1" id="tLN-8Z-Gnf"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ruh-zk-ykB">
-                                <rect key="frame" x="16" y="73" width="56" height="56"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="56" id="Kfb-0v-Gki"/>
-                                    <constraint firstAttribute="height" constant="56" id="yrE-QI-5Ss"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Steven" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7fd-rp-We7">
                                 <rect key="frame" x="80" y="73" width="55" height="20"/>
                                 <constraints>
@@ -741,6 +734,13 @@
                                     <outlet property="delegate" destination="stK-Uc-ckb" id="uIU-TH-DZg"/>
                                 </connections>
                             </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ruh-zk-ykB">
+                                <rect key="frame" x="16" y="73" width="56" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="56" id="Kfb-0v-Gki"/>
+                                    <constraint firstAttribute="height" constant="56" id="yrE-QI-5Ss"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -782,7 +782,8 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="doG-Rr-BCS" id="5ue-ge-8mQ"/>
-                        <outlet property="userImageView" destination="Ruh-zk-ykB" id="wu6-Ve-fFf"/>
+                        <outlet property="userImageView" destination="Ruh-zk-ykB" id="q7B-BZ-Ry1"/>
+                        <outlet property="userNameLabel" destination="7fd-rp-We7" id="xGS-rh-5DF"/>
                         <segue destination="FUQ-Ai-nDG" kind="show" identifier="toBarDetailSegue" id="PpL-oT-CxO"/>
                     </connections>
                 </viewController>
@@ -1070,7 +1071,7 @@
                                 <rect key="frame" x="0.0" y="179" width="320" height="389"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="87" id="6H3-6P-WFP">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HistoryTableViewCell" rowHeight="87" id="6H3-6P-WFP" customClass="HistoryTableViewCell" customModule="Cheers" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6H3-6P-WFP" id="UeR-X4-UaQ">
@@ -1146,8 +1147,18 @@
                                                 <constraint firstItem="32P-ih-Bfi" firstAttribute="top" secondItem="UeR-X4-UaQ" secondAttribute="topMargin" id="WgE-lI-sUE"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="barImageView" destination="1RW-cN-mQD" id="eAR-c7-7fa"/>
+                                            <outlet property="barNameLabel" destination="Fab-EK-9FA" id="uYC-LP-Ozy"/>
+                                            <outlet property="barStreetLabel" destination="KcJ-02-PXU" id="bYo-hc-FUG"/>
+                                            <outlet property="dateLabel" destination="kSd-r4-JVJ" id="Zkw-vH-WrV"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Evp-ht-W1Q" id="FQm-pU-OCO"/>
+                                    <outlet property="delegate" destination="Evp-ht-W1Q" id="cMI-AF-MZQ"/>
+                                </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bwm-FO-n5j">
                                 <rect key="frame" x="119" y="95" width="56" height="15"/>
@@ -1204,10 +1215,15 @@
                             <constraint firstAttribute="trailing" secondItem="7TH-5Z-bMU" secondAttribute="trailing" id="zfn-6c-dPh"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="DMo-pd-btx" id="lbf-pK-d2P"/>
+                        <outlet property="userImageView" destination="Mfb-hi-3g1" id="ouY-Cm-2ea"/>
+                        <outlet property="userNameLabel" destination="k99-Va-agO" id="Cho-JW-UwN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XOO-DX-iGM" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1138" y="-913"/>
+            <point key="canvasLocation" x="-1136" y="-915"/>
         </scene>
         <!--redeemDrink-->
         <scene sceneID="c8r-rw-QUK">
