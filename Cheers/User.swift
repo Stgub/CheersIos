@@ -58,19 +58,26 @@ class User{
     func getUserImg(returnBlock:((UIImage)->Void)?){
         print("CHUCK: getUserImg()")
         if let url = self.imgUrl {
-            let nsUrl = NSURL(string: url as String)
-            let urlRequest = NSURLRequest(url: nsUrl! as URL)
-            let dataSession = URLSession.shared
-            let dataTask = dataSession.dataTask(with: urlRequest as URLRequest, completionHandler:{ (data, response, error) in
-                if error == nil {
-                    if let image = UIImage(data: data!) {
-                        print("Chuck: successfully got image")
-                        self.usersImage = image
-                        returnBlock!(self.usersImage)
-                    } else { print("Chuck: Could not get image from data") }
-                } else {  print("Chuck: error with loading image -\(error)") }
-            })
-            dataTask.resume() // needed or the above will never happen
+            if let image = imageCache.object(forKey: url as NSString){
+                self.usersImage = image
+                returnBlock!(self.usersImage)
+            } else {
+
+                let nsUrl = NSURL(string: url as String)
+                let urlRequest = NSURLRequest(url: nsUrl! as URL)
+                let dataSession = URLSession.shared
+                let dataTask = dataSession.dataTask(with: urlRequest as URLRequest, completionHandler:{ (data, response, error) in
+                    if error == nil {
+                        if let image = UIImage(data: data!) {
+                            print("Chuck: successfully got image")
+                            self.usersImage = image
+                            imageCache.setObject(image, forKey: url as NSString)
+                            returnBlock!(self.usersImage)
+                        } else { print("Chuck: Could not get image from data") }
+                    } else {  print("Chuck: error with loading image -\(error)") }
+                })
+                dataTask.resume() // needed or the above will never happen
+            }
         } else { print("CHUCK: No imgUrl") }
     }
     

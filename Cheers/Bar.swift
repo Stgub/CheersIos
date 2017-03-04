@@ -54,22 +54,27 @@ class Bar {
 
     }
     func getImage(returnBlock:@escaping ()->()){
-        let ref = FIRStorage.storage().reference(forURL: self.imgUrl)
-        ref.data(withMaxSize: 2 * 1024 * 1024, completion: { (data, error) in
-            if error != nil {
-                print("Chuck: Error downloading img -\(error)")
-                
-            } else {
-                print("Chuck: Img downloaded from Firebase storage")
-                if let imgData = data {
-                    if let img = UIImage(data: imgData) {
-                            imageCache.setObject(img, forKey: self.imgUrl as NSString)
-                            self.img = img
-                            returnBlock()
-                    } else { print("Could not load image from data")}
+        if let image = imageCache.object(forKey: self.imgUrl as NSString) {
+            self.img = image
+            returnBlock()
+        } else {
+            let ref = FIRStorage.storage().reference(forURL: self.imgUrl)
+            ref.data(withMaxSize: 2 * 1024 * 1024, completion: { (data, error) in
+                if error != nil {
+                    print("Chuck: Error downloading img -\(error)")
+                    
+                } else {
+                    print("Chuck: Img downloaded from Firebase storage")
+                    if let imgData = data {
+                        if let img = UIImage(data: imgData) {
+                                imageCache.setObject(img, forKey: self.imgUrl as NSString)
+                                self.img = img
+                                returnBlock()
+                        } else { print("Could not load image from data")}
+                    }
                 }
-            }
-        })
+            })
+        }
     }
     
  
