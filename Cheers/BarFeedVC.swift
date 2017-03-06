@@ -12,6 +12,7 @@ var currentUser:User!
 class BarFeedVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var userNameLabel: UILabel!
     
     var bars:[Bar] = []
     var selectedBar:Bar!
@@ -23,6 +24,7 @@ class BarFeedVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         
         getCurrentUserInfo { 
             if let user = currentUser{
+                self.userNameLabel.text = user.name
                 user.getUserImg(returnBlock: { (image) in
                     DispatchQueue.main.async {
                         self.userImageView.image = image
@@ -84,7 +86,7 @@ class BarFeedVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         if let barName = bar.barName {
             cell.barNameLabel.text = barName
         }
-        if let barLocation = bar.location {
+        if let barLocation = bar.locationStreet {
             cell.barStreetLabel.text = barLocation
         }
         if let barImage = bar.img {

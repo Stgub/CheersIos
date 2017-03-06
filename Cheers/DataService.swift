@@ -11,6 +11,7 @@ import Foundation
 import Firebase
 import SwiftKeychainWrapper
 
+var imageCache: NSCache<NSString, UIImage> = NSCache()
 
 
 let DB_BASE = FIRDatabase.database().reference() // gives the URL of the root of the db, also in the google plist
