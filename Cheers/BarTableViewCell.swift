@@ -15,6 +15,7 @@ class BarTableViewCell: UITableViewCell {
     @IBOutlet weak var barImageView: UIImageView!
     @IBOutlet weak var barStreetLabel: UILabel!
     
+    @IBOutlet weak var barAreaLabel: UILabel!
     @IBOutlet weak var freeDrinkBtn: UIButton!
     
     @IBAction func redeemBtnTapped(_ sender: Any) {

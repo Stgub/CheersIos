@@ -11,13 +11,25 @@ import Firebase
 var currentUser:User!
 class BarFeedVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    @IBOutlet weak var userImageView: UIImageView!
-    @IBOutlet weak var userNameLabel: UILabel!
     
     var bars:[Bar] = []
     var selectedBar:Bar!
+    
+    @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var userNameLabel: UILabel!
+    
+    @IBOutlet weak var membershipLabel: UIButton!
+    @IBOutlet weak var creditsLabel: UILabel!
+    
+    @IBAction func membershipBtnTapped(_ sender: Any) {
+        presentMembershipVC(sender:self)
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         tableView.reloadData()
+        if let user = currentUser{
+            self.creditsLabel.text = "Credits: \(user.credits!)"
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +37,8 @@ class BarFeedVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         getCurrentUserInfo { 
             if let user = currentUser{
                 self.userNameLabel.text = user.name
+                self.creditsLabel.text = "Credits: \(user.credits!)"
+                self.membershipLabel.setTitle(user.membership, for: .normal)
                 user.getUserImg(returnBlock: { (image) in
                     DispatchQueue.main.async {
                         self.userImageView.image = image
@@ -86,9 +100,23 @@ class BarFeedVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         if let barName = bar.barName {
             cell.barNameLabel.text = barName
         }
-        if let barLocation = bar.locationStreet {
-            cell.barStreetLabel.text = barLocation
+        if let barStreet = bar.locationStreet {
+            cell.barStreetLabel.text = barStreet
+        } else {
+            cell.barStreetLabel.text = "No address"
         }
+        var locationString = ""
+        if let barCity = bar.locationCity {
+            locationString += barCity
+        }
+        if let barState  = bar.locationState{
+            locationString += ", \(barState)"
+        }
+        if let barZipcode = bar.locationZipCode{
+             locationString += " \(barZipcode)"
+        }
+        cell.barAreaLabel.text = locationString
+        
         if let barImage = bar.img {
             cell.barImageView.image = barImage
         }
