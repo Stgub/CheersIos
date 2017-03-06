@@ -34,7 +34,7 @@ class BarDetailVC: UIViewController, hasBarVar {
                 print("Chuck: Error redeeming -\(error)")
             } else {
                 print("Successfully redeemed")
-                currentUser.barsUsed[self.bar.key] = currentDateString
+                currentUser.usedBar(barId: self.bar.key, currentDate:currentDateString)
                 self.bar.hasBeenUsed = true
                 self.dismiss(animated: true, completion: nil)
             }
@@ -53,11 +53,28 @@ class BarDetailVC: UIViewController, hasBarVar {
         if let barStreet = bar.locationStreet{
             barStreetLabel.text = barStreet
         }
-        if let barUsed = bar.hasBeenUsed{
+        if currentUser.credits <= 0 {
+            redeemDrinkBtn.setTitle("Upgrade to recieve more credits!", for: .normal)
+            redeemDrinkBtn.isUserInteractionEnabled = false
+        } else if let barUsed = bar.hasBeenUsed{
             if barUsed {
-                redeemDrinkBtn.setTitle("Already redeemed drink", for: .normal)
-                redeemDrinkBtn.isUserInteractionEnabled = false
+                let dateUsed = currentUser.barsUsed[bar.key]
+                var date = getDateFromDateString(date:dateUsed!)
+                date.addTimeInterval(60 * 60 * 24 * 30)
+                if date.timeIntervalSinceNow > 0 {
+                    redeemDrinkBtn.setTitle("Redeemed, available again: \(getStringFromDate(date: date))", for: .normal)
+                    redeemDrinkBtn.isUserInteractionEnabled = false
+                } else{
+                    redeemDrinkBtn.setTitle("Have your server tap to redeem", for: .normal)
+                    
+                    redeemDrinkBtn.isUserInteractionEnabled = true
+                }
             }
+        } else {
+            redeemDrinkBtn.setTitle("Have your server tap to redeem", for: .normal)
+
+            redeemDrinkBtn.isUserInteractionEnabled = true
+
         }
         // Do any additional setup after loading the view.
     }

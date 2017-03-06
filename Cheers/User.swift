@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Firebase
 var userImage:UIImage! // out here because it is not actually stored in the databse
 struct userDataTypes {
     static let email = "email"
@@ -16,7 +17,9 @@ struct userDataTypes {
     static let provider = "provider"
     static let birthday = "birthday"
     static let barsUsed = "barsUsed"
-    
+    static let credits = "credits"
+    static let membership = "membership"
+    static let billingDate = "billing-date"
     static let imgUrl = "imgUrl"
    // static let pictureUrl = "pictureUrl"
 }
@@ -26,8 +29,10 @@ struct membershipLevels {
 }
 
 class User{
+    var ref: FIRDatabaseReference!
     var membership:String!
-    var drinksLeft:Int!
+    var credits:Int!
+    var billingDate:String!
     var userKey:String!
     var name:String!
     var barsUsed:Dictionary<String,String>!
@@ -46,15 +51,46 @@ class User{
         if let imgUrl = userData[userDataTypes.imgUrl] as? String {
             self.imgUrl = imgUrl
         }
+        if let billingDate = userData[userDataTypes.billingDate] as? String {
+            self.billingDate = billingDate
+            
+        }
+        if let membership = userData[userDataTypes.membership] as? String {
+            self.membership = membership
+            if membership == membershipLevels.premium {
+                credits = 10
+            } else {
+                credits = 1
+            }
+        } else {
+            self.membership = membershipLevels.basic
+            credits = 1
+        }
         if let barsUsed = userData[userDataTypes.barsUsed] as? Dictionary<String,String>{
             print("Bars used - \(barsUsed)")
             self.barsUsed = barsUsed
+            for (barKey, date) in barsUsed {
+                
+                let dateFormater = DateFormatter()
+                dateFormater.dateFormat = "MM/dd/yyyy"
+                let dateUsed = dateFormater.date(from: date)
+                let timeFromNow = (dateUsed?.timeIntervalSinceNow)! / (60 * 60 * 24 * 30)
+                print("Date from now: \(timeFromNow)")
+                if timeFromNow > -30 {
+                    credits! -= 1
+                }
+                
+            }
         } else {
             print("No bars used")
             barsUsed  = [:]
         }
+
+ 
+
     
     }
+
     func getUserImg(returnBlock:((UIImage)->Void)?){
         print("CHUCK: getUserImg()")
         if let url = self.imgUrl {
@@ -82,7 +118,9 @@ class User{
     }
     
     
-    func usedBar(barId:String){
-    
+    func usedBar(barId:String, currentDate:String){
+        currentUser.barsUsed[barId] = currentDate
+        currentUser.credits = currentUser.credits - 1
+
     }
 }

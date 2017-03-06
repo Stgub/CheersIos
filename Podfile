@@ -6,6 +6,8 @@ target 'Cheers' do
   use_frameworks!
 
   # Pods for Hatchling
+  pod 'Stripe' # payment service
+  pod 'AFNetworking', '~> 2.5.4'
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'

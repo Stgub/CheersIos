@@ -24,6 +24,8 @@
 		56B91B061E651C1700CB40BB /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B91B051E651C1700CB40BB /* DataService.swift */; };
 		56B91B081E651C7700CB40BB /* GeneralFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B91B071E651C7700CB40BB /* GeneralFunctions.swift */; };
 		56F78A5E1E6A600E000E10F4 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F78A5D1E6A600E000E10F4 /* HistoryTableViewCell.swift */; };
+		56F78A601E6C866E000E10F4 /* MembershipVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F78A5F1E6C866E000E10F4 /* MembershipVC.swift */; };
+		56F78A621E6C9198000E10F4 /* PaymentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F78A611E6C9198000E10F4 /* PaymentVC.swift */; };
 		56FDE76F1E6523DA00BDE97F /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FDE76E1E6523DA00BDE97F /* HistoryVC.swift */; };
 		56FDE7711E666F3E00BDE97F /* BarDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FDE7701E666F3E00BDE97F /* BarDetailVC.swift */; };
 		56FDE7731E666F9D00BDE97F /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FDE7721E666F9D00BDE97F /* Protocols.swift */; };
@@ -78,6 +80,8 @@
 		56B91B051E651C1700CB40BB /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		56B91B071E651C7700CB40BB /* GeneralFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralFunctions.swift; sourceTree = "<group>"; };
 		56F78A5D1E6A600E000E10F4 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
+		56F78A5F1E6C866E000E10F4 /* MembershipVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipVC.swift; sourceTree = "<group>"; };
+		56F78A611E6C9198000E10F4 /* PaymentVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentVC.swift; sourceTree = "<group>"; };
 		56FDE76E1E6523DA00BDE97F /* HistoryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
 		56FDE7701E666F3E00BDE97F /* BarDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarDetailVC.swift; sourceTree = "<group>"; };
 		56FDE7721E666F9D00BDE97F /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
@@ -220,6 +224,8 @@
 				56B91AFD1E651A2000CB40BB /* AccountVC.swift */,
 				56FDE76E1E6523DA00BDE97F /* HistoryVC.swift */,
 				56FDE7701E666F3E00BDE97F /* BarDetailVC.swift */,
+				56F78A5F1E6C866E000E10F4 /* MembershipVC.swift */,
+				56F78A611E6C9198000E10F4 /* PaymentVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -532,8 +538,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56F78A621E6C9198000E10F4 /* PaymentVC.swift in Sources */,
 				56B91B061E651C1700CB40BB /* DataService.swift in Sources */,
 				56FDE7751E666FD600BDE97F /* Bar.swift in Sources */,
+				56F78A601E6C866E000E10F4 /* MembershipVC.swift in Sources */,
 				56FDE7711E666F3E00BDE97F /* BarDetailVC.swift in Sources */,
 				19FBCB871E635FE500AA10B5 /* BarFeedVC.swift in Sources */,
 				56B91B041E651B6600CB40BB /* BarTableViewCell.swift in Sources */,

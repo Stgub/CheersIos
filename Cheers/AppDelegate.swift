@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FBSDKLoginKit
+import Stripe
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FIRApp.configure()
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        //Stripe payment service
+        STPPaymentConfiguration.shared().publishableKey = "pk_test_vbIvPl0JdKlVqMlrILx3A8Sf" //test
+       //STPPaymentConfiguration.shared().publishableKey = "pk_live_PuYngGgOA2VX11E7NqNZ1vW3" // Live
 
         return true
     }

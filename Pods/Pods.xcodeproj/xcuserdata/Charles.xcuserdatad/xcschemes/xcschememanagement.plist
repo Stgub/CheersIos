@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AFNetworking.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Bolts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -44,6 +49,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Stripe-Stripe.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Stripe.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SwiftKeychainWrapper.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,12 +67,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>107A9565F9DF88517DFD3E28C05B2B96</key>
+		<key>0BD659E21DA1CDA96BE2DD70EBA13298</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>38CBEA7B5C0101B1D5A04EFDED4B24E4</key>
+		<key>107A9565F9DF88517DFD3E28C05B2B96</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,7 +87,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8679D8439E89C3F93DC2CD60AB66C8D3</key>
+		<key>6BF6725D4CC7EAE219125D2A2D9FB103</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6EA7277C4065428B2C3ABBED67B1803D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A760F2DF43F714C4D7E7A4CCD88E08D2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AE4798A996A39B69265AED460328823E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

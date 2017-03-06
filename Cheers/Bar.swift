@@ -14,10 +14,10 @@ class Bar {
         static let imgUrl = "ImgUrl"
         static let barName = "barName"
         
-        static let locationStreet = "LocationStreet"
-        static let locationCity = "LocationCity"
-        static let locationState = "LocationState"
-        static let locationZipCode = "LocationZipCode"
+        static let locationStreet = "locationStreet"
+        static let locationCity = "locationCity"
+        static let locationState = "locationState"
+        static let locationZipCode = "locationZipCode"
 
     }
     var key:String!
