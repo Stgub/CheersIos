@@ -16,8 +16,11 @@ class PaymentVC: UIViewController {
     
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var cardNumberField: UITextField!
-    @IBOutlet weak var expirationDateField: UITextField!
     @IBOutlet weak var CVCField: UITextField!
+    
+    @IBOutlet weak var expirationMonthField: UITextField!
+    @IBOutlet weak var expirationYearField: UITextField!
+    
     
     @IBAction func purchaseBtnTapped(_ sender: Any) {
         self.view.addSubview(spinner)
@@ -41,33 +44,32 @@ class PaymentVC: UIViewController {
 
             return
         }
-        if self.expirationDateField.text?.isEmpty == true {
+        if self.expirationMonthField.text?.isEmpty == true || self.expirationMonthField.text?.isEmpty == true {
             handleIncompleteInfo(missingInfo: "Expiration Date")
             return
         }
         // Split the expiration date to extract Month & Year
-        if self.expirationDateField.text?.isEmpty == false {
-            let expirationDate = self.expirationDateField.text?.components(separatedBy: "/")
-            let expMonth = UInt(Int((expirationDate?[0])!)!)
-            let expYear = UInt(Int((expirationDate?[1])!)!)
-            
-            // Send the card info to Strip to get the token
-            stripCard.number = self.cardNumberField.text
-            stripCard.cvc = self.CVCField.text
-            stripCard.expMonth = expMonth
-            stripCard.expYear = expYear
-            STPCardValidator.validationState(forCard: stripCard)
+    
+        let expMonth = UInt(Int(expirationMonthField.text!)!)
+        let expYear = UInt(Int(expirationYearField.text!)!)
+        
+        // Send the card info to Strip to get the token
+        stripCard.number = self.cardNumberField.text
+        stripCard.cvc = self.CVCField.text
+        stripCard.expMonth = expMonth
+        stripCard.expYear = expYear
+        STPCardValidator.validationState(forCard: stripCard)
 
-            STPAPIClient.shared().createToken(withCard: stripCard, completion: { (token, error) -> Void in
-                
-                if error != nil {
-                    self.handleError(error: error! as NSError)
-                    return
-                } 
-                
-                self.postStripeToken(token: token!)
-            })
-        }
+        STPAPIClient.shared().createToken(withCard: stripCard, completion: { (token, error) -> Void in
+            
+            if error != nil {
+                self.handleError(error: error! as NSError)
+                return
+            } 
+            
+            self.postStripeToken(token: token!)
+        })
+        
         
     }
     func handleIncompleteInfo(missingInfo:String){
@@ -96,9 +98,24 @@ class PaymentVC: UIViewController {
         
         
         let manager = AFHTTPRequestOperationManager()
-        manager.responseSerializer.acceptableContentTypes = Set(arrayLiteral: "text/html")
+        manager.responseSerializer.acceptableContentTypes = Set(["text/html","application/json"])
         manager.post(URL, parameters: params, success: { (operation, responseObject) -> Void in
             if let response = responseObject as? [String: String] {
+                if let customerId = response["customerId"]{
+                    print("CHUCK: customerId \(customerId))")
+                    currentUser.ref.child(userDataTypes.membership).setValue(membershipLevels.premium)
+                    currentUser.membership = membershipLevels.premium
+                    currentUser.ref.child(userDataTypes.stripeId).setValue(customerId, withCompletionBlock: { (error, ref) in
+                        if error != nil {
+                            print("Chuck: Error saving stripeId")
+                        } else {
+                            
+                        }
+                    })
+                    currentUser.stripeId = customerId
+                }
+              
+
                 let alertController = UIAlertController(title: response["status"]!, message: response["message"]!, preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "Okay", style: UIAlertActionStyle.default) {
                     UIAlertAction in

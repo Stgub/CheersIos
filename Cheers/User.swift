@@ -21,6 +21,7 @@ struct userDataTypes {
     static let membership = "membership"
     static let billingDate = "billing-date"
     static let imgUrl = "imgUrl"
+    static let stripeId = "stripeId"
    // static let pictureUrl = "pictureUrl"
 }
 struct membershipLevels {
@@ -42,6 +43,7 @@ class User{
     var userEmail:String!
     var userBirthday:String!
     var gender:String!
+    var stripeId:String!
 
     init( userKey: String , userData: Dictionary<String, AnyObject> ){
         self.userKey = userKey
@@ -50,6 +52,9 @@ class User{
         }
         if let imgUrl = userData[userDataTypes.imgUrl] as? String {
             self.imgUrl = imgUrl
+        }
+        if let stripeId =  userData[userDataTypes.stripeId] as? String {
+            self.stripeId = stripeId
         }
         if let billingDate = userData[userDataTypes.billingDate] as? String {
             self.billingDate = billingDate

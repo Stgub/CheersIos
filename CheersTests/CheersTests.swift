@@ -8,6 +8,7 @@
 
 import XCTest
 @testable import Cheers
+@testable import Firebase
 
 class CheersTests: XCTestCase {
     
