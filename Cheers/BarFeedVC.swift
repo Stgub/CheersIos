@@ -29,6 +29,7 @@ class BarFeedVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         tableView.reloadData()
         if let user = currentUser{
             self.creditsLabel.text = "Credits: \(user.credits!)"
+            self.membershipLabel.setTitle(currentUser.membership, for: .normal)
         }
     }
     override func viewDidLoad() {
