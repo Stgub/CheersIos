@@ -657,7 +657,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEw-oq-9uQ">
                                                     <rect key="frame" x="8" y="8" width="304" height="70"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="squareLogoBlack" translatesAutoresizingMaskIntoConstraints="NO" id="Ov4-Lr-QQU">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="squareLogoBlack" translatesAutoresizingMaskIntoConstraints="NO" id="Ov4-Lr-QQU" customClass="RoundedImageCorner" customModule="Cheers" customModuleProvider="target">
                                                             <rect key="frame" x="8" y="8" width="56" height="56"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="56" id="7zj-r0-FEB"/>
@@ -691,8 +691,8 @@
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.54000000000000004" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YbA-Jd-vzT">
-                                                            <rect key="frame" x="207" y="20" width="97" height="30"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YbA-Jd-vzT">
+                                                            <rect key="frame" x="237" y="21.5" width="59" height="27"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <state key="normal" title="Free Drink">
                                                                 <color key="titleColor" red="1" green="0.65490196079999996" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -738,7 +738,7 @@
                                     <outlet property="delegate" destination="stK-Uc-ckb" id="uIU-TH-DZg"/>
                                 </connections>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ruh-zk-ykB">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="drinkClub" translatesAutoresizingMaskIntoConstraints="NO" id="Ruh-zk-ykB" customClass="RoundedImageCorner" customModule="Cheers" customModuleProvider="target">
                                 <rect key="frame" x="16" y="73" width="56" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="56" id="Kfb-0v-Gki"/>
@@ -1033,7 +1033,7 @@
                                     <constraint firstAttribute="height" constant="1" id="PKb-ZJ-Lvz"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mfb-hi-3g1">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="drinkClub" translatesAutoresizingMaskIntoConstraints="NO" id="Mfb-hi-3g1" customClass="RoundedImageCorner" customModule="Cheers" customModuleProvider="target">
                                 <rect key="frame" x="16" y="73" width="56" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="7pJ-JO-cvv"/>
@@ -1090,7 +1090,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32P-ih-Bfi">
                                                     <rect key="frame" x="8" y="8" width="304" height="70"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="squareLogoBlack" translatesAutoresizingMaskIntoConstraints="NO" id="1RW-cN-mQD">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="squareLogoBlack" translatesAutoresizingMaskIntoConstraints="NO" id="1RW-cN-mQD" customClass="RoundedImageCorner" customModule="Cheers" customModuleProvider="target">
                                                             <rect key="frame" x="8" y="8" width="56" height="56"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="56" id="ZEf-PL-qWS"/>
@@ -1289,7 +1289,7 @@
                                     <constraint firstAttribute="height" constant="1" id="r5W-D2-lOD"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="squareLogoBlack" translatesAutoresizingMaskIntoConstraints="NO" id="dkK-OB-sDY">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="squareLogoBlack" translatesAutoresizingMaskIntoConstraints="NO" id="dkK-OB-sDY" customClass="RoundedImageCorner" customModule="Cheers" customModuleProvider="target">
                                 <rect key="frame" x="16" y="73" width="56" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="56" id="jNw-WM-99b"/>
@@ -1522,7 +1522,7 @@
                                     <constraint firstAttribute="height" constant="1" id="I9x-oL-Sdc"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zKf-k8-0de">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="drinkClub" translatesAutoresizingMaskIntoConstraints="NO" id="zKf-k8-0de" customClass="RoundedImageCorner" customModule="Cheers" customModuleProvider="target">
                                 <rect key="frame" x="16" y="73" width="56" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="B9J-AT-g3B"/>
@@ -3184,7 +3184,7 @@
                                     <constraint firstAttribute="height" constant="1" id="vhZ-Ti-pbh"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="squareLogoBlack" translatesAutoresizingMaskIntoConstraints="NO" id="DVI-lE-K4w">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="squareLogoBlack" translatesAutoresizingMaskIntoConstraints="NO" id="DVI-lE-K4w" customClass="RoundedImageCorner" customModule="Cheers" customModuleProvider="target">
                                 <rect key="frame" x="16" y="73" width="56" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="56" id="dSS-bY-bwt"/>
@@ -3355,6 +3355,7 @@
         <image name="Logo" width="174" height="59"/>
         <image name="LogoSquare" width="18" height="24"/>
         <image name="backBtnBlack" width="12" height="20"/>
+        <image name="drinkClub" width="159" height="159"/>
         <image name="squareLogoBlack" width="157" height="158"/>
     </resources>
 </document>
