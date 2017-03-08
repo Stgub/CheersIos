@@ -55,8 +55,8 @@ class FirstLoginVC: UIViewController {
                                         dateFormatter.dateFormat = "dd/MM/yyyy"
                                         let date = dateFormatter.date(from: birthday)
                                         print("birthday day formatted")
-                                        let age = (date?.timeIntervalSinceNow)! / (60 * 60 * 24 * 365)
-                                        /*if age > -21 {
+                                   /* let age = (date?.timeIntervalSinceNow)! / (60 * 60 * 24 * 365)
+                                        if age > -21 {
                                             presentUIAlert(sender: self, title: "Does not meet age requirements", message: "User must be over 21 to use")
                                             return
                                         }*/
