@@ -909,6 +909,9 @@
                                 <state key="normal" title="Reccomend Business">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.87" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
+                                <connections>
+                                    <action selector="reccomendTapped:" destination="ecw-P9-59P" eventType="touchUpInside" id="Dq8-pe-YTo"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dba-pg-xt2">
                                 <rect key="frame" x="0.0" y="315" width="320" height="30"/>
@@ -920,6 +923,9 @@
                                 <state key="normal" title="App Feedback">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.87" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
+                                <connections>
+                                    <action selector="feedbackTapped:" destination="ecw-P9-59P" eventType="touchUpInside" id="fpd-Xc-LiI"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Membership" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YDJ-N6-Asj">
                                 <rect key="frame" x="16" y="73" width="90.5" height="22"/>
@@ -976,6 +982,9 @@
                             <constraint firstAttribute="trailing" secondItem="JB9-LZ-dNu" secondAttribute="trailing" id="tqB-Lh-PL3"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <segue destination="Ovb-NP-vCN" kind="show" identifier="toContactUsVC" id="eq1-0K-DHy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="39a-Jz-qgV" sceneMemberID="firstResponder"/>
             </objects>
@@ -1948,10 +1957,10 @@
             </objects>
             <point key="canvasLocation" x="2676" y="-228"/>
         </scene>
-        <!--logInSignUp-->
+        <!--contactUs-->
         <scene sceneID="518-TL-PBA">
             <objects>
-                <viewController id="Ovb-NP-vCN" userLabel="logInSignUp" customClass="ViewController" customModule="Cheers" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Ovb-NP-vCN" userLabel="contactUs" customClass="contactUsVC" customModule="Cheers" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BON-Yb-U8H"/>
                         <viewControllerLayoutGuide type="bottom" id="ulL-Mc-2e0"/>
@@ -1972,6 +1981,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bww-ch-gFe">
                                         <rect key="frame" x="16" y="29" width="12" height="22"/>
                                         <state key="normal" image="backBtnBlack"/>
+                                        <connections>
+                                            <action selector="backBtnTapped:" destination="Ovb-NP-vCN" eventType="touchUpInside" id="4mh-MN-Pq2"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1997,12 +2009,15 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DHT-cN-b00">
-                                <rect key="frame" x="63" y="196.5" width="194" height="37"/>
+                                <rect key="frame" x="45.5" y="196.5" width="229" height="37"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
-                                <state key="normal" title="ouremail@ouremail.com">
+                                <state key="normal" title="Contact@TheDrinkClub.com">
                                     <color key="titleColor" red="1" green="0.65490196079999996" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
+                                <connections>
+                                    <action selector="emailBtnTapped:" destination="Ovb-NP-vCN" eventType="touchUpInside" id="iVw-Zc-mx8"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2021,6 +2036,9 @@
                             <constraint firstItem="425-LS-2OA" firstAttribute="leading" secondItem="twI-Rr-1uP" secondAttribute="leadingMargin" id="wLT-hg-FZS"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="contactDesc" destination="425-LS-2OA" id="Zpr-UG-Mi1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oqj-dB-6an" sceneMemberID="firstResponder"/>
             </objects>
