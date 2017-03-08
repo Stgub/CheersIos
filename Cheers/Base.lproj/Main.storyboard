@@ -238,7 +238,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bS4-V5-5oL" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1004" y="37"/>
+            <point key="canvasLocation" x="1003.125" y="36.971830985915496"/>
         </scene>
         <!--logIn-->
         <scene sceneID="9Zf-le-yuy">
@@ -264,6 +264,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9qf-Ea-7Ap">
                                         <rect key="frame" x="16" y="29" width="12" height="22"/>
                                         <state key="normal" image="backBtnBlack"/>
+                                        <connections>
+                                            <action selector="backBtnTapped:" destination="nyo-o2-0we" eventType="touchUpInside" id="Z5T-lw-Aqs"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -320,6 +323,9 @@
                                 <state key="normal" title="forgot password?">
                                     <color key="titleColor" white="0.0" alpha="0.87" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="bsT-VF-vgi" kind="show" id="sgD-0Q-0fM"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.9882434606552124" green="0.98822498321533203" blue="0.98823750019073486" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -355,7 +361,7 @@
         <!--signUp-->
         <scene sceneID="Uxi-aL-IYc">
             <objects>
-                <viewController id="4h0-h2-VVJ" userLabel="signUp" customClass="ViewController" customModule="Cheers" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="4h0-h2-VVJ" userLabel="signUp" customClass="CreateEmailLoginVC" customModule="Cheers" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Eds-GC-ek3"/>
                         <viewControllerLayoutGuide type="bottom" id="yQG-4E-IG7"/>
@@ -472,6 +478,9 @@
                                 <state key="normal" title="Sign up">
                                     <color key="titleColor" red="1" green="0.65490196079999996" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
+                                <connections>
+                                    <action selector="signUpBtnPressed:" destination="4h0-h2-VVJ" eventType="touchUpInside" id="BGY-PT-tsj"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.9882434606552124" green="0.98822498321533203" blue="0.98823750019073486" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -508,6 +517,15 @@
                             <constraint firstAttribute="trailing" secondItem="yWY-jG-ai3" secondAttribute="trailing" id="zyQ-9D-zaX"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="birthdayField" destination="vAs-GD-QvV" id="A0b-Lx-XdB"/>
+                        <outlet property="cityField" destination="GIQ-Da-q1N" id="n1H-Uf-8RG"/>
+                        <outlet property="emailField" destination="20f-VA-cNp" id="yyi-hf-0M5"/>
+                        <outlet property="genderField" destination="yNy-RR-i0J" id="Omk-q2-5K3"/>
+                        <outlet property="nameField" destination="kjb-48-AFk" id="7RQ-pf-0KI"/>
+                        <outlet property="passwordField" destination="jYb-fy-RFL" id="D2M-IP-Gte"/>
+                        <outlet property="zipCodeField" destination="5d2-1Y-gdK" id="eie-nd-d6t"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ALV-Bx-jRM" sceneMemberID="firstResponder"/>
             </objects>
@@ -1859,7 +1877,7 @@
         <!--logIn-->
         <scene sceneID="gvm-EA-G45">
             <objects>
-                <viewController id="bsT-VF-vgi" userLabel="logIn" customClass="ViewController" customModule="Cheers" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="bsT-VF-vgi" userLabel="logIn" customClass="ForgotCredentialsVC" customModule="Cheers" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="60i-sV-Njo"/>
                         <viewControllerLayoutGuide type="bottom" id="DAb-X1-oCD"/>
@@ -1880,6 +1898,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="95i-wx-WZL">
                                         <rect key="frame" x="16" y="29" width="12" height="22"/>
                                         <state key="normal" image="backBtnBlack"/>
+                                        <connections>
+                                            <action selector="backBtnTapped:" destination="bsT-VF-vgi" eventType="touchUpInside" id="TI1-GB-jAH"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1929,6 +1950,9 @@
                                 <state key="normal" title="Submit">
                                     <color key="titleColor" red="1" green="0.65490196079999996" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
+                                <connections>
+                                    <action selector="submitBtnTapped:" destination="bsT-VF-vgi" eventType="touchUpInside" id="qlO-Sd-tw6"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.98824346070000002" green="0.98822498319999996" blue="0.98823750020000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1952,6 +1976,9 @@
                             <constraint firstItem="AEQ-LO-7mi" firstAttribute="trailing" secondItem="2cg-KO-qfv" secondAttribute="trailingMargin" id="zbr-TT-Uke"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="emailField" destination="xs6-Zu-RC5" id="kUA-mC-MGv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rqg-cA-Yg3" sceneMemberID="firstResponder"/>
             </objects>
@@ -3254,7 +3281,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gKQ-pf-bg8">
-                                <rect key="frame" x="131" y="511" width="60" height="37"/>
+                                <rect key="frame" x="130" y="511" width="60" height="37"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="18"/>
                                 <state key="normal" title="Submit">
