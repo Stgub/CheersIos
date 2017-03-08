@@ -56,10 +56,10 @@ class FirstLoginVC: UIViewController {
                                         let date = dateFormatter.date(from: birthday)
                                         print("birthday day formatted")
                                         let age = (date?.timeIntervalSinceNow)! / (60 * 60 * 24 * 365)
-                                        if age > -21 {
+                                        /*if age > -21 {
                                             presentUIAlert(sender: self, title: "Does not meet age requirements", message: "User must be over 21 to use")
                                             return
-                                        }
+                                        }*/
                                         userData[userDataTypes.birthday] = birthday
                                     } else { print("Chuck: Could'nt grab FB birthday")}
                                     if let email = result["email"] as? String{
