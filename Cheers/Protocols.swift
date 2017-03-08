@@ -11,3 +11,6 @@ import Foundation
 protocol hasBarVar {
     var bar:Bar! {get set}
 }
+protocol  hasDataDict {
+    var dataDict:[String:Any]{get set}
+}
