@@ -37,7 +37,12 @@ class SignUpBarIntialVC: UIViewController, hasDataDict {
         // Do any additional setup after loading the view.
     }
 
-
+    // hides keyboard on tap
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        super.touchesBegan(touches, with:event)
+        self.view.endEditing(true)
+    }
     
     // MARK: - Navigation
 

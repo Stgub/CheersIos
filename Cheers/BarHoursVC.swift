@@ -100,6 +100,7 @@ class BarHoursVC: UIViewController, hasDataDict {
         self.performSegue(withIdentifier: "nextBarSignUpSegue", sender: self)
     }
     @IBAction func amPmBtnTapped(_ button :UIButton){
+        print("change period button pressed currently \(button.titleLabel!.text!)")
         if button.titleLabel!.text! == "am"{
             button.setTitle("pm", for: .normal)
         } else {
@@ -110,11 +111,21 @@ class BarHoursVC: UIViewController, hasDataDict {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        for button in amPmBtns {
+            button.addTarget(self, action: #selector(self.amPmBtnTapped(_:)), for: .touchUpInside)
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // hides keyboard on tap
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        super.touchesBegan(touches, with:event)
+        self.view.endEditing(true)
     }
     
     
