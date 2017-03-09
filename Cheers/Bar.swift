@@ -68,11 +68,15 @@ class Bar {
 
     }
     func getImage(returnBlock:@escaping ()->()){
-        if let image = imageCache.object(forKey: self.imgUrl as NSString) {
+        guard let imageUrl = self.imgUrl else {
+            print("CHUCK: no image url")
+            return
+        }
+        if let image = imageCache.object(forKey: imageUrl as NSString) {
             self.img = image
             returnBlock()
         } else {
-            let ref = FIRStorage.storage().reference(forURL: self.imgUrl)
+            let ref = FIRStorage.storage().reference(forURL: imageUrl)
             ref.data(withMaxSize: 2 * 1024 * 1024, completion: { (data, error) in
                 if error != nil {
                     print("Chuck: Error downloading img -\(error)")

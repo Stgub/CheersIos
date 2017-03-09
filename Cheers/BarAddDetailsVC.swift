@@ -48,6 +48,8 @@ class BarAddDetailsVC: UIViewController, hasDataDict, UIImagePickerControllerDel
         chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
         barImgView.contentMode = .scaleAspectFit //3
         barImgView.image = chosenImage //4
+        dataDict[Bar.dataTypes.img] = chosenImage
+
         dismiss(animated:true, completion: nil) //5
     }
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

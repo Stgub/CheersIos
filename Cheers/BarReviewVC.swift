@@ -26,17 +26,28 @@ class BarReviewVC: UIViewController, hasDataDict {
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func submitBtnTapped(_ sender: Any) {
-        
-        let firebasePost = DataService.ds.REF_BARS.childByAutoId()
-        //let postId = firebasePost.key
-        firebasePost.setValue(firebaseDict) { (error, ref) in
-            if error == nil {
-                presentUIAlert(sender: self, title: "", message: "Success!")
-            } else {
-                print("Chuck: Error -\(error)")
-                presentUIAlert(sender: self, title: "Error", message: "\(error.debugDescription)")
-            }
+        guard let image = dataDict[Bar.dataTypes.img] as? UIImage else {
+            presentUIAlert(sender: self, title: "No bar Image", message: "Go back and add an image")
+            return
         }
+        postBarImage(barImage: image ) {
+            (imgUrl) in
+            print("got Url")
+            self.firebaseDict[Bar.dataTypes.imgUrl] = imgUrl as AnyObject
+            let firebasePost = DataService.ds.REF_BARS.childByAutoId()
+            //let postId = firebasePost.key
+            
+            firebasePost.setValue(self.firebaseDict) { (error, ref) in
+                if error == nil {
+                    presentUIAlert(sender: self, title: "", message: "Success!")
+                } else {
+                    print("Chuck: Error -\(error)")
+                    presentUIAlert(sender: self, title: "Error", message: "\(error.debugDescription)")
+                }
+            }
+            
+        }
+
 
     }
     override func viewDidLoad() {
@@ -79,17 +90,13 @@ class BarReviewVC: UIViewController, hasDataDict {
         }
         if let image = dataDict[Bar.dataTypes.img] as? UIImage {
             self.barImgView.image = image
-            postBarImage(barImage: image ) {
-                (imgUrl) in
-                self.firebaseDict[Bar.dataTypes.imgUrl] = imgUrl as AnyObject
-                
-            }
+
+        } else { print("No bar image in data dict")
         }
- 
     }
     
     func postBarImage(barImage:UIImage, returnBlock:@escaping (_ imgUrl:String)->()){
-        
+        print("posting image to databse")
         if let productImgData = UIImageJPEGRepresentation(barImage, 0.2) {
             
             let imgUid = NSUUID().uuidString
