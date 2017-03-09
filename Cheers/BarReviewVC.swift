@@ -22,8 +22,22 @@ class BarReviewVC: UIViewController, hasDataDict {
     @IBOutlet weak var barPhoneNumberLabel: UILabel!
     @IBOutlet weak var drinksLabel: UILabel!
 
+    @IBAction func backBtnTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     @IBAction func submitBtnTapped(_ sender: Any) {
         
+        let firebasePost = DataService.ds.REF_BARS.childByAutoId()
+        //let postId = firebasePost.key
+        firebasePost.setValue(firebaseDict) { (error, ref) in
+            if error == nil {
+                presentUIAlert(sender: self, title: "", message: "Success!")
+            } else {
+                print("Chuck: Error -\(error)")
+                presentUIAlert(sender: self, title: "Error", message: "\(error.debugDescription)")
+            }
+        }
+
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,18 +85,6 @@ class BarReviewVC: UIViewController, hasDataDict {
                 
             }
         }
-        
-        let firebasePost = DataService.ds.REF_BARS.childByAutoId()
-        //let postId = firebasePost.key
-        firebasePost.setValue(firebaseDict) { (error, ref) in
-            if error != nil {
-                presentUIAlert(sender: self, title: "", message: "Success!")
-            } else {
-                print("Chuck: Error -\(error)")
-                presentUIAlert(sender: self, title: "Error", message: "\(error.debugDescription)")
-            }
-        }
-        
  
     }
     

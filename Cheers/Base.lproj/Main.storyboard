@@ -676,7 +676,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e1n-h0-460" id="dRF-Zo-fkb">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="87"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="86"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEw-oq-9uQ">
@@ -1118,7 +1118,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6H3-6P-WFP" id="UeR-X4-UaQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="87"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="86"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32P-ih-Bfi">
@@ -2086,14 +2086,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wtS-bk-WT7">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t4w-yl-aYO">
-                                        <rect key="frame" x="16" y="29" width="53" height="32"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                        <state key="normal" title="Sign out">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.87" colorSpace="custom" customColorSpace="displayP3"/>
-                                        </state>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign up a bar" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9F1-5z-Uk5">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Sign up a bar" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9F1-5z-Uk5">
                                         <rect key="frame" x="106.5" y="35" width="107.5" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="buW-8L-02w"/>
@@ -2105,11 +2098,8 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="t4w-yl-aYO" firstAttribute="leading" secondItem="wtS-bk-WT7" secondAttribute="leading" constant="16" id="7dW-bh-pMi"/>
-                                    <constraint firstItem="9F1-5z-Uk5" firstAttribute="centerY" secondItem="t4w-yl-aYO" secondAttribute="centerY" id="8ac-Qb-hGb"/>
                                     <constraint firstAttribute="height" constant="64" id="dLA-hg-CxT"/>
                                     <constraint firstItem="9F1-5z-Uk5" firstAttribute="centerX" secondItem="wtS-bk-WT7" secondAttribute="centerX" id="nep-FU-hkz"/>
-                                    <constraint firstItem="t4w-yl-aYO" firstAttribute="top" secondItem="wtS-bk-WT7" secondAttribute="top" constant="29" id="yGQ-4R-tBY"/>
                                 </constraints>
                             </view>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Bar Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8xP-OD-h57">
@@ -2129,13 +2119,13 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bar Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Luk-J8-zAw">
-                                <rect key="frame" x="16" y="73" width="71.5" height="22"/>
+                                <rect key="frame" x="16" y="73" width="72" height="22"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.54000000000000004" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bar Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="izF-C2-YXg">
-                                <rect key="frame" x="16" y="151" width="86.5" height="22"/>
+                                <rect key="frame" x="16" y="151" width="87" height="22"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.54000000000000004" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
@@ -2165,7 +2155,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gPl-2o-U94">
-                                <rect key="frame" x="140.5" y="511" width="39" height="37"/>
+                                <rect key="frame" x="141" y="511" width="39" height="37"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                                 <state key="normal" title="Next">
                                     <color key="titleColor" red="1" green="0.65490196079999996" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -2957,7 +2947,6 @@
                         <outlet property="wedCloseBtn" destination="f1M-0Q-Qtb" id="4eN-78-anF"/>
                         <outlet property="wedOpen" destination="KWY-Xq-M6G" id="bAj-CS-lyF"/>
                         <outlet property="wedOpenBtn" destination="aq6-Ms-O72" id="OyM-7I-Rkv"/>
-                        <outletCollection property="amPmBtns" destination="Bi7-wa-yI1" collectionClass="NSMutableArray" id="mxK-sb-WQr"/>
                         <outletCollection property="amPmBtns" destination="Bi7-wa-yI1" collectionClass="NSMutableArray" id="F7s-VB-vyD"/>
                         <outletCollection property="amPmBtns" destination="zCj-Uy-b4p" collectionClass="NSMutableArray" id="nA4-Nh-VhP"/>
                         <outletCollection property="amPmBtns" destination="aq6-Ms-O72" collectionClass="NSMutableArray" id="Obc-vp-prY"/>
@@ -3093,8 +3082,7 @@
                                     <color key="titleColor" red="1" green="0.65490196079999996" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
-                                    <action selector="editBarImgBtnTapped:" destination="6lE-VW-QAF" eventType="touchUpInside" id="bKp-YE-mMF"/>
-                                    <action selector="membershipBtnTapped:" destination="stK-Uc-ckb" eventType="touchUpInside" id="4mV-aU-v8S"/>
+                                    <action selector="editBarImgBtnTapped:" destination="6lE-VW-QAF" eventType="touchUpInside" id="oBV-xQ-sOq"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -3150,6 +3138,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gLh-XA-6qN">
                                         <rect key="frame" x="24" y="29" width="12" height="22"/>
                                         <state key="normal" image="backBtnBlack"/>
+                                        <connections>
+                                            <action selector="backBtnTapped:" destination="iln-Ly-8iU" eventType="touchUpInside" id="Hyh-g8-qiq"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Review and submit bar" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pIn-OV-hZy">
                                         <rect key="frame" x="69" y="30" width="183" height="20"/>

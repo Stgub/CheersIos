@@ -18,10 +18,9 @@ class BarAddDetailsVC: UIViewController, hasDataDict, UIImagePickerControllerDel
     @IBAction func backBtnTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    @IBAction func editBarImgBtnTapped(_ sender: Any) {
+    @IBAction func editBarImgBtnTapped(_ sender: UIButton) {
         print("picking Product Picture")
-        imagePicker.delegate = self
-        imagePicker.allowsEditing = true
+        imagePicker.allowsEditing = false
         
         present(imagePicker, animated: true, completion: nil)
     }
@@ -34,16 +33,17 @@ class BarAddDetailsVC: UIViewController, hasDataDict, UIImagePickerControllerDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        imagePicker.delegate = self
 
         // Do any additional setup after loading the view.
     }
 
     
     
-    //MARK: - Delegates
-    func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [String : AnyObject])
-    {
+ //MARK: - Delegates
+    // In order to work you need to put in a photo access description in Plist. Need to add one for camera if we wish to add
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    
         var  chosenImage = UIImage()
         chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
         barImgView.contentMode = .scaleAspectFit //3
@@ -53,6 +53,13 @@ class BarAddDetailsVC: UIViewController, hasDataDict, UIImagePickerControllerDel
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
+    // hides keyboard on tap
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        super.touchesBegan(touches, with:event)
+        self.view.endEditing(true)
+    }
+    
     
 
     
