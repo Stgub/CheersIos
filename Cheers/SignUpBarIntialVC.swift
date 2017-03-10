@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SignUpBarIntialVC: UIViewController, hasDataDict {
     var dataDict: [String : Any] = [:]
@@ -33,9 +34,50 @@ class SignUpBarIntialVC: UIViewController, hasDataDict {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+            let email = "charlesfayal@gmail.com"
+            let pwd = "Gorby123"
+            FIRAuth.auth()?.signIn(withEmail: email, password: pwd, completion: { (user, error) in
+                
+                if error != nil {
+                    if (error != nil) {
+                        // an error occurred while attempting login
+                        if let errCode = FIRAuthErrorCode(rawValue: (error?._code)!) {
+                            switch errCode {
+                            case .errorCodeInvalidEmail:
+                                presentUIAlert(sender:self,title: "Invalid email", message: "Email is not in the correct format")
+                            case .errorCodeWrongPassword:
+                                presentUIAlert(sender:self,title: "Invalid password", message: "Please enter the correct password")
+                            case .errorCodeUserNotFound:
+                                presentUIAlert(sender:self,title: "User not found", message: "Make sure email is correct, or create an account")
+                            default:
+                                presentUIAlert(sender:self,title: "Error logging in", message: "Please try again")
+                                print("Chuck - Error logging in went to default error \(error)")
+                                
+                            }
+                        }
+                    }
+                }else {
+                    print("Chuck: Email authenticated with Firebase")
+                    if let user = user {
+                        let userData = ["provider": user.providerID]
+                        self.completeSignIn(id: user.uid, userData: userData)
+                    }
+                }
+            })
+        }
 
-        // Do any additional setup after loading the view.
+
+    
+    
+    
+    
+    func completeSignIn(id:String, userData:Dictionary<String, String>){
+        // for automatic sign in
+        DataService.ds.createFirebaseDBUser(uid: id, userData: userData)
+        print("Signed in")
     }
+
+
 
     // hides keyboard on tap
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
