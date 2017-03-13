@@ -676,7 +676,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e1n-h0-460" id="dRF-Zo-fkb">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="86"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="86.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEw-oq-9uQ">
@@ -1118,7 +1118,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6H3-6P-WFP" id="UeR-X4-UaQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="86"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="86.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32P-ih-Bfi">
@@ -2071,10 +2071,10 @@
             </objects>
             <point key="canvasLocation" x="1876.875" y="-914.78873239436621"/>
         </scene>
-        <!--account-->
+        <!--signUpBarInitial-->
         <scene sceneID="2eQ-Cd-Zu2">
             <objects>
-                <viewController storyboardIdentifier="SignUpBarIntialVC" id="xrM-H1-HPp" userLabel="account" customClass="SignUpBarIntialVC" customModule="Cheers" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpBarIntialVC" id="xrM-H1-HPp" userLabel="signUpBarInitial" customClass="SignUpBarIntialVC" customModule="Cheers" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ni9-Uy-78Q"/>
                         <viewControllerLayoutGuide type="bottom" id="QcV-qc-VKK"/>
@@ -2096,7 +2096,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZx-2r-MQj">
-                                        <rect key="frame" x="267" y="29" width="45" height="20"/>
+                                        <rect key="frame" x="16" y="29" width="45" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="drO-7f-1h5"/>
                                         </constraints>
@@ -2106,6 +2106,7 @@
                                         </state>
                                         <connections>
                                             <action selector="backBtnTapped:" destination="N3W-dB-cyg" eventType="touchUpInside" id="K1h-Wc-fft"/>
+                                            <action selector="signOutBtnTapped:" destination="xrM-H1-HPp" eventType="touchUpInside" id="LOd-qs-r6g"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -2113,9 +2114,9 @@
                                 <constraints>
                                     <constraint firstItem="ZZx-2r-MQj" firstAttribute="top" secondItem="wtS-bk-WT7" secondAttribute="topMargin" constant="21" id="G9e-9U-ylA"/>
                                     <constraint firstItem="ZZx-2r-MQj" firstAttribute="centerY" secondItem="9F1-5z-Uk5" secondAttribute="centerY" id="LwY-Z6-yx4"/>
+                                    <constraint firstItem="ZZx-2r-MQj" firstAttribute="leading" secondItem="wtS-bk-WT7" secondAttribute="leadingMargin" constant="8" id="YEm-Nw-eoD"/>
                                     <constraint firstAttribute="height" constant="64" id="dLA-hg-CxT"/>
                                     <constraint firstItem="9F1-5z-Uk5" firstAttribute="centerX" secondItem="wtS-bk-WT7" secondAttribute="centerX" id="nep-FU-hkz"/>
-                                    <constraint firstAttribute="trailingMargin" secondItem="ZZx-2r-MQj" secondAttribute="trailing" id="ouc-fH-7og"/>
                                 </constraints>
                             </view>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Bar Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8xP-OD-h57">
@@ -2258,10 +2259,10 @@
             </objects>
             <point key="canvasLocation" x="-3568.125" y="-1626.7605633802816"/>
         </scene>
-        <!--account-->
+        <!--signUpBarHours-->
         <scene sceneID="v0V-1h-3QD">
             <objects>
-                <viewController id="N3W-dB-cyg" userLabel="account" customClass="BarHoursVC" customModule="Cheers" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="N3W-dB-cyg" userLabel="signUpBarHours" customClass="BarHoursVC" customModule="Cheers" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cFe-w2-jyt"/>
                         <viewControllerLayoutGuide type="bottom" id="nUy-o0-C0q"/>
@@ -2998,10 +2999,10 @@
             </objects>
             <point key="canvasLocation" x="-2833.125" y="-1655.2816901408451"/>
         </scene>
-        <!--account-->
+        <!--signUpBarDesc-->
         <scene sceneID="vLf-ZW-yJl">
             <objects>
-                <viewController id="6lE-VW-QAF" userLabel="account" customClass="BarAddDetailsVC" customModule="Cheers" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="6lE-VW-QAF" userLabel="signUpBarDesc" customClass="BarAddDetailsVC" customModule="Cheers" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="A7m-gr-kN2"/>
                         <viewControllerLayoutGuide type="bottom" id="pYa-IY-m7J"/>
@@ -3281,8 +3282,8 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.87" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Draft Beer, Cosmo, G&amp;T" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xZX-JT-q6y">
-                                <rect key="frame" x="15" y="407" width="288" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Draft Beer, Cosmo, G&amp;T" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xZX-JT-q6y">
+                                <rect key="frame" x="16" y="407" width="288" height="17"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.54000000000000004" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>

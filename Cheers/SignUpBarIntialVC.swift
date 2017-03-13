@@ -8,8 +8,17 @@
 
 import UIKit
 import Firebase
+import SwiftKeychainWrapper
 
 class SignUpBarIntialVC: UIViewController, hasDataDict {
+    
+    @IBAction func signOutBtnTapped(_ sender: Any) {
+        
+        try! FIRAuth.auth()!.signOut()
+        KeychainWrapper.standard.removeObject(forKey: KEY_UID)
+        presentFirstLoginVC(sender: self)
+    }
+    
     var dataDict: [String : Any] = [:]
     @IBOutlet weak var barNameField: UITextField!
     @IBOutlet weak var streetField: UITextField!
