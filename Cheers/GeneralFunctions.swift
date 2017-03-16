@@ -18,6 +18,7 @@ func presentUIAlert(sender: UIViewController, title:String, message:String){
     sender.present(alertController, animated: true, completion: nil)
     
 }
+
 /**
  Performs a segue from whatever UIViewController to the Feed VC
  */
@@ -36,6 +37,12 @@ func presentMembershipVC(sender:UIViewController){
     let vc = storyboard.instantiateViewController(withIdentifier: "MembershipVC")
     sender.present(vc, animated: true, completion: nil)
 }
+func presentSignUpBarIntialVC(sender:UIViewController){
+    let storyboard = UIStoryboard(name: myStoryboards.main, bundle: Bundle.main)
+    let vc = storyboard.instantiateViewController(withIdentifier: "SignUpBarIntialVC")
+    sender.present(vc, animated: true, completion: nil)
+}
+
 
 func getCurrentUserInfo(returnBlock:(()->Void)? = nil){
     print("Grabbing current users info")

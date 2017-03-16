@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -599,8 +599,8 @@
                                     <constraint firstAttribute="height" constant="1" id="tLN-8Z-Gnf"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Steven" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7fd-rp-We7">
-                                <rect key="frame" x="80" y="73" width="55" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7fd-rp-We7">
+                                <rect key="frame" x="80" y="73" width="36" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="hSe-Xe-wkU"/>
                                 </constraints>
@@ -618,7 +618,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Renew 12/24" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I1E-pH-phA">
-                                <rect key="frame" x="222" y="76" width="82" height="15"/>
+                                <rect key="frame" x="222" y="75.5" width="82" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="n6D-he-Y1X"/>
                                 </constraints>
@@ -676,7 +676,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e1n-h0-460" id="dRF-Zo-fkb">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="86.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="87"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEw-oq-9uQ">
@@ -1118,7 +1118,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6H3-6P-WFP" id="UeR-X4-UaQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="86.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="87"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32P-ih-Bfi">
@@ -1490,6 +1490,7 @@
                     <connections>
                         <outlet property="barDescriptLabel" destination="WXm-ib-lDC" id="2dk-Kt-0w6"/>
                         <outlet property="barDrinksLabel" destination="Obi-Sp-7if" id="LqG-Qu-ioG"/>
+                        <outlet property="barHoursLabel" destination="jO9-aY-gFO" id="bRV-RN-cw3"/>
                         <outlet property="barImageView" destination="dkK-OB-sDY" id="gN3-T9-VBL"/>
                         <outlet property="barNameLabel" destination="gfV-W5-FcB" id="sQx-iM-xvV"/>
                         <outlet property="barPhoneNumLabel" destination="YXR-aD-7YD" id="uaU-YD-RtZ"/>
@@ -2257,7 +2258,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sDR-BL-aVH" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3568.125" y="-1626.7605633802816"/>
+            <point key="canvasLocation" x="-4144" y="-85"/>
         </scene>
         <!--signUpBarHours-->
         <scene sceneID="v0V-1h-3QD">
@@ -2992,12 +2993,13 @@
                         <outletCollection property="timeFields" destination="hq4-zR-DEK" collectionClass="NSMutableArray" id="VK6-Y4-2oW"/>
                         <outletCollection property="timeFields" destination="atg-uK-OHX" collectionClass="NSMutableArray" id="hLo-GB-Mjj"/>
                         <outletCollection property="timeFields" destination="Gsx-0U-GT9" collectionClass="NSMutableArray" id="4Rf-PQ-1Se"/>
+                        <outletCollection property="amPmBtns" destination="TS2-0Y-in4" collectionClass="NSMutableArray" id="mfC-Gj-BJ3"/>
                         <segue destination="6lE-VW-QAF" kind="show" identifier="nextBarSignUpSegue" id="agK-Wp-MOr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4ng-fA-Jhv" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2833.125" y="-1655.2816901408451"/>
+            <point key="canvasLocation" x="-3293" y="-69"/>
         </scene>
         <!--signUpBarDesc-->
         <scene sceneID="vLf-ZW-yJl">
@@ -3135,7 +3137,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="38g-da-RQj" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2053" y="-1655"/>
+            <point key="canvasLocation" x="-2513" y="-69"/>
         </scene>
         <!--Bar Review-->
         <scene sceneID="HHg-MJ-8zO">
@@ -3357,7 +3359,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="heG-pa-TW5" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1339" y="-1655"/>
+            <point key="canvasLocation" x="-1798" y="-69"/>
         </scene>
     </scenes>
     <resources>

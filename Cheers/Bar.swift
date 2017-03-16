@@ -21,6 +21,8 @@ class Bar {
         static let locationZipCode = "locationZipCode"
         static let phoneNumber = "phoneNumber"
         static let drinks = "drinks"
+        static let hoursTime = "hoursTime"
+        static let hoursAmPm = "hoursAmPm"
     }
     var key:String!
     var barName:String!
@@ -34,6 +36,8 @@ class Bar {
     var hasBeenUsed:Bool!
     var description:String!
     var drinks: String!
+    var hoursTime: Dictionary<String,String>!
+    var hoursAmPm: Dictionary<String,String>!
     
     init(barKey:String, dataDict:Dictionary<String,AnyObject>){
         self.key = barKey
@@ -61,9 +65,14 @@ class Bar {
         if let drinks = dataDict[dataTypes.drinks] as? String{
             self.drinks = drinks
         }
-        if let imgUrl = dataDict[Bar.dataTypes.imgUrl] as? String{
+        if let imgUrl = dataDict[dataTypes.imgUrl] as? String{
             self.imgUrl = imgUrl
- 
+        }
+        if let hoursTime = dataDict[dataTypes.hoursTime] as? Dictionary<String,String>{
+            self.hoursTime = hoursTime
+        }
+        if let hoursAmPm = dataDict[dataTypes.hoursAmPm] as? Dictionary<String,String>{
+            self.hoursAmPm = hoursAmPm
         }
 
     }
@@ -94,7 +103,24 @@ class Bar {
             })
         }
     }
-    
+    //used to get a paragraph of the bar hours for labels throughout the app
+    static func getHoursParagraph(hoursDict:Dictionary<String,String>,amPmDict:Dictionary<String,String>)-> String{
+        var barHoursPara = ""
+        barHoursPara += "Mon. \(hoursDict["monOpen"]!)\(amPmDict["monOpen"]!)-\(hoursDict["monClose"]!)\(amPmDict["monClose"]!)"
+        barHoursPara += ", "
+        barHoursPara += "Tue. \(hoursDict["tueOpen"]!)\(amPmDict["tueOpen"]!)-\(hoursDict["tueClose"]!)\(amPmDict["tueClose"]!)"
+        barHoursPara += ", "
+        barHoursPara += "Wed. \(hoursDict["wedOpen"]!)\(amPmDict["wedOpen"]!)-\(hoursDict["wedClose"]!)\(amPmDict["wedClose"]!)"
+        barHoursPara += ", "
+        barHoursPara += "Thurs. \(hoursDict["thuOpen"]!)\(amPmDict["thuOpen"]!)-\(hoursDict["thuClose"]!)\(amPmDict["thuClose"]!)"
+        barHoursPara += ", "
+        barHoursPara += "Fri. \(hoursDict["friOpen"]!)\(amPmDict["friOpen"]!)-\(hoursDict["friClose"]!)\(amPmDict["friClose"]!)"
+        barHoursPara += ", "
+        barHoursPara += "Sat. \(hoursDict["satOpen"]!)\(amPmDict["satOpen"]!)-\(hoursDict["satClose"]!)\(amPmDict["satClose"]!)"
+        barHoursPara += ", "
+        barHoursPara += "Sun. \(hoursDict["sunOpen"]!)\(amPmDict["sunOpen"]!)-\(hoursDict["sunClose"]!)\(amPmDict["sunClose"]!)"
+        return barHoursPara
+    }
  
 
 }

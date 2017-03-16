@@ -86,6 +86,7 @@ class PaymentVC: UIViewController {
 
         
     }
+    
     func postStripeToken(token: STPToken) {
         print("postStripeToken")
         let URL = "http://localhost/donate/payment.php"
@@ -94,8 +95,8 @@ class PaymentVC: UIViewController {
         "amount": "10",
         "currency": "usd",
         "email":self.emailField.text!,
-        "description": self.emailField.text!] as [String:String]
-        
+        "description": self.emailField.text!
+        ] as [String:String]
         
         let manager = AFHTTPRequestOperationManager()
         manager.responseSerializer.acceptableContentTypes = Set(["text/html","application/json"])
@@ -115,7 +116,6 @@ class PaymentVC: UIViewController {
                     currentUser.stripeId = customerId
                 }
               
-
                 let alertController = UIAlertController(title: response["status"]!, message: response["message"]!, preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "Okay", style: UIAlertActionStyle.default) {
                     UIAlertAction in

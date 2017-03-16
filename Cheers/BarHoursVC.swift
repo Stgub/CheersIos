@@ -11,9 +11,11 @@ import UIKit
 
 class BarHoursVC: UIViewController, hasDataDict {
     var dataDict = [String:Any]()
+    
     @IBOutlet var amPmBtns: [UIButton]!
     @IBOutlet var timeFields: [UITextField]!
     
+    // only really need monday text and buttons for autofill
     @IBOutlet weak var monOpen: UITextField!
     @IBOutlet weak var tueOpen: UITextField!
     @IBOutlet weak var wedOpen: UITextField!
@@ -64,26 +66,23 @@ class BarHoursVC: UIViewController, hasDataDict {
         friClose.text = monClose.text!
         satClose.text = monClose.text!
         sunClose.text = monClose.text!
+        
+        for btn in amPmBtns{
+            let openTitle = monOpenBtn.titleLabel!.text
+            let closeTitle = monCloseBtn.titleLabel!.text
+            
+            if (btn.accessibilityIdentifier?.contains("Open"))!{
+                btn.setTitle(openTitle, for: .normal)
+            } else{
+                btn.setTitle(closeTitle, for: .normal)
+            }
+        }
     }
     
     @IBAction func backBtnTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    var barHours = ""
     @IBAction func nextBtnTapped(_ sender: Any) {
-    barHours = "Mon. \(monOpen.text!)\(monOpenBtn.titleLabel!.text!)-\(monClose.text!)\(monCloseBtn.titleLabel!.text!)"
-    barHours += ", "
-    barHours += "Tue. \(tueOpen.text!)\(tueOpenBtn.titleLabel!.text!)-\(tueClose.text!)\(tueCloseBtn.titleLabel!.text!)"
-    barHours += ", "
-    barHours += "Wed. \(wedOpen.text!)\(wedOpenBtn.titleLabel!.text!)-\(wedClose.text!)\(wedCloseBtn.titleLabel!.text!)"
-    barHours += ", "
-    barHours += "Thur. \(thurOpen.text!)\(thurOpenBtn.titleLabel!.text!)-\(thurClose.text!)\(thuCloseBtn.titleLabel!.text!)"
-    barHours += ", "
-    barHours += "Fri. \(friOpen.text!)\(friOpenBtn.titleLabel!.text!)-\(friClose.text!)\(friCloseBtn.titleLabel!.text!)"
-    barHours += ", "
-    barHours += "Sat. \(satOpen.text!)\(satOpenBtn.titleLabel!.text!)-\(satClose.text!)\(satCloseBtn.titleLabel!.text!)"
-    barHours += ", "
-    barHours += "Sun. \(sunOpen.text!)\(sunOpenBtn.titleLabel!.text!)-\(sunClose.text!)\(sunCloseBtn.titleLabel!.text!)"
         
         var periodDict:[String:String] = [:]
         var hoursDict:[String:String] = [:]
@@ -93,12 +92,13 @@ class BarHoursVC: UIViewController, hasDataDict {
         for time in timeFields{
             hoursDict[time.accessibilityIdentifier!] = time.text!
         }
-        dataDict["hoursDict"] = hoursDict
-        dataDict["periodDict"] = periodDict
-        dataDict["drinks"] = drinksTextView.text!
+        dataDict[Bar.dataTypes.hoursTime] = hoursDict
+        dataDict[Bar.dataTypes.hoursAmPm] = periodDict
+        dataDict[Bar.dataTypes.drinks] = drinksTextView.text!
 
         self.performSegue(withIdentifier: "nextBarSignUpSegue", sender: self)
     }
+    //changes am to pm and vice versa when tapped
     @IBAction func amPmBtnTapped(_ button :UIButton){
         print("change period button pressed currently \(button.titleLabel!.text!)")
         if button.titleLabel!.text! == "am"{
@@ -107,20 +107,16 @@ class BarHoursVC: UIViewController, hasDataDict {
             button.setTitle("am", for: .normal )
         }
      }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
+        //Add action to buttons when pressed
         for button in amPmBtns {
             button.addTarget(self, action: #selector(self.amPmBtnTapped(_:)), for: .touchUpInside)
         }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+
     // hides keyboard on tap
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         

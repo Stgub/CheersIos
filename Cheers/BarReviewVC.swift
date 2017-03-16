@@ -39,7 +39,14 @@ class BarReviewVC: UIViewController, hasDataDict {
             
             firebasePost.setValue(self.firebaseDict) { (error, ref) in
                 if error == nil {
-                    presentUIAlert(sender: self, title: "", message: "Success!")
+                    let alert = UIAlertController()
+                    let okayAction = UIAlertAction(
+                        title: "Great!",
+                        style: UIAlertActionStyle.default,
+                        handler: { (alertAction) in
+                        presentSignUpBarIntialVC(sender:self)
+                    })
+                    alert.addAction(okayAction)
                 } else {
                     print("Chuck: Error -\(error)")
                     presentUIAlert(sender: self, title: "Error", message: "\(error.debugDescription)")
@@ -88,13 +95,21 @@ class BarReviewVC: UIViewController, hasDataDict {
             self.drinksLabel.text = drinks
             firebaseDict[Bar.dataTypes.drinks] = drinks as AnyObject
         }
+        if let hoursTime = dataDict[Bar.dataTypes.hoursTime] as? Dictionary<String,String>{
+            if let hoursAmPm = dataDict[Bar.dataTypes.hoursAmPm] as? Dictionary<String,String>{
+                firebaseDict[Bar.dataTypes.hoursTime] = hoursTime as AnyObject
+                firebaseDict[Bar.dataTypes.hoursAmPm] = hoursAmPm as AnyObject
+                self.barHoursLabel.text = Bar.getHoursParagraph(hoursDict: hoursTime, amPmDict: hoursAmPm)
+            }
+            
+        }
         if let image = dataDict[Bar.dataTypes.img] as? UIImage {
             self.barImgView.image = image
 
         } else { print("No bar image in data dict")
         }
     }
-    
+
     func postBarImage(barImage:UIImage, returnBlock:@escaping (_ imgUrl:String)->()){
         print("posting image to databse")
         if let productImgData = UIImageJPEGRepresentation(barImage, 0.2) {

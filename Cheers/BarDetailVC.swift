@@ -18,6 +18,7 @@ class BarDetailVC: UIViewController, hasBarVar {
     @IBOutlet weak var barPhoneNumLabel: UILabel!
     @IBOutlet weak var barDrinksLabel: UILabel!
     @IBOutlet weak var redeemDrinkBtn: UIButton!
+    @IBOutlet weak var barHoursLabel: UILabel!
     
     @IBAction func backBtnTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -53,6 +54,14 @@ class BarDetailVC: UIViewController, hasBarVar {
         if let barStreet = bar.locationStreet{
             barStreetLabel.text = barStreet
         }
+        if let barPhoneNum = bar.phoneNumber{
+            barPhoneNumLabel.text = barPhoneNum
+        }
+        if let barHours = bar.hoursTime{
+            if let barAmPm = bar.hoursAmPm{
+                barHoursLabel.text = Bar.getHoursParagraph(hoursDict: barHours, amPmDict: barAmPm)
+            }
+        }
         if currentUser.credits <= 0 {
             redeemDrinkBtn.setTitle("Upgrade to recieve more credits!", for: .normal)
             redeemDrinkBtn.isUserInteractionEnabled = false
@@ -76,7 +85,7 @@ class BarDetailVC: UIViewController, hasBarVar {
             redeemDrinkBtn.isUserInteractionEnabled = true
 
         }
-        // Do any additional setup after loading the view.
+
     }
     
 
