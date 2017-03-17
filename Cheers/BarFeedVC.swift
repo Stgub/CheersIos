@@ -128,7 +128,10 @@ class BarFeedVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
         return cell
     }
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! BarTableViewCell
+       tappedBar(forBar: cell.bar)
+    }
     
     //MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
