@@ -12,6 +12,7 @@ import Firebase
 class BarReviewVC: UIViewController, hasDataDict {
     var dataDict: [String : Any] = [:]
     var firebaseDict:[String:AnyObject] = [:]
+    let activityIndicator = UIActivityIndicatorView()
     @IBOutlet weak var barNameLabel: UILabel!
     
     @IBOutlet weak var barDescriptLabel: UILabel!
@@ -30,9 +31,11 @@ class BarReviewVC: UIViewController, hasDataDict {
             presentUIAlert(sender: self, title: "No bar Image", message: "Go back and add an image")
             return
         }
+        turnActivityIndicator(on: true)
         postBarImage(barImage: image ) {
             (imgUrl) in
             print("got Url")
+            self.turnActivityIndicator(on: false)
             self.firebaseDict[Bar.dataTypes.imgUrl] = imgUrl as AnyObject
             let firebasePost = DataService.ds.REF_BARS.childByAutoId()
             //let postId = firebasePost.key
@@ -44,6 +47,7 @@ class BarReviewVC: UIViewController, hasDataDict {
                         title: "Great!",
                         style: UIAlertActionStyle.default,
                         handler: { (alertAction) in
+                        
                         presentSignUpBarIntialVC(sender:self)
                     })
                     alert.addAction(okayAction)
@@ -57,8 +61,25 @@ class BarReviewVC: UIViewController, hasDataDict {
 
 
     }
+    func turnActivityIndicator(on:Bool){
+        if on {
+            activityIndicator.startAnimating()
+            self.view.isUserInteractionEnabled = false
+        } else {
+            activityIndicator.stopAnimating()
+            self.view.isUserInteractionEnabled = true
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Initialize activity indicator
+        activityIndicator.color = UIColor.gray
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        self.view.addSubview(activityIndicator)
+        activityIndicator.isHidden = true
+
+        
         if let barName = dataDict[Bar.dataTypes.barName] as? String {
             self.barNameLabel.text = barName
             firebaseDict[Bar.dataTypes.barName] = barName as AnyObject

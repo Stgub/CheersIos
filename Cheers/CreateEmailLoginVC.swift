@@ -19,7 +19,7 @@ class CreateEmailLoginVC: UIViewController {
     @IBOutlet weak var cityField: UITextField!
     @IBOutlet weak var zipCodeField: UITextField!
     
-    @IBAction func backBtnTapped(_ sender: Any) {
+    @IBAction func backBtnTapped(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func signUpBtnPressed(_ sender: Any) {
