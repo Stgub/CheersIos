@@ -172,7 +172,7 @@
                                         <rect key="frame" x="16" y="29" width="12" height="22"/>
                                         <state key="normal" image="backBtnBlack"/>
                                         <connections>
-                                            <action selector="backBtnTapped:" destination="KEs-z3-WWh" eventType="touchUpInside" id="2Ct-fi-oJw"/>
+                                            <action selector="backBtnTapped:" destination="KEs-z3-WWh" eventType="touchUpInside" id="WVC-V3-buU"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -682,7 +682,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e1n-h0-460" id="dRF-Zo-fkb">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="87"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="86"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEw-oq-9uQ">
@@ -1124,7 +1124,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6H3-6P-WFP" id="UeR-X4-UaQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="87"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="86"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32P-ih-Bfi">
@@ -1372,7 +1372,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.54000000000000004" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXm-ib-lDC">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXm-ib-lDC">
                                 <rect key="frame" x="16" y="168" width="288" height="66"/>
                                 <string key="text">This swanky place has evefyhting you could have from pool tables and a chill vibe to the back club whree the real action happens. C'mon through and enjoya free drink!</string>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
@@ -1388,7 +1388,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.87" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jO9-aY-gFO">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jO9-aY-gFO">
                                 <rect key="frame" x="16" y="264" width="288" height="66"/>
                                 <string key="text">Mon 11:30am - 12:30am, Tues 11:30am - 12:30am, Wed 11:30am - 12:30am, Thu 11:30 am - 12:30am, Fri 11:30am - 12:30am, Sat 11:30am - 12:30am, Sun 11:30am - 12:30am</string>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
@@ -1404,7 +1404,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.87" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="212 - 304 - 6709" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YXR-aD-7YD">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="212 - 304 - 6709" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YXR-aD-7YD">
                                 <rect key="frame" x="115.5" y="360" width="89" height="17"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.54000000000000004" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1580,24 +1580,24 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sC3-SE-JII">
-                                <rect key="frame" x="16" y="153" width="288" height="175"/>
+                                <rect key="frame" x="16" y="153" width="288" height="174.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Friend of the Club" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S06-xA-TsL">
-                                        <rect key="frame" x="76" y="13" width="137" height="21"/>
+                                        <rect key="frame" x="75.305203783640991" y="12.999999999999773" width="137" height="21.000000000000227"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1 free drink a month on us " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pMD-lW-yUC">
-                                        <rect key="frame" x="43" y="48" width="203" height="21"/>
+                                        <rect key="frame" x="41.997689227666797" y="48" width="203" height="20.999999999999773"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dTu-Rg-lw2">
-                                        <rect key="frame" x="51" y="130" width="187" height="30"/>
+                                        <rect key="frame" x="50.324567866660345" y="129.99999999999977" width="187" height="30.000000000000455"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="Your current membership">
@@ -1609,26 +1609,38 @@
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93062900641025637" green="0.93062900641025637" blue="0.93062900641025637" alpha="1" colorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="keyPath">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="For all the effor you put in to download our app" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GsL-2K-jUw">
+                                <rect key="frame" x="40.650025396430465" y="229.00000000000023" width="238" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jo0-mH-vPw">
-                                <rect key="frame" x="16" y="343.5" width="288" height="174.5"/>
+                                <rect key="frame" x="16" y="343" width="288" height="174.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Club Member" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t2P-2v-N9q">
-                                        <rect key="frame" x="93" y="8" width="104" height="21"/>
+                                        <rect key="frame" x="91.958961061628088" y="8.0000000000002274" width="104.00000000000006" height="20.999999999999773"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$10 for a free drink a day " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OQb-Ba-lGf">
-                                        <rect key="frame" x="47" y="37" width="195" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10 drinks for $10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OQb-Ba-lGf">
+                                        <rect key="frame" x="79.468643103137765" y="37.000000000000227" width="127.99999999999989" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRx-KQ-a9d">
-                                        <rect key="frame" x="51" y="120" width="187" height="30"/>
+                                        <rect key="frame" x="50.324567866660345" y="120" width="186.99999999999994" height="30.000000000000227"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="0.65490196079999996" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="Join the club">
@@ -1638,8 +1650,8 @@
                                             <action selector="upgradeBtnTapped:" destination="Bni-sn-Jf5" eventType="touchUpInside" id="DmB-Kb-8c5"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="That's 30 free drinks a month for the price of one!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UnP-6D-Pcd">
-                                        <rect key="frame" x="23" y="55" width="244" height="57"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="That's 10 drinks for the price of 1!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UnP-6D-Pcd">
+                                        <rect key="frame" x="-6.5757694997955696" y="55.000000000000227" width="300" height="57"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -1647,14 +1659,12 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93062900640000001" green="0.93062900640000001" blue="0.93062900640000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="keyPath">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="For all the effor you put in to download our app" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GsL-2K-jUw">
-                                <rect key="frame" x="41" y="229" width="238" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -3391,7 +3401,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="heG-pa-TW5" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1798" y="-69"/>
+            <point key="canvasLocation" x="-1553" y="-70"/>
         </scene>
     </scenes>
     <resources>

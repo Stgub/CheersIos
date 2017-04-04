@@ -59,7 +59,8 @@ class MembershipVC: UIViewController {
     func unsubscribe(){
             print("postStripeToken")
 
-        let URL = "http://localhost/donate/unsubscribe.php"
+        let URL = SERVER_BASE + "/unsubscribeUser"
+        
         let params = ["customerId":currentUser.stripeId] as [String:String]
         
         let manager = AFHTTPRequestOperationManager()
@@ -69,8 +70,10 @@ class MembershipVC: UIViewController {
                 if response["Error"] != nil{
                     presentUIAlert(sender: self, title: "Error", message:"Please try again")
                 } else {
+                    //Protect these
                     let status = response["status"]
                     let message = response["message"]
+                    
                     presentUIAlert(sender: self, title: status!, message: message!)
                     if status == "canceled"{
                         currentUser.membership = membershipLevels.basic
@@ -86,8 +89,7 @@ class MembershipVC: UIViewController {
                 print("Chuck: Error -\(error)")
                 presentUIAlert(sender: self, title: "Please Try Again", message: (error?.localizedDescription)!)
                 
-        }
-        )
+        })
             
         
 

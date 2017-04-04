@@ -62,6 +62,9 @@ class BarDetailVC: UIViewController, hasBarVar {
                 barHoursLabel.text = Bar.getHoursParagraph(hoursDict: barHours, amPmDict: barAmPm)
             }
         }
+        if let barDescript = bar.description{
+            barDescriptLabel.text = barDescript
+        }
         if currentUser.credits <= 0 {
             redeemDrinkBtn.setTitle("Upgrade to recieve more credits!", for: .normal)
             redeemDrinkBtn.isUserInteractionEnabled = false
