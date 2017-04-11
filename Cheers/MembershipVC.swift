@@ -11,10 +11,15 @@ import Stripe
 import AFNetworking
 
 class MembershipVC: UIViewController {
-
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var userImageView: RoundedImageCorner!
+    @IBOutlet weak var membershipLabel: UILabel!
+    @IBOutlet weak var creditsLabel: UILabel!
+    
+    @IBOutlet weak var renewsDateLabel: UILabel!
     @IBOutlet weak var basicMembershipBtn: UIButton!
     @IBOutlet weak var clubMembershipBtn: UIButton!
-    
+
     @IBAction func backBtnTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -36,13 +41,24 @@ class MembershipVC: UIViewController {
     }
     
     @IBAction func upgradeBtnTapped(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "toPaymentVCSegue", sender: self)
+        self.performSegue(withIdentifier: "toCheckoutVCSegue", sender: self)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        updateUI()
+        
+        
     }
-    override func viewDidAppear(_ animated: Bool) {
+    
+    func updateUI(){
+        
+        self.usernameLabel.text = currentUser.name
+        self.creditsLabel.text = "\(currentUser.credits!)"
+        self.membershipLabel.text = currentUser.membership
+        if let userImage = currentUser.usersImage {
+            self.userImageView.image = currentUser.usersImage
+        }
+        
         if currentUser.membership == membershipLevels.premium{
             basicMembershipBtn.setTitle("Downgrade", for: .normal)
             clubMembershipBtn.setTitle("You're in the club", for: .normal)
@@ -55,40 +71,17 @@ class MembershipVC: UIViewController {
             clubMembershipBtn.isUserInteractionEnabled = true
         }
     }
+    override func viewDidAppear(_ animated: Bool) {
+        updateUI()
+    }
     
     func unsubscribe(){
-            print("postStripeToken")
-
-        let URL = "http://localhost/donate/unsubscribe.php"
-        let params = ["customerId":currentUser.stripeId] as [String:String]
-        
-        let manager = AFHTTPRequestOperationManager()
-        manager.responseSerializer.acceptableContentTypes = Set(["text/html","application/json"])
-        manager.post(URL, parameters: params, success: { (operation, responseObject) -> Void in
-            if let response = responseObject as? [String: String] {
-                if response["Error"] != nil{
-                    presentUIAlert(sender: self, title: "Error", message:"Please try again")
-                } else {
-                    let status = response["status"]
-                    let message = response["message"]
-                    presentUIAlert(sender: self, title: status!, message: message!)
-                    if status == "canceled"{
-                        currentUser.membership = membershipLevels.basic
-                        currentUser.ref.child(userDataTypes.membership).setValue(membershipLevels.basic)
-                    }
-                }
-            }else{ print("Chuck: Could not convert to [String: String]")}
-
-        },
-                     failure:
-            {
-                requestOperation, error in
-                print("Chuck: Error -\(error)")
-                presentUIAlert(sender: self, title: "Please Try Again", message: (error?.localizedDescription)!)
-                
+         let myAPIClient = MyAPIClient.sharedClient
+         myAPIClient.unusubscribeCustomer { (status, message) in
+            presentUIAlert(sender: self, title: status, message: message)
+            self.updateUI()
         }
-        )
-            
+  
         
 
     }

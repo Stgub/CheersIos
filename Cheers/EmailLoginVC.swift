@@ -16,7 +16,7 @@ class EmailLoginVC: UIViewController {
     
     @IBOutlet weak var passwordField: UITextField!
     
-    @IBAction func backBtnTapped(_ sender: Any) {
+    @IBAction func backBtnTapped(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func loginBtnTapped(_ sender: Any) {

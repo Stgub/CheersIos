@@ -21,7 +21,9 @@ class FirstLoginVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         if let _  = KeychainWrapper.standard.string(forKey: KEY_UID ){
             print("CHUCK: ID found in keychain")
-            presentBarFeedVC(sender: self)
+            MyFireBaseAPIClient.sharedClient.getCurrentUser(){
+                presentBarFeedVC(sender: self)
+            }
         }
     }
 
@@ -118,7 +120,7 @@ class FirstLoginVC: UIViewController {
                     (deviceSnapshot) in
                     let deviceId = UIDevice.current.identifierForVendor!.uuidString
                     if deviceSnapshot.hasChild(deviceId) {
-                        presentUIAlert(sender: self, title: "Device is already associated with an account", message: "Please contact support at support@TheDrinkClub.com")
+                        presentUIAlert(sender: self, title: "Device is already associated with an account", message: "Please contact support at support@GetToastApp.com")
                         return
                     }
                 })

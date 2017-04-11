@@ -25,16 +25,18 @@ class SignUpBarIntialVC: UIViewController, hasDataDict {
     @IBOutlet weak var cityField: UITextField!
     @IBOutlet weak var stateField: UITextField!
     @IBOutlet weak var zipCodeField: UITextField!
-    @IBOutlet weak var phoneNumberField: UITextField!
+    @IBOutlet weak var phoneNumArea: UITextField!
+    @IBOutlet weak var phoneNumSecond: UITextField!
+    @IBOutlet weak var phoneNumThird: UITextField!
     
     @IBAction func nextBtnTapped(_ sender: Any) {
-        
+        let phonenumber = "(\(phoneNumArea.text!)\(phoneNumSecond.text!)-\(phoneNumThird.text!)"
         dataDict[Bar.dataTypes.locationStreet] = streetField.text!
         dataDict[Bar.dataTypes.barName] = barNameField.text!
         dataDict[Bar.dataTypes.locationCity] = cityField.text!
         dataDict[Bar.dataTypes.locationState] = stateField.text!
         dataDict[Bar.dataTypes.locationZipCode] = zipCodeField.text!
-        dataDict[Bar.dataTypes.phoneNumber] = phoneNumberField.text!
+        dataDict[Bar.dataTypes.phoneNumber] = phonenumber
     
         self.performSegue(withIdentifier: "nextBarSignUpSegue", sender: self)
         

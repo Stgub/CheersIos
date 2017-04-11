@@ -34,7 +34,7 @@ class PaymentVC: UIViewController {
         print("tapped purchase")
         // Initiate the card
         let stripCard = STPCardParams()
-        
+
         if self.cardNumberField.text?.isEmpty == true {
             handleIncompleteInfo(missingInfo: "Card Number")
             return
@@ -53,22 +53,89 @@ class PaymentVC: UIViewController {
         let expMonth = UInt(Int(expirationMonthField.text!)!)
         let expYear = UInt(Int(expirationYearField.text!)!)
         
-        // Send the card info to Strip to get the token
-        stripCard.number = self.cardNumberField.text
-        stripCard.cvc = self.CVCField.text
-        stripCard.expMonth = expMonth
-        stripCard.expYear = expYear
-        STPCardValidator.validationState(forCard: stripCard)
+        if let customerId = currentUser.stripeID {
+            
+            let URL =  SERVER_BASE + "/subscribeUser"
+            let params = ["customerID": customerId ] as [String:String]
+            
+            let manager = AFHTTPRequestOperationManager()
+            manager.responseSerializer.acceptableContentTypes = Set(["text/html","application/json"])
+            manager.post(URL, parameters: params, success: { (operation, responseObject) -> Void in
+                if let response = responseObject as? [String: String] {
+                    if let error = response["Error"]{
+                        print(error)
+                    }
+                    print("CHUCK: customerId \(customerId))")
+                    currentUser.ref.child(userDataTypes.membership).setValue(membershipLevels.premium)
+                  //  currentUser.membership = membershipLevels.premium
+                    currentUser.ref.child(userDataTypes.stripeId).setValue(customerId, withCompletionBlock: { (error, ref) in
+                        if error != nil {
+                            print("Chuck: Error saving stripeId")
+                        } else {
+                            
+                        }
+                    })
+                    
+                    let alertController = UIAlertController(title: response["status"]!, message: response["message"]!, preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "Okay", style: UIAlertActionStyle.default) {
+                        UIAlertAction in
+                        let currentDate = Date()
+                        let dateFormater = DateFormatter()
+                        dateFormater.dateFormat = "MM/dd/yyyy"
+                        let currentDateString = dateFormater.string(from: currentDate)
+                        currentUser.billingDate = currentDateString
+                        currentUser.ref.child(userDataTypes.billingDate).setValue(currentUser.billingDate, withCompletionBlock: { (error, ref) in
+                            if error != nil {
+                                print("Chuck: error upgrading user's billing date")
+                                
+                            }
+                        })
+                        currentUser.ref.child(userDataTypes.membership).setValue(membershipLevels.premium, withCompletionBlock: { (error, ref) in
+                            if error != nil {
+                                print("Chuck: error upgrading user's membership")
+                                
+                            }
+                        })
+                        self.view.isUserInteractionEnabled = true
+                        self.dismiss(animated: true, completion: nil)
+                        
+                        NSLog("Okay Pressed")
+                    }
+                    self.spinner.stopAnimating()
+                    alertController.addAction(okAction)
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            },
+                         failure:
+                {
+                    requestOperation, error in
+                    print("Chuck: Error -\(error)")
+                    presentUIAlert(sender: self, title: "Please Try Again", message: (error?.localizedDescription)!)
+                    self.spinner.stopAnimating()
+                    self.view.isUserInteractionEnabled = true
+                    
+            }
+                
+            )
+        } else {
+            // Send the card info to Strip to get the token
+            stripCard.number = self.cardNumberField.text
+            stripCard.cvc = self.CVCField.text
+            stripCard.expMonth = expMonth
+            stripCard.expYear = expYear
+            STPCardValidator.validationState(forCard: stripCard)
+            
+            STPAPIClient.shared().createToken(withCard: stripCard, completion: { (token, error) -> Void in
+                
+                if error != nil {
+                    self.handleError(error: error! as NSError)
+                    return
+                }
+                
+                self.postStripeToken(token: token!)
+            })
 
-        STPAPIClient.shared().createToken(withCard: stripCard, completion: { (token, error) -> Void in
-            
-            if error != nil {
-                self.handleError(error: error! as NSError)
-                return
-            } 
-            
-            self.postStripeToken(token: token!)
-        })
+        }
         
         
     }
@@ -86,36 +153,42 @@ class PaymentVC: UIViewController {
 
         
     }
+    
     func postStripeToken(token: STPToken) {
-        print("postStripeToken")
-        let URL = "http://localhost/donate/payment.php"
+
+        let URL =  SERVER_BASE + "/processDonation"
         let params = ["stripeToken": token.tokenId,
         //"plan" : "premiumSubscription",
-        "amount": "10",
+        "amount": "1000",
         "currency": "usd",
         "email":self.emailField.text!,
-        "description": self.emailField.text!] as [String:String]
-        
+        "description": self.emailField.text!
+        ] as [String:String]
         
         let manager = AFHTTPRequestOperationManager()
         manager.responseSerializer.acceptableContentTypes = Set(["text/html","application/json"])
         manager.post(URL, parameters: params, success: { (operation, responseObject) -> Void in
             if let response = responseObject as? [String: String] {
-                if let customerId = response["customerId"]{
-                    print("CHUCK: customerId \(customerId))")
+                if let error = response["Error"]{
+                    print(error)
+                }
+                if let customerID = response["customerId"]{
+                    print("CHUCK: customerId \(customerID))")
                     currentUser.ref.child(userDataTypes.membership).setValue(membershipLevels.premium)
-                    currentUser.membership = membershipLevels.premium
-                    currentUser.ref.child(userDataTypes.stripeId).setValue(customerId, withCompletionBlock: { (error, ref) in
+                 //   currentUser.membership = membershipLevels.premium
+                    currentUser.ref.child(userDataTypes.stripeId).setValue(customerID, withCompletionBlock: { (error, ref) in
                         if error != nil {
                             print("Chuck: Error saving stripeId")
                         } else {
                             
                         }
                     })
-                    currentUser.stripeId = customerId
+                    currentUser.setStripeID(stripeID: customerID, completion: {
+                        (error) in
+                        print("Error \(error)")
+                    })
                 }
               
-
                 let alertController = UIAlertController(title: response["status"]!, message: response["message"]!, preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "Okay", style: UIAlertActionStyle.default) {
                     UIAlertAction in
@@ -138,7 +211,7 @@ class PaymentVC: UIViewController {
                         }
                     })
                     self.view.isUserInteractionEnabled = true
-                    //self.dismiss(animated: true, completion: nil)
+                    self.dismiss(animated: true, completion: nil)
 
                     NSLog("Okay Pressed")
                 }

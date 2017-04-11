@@ -19,8 +19,12 @@
 		19FBCBA51E635FE500AA10B5 /* CheersUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FBCBA41E635FE500AA10B5 /* CheersUITests.swift */; };
 		19FBCBB81E6379A600AA10B5 /* Shadow&RoundBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FBCBB71E6379A600AA10B5 /* Shadow&RoundBtn.swift */; };
 		19FBCBBA1E6379E200AA10B5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FBCBB91E6379E200AA10B5 /* Constants.swift */; };
+		5605D48C1E9806900098EC52 /* MyFirebaseAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5605D48B1E9806900098EC52 /* MyFirebaseAPIClient.swift */; };
+		560861661E7B6924001E1F13 /* ScreenWithBackButtonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560861651E7B6924001E1F13 /* ScreenWithBackButtonVC.swift */; };
+		5632C26B1E933716003C2D6B /* MyAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5632C26A1E933716003C2D6B /* MyAPIClient.swift */; };
 		56B00C3F1E70C9F400B64B71 /* CreateEmailLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B00C3E1E70C9F400B64B71 /* CreateEmailLoginVC.swift */; };
 		56B00C421E70CA2600B64B71 /* ForgotCredentialsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B00C411E70CA2600B64B71 /* ForgotCredentialsVC.swift */; };
+		56B589511E94668D009F7786 /* CheckoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B589501E94668D009F7786 /* CheckoutVC.swift */; };
 		56B91AFA1E65173F00CB40BB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 56B91AF91E65173F00CB40BB /* GoogleService-Info.plist */; };
 		56B91AFC1E65195600CB40BB /* FirstLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B91AFB1E65195600CB40BB /* FirstLoginVC.swift */; };
 		56B91AFE1E651A2000CB40BB /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B91AFD1E651A2000CB40BB /* AccountVC.swift */; };
@@ -85,8 +89,12 @@
 		19FBCBB71E6379A600AA10B5 /* Shadow&RoundBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shadow&RoundBtn.swift"; sourceTree = "<group>"; };
 		19FBCBB91E6379E200AA10B5 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		26B584204E8B800ADDF298D4 /* Pods_Cheers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cheers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5605D48B1E9806900098EC52 /* MyFirebaseAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFirebaseAPIClient.swift; sourceTree = "<group>"; };
+		560861651E7B6924001E1F13 /* ScreenWithBackButtonVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenWithBackButtonVC.swift; sourceTree = "<group>"; };
+		5632C26A1E933716003C2D6B /* MyAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAPIClient.swift; sourceTree = "<group>"; };
 		56B00C3E1E70C9F400B64B71 /* CreateEmailLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEmailLoginVC.swift; sourceTree = "<group>"; };
 		56B00C411E70CA2600B64B71 /* ForgotCredentialsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotCredentialsVC.swift; sourceTree = "<group>"; };
+		56B589501E94668D009F7786 /* CheckoutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutVC.swift; sourceTree = "<group>"; };
 		56B91AF91E65173F00CB40BB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		56B91AFB1E65195600CB40BB /* FirstLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstLoginVC.swift; sourceTree = "<group>"; };
 		56B91AFD1E651A2000CB40BB /* AccountVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
@@ -203,6 +211,8 @@
 			isa = PBXGroup;
 			children = (
 				56B91B051E651C1700CB40BB /* DataService.swift */,
+				5605D48B1E9806900098EC52 /* MyFirebaseAPIClient.swift */,
+				5632C26A1E933716003C2D6B /* MyAPIClient.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -241,17 +251,27 @@
 		19FBCBB61E6378C200AA10B5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				561FE53E1E94818A0062CE2A /* Archive */,
 				19FBCB861E635FE500AA10B5 /* BarFeedVC.swift */,
+				560861651E7B6924001E1F13 /* ScreenWithBackButtonVC.swift */,
 				56B91AFD1E651A2000CB40BB /* AccountVC.swift */,
 				56FDE76E1E6523DA00BDE97F /* HistoryVC.swift */,
 				56FDE7701E666F3E00BDE97F /* BarDetailVC.swift */,
 				56F78A5F1E6C866E000E10F4 /* MembershipVC.swift */,
-				56F78A611E6C9198000E10F4 /* PaymentVC.swift */,
+				56B589501E94668D009F7786 /* CheckoutVC.swift */,
 				199AF66E1E6F969F00FBBAD1 /* contactUsVC.swift */,
 				56B00C401E70C9F900B64B71 /* LoginSigninFlow */,
 				56FF178A1E6F9FE900089C7C /* CreateBarFlow */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		561FE53E1E94818A0062CE2A /* Archive */ = {
+			isa = PBXGroup;
+			children = (
+				56F78A611E6C9198000E10F4 /* PaymentVC.swift */,
+			);
+			name = Archive;
 			sourceTree = "<group>";
 		};
 		56B00C401E70C9F900B64B71 /* LoginSigninFlow */ = {
@@ -376,7 +396,7 @@
 				TargetAttributes = {
 					19FBCB801E635FE500AA10B5 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = T4B85P4F7X;
+						DevelopmentTeam = Y436CAXHW3;
 						ProvisioningStyle = Automatic;
 					};
 					19FBCB941E635FE500AA10B5 = {
@@ -590,6 +610,7 @@
 				56F78A621E6C9198000E10F4 /* PaymentVC.swift in Sources */,
 				56B91B061E651C1700CB40BB /* DataService.swift in Sources */,
 				56FF17891E6F8F3500089C7C /* BarHoursVC.swift in Sources */,
+				56B589511E94668D009F7786 /* CheckoutVC.swift in Sources */,
 				56FDE7751E666FD600BDE97F /* Bar.swift in Sources */,
 				56F78A601E6C866E000E10F4 /* MembershipVC.swift in Sources */,
 				56FDE7711E666F3E00BDE97F /* BarDetailVC.swift in Sources */,
@@ -597,10 +618,12 @@
 				199AF66F1E6F969F00FBBAD1 /* contactUsVC.swift in Sources */,
 				56FF17871E6F8E5D00089C7C /* SignUpBarIntialVC.swift in Sources */,
 				56B00C421E70CA2600B64B71 /* ForgotCredentialsVC.swift in Sources */,
+				560861661E7B6924001E1F13 /* ScreenWithBackButtonVC.swift in Sources */,
 				1916ADFB1E733AC3003EACC2 /* textViewRoundCorner.swift in Sources */,
 				56B91B041E651B6600CB40BB /* BarTableViewCell.swift in Sources */,
 				19FBCB851E635FE500AA10B5 /* AppDelegate.swift in Sources */,
 				56B91AFE1E651A2000CB40BB /* AccountVC.swift in Sources */,
+				5605D48C1E9806900098EC52 /* MyFirebaseAPIClient.swift in Sources */,
 				56FF17851E6F8DC000089C7C /* EmailLoginVC.swift in Sources */,
 				19FBCBB81E6379A600AA10B5 /* Shadow&RoundBtn.swift in Sources */,
 				56B91B081E651C7700CB40BB /* GeneralFunctions.swift in Sources */,
@@ -609,6 +632,7 @@
 				56FDE7731E666F9D00BDE97F /* Protocols.swift in Sources */,
 				56FDE76F1E6523DA00BDE97F /* HistoryVC.swift in Sources */,
 				56B91AFC1E65195600CB40BB /* FirstLoginVC.swift in Sources */,
+				5632C26B1E933716003C2D6B /* MyAPIClient.swift in Sources */,
 				56B91B001E651A8C00CB40BB /* User.swift in Sources */,
 				56B00C3F1E70C9F400B64B71 /* CreateEmailLoginVC.swift in Sources */,
 			);
@@ -763,7 +787,7 @@
 			baseConfigurationReference = A1796906B35241706F3C0F60 /* Pods-Cheers.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = T4B85P4F7X;
+				DEVELOPMENT_TEAM = Y436CAXHW3;
 				INFOPLIST_FILE = Cheers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Cheers.Cheers;
@@ -777,7 +801,7 @@
 			baseConfigurationReference = 91E0287E48F2ECDEB8F29508 /* Pods-Cheers.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = T4B85P4F7X;
+				DEVELOPMENT_TEAM = Y436CAXHW3;
 				INFOPLIST_FILE = Cheers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Cheers.Cheers;
