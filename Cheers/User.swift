@@ -24,15 +24,64 @@ struct userDataTypes {
     static let stripeId = "stripeId"
    // static let pictureUrl = "pictureUrl"
 }
+//should be enumerate?
 struct membershipLevels {
-    static let basic = "basic"
-    static let premium = "premium"
+    static let basic = "Basic"
+    static let premium = "Premium"
 }
 
 class User{
     var ref: FIRDatabaseReference!
-    var membership:String!
-    var credits:Int!
+    private var _membership:String!
+    
+    private func setMembership(membership:String){
+        self._membership = membership
+        if _membership == membershipLevels.premium{
+            self.credits = 10
+        } else{
+            self.credits = 1
+        }
+    }
+    var membership:String! {
+        get {
+            return self._membership
+        }
+    }
+    func setMembership(membership:String, completion:@escaping (_ error:Error?)->Void){
+        self.ref.child(userDataTypes.membership).setValue(membership) { (error, ref) in
+            if error != nil {
+                print("Error setting membership - \(error))")
+                completion(error)
+            } else {
+                completion(nil)
+                self.setMembership(membership: membership)
+            }
+        }
+    }
+    private var _credits:Int!
+    var credits:Int! {
+        set(newVal){
+            self._credits = newVal
+            for (_ , date) in self.barsUsed {
+                
+                let dateFormater = DateFormatter()
+                dateFormater.dateFormat = "MM/dd/yyyy"
+                let dateUsed = dateFormater.date(from: date)
+                let timeFromNow = (dateUsed?.timeIntervalSinceNow)! / (60 * 60 * 24 * 30)
+                print("Date from now: \(timeFromNow)")
+                if timeFromNow > -30 {
+                    self._credits! -= 1
+                }
+            }
+        }
+        get{
+            if self._credits < 0 {
+                return 0
+            } else {
+                return self._credits
+            }
+        }
+    }
     var billingDate:String!
     var userKey:String!
     var name:String!
@@ -43,8 +92,21 @@ class User{
     var userEmail:String!
     var userBirthday:String!
     var gender:String!
-    var stripeId:String!
-
+    private var _stripeID:String!
+    var stripeID:String?{
+        get{ return _stripeID }
+    }
+    func setStripeID(stripeID:String, completion:@escaping (_ error:Error?)->Void){
+        self.ref.child(userDataTypes.stripeId).setValue(stripeID) { (error, ref) in
+            if error != nil {
+                print("Error setting stripeID - \(error))")
+                completion(error)
+            } else {
+                completion(nil)
+                self._stripeID = stripeID
+            }
+        }
+    }
     init( userKey: String , userData: Dictionary<String, AnyObject> ){
         self.userKey = userKey
         if let name = userData[userDataTypes.name] as? String {
@@ -54,43 +116,27 @@ class User{
             self.imgUrl = imgUrl
         }
         if let stripeId =  userData[userDataTypes.stripeId] as? String {
-            self.stripeId = stripeId
+            self._stripeID = stripeId
         }
         if let billingDate = userData[userDataTypes.billingDate] as? String {
             self.billingDate = billingDate
-            
         }
-        if let membership = userData[userDataTypes.membership] as? String {
-            self.membership = membership
-            if membership == membershipLevels.premium {
-                credits = 10
-            } else {
-                credits = 1
-            }
-        } else {
-            self.membership = membershipLevels.basic
-            credits = 1
-        }
-        if let barsUsed = userData[userDataTypes.barsUsed] as? Dictionary<String,String>{
-            print("Bars used - \(barsUsed)")
-            self.barsUsed = barsUsed
-            for (barKey, date) in barsUsed {
-                
-                let dateFormater = DateFormatter()
-                dateFormater.dateFormat = "MM/dd/yyyy"
-                let dateUsed = dateFormater.date(from: date)
-                let timeFromNow = (dateUsed?.timeIntervalSinceNow)! / (60 * 60 * 24 * 30)
-                print("Date from now: \(timeFromNow)")
-                if timeFromNow > -30 {
-                    credits! -= 1
-                }
-                
-            }
-        } else {
-            print("No bars used")
-            barsUsed  = [:]
+        if let email = userData[userDataTypes.email] as? String {
+            self.userEmail = email
         }
 
+        if let barsUsed = userData[userDataTypes.barsUsed] as? Dictionary<String,String>{
+                print("Bars used - \(barsUsed)")
+                self.barsUsed = barsUsed
+            } else {
+                print("No bars used")
+                barsUsed  = [:]
+        }
+        if let membership = userData[userDataTypes.membership] as? String {
+            self.setMembership(membership: membership)
+        } else {
+            self.setMembership(membership:membershipLevels.basic)
+        }
  
 
     

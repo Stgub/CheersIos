@@ -12,8 +12,9 @@ import Firebase
 import SwiftKeychainWrapper
 
 var imageCache: NSCache<NSString, UIImage> = NSCache()
-//SHOULD THIS BE HTTPS?
-let SERVER_BASE = "http://54.148.199.207:5000" // "54.71.81.140"
+let SERVER_BASE = "http://52.41.104.17:5000"  //"http://0.0.0.0:5000"
+
+
 let DB_BASE = FIRDatabase.database().reference() // gives the URL of the root of the db, also in the google plist
 let STORAGE_BASE = FIRStorage.storage().reference()
 private var _REF_IMAGES = STORAGE_BASE.child("images")

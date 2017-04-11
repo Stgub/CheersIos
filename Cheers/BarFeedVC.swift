@@ -17,7 +17,6 @@ class BarFeedVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
-    
     @IBOutlet weak var membershipLabel: UIButton!
     @IBOutlet weak var creditsLabel: UILabel!
     
@@ -35,48 +34,38 @@ class BarFeedVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getCurrentUserInfo { 
-            if let user = currentUser{
-                self.userNameLabel.text = user.name
-                self.creditsLabel.text = "Credits: \(user.credits!)"
-                self.membershipLabel.setTitle(user.membership, for: .normal)
-                user.getUserImg(returnBlock: { (image) in
-                    DispatchQueue.main.async {
-                        self.userImageView.image = image
-                    }
-                
-                })
-                guard let barsUsed = user.barsUsed else {
-                    print("Chuck: Bars used not there")
-                    return
-                }
-                //Get bars
-
-                DataService.ds.REF_BARS.observeSingleEvent(of: .value, with: {
-                    (snapshot) in
-                    if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
-                        for snap in snapshots {
-                            print("CHUCK: SNAP - \(snap)")
-                            if let barData = snap.value as? Dictionary<String, AnyObject>{
-                                let newBar = Bar(barKey: snap.key, dataDict: barData)
-                                if barsUsed.keys.contains(newBar.key){
-                                    newBar.hasBeenUsed = true
-                                } else {
-                                    newBar.hasBeenUsed = false
-                                }
-                                newBar.getImage(){
-                                    self.bars.append(newBar)
-                                    self.tableView.reloadData()
-                                }
-                            }
-                        }
-                    }
-                })
-                
-                
-            } else { print( "CHUCK: No current user") }
+        self.userNameLabel.text = currentUser.name
+        self.creditsLabel.text = "Credits: \(currentUser.credits!)"
+        self.membershipLabel.setTitle(currentUser.membership, for: .normal)
+    
+        currentUser.getUserImg(returnBlock: { (image) in
+            DispatchQueue.main.async {
+                self.userImageView.image = image
+            }
+        
+        })
+        guard let barsUsed = currentUser.barsUsed else {
+            print("Backend: Bars used not there")
+            return
         }
-
+        //Get bars
+        
+        MyFireBaseAPIClient.sharedClient.getBars(){
+            (returnedBars) in
+            print("Backend API returned bars")
+            for bar in returnedBars{
+                if barsUsed.keys.contains(bar.key){
+                    bar.hasBeenUsed = true
+                } else {
+                    bar.hasBeenUsed = false
+                }
+                bar.getImage(){
+                    print("Appending \(bar.barName) to tableview")
+                    self.bars.append(bar)
+                    self.tableView.reloadData()
+                }
+            }
+        }
     }
     /**
      Called from BarTableViewCell

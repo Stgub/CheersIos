@@ -77,6 +77,7 @@ class Bar {
 
     }
     func getImage(returnBlock:@escaping ()->()){
+        print("Getting image for \(self.barName)")
         guard let imageUrl = self.imgUrl else {
             print("CHUCK: no image url")
             return

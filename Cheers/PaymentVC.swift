@@ -53,7 +53,7 @@ class PaymentVC: UIViewController {
         let expMonth = UInt(Int(expirationMonthField.text!)!)
         let expYear = UInt(Int(expirationYearField.text!)!)
         
-        if let customerId = currentUser.stripeId {
+        if let customerId = currentUser.stripeID {
             
             let URL =  SERVER_BASE + "/subscribeUser"
             let params = ["customerID": customerId ] as [String:String]
@@ -67,7 +67,7 @@ class PaymentVC: UIViewController {
                     }
                     print("CHUCK: customerId \(customerId))")
                     currentUser.ref.child(userDataTypes.membership).setValue(membershipLevels.premium)
-                    currentUser.membership = membershipLevels.premium
+                  //  currentUser.membership = membershipLevels.premium
                     currentUser.ref.child(userDataTypes.stripeId).setValue(customerId, withCompletionBlock: { (error, ref) in
                         if error != nil {
                             print("Chuck: Error saving stripeId")
@@ -172,18 +172,21 @@ class PaymentVC: UIViewController {
                 if let error = response["Error"]{
                     print(error)
                 }
-                if let customerId = response["customerId"]{
-                    print("CHUCK: customerId \(customerId))")
+                if let customerID = response["customerId"]{
+                    print("CHUCK: customerId \(customerID))")
                     currentUser.ref.child(userDataTypes.membership).setValue(membershipLevels.premium)
-                    currentUser.membership = membershipLevels.premium
-                    currentUser.ref.child(userDataTypes.stripeId).setValue(customerId, withCompletionBlock: { (error, ref) in
+                 //   currentUser.membership = membershipLevels.premium
+                    currentUser.ref.child(userDataTypes.stripeId).setValue(customerID, withCompletionBlock: { (error, ref) in
                         if error != nil {
                             print("Chuck: Error saving stripeId")
                         } else {
                             
                         }
                     })
-                    currentUser.stripeId = customerId
+                    currentUser.setStripeID(stripeID: customerID, completion: {
+                        (error) in
+                        print("Error \(error)")
+                    })
                 }
               
                 let alertController = UIAlertController(title: response["status"]!, message: response["message"]!, preferredStyle: .alert)
