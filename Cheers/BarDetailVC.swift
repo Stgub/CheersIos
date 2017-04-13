@@ -24,18 +24,15 @@ class BarDetailVC: UIViewController, hasBarVar {
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func redeemDrinkBtnTapped(_ sender: Any) {
-        let currentDate = Date()
-        let dateFormater = DateFormatter()
-        dateFormater.dateFormat = "MM/dd/yyyy"
-        let currentDateString = dateFormater.string(from: currentDate)
         print("CHUCK: User redeemed bar -\(bar.barName)")
-        DataService.ds.REF_USER_CURRENT.child(userDataTypes.barsUsed).child(bar.key).setValue(currentDateString) {
+        let dateStamp = NSDate().timeIntervalSince1970
+        DataService.ds.REF_USER_CURRENT.child(userDataTypes.barsUsed).child(bar.key).setValue(dateStamp){
             (error, ref) in
             if error != nil {
                 print("Chuck: Error redeeming -\(error)")
             } else {
                 print("Successfully redeemed")
-                currentUser.usedBar(barId: self.bar.key, currentDate:currentDateString)
+                currentUser.usedBar(barId: self.bar.key, currentDate:dateStamp)
                 self.bar.hasBeenUsed = true
                 self.dismiss(animated: true, completion: nil)
             }
@@ -71,10 +68,9 @@ class BarDetailVC: UIViewController, hasBarVar {
         } else if let barUsed = bar.hasBeenUsed{
             if barUsed {
                 let dateUsed = currentUser.barsUsed[bar.key]
-                var date = getDateFromDateString(date:dateUsed!)
-                date.addTimeInterval(60 * 60 * 24 * 30)
-                if date.timeIntervalSinceNow > 0 {
-                    redeemDrinkBtn.setTitle("Redeemed, available again: \(getStringFromDate(date: date))", for: .normal)
+                let dateAvailable = dateUsed! + 30 * 24 * 60 * 60
+                if dateAvailable > NSDate().timeIntervalSince1970 {
+                    redeemDrinkBtn.setTitle("Redeemed, available again: \(getDateStringFromTimeStamp(date: dateAvailable))", for: .normal)
                     redeemDrinkBtn.isUserInteractionEnabled = false
                 } else{
                     redeemDrinkBtn.setTitle("Have your server tap to redeem", for: .normal)

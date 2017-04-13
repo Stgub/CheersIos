@@ -19,9 +19,11 @@ struct userDataTypes {
     static let barsUsed = "barsUsed"
     static let credits = "credits"
     static let membership = "membership"
-    static let billingDate = "billing-date"
     static let imgUrl = "imgUrl"
     static let stripeId = "stripeId"
+    static let currentPeriodStart = "current_period_start"
+    static let currentPeriodEnd = "current_period_end"
+    static let billingDate = "billingDate"
    // static let pictureUrl = "pictureUrl"
 }
 //should be enumerate?
@@ -33,46 +35,43 @@ struct membershipLevels {
 class User{
     var ref: FIRDatabaseReference!
     private var _membership:String!
-    
-    private func setMembership(membership:String){
-        self._membership = membership
-        if _membership == membershipLevels.premium{
-            self.credits = 10
-        } else{
-            self.credits = 1
-        }
-    }
-    var membership:String! {
-        get {
-            return self._membership
-        }
-    }
-    func setMembership(membership:String, completion:@escaping (_ error:Error?)->Void){
-        self.ref.child(userDataTypes.membership).setValue(membership) { (error, ref) in
-            if error != nil {
-                print("Error setting membership - \(error))")
-                completion(error)
+    var membership:String!{
+        set(newVal){
+            _membership = newVal
+            self.ref.child(userDataTypes.membership).setValue(membership)
+            if self._membership == membershipLevels.premium {
+                self._credits = 10
+                if(self.currentPeriodStart == nil || self.currentPeriodEnd == nil){
+                    self.setStandardPeriods()
+                } else {
+                    if ( currentPeriodEnd < NSDate().timeIntervalSince1970 ){
+                        MyAPIClient.sharedClient.updatePeriods()
+                    }
+                }
             } else {
-                completion(nil)
-                self.setMembership(membership: membership)
+                self._credits = 1
+                self.setStandardPeriods()
             }
+
+
         }
+        get{
+            return _membership
+        }
+    }
+
+    /**
+     If no period exits this sets the start period to today and end a month from now
+    */
+    private func setStandardPeriods(){
+        self.currentPeriodStart = NSDate().timeIntervalSince1970
+        self.currentPeriodEnd = NSDate().timeIntervalSince1970 + 30 * 24 * 60 * 60 // add a month
     }
     private var _credits:Int!
     var credits:Int! {
         set(newVal){
             self._credits = newVal
-            for (_ , date) in self.barsUsed {
-                
-                let dateFormater = DateFormatter()
-                dateFormater.dateFormat = "MM/dd/yyyy"
-                let dateUsed = dateFormater.date(from: date)
-                let timeFromNow = (dateUsed?.timeIntervalSinceNow)! / (60 * 60 * 24 * 30)
-                print("Date from now: \(timeFromNow)")
-                if timeFromNow > -30 {
-                    self._credits! -= 1
-                }
-            }
+            self.ref.child(userDataTypes.credits).setValue(self._credits)
         }
         get{
             if self._credits < 0 {
@@ -82,10 +81,28 @@ class User{
             }
         }
     }
+    var currentPeriodStart:TimeInterval! {
+        get { return _currentPeriodStart }
+        set(newVal) {
+            self._currentPeriodStart = newVal
+            self.ref.child(userDataTypes.currentPeriodStart).setValue(self._currentPeriodStart) //update server
+        }
+    }
+    private var _currentPeriodStart:TimeInterval!
+    var currentPeriodEnd:TimeInterval! {
+        get { return _currentPeriodEnd }
+        set(newVal) {
+            self._currentPeriodEnd = newVal
+            self.ref.child(userDataTypes.currentPeriodStart).setValue(self._currentPeriodEnd) //update server
+        }
+    }
+    private var _currentPeriodEnd:TimeInterval!
+
     var billingDate:String!
+    var updatedCreditsDate:TimeInterval!
     var userKey:String!
     var name:String!
-    var barsUsed:Dictionary<String,String>!
+    var barsUsed:Dictionary<String,TimeInterval>!
     var key:String!
     var imgUrl:String!
     var usersImage:UIImage!
@@ -94,19 +111,13 @@ class User{
     var gender:String!
     private var _stripeID:String!
     var stripeID:String?{
+        set(newVal) {
+            self.ref.child(userDataTypes.stripeId).setValue(newVal)
+            self._stripeID = newVal
+        }
         get{ return _stripeID }
     }
-    func setStripeID(stripeID:String, completion:@escaping (_ error:Error?)->Void){
-        self.ref.child(userDataTypes.stripeId).setValue(stripeID) { (error, ref) in
-            if error != nil {
-                print("Error setting stripeID - \(error))")
-                completion(error)
-            } else {
-                completion(nil)
-                self._stripeID = stripeID
-            }
-        }
-    }
+
     init( userKey: String , userData: Dictionary<String, AnyObject> ){
         self.userKey = userKey
         if let name = userData[userDataTypes.name] as? String {
@@ -125,7 +136,7 @@ class User{
             self.userEmail = email
         }
 
-        if let barsUsed = userData[userDataTypes.barsUsed] as? Dictionary<String,String>{
+        if let barsUsed = userData[userDataTypes.barsUsed] as? Dictionary<String,TimeInterval>{
                 print("Bars used - \(barsUsed)")
                 self.barsUsed = barsUsed
             } else {
@@ -133,11 +144,28 @@ class User{
                 barsUsed  = [:]
         }
         if let membership = userData[userDataTypes.membership] as? String {
-            self.setMembership(membership: membership)
+            self._membership = membership
         } else {
-            self.setMembership(membership:membershipLevels.basic)
+            self._membership = membershipLevels.basic
         }
- 
+        
+        if let credits = userData[userDataTypes.credits] as? Int {
+            self._credits = credits
+        } else {
+            if _membership == membershipLevels.premium {
+                self._credits = 10
+            } else {
+                self._credits = 1
+            }
+        
+            print("Backend: No Credits added")
+        }
+        if let currentPeriodStart = userData[userDataTypes.currentPeriodStart] as? TimeInterval {
+            self._currentPeriodStart = currentPeriodStart
+        }
+        if let currentPeriodEnd = userData[userDataTypes.currentPeriodEnd] as? TimeInterval {
+            self._currentPeriodEnd = currentPeriodEnd
+        }
 
     
     }
@@ -169,7 +197,7 @@ class User{
     }
     
     
-    func usedBar(barId:String, currentDate:String){
+    func usedBar(barId:String, currentDate:TimeInterval){
         currentUser.barsUsed[barId] = currentDate
         currentUser.credits = currentUser.credits - 1
 

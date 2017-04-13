@@ -125,19 +125,10 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
             message = error!.localizedDescription
             completePurchase(title: title, message: message, error: error)
         case .success:
-  
-            currentUser.setMembership(membership: membershipLevels.premium, completion: { (error) in
-                if error != nil {
-                    title = "Error"
-                    message = "Purcahsed but the database did not update, please contact support@GetToastApp.com"
-                    self.completePurchase(title: title, message: message, error: error)
-
-                } else {
-                    title = "Success"
-                    message = "Welcome to the premium membership!"
-                    self.completePurchase(title: title, message: message, error: nil)
-                }
-            })
+            currentUser.membership = membershipLevels.premium
+            title = "Success"
+            message = "Welcome to the premium membership!"
+            self.completePurchase(title: title, message: message, error: nil)
             
         case .userCancellation:
             paymentInProgress = false
