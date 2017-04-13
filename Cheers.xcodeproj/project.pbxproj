@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1916ADFB1E733AC3003EACC2 /* textViewRoundCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1916ADFA1E733AC3003EACC2 /* textViewRoundCorner.swift */; };
+		193944761E9FEE3900557853 /* circlePP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193944751E9FEE3900557853 /* circlePP.swift */; };
 		199AF66D1E6F6DAA00FBBAD1 /* RoundedImageCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199AF66C1E6F6DAA00FBBAD1 /* RoundedImageCorner.swift */; };
 		199AF66F1E6F969F00FBBAD1 /* contactUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199AF66E1E6F969F00FBBAD1 /* contactUsVC.swift */; };
 		19FBCB851E635FE500AA10B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FBCB841E635FE500AA10B5 /* AppDelegate.swift */; };
@@ -71,6 +72,7 @@
 		0FF677D2DC6CF78E1672A73A /* Pods-CheersTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CheersTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CheersTests/Pods-CheersTests.release.xcconfig"; sourceTree = "<group>"; };
 		1803AED7E78CBD054C9CC6C6 /* Pods-CheersUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CheersUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CheersUITests/Pods-CheersUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		1916ADFA1E733AC3003EACC2 /* textViewRoundCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = textViewRoundCorner.swift; sourceTree = "<group>"; };
+		193944751E9FEE3900557853 /* circlePP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = circlePP.swift; sourceTree = "<group>"; };
 		199AF66C1E6F6DAA00FBBAD1 /* RoundedImageCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedImageCorner.swift; sourceTree = "<group>"; };
 		199AF66E1E6F969F00FBBAD1 /* contactUsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = contactUsVC.swift; sourceTree = "<group>"; };
 		19FBCB811E635FE500AA10B5 /* Cheers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cheers.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -244,6 +246,7 @@
 				56B91B031E651B6600CB40BB /* BarTableViewCell.swift */,
 				199AF66C1E6F6DAA00FBBAD1 /* RoundedImageCorner.swift */,
 				1916ADFA1E733AC3003EACC2 /* textViewRoundCorner.swift */,
+				193944751E9FEE3900557853 /* circlePP.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -631,6 +634,7 @@
 				19FBCBBA1E6379E200AA10B5 /* Constants.swift in Sources */,
 				56FDE7731E666F9D00BDE97F /* Protocols.swift in Sources */,
 				56FDE76F1E6523DA00BDE97F /* HistoryVC.swift in Sources */,
+				193944761E9FEE3900557853 /* circlePP.swift in Sources */,
 				56B91AFC1E65195600CB40BB /* FirstLoginVC.swift in Sources */,
 				5632C26B1E933716003C2D6B /* MyAPIClient.swift in Sources */,
 				56B91B001E651A8C00CB40BB /* User.swift in Sources */,
