@@ -53,6 +53,7 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
         }
         let path = "/charge"
         let url = baseURL.appendingPathComponent(path)
+        
         guard let stripeID = currentUser.stripeID else {
             createCutomer(completion: { (customer, error) in
                 if error != nil {
@@ -76,7 +77,7 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
         let json: [String: Any] = [
             "customerID": stripeID ,
             "amount": amount,
-            "source":result.source.stripeID]
+            "sourceID":result.source.stripeID]
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         request.httpBody = jsonData
         let task = self.session.dataTask(with: request) { (data, urlResponse, error) in
@@ -85,6 +86,7 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
                     if httpResponse.statusCode != 200 {
                         print(httpResponse)
                         print("Backend: Error creating charge with http status: \(httpResponse.statusCode)")
+                        print("Error - \(error?.localizedDescription)")
                         completion(error)
                     } else {
                         completion(nil)
@@ -137,9 +139,9 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
         let task = self.session.dataTask(with: request) { (data, urlResponse, error) in
             DispatchQueue.main.async {
                 let deserializer = STPCustomerDeserializer(data: data, urlResponse: urlResponse, error: error)
-                if let error = deserializer.error {
+                if let deserError = deserializer.error {
                     print("Error in retrieving customer")
-                    completion(nil, error)
+                    completion(nil, deserError)
                     return
                 } else if let customer = deserializer.customer {
                     currentUser.stripeID = customer.stripeID
@@ -266,11 +268,7 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
     public func attachSource(toCustomer source: STPSource, completion: @escaping STPErrorBlock) {
         print("attachSource")
         guard let baseURLString = baseURLString, let baseURL = URL(string: baseURLString) else {
-            if let token = source as? STPToken, let card = token.card {
-                self.sources.append(card)
-                self.defaultSource = card
-            }
-            completion(nil)
+            print("Error with base string to attach source")
             return
         }
         let path = "/customer/sources"
@@ -280,12 +278,17 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
-        let json: [String: Any] = ["sourceID": source.stripeID]
+        print("Sending source \(source.stripeID)")
+        let json: [String: Any] = [
+            "sourceID": source.stripeID,
+            "customerID": currentUser.stripeID
+            ]
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         request.httpBody = jsonData
         let task = self.session.dataTask(with: request) { (data, urlResponse, error) in
             DispatchQueue.main.async {
                 if let error = self.decodeResponse(urlResponse, error: error as NSError?) {
+                    print("Backend: Error with attachSource - \(error.localizedDescription)")
                     completion(error)
                     return
                 }
@@ -303,34 +306,25 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
         print("selectDefaultCustomerSource")
         let baseURLString = SERVER_BASE
         let baseURL = URL(string: baseURLString)!
-       // guard let baseURLString = baseURLString, let baseURL = URL(string: baseURLString) else {
-      /*  guard let baseURLString = SERVER_BASE, let baseURL = URL(string: baseURLString) else {
-
-            if let token = source as? STPToken {
-                self.defaultSource = token.card
-            }
-            completion(nil)
-            return
-        }*/
         let path = "/customer/default_source"
         let url = baseURL.appendingPathComponent(path)
-        let params = [
-            "source": source.stripeID,
-            ]
+
+        
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
-        do {
-            request.httpBody = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted) // pass dictionary to nsdata object and set it as request body
-            
-        } catch let error {
-            print(error.localizedDescription)
-        }
-        //let request = URLRequest.request(url, method: .POST, params: params as [String : AnyObject])
+        let json = [
+            "sourceID": source.stripeID,
+            "customerID": currentUser.stripeID
+        ]
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        request.httpBody = jsonData
+
         let task = self.session.dataTask(with: request) { (data, urlResponse, error) in
             DispatchQueue.main.async {
                 if let error = self.decodeResponse(urlResponse, error: error as NSError?) {
+                    print("Backend: Error with default source -\(error.localizedDescription)")
                     completion(error)
                     return
                 }

@@ -121,6 +121,7 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
         var message:String = ""
         switch status {
         case .error:
+            print("Backend: didfinishWith error - \(error?.localizedDescription)")
             title = "Error"
             message = error!.localizedDescription
             completePurchase(title: title, message: message, error: error)
