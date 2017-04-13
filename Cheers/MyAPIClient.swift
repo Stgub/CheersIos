@@ -36,7 +36,13 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
         }
         return error
     }
-    
+    /**
+     Updates the currentPeriodStart and currentPeriodEnd from the server
+    */
+    func updatePeriods(){
+        
+        
+    }
 
     func createCharge(_ result: STPPaymentResult, amount: Int, completion:  @escaping (_ error: Error?)->Void){
         print("Create charge")
@@ -47,24 +53,61 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
         }
         let path = "/charge"
         let url = baseURL.appendingPathComponent(path)
+        guard let stripeID = currentUser.stripeID else {
+            createCutomer(completion: { (customer, error) in
+                if error != nil {
+                    print("Backend: Could not create customer for charge")
+                    completion(error)
+                } else {
+                    currentUser.stripeID = customer?.stripeID
+                    self.createCharge(result, amount: amount, completion: {
+                    (error) in
+                        completion(error)
+                    })
+                }
+            })
+            return
+        }
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         let json: [String: Any] = [
-            "customerID": "cus_AOKsWJgyCIX2I1",
+            "customerID": stripeID ,
             "amount": amount,
             "source":result.source.stripeID]
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         request.httpBody = jsonData
         let task = self.session.dataTask(with: request) { (data, urlResponse, error) in
             DispatchQueue.main.async {
-                if let error = self.decodeResponse(urlResponse, error: error as NSError?) {
-                    completion(error)
-                    return
+                if let httpResponse = urlResponse as? HTTPURLResponse {
+                    if httpResponse.statusCode != 200 {
+                        print(httpResponse)
+                        print("Backend: Error creating charge with http status: \(httpResponse.statusCode)")
+                        completion(error)
+                    } else {
+                        completion(nil)
+                        print("Success")
+                        print(httpResponse.allHeaderFields.values)
+                        do {  let json = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! [String:AnyObject]
+                            print(json)
+                            if let currentPeriodStart = json[userDataTypes.currentPeriodStart] as? TimeInterval{
+                                currentUser.currentPeriodStart = currentPeriodStart
+                            }
+                            if let currentPeriodEnd = json[userDataTypes.currentPeriodEnd] as? TimeInterval{
+                                currentUser.currentPeriodEnd = currentPeriodEnd
+                            }
+                            
+                            
+                        } catch {
+                            print("Backend: Could not read JSON data from charge request")
+                            completion(error)
+                        }
+                    }
+                }else {
+                    print("Backend: could not cast urlResponse as HTTPURLResponse")
                 }
-                completion(nil)
             }
         }
         task.resume()
@@ -99,14 +142,9 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
                     completion(nil, error)
                     return
                 } else if let customer = deserializer.customer {
-                    currentUser.setStripeID(stripeID: customer.stripeID){
-                        (error) in
-                        if error != nil {
-                            completion(nil,error)
-                        } else {
-                            completion(customer, nil)
-                        }
-                    }
+                    currentUser.stripeID = customer.stripeID
+                    completion(customer, nil)
+
                 }
             }
         }
@@ -200,17 +238,10 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
                     print("Error unsubscribing- \(error)")
                 } else {
                     //Protect these
-                    currentUser.setMembership(membership: membershipLevels.basic){error in
-                        if error != nil {
-                            completion("Error","Please try again")
-                        } else {
-                            let status = response["status"]
-                            let message = response["message"]
-                            completion(status!,message!)
-                        }
-      
-                    }
-
+                    currentUser.membership = membershipLevels.basic
+                    let status = response["status"]
+                    let message = response["message"]
+                    completion(status!,message!)
                 }
             }else{ print("Backend Error: Could not convert to [String: String]")}
             

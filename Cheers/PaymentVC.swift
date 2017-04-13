@@ -183,10 +183,7 @@ class PaymentVC: UIViewController {
                             
                         }
                     })
-                    currentUser.setStripeID(stripeID: customerID, completion: {
-                        (error) in
-                        print("Error \(error)")
-                    })
+                    currentUser.stripeID = customerID
                 }
               
                 let alertController = UIAlertController(title: response["status"]!, message: response["message"]!, preferredStyle: .alert)

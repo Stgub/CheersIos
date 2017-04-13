@@ -48,18 +48,25 @@ func presentSignUpBarIntialVC(sender:UIViewController){
 }
 
 
-
+func getDateStringFromTimeStamp(date: TimeInterval)-> String{
+    let monthDayFormatter = DateFormatter()
+    monthDayFormatter.dateFormat = "MM/dd"
+    let dateString = monthDayFormatter.string(from: Date(timeIntervalSince1970: date))
+    return dateString
+}
+/*
 func getStringFromDate(date:Date) -> String{
     
     let dateFormater = DateFormatter()
     dateFormater.dateFormat = "MM/dd/yyyy"
     let dateString = dateFormater.string(from: date)
     return dateString
-}
+}*/
+/*
 func getDateFromDateString(date:String) -> Date{
     let dateFormater = DateFormatter()
     dateFormater.dateFormat = "MM/dd/yyyy"
     let date = dateFormater.date(from: date)!
     return date
 }
-
+*/

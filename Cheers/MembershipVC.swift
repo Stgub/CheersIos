@@ -11,6 +11,26 @@ import Stripe
 import AFNetworking
 
 class MembershipVC: UIViewController {
+    
+    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    var serverRequestInProgress: Bool = false {
+        didSet {
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+                if self.serverRequestInProgress {
+                    self.view.isUserInteractionEnabled = false
+                    self.activityIndicator.startAnimating()
+                    self.activityIndicator.isHidden = false
+                    //self.buyButton.alpha = 0
+                }
+                else {
+                    self.view.isUserInteractionEnabled = true
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.isHidden = true
+                    //self.buyButton.alpha = 1
+                }
+            }, completion: nil)
+        }
+    }
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var userImageView: RoundedImageCorner!
     @IBOutlet weak var membershipLabel: UILabel!
@@ -46,6 +66,9 @@ class MembershipVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
+        self.activityIndicator.isHidden = true
+        self.activityIndicator.center = self.view.center
+        self.view.addSubview(activityIndicator)
         
         
     }
@@ -76,13 +99,12 @@ class MembershipVC: UIViewController {
     }
     
     func unsubscribe(){
-         let myAPIClient = MyAPIClient.sharedClient
-         myAPIClient.unusubscribeCustomer { (status, message) in
+        serverRequestInProgress = true
+        MyAPIClient.sharedClient.unusubscribeCustomer { (status, message) in
             presentUIAlert(sender: self, title: status, message: message)
             self.updateUI()
+            self.serverRequestInProgress = false
         }
-  
-        
 
     }
 
