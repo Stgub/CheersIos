@@ -24,7 +24,7 @@ class AccountVC: UIViewController {
     }
     
     @IBAction func backBtnTapped(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: false, completion: nil)
     }
     @IBAction func logOutBtnTapped(_ sender: Any) {
         print("Log out btn tapped")

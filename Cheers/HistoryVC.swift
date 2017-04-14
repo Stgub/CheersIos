@@ -54,7 +54,7 @@ class HistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
 
     @IBAction func backBtnTapped(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: false, completion: nil)
     }
     //MARK: Tableview Functions
     
