@@ -38,14 +38,16 @@ class User{
     var membership:String!{
         set(newVal){
             _membership = newVal
-            self.ref.child(userDataTypes.membership).setValue(membership)
+            self.ref.child(userDataTypes.membership).setValue(membership) //Update firebase
             if self._membership == membershipLevels.premium {
                 self._credits = 10
                 if(self.currentPeriodStart == nil || self.currentPeriodEnd == nil){
                     self.setStandardPeriods()
                 } else {
                     if ( currentPeriodEnd < NSDate().timeIntervalSince1970 ){
-                        MyAPIClient.sharedClient.updatePeriods()
+                        MyAPIClient.sharedClient.updateCustomer {
+                            print("DO SOMETHIGN HERE")
+                        }
                     }
                 }
             } else {
@@ -120,6 +122,7 @@ class User{
 
     init( userKey: String , userData: Dictionary<String, AnyObject> ){
         self.userKey = userKey
+        self.ref = DataService.ds.REF_USER_CURRENT
         if let name = userData[userDataTypes.name] as? String {
             self.name = name
         }
@@ -136,9 +139,9 @@ class User{
             self.userEmail = email
         }
 
-        if let barsUsed = userData[userDataTypes.barsUsed] as? Dictionary<String,TimeInterval>{
+        if let barsUsed = userData[userDataTypes.barsUsed]{
                 print("Bars used - \(barsUsed)")
-                self.barsUsed = barsUsed
+                self.barsUsed = barsUsed as! Dictionary<String,TimeInterval>
             } else {
                 print("No bars used")
                 barsUsed  = [:]
@@ -165,6 +168,19 @@ class User{
         }
         if let currentPeriodEnd = userData[userDataTypes.currentPeriodEnd] as? TimeInterval {
             self._currentPeriodEnd = currentPeriodEnd
+        }
+        if self._currentPeriodEnd == nil || self._currentPeriodStart == nil {
+            //never got one.. don't check if they are premium
+            self.setStandardPeriods()
+            
+        } else if self._currentPeriodEnd < NSDate().timeIntervalSince1970 {
+                // expired 
+            //CHECK WITH SERVER 
+            if self._membership == membershipLevels.premium {
+                self.membership = membershipLevels.basic
+            }
+            setStandardPeriods()
+        
         }
 
     

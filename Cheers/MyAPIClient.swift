@@ -37,9 +37,9 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
         return error
     }
     /**
-     Updates the currentPeriodStart and currentPeriodEnd from the server
+     Updates the user and particularly currentPeriodStart and currentPeriodEnd from the server
     */
-    func updatePeriods(){
+    func updateCustomer( completion:()->Void){
         
         
     }
