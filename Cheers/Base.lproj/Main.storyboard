@@ -836,6 +836,7 @@
                     <connections>
                         <outlet property="creditsLabel" destination="lo2-iU-8PZ" id="7vi-Q0-cGV"/>
                         <outlet property="membershipLabel" destination="4TO-1e-mLo" id="Ke6-jB-tQZ"/>
+                        <outlet property="renewDateLabel" destination="I1E-pH-phA" id="VML-gz-ESt"/>
                         <outlet property="tableView" destination="doG-Rr-BCS" id="MC7-0Z-FkI"/>
                         <outlet property="userImageView" destination="Ruh-zk-ykB" id="q7B-BZ-Ry1"/>
                         <outlet property="userNameLabel" destination="7fd-rp-We7" id="xGS-rh-5DF"/>
@@ -952,7 +953,7 @@
                                     <constraint firstAttribute="height" constant="30" id="I0R-ju-uw6"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
-                                <state key="normal" title="Reccomend Business">
+                                <state key="normal" title="Recomend Business">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.87" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
@@ -1150,7 +1151,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6H3-6P-WFP" id="UeR-X4-UaQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="86.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="86"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32P-ih-Bfi">

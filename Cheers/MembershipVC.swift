@@ -78,6 +78,7 @@ class MembershipVC: UIViewController {
         self.usernameLabel.text = currentUser.name
         self.creditsLabel.text = "\(currentUser.credits!)"
         self.membershipLabel.text = currentUser.membership
+        self.renewsDateLabel.text = getDateStringFromTimeStamp(date: currentUser.currentPeriodEnd)
         if let userImage = currentUser.usersImage {
             self.userImageView.image = currentUser.usersImage
         }

@@ -12,7 +12,7 @@ import Firebase
 
 class HistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    var history:[String:String] = [:] // barkey and date
+    var history:[String:TimeInterval] = [:] // barkey and date
     var barHistory:[Bar] = []
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var userImageView: UIImageView!
@@ -27,7 +27,7 @@ class HistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         self.userNameLabel.text = currentUser.name
         DataService.ds.REF_USER_CURRENT.child(userDataTypes.barsUsed).observeSingleEvent(of: .value, with: {
             (snapshot) in
-            if let historyData = snapshot.value as? Dictionary<String,String>{
+            if let historyData = snapshot.value as? Dictionary<String,TimeInterval>{
                 print(historyData)
                 self.history = historyData
             }
@@ -68,7 +68,7 @@ class HistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         cell.barImageView.image = bar.img
         cell.barNameLabel.text = bar.barName
         cell.barStreetLabel.text = bar.locationStreet
-        cell.dateLabel.text = date
+        cell.dateLabel.text = getDateStringFromTimeStamp(date: date!)
         return cell
     }
 }
