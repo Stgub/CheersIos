@@ -74,7 +74,6 @@ class MembershipVC: UIViewController {
     }
     
     func updateUI(){
-        
         self.usernameLabel.text = currentUser.name
         self.creditsLabel.text = "\(currentUser.credits!)"
         self.membershipLabel.text = currentUser.membership

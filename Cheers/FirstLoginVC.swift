@@ -56,8 +56,8 @@ class FirstLoginVC: UIViewController {
                                         let dateFormatter = DateFormatter()
                                         dateFormatter.dateFormat = "dd/MM/yyyy"
                                         let date = dateFormatter.date(from: birthday)
-                                        print("birthday day formatted")
-                                   /* let age = (date?.timeIntervalSinceNow)! / (60 * 60 * 24 * 365)
+                                        //print("birthday day formatted")
+                                        /* let age = (date?.timeIntervalSinceNow)! / (60 * 60 * 24 * 365)
                                         if age > -21 {
                                             presentUIAlert(sender: self, title: "Does not meet age requirements", message: "User must be over 21 to use")
                                             return
@@ -130,7 +130,10 @@ class FirstLoginVC: UIViewController {
         DataService.ds.createFirebaseDBUser(uid: id, userData: userData)
         let KeychainResult = KeychainWrapper.standard.set(id, forKey: KEY_UID)
         print("Chuck: Data saved to keycahain \(KeychainResult)")
-        presentBarFeedVC(sender: self)
+         MyFireBaseAPIClient.sharedClient.getCurrentUser(returnBlock:{
+                presentBarFeedVC(sender: self)
+
+            })
     }
 
 

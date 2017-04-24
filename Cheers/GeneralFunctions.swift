@@ -54,9 +54,30 @@ func getDateStringFromTimeStamp(date: TimeInterval)-> String{
     let dateString = monthDayFormatter.string(from: Date(timeIntervalSince1970: date))
     return dateString
 }
+
+/**
+ Used to update the timer labels
+ *@Return: bool that is true if there has been enough time between drinks
+ */
+func timeLeftBetweenDrinks()->TimeInterval{
+    let timeNow = NSDate().timeIntervalSince1970
+    let lastDrinkTime = currentUser.barsUsed.values.max() ?? 0
+    return TIME_BETWEEN_DRINKS - (timeNow - lastDrinkTime)
+}
+
+func timeStringFromIntervael(timeInterval:TimeInterval)->String{
+    let hrs = Int(timeInterval/(60*60))
+    let mins = Int(timeInterval .truncatingRemainder(dividingBy: 60*60) / 60 )
+    var minsStr = "\(mins)"
+    if mins < 10 {
+        minsStr = "0\(mins)"
+    }
+    return "\(hrs):\(minsStr)"
+}
+
 /*
 func getStringFromDate(date:Date) -> String{
-    
+ 
     let dateFormater = DateFormatter()
     dateFormater.dateFormat = "MM/dd/yyyy"
     let dateString = dateFormater.string(from: date)

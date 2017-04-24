@@ -14,18 +14,27 @@ class BarFeedVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var bars:[Bar] = []
     var selectedBar:Bar!
+    fileprivate var drinkTimer = Timer()
     
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var membershipLabel: UIButton!
     @IBOutlet weak var creditsLabel: UILabel!
     @IBOutlet weak var renewDateLabel: UILabel!
+    @IBOutlet weak var drinkTimeLeft: UILabel!
     
     @IBAction func membershipBtnTapped(_ sender: Any) {
         presentMembershipVC(sender:self)
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        if timeLeftBetweenDrinks() > 0 {
+            drinkTimer = Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(self.updateDrinkTimer), userInfo: nil, repeats: true)
+            drinkTimer.fire()
+        } else {
+            drinkTimeLeft.isHidden = true
+        }
+            
         tableView.reloadData()
         if let user = currentUser{
             self.creditsLabel.text = "Credits: \(user.credits!)"
@@ -34,6 +43,8 @@ class BarFeedVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        MyFireBaseAPIClient.sharedClient.startObservingDatabase()
         
         self.userNameLabel.text = currentUser.name
         self.creditsLabel.text = "Credits: \(currentUser.credits!)"
@@ -69,9 +80,20 @@ class BarFeedVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
         
     }
+
+    func updateDrinkTimer(){
+        let timeLeft = timeLeftBetweenDrinks()
+        if timeLeft < 0 {
+            drinkTimer.invalidate()
+            drinkTimeLeft.isHidden = true
+        } else {
+            drinkTimeLeft.isHidden = false
+            drinkTimeLeft.text = timeStringFromIntervael(timeInterval: timeLeft)
+        }
+    }
     /**
      Called from BarTableViewCell
- */
+    */
     func tappedBar(forBar:Bar){
         selectedBar = forBar
         self.performSegue(withIdentifier: "toBarDetailSegue", sender: self)
@@ -150,8 +172,8 @@ class BarFeedVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             }
         }
     }
-    
-    
+
+
  
 
 }

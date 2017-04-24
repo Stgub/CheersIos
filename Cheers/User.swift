@@ -45,7 +45,7 @@ class User{
                     self.setStandardPeriods()
                 } else {
                     if ( currentPeriodEnd < NSDate().timeIntervalSince1970 ){
-                        MyAPIClient.sharedClient.updateCustomer {
+                        MyAPIClient.sharedClient.updateCustomer {error  in
                             print("DO SOMETHIGN HERE")
                         }
                     }
@@ -100,7 +100,6 @@ class User{
     }
     private var _currentPeriodEnd:TimeInterval!
 
-    var billingDate:String!
     var updatedCreditsDate:TimeInterval!
     var userKey:String!
     var name:String!
@@ -119,12 +118,19 @@ class User{
         }
         get{ return _stripeID }
     }
-
+    
     init( userKey: String , userData: Dictionary<String, AnyObject> ){
         self.userKey = userKey
+        self.updateData(userData: userData)
+    
+    }
+    
+    func updateData(userData:Dictionary<String,AnyObject>){
         self.ref = DataService.ds.REF_USER_CURRENT
         if let name = userData[userDataTypes.name] as? String {
             self.name = name
+        } else {
+            self.name = "Anonymous" //TODO need to make sure we get users name
         }
         if let imgUrl = userData[userDataTypes.imgUrl] as? String {
             self.imgUrl = imgUrl
@@ -132,19 +138,17 @@ class User{
         if let stripeId =  userData[userDataTypes.stripeId] as? String {
             self._stripeID = stripeId
         }
-        if let billingDate = userData[userDataTypes.billingDate] as? String {
-            self.billingDate = billingDate
-        }
+        
         if let email = userData[userDataTypes.email] as? String {
             self.userEmail = email
         }
-
+        
         if let barsUsed = userData[userDataTypes.barsUsed]{
-                print("Bars used - \(barsUsed)")
-                self.barsUsed = barsUsed as! Dictionary<String,TimeInterval>
-            } else {
-                print("No bars used")
-                barsUsed  = [:]
+            print("Bars used - \(barsUsed)")
+            self.barsUsed = barsUsed as! Dictionary<String,TimeInterval>
+        } else {
+            print("No bars used")
+            barsUsed  = [:]
         }
         if let membership = userData[userDataTypes.membership] as? String {
             self._membership = membership
@@ -160,8 +164,8 @@ class User{
             } else {
                 self._credits = 1
             }
-        
-            print("Backend: No Credits added")
+            
+            print("Backend: No Credits information on Firebase")
         }
         if let currentPeriodStart = userData[userDataTypes.currentPeriodStart] as? TimeInterval {
             self._currentPeriodStart = currentPeriodStart
@@ -174,19 +178,18 @@ class User{
             self.setStandardPeriods()
             
         } else if self._currentPeriodEnd < NSDate().timeIntervalSince1970 {
-                // expired 
-            //CHECK WITH SERVER 
+            // expired
+            //CHECK WITH SERVER
             if self._membership == membershipLevels.premium {
                 self.membership = membershipLevels.basic
             }
             setStandardPeriods()
-        
+            
         }
 
-    
     }
 
-    func getUserImg(returnBlock:((UIImage)->Void)?){
+    func getUserImg(returnBlock:((UIImage?)->Void)?){
         print("CHUCK: getUserImg()")
         if let url = self.imgUrl {
             if let image = imageCache.object(forKey: url as NSString){
@@ -209,7 +212,7 @@ class User{
                 })
                 dataTask.resume() // needed or the above will never happen
             }
-        } else { print("CHUCK: No imgUrl") }
+        } else { print("Backend: User has no imgUrl ") }
     }
     
     

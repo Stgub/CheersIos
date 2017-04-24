@@ -12,6 +12,9 @@ class MyFireBaseAPIClient:NSObject{
     static let sharedClient = MyFireBaseAPIClient()
     override init() { }
     
+    /**
+     Sets the current user and retrieves any information stored on firebase about the user
+ */
     func getCurrentUser(returnBlock:(()->Void)? = nil){
         print("Grabbing current users info")
         DataService.ds.REF_USER_CURRENT.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -46,5 +49,29 @@ class MyFireBaseAPIClient:NSObject{
                 returnBlock(returnedBars)
             }
         })
+    }
+    
+    //NEED TO FIGURE OUT WHERE TO PUT THIS
+    private var databaseHandle: FIRDatabaseHandle!
+    func startObservingDatabase () {
+        databaseHandle = DataService.ds.REF_USER_CURRENT.observe(.value, with: { (snapshot) in
+            //Update current User
+            let snapKey = snapshot.key
+            for userSnapShot in snapshot.children{
+                if let userData = userSnapShot as? Dictionary<String,AnyObject>{
+                    if let user = currentUser {
+                        if user.key == snapKey{
+                            currentUser.updateData(userData: userData)
+                        } else {
+                            let newUser = User(userKey: snapKey, userData:userData)
+                        }
+                    }
+                }
+            }
+            //Update UI?
+        })
+    }
+    deinit {
+        DataService.ds.REF_USER_CURRENT.removeObserver(withHandle: databaseHandle)
     }
 }

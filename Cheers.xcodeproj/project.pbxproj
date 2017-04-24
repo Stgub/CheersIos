@@ -33,9 +33,9 @@
 		56B91B041E651B6600CB40BB /* BarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B91B031E651B6600CB40BB /* BarTableViewCell.swift */; };
 		56B91B061E651C1700CB40BB /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B91B051E651C1700CB40BB /* DataService.swift */; };
 		56B91B081E651C7700CB40BB /* GeneralFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B91B071E651C7700CB40BB /* GeneralFunctions.swift */; };
+		56DC6A4A1EADAB9800449739 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DC6A491EADAB9800449739 /* UserService.swift */; };
 		56F78A5E1E6A600E000E10F4 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F78A5D1E6A600E000E10F4 /* HistoryTableViewCell.swift */; };
 		56F78A601E6C866E000E10F4 /* MembershipVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F78A5F1E6C866E000E10F4 /* MembershipVC.swift */; };
-		56F78A621E6C9198000E10F4 /* PaymentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F78A611E6C9198000E10F4 /* PaymentVC.swift */; };
 		56FDE76F1E6523DA00BDE97F /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FDE76E1E6523DA00BDE97F /* HistoryVC.swift */; };
 		56FDE7711E666F3E00BDE97F /* BarDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FDE7701E666F3E00BDE97F /* BarDetailVC.swift */; };
 		56FDE7731E666F9D00BDE97F /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FDE7721E666F9D00BDE97F /* Protocols.swift */; };
@@ -104,9 +104,9 @@
 		56B91B031E651B6600CB40BB /* BarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarTableViewCell.swift; sourceTree = "<group>"; };
 		56B91B051E651C1700CB40BB /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		56B91B071E651C7700CB40BB /* GeneralFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralFunctions.swift; sourceTree = "<group>"; };
+		56DC6A491EADAB9800449739 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		56F78A5D1E6A600E000E10F4 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		56F78A5F1E6C866E000E10F4 /* MembershipVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipVC.swift; sourceTree = "<group>"; };
-		56F78A611E6C9198000E10F4 /* PaymentVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentVC.swift; sourceTree = "<group>"; };
 		56FDE76E1E6523DA00BDE97F /* HistoryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
 		56FDE7701E666F3E00BDE97F /* BarDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarDetailVC.swift; sourceTree = "<group>"; };
 		56FDE7721E666F9D00BDE97F /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
@@ -215,6 +215,7 @@
 				56B91B051E651C1700CB40BB /* DataService.swift */,
 				5605D48B1E9806900098EC52 /* MyFirebaseAPIClient.swift */,
 				5632C26A1E933716003C2D6B /* MyAPIClient.swift */,
+				56DC6A491EADAB9800449739 /* UserService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -272,7 +273,6 @@
 		561FE53E1E94818A0062CE2A /* Archive */ = {
 			isa = PBXGroup;
 			children = (
-				56F78A611E6C9198000E10F4 /* PaymentVC.swift */,
 			);
 			name = Archive;
 			sourceTree = "<group>";
@@ -610,7 +610,6 @@
 				199AF66D1E6F6DAA00FBBAD1 /* RoundedImageCorner.swift in Sources */,
 				56FF178C1E6FA0A300089C7C /* BarAddDetailsVC.swift in Sources */,
 				56FF178E1E6FA0BB00089C7C /* BarReviewVC.swift in Sources */,
-				56F78A621E6C9198000E10F4 /* PaymentVC.swift in Sources */,
 				56B91B061E651C1700CB40BB /* DataService.swift in Sources */,
 				56FF17891E6F8F3500089C7C /* BarHoursVC.swift in Sources */,
 				56B589511E94668D009F7786 /* CheckoutVC.swift in Sources */,
@@ -636,6 +635,7 @@
 				56FDE76F1E6523DA00BDE97F /* HistoryVC.swift in Sources */,
 				193944761E9FEE3900557853 /* circlePP.swift in Sources */,
 				56B91AFC1E65195600CB40BB /* FirstLoginVC.swift in Sources */,
+				56DC6A4A1EADAB9800449739 /* UserService.swift in Sources */,
 				5632C26B1E933716003C2D6B /* MyAPIClient.swift in Sources */,
 				56B91B001E651A8C00CB40BB /* User.swift in Sources */,
 				56B00C3F1E70C9F400B64B71 /* CreateEmailLoginVC.swift in Sources */,

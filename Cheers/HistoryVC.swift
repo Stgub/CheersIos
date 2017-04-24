@@ -17,7 +17,20 @@ class HistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var userRenewDateLabel: UILabel!
+    @IBOutlet weak var creditsLabel: UILabel!
+    @IBOutlet weak var userMembershipLabel: UIButton!
     
+    @IBOutlet weak var moneySavedLabel: UILabel!
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.creditsLabel.text = "Credits: \(currentUser.credits!)"
+        self.userMembershipLabel.setTitle(currentUser.membership, for: .normal)
+        self.userRenewDateLabel.text = getDateStringFromTimeStamp(date: currentUser.currentPeriodEnd)
+        let drinksUsed = currentUser.barsUsed.count
+        self.moneySavedLabel.text = "$\(drinksUsed * 10).00" // Update with actual prices??
+
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         if let image = currentUser.usersImage {

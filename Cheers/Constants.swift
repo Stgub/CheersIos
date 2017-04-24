@@ -12,7 +12,7 @@ let SHADOW_GRAY: CGFloat = 120.0 / 255.0
 
 
 let KEY_UID = "uid"
-
+let TIME_BETWEEN_DRINKS:TimeInterval = 90 * 60// in seconds
 
 struct myStoryboards {
     static let  main = "Main"

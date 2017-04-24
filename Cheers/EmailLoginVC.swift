@@ -52,7 +52,10 @@ class EmailLoginVC: UIViewController {
                     }else {
                         print("Chuck: Email authenticated with Firebase")
                         if let user = user {
-                            let userData = ["provider": user.providerID]
+                            let userData = [
+                                "provider": user.providerID,
+                                "email" : user.email!
+                            ]
                             self.completeSignIn(id: user.uid, userData: userData)
                         }
                     }
@@ -69,8 +72,10 @@ class EmailLoginVC: UIViewController {
         DataService.ds.createFirebaseDBUser(uid: id, userData: userData)
         let KeychainResult = KeychainWrapper.standard.set(id, forKey: KEY_UID)
         print("Chuck: Data saved to keycahain \(KeychainResult)")
-        
-        presentBarFeedVC(sender: self)
+        MyFireBaseAPIClient.sharedClient.getCurrentUser(){
+            presentBarFeedVC(sender: self)
+
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
