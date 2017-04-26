@@ -17,22 +17,20 @@ class HistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var userRenewDateLabel: UILabel!
+    @IBOutlet weak var creditsLabel: UILabel!
+    @IBOutlet weak var userMembershipLabel: UIButton!
     
+    @IBOutlet weak var moneySavedLabel: UILabel!
+    
+    override func viewDidAppear(_ animated: Bool) {
+        updateUI()
+       
+
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let image = currentUser.usersImage {
-            self.userImageView.image = image
-
-        }
-        self.userNameLabel.text = currentUser.name
-        DataService.ds.REF_USER_CURRENT.child(userDataTypes.barsUsed).observeSingleEvent(of: .value, with: {
-            (snapshot) in
-            if let historyData = snapshot.value as? Dictionary<String,TimeInterval>{
-                print(historyData)
-                self.history = historyData
-            }
-        })
-        
+        updateUI()
        DataService.ds.REF_BARS.observeSingleEvent(of: .value, with: {
             (snapshot) in
             if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
@@ -55,6 +53,26 @@ class HistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBAction func backBtnTapped(_ sender: Any) {
         self.dismiss(animated: false, completion: nil)
+    }
+    
+    func updateUI(){
+        self.creditsLabel.text = "\(currentUser.credits!)"
+        self.userMembershipLabel.setTitle(currentUser.membership, for: .normal)
+        self.userRenewDateLabel.text = getDateStringFromTimeStamp(date: currentUser.currentPeriodEnd)
+        let drinksUsed = currentUser.barsUsed.count
+        self.moneySavedLabel.text = "$\(drinksUsed * 10).00" // Update with actual prices??
+        if let image = currentUser.usersImage {
+            self.userImageView.image = image
+        }
+        self.userNameLabel.text = currentUser.name
+        DataService.ds.REF_USER_CURRENT.child(userDataTypes.barsUsed).observeSingleEvent(of: .value, with: {
+            (snapshot) in
+            if let historyData = snapshot.value as? Dictionary<String,TimeInterval>{
+                print(historyData)
+                self.history = historyData
+            }
+        })
+
     }
     //MARK: Tableview Functions
     

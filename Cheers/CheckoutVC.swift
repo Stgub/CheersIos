@@ -81,10 +81,8 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
 
     required init?(coder aDecoder: NSCoder) {
        // fatalError("init(coder:) has not been implemented")
-        myAPIClient.baseURLString = backendBaseURL
         self.paymentContext = STPPaymentContext(apiAdapter: myAPIClient)
         super.init(coder: aDecoder)
-        myAPIClient.baseURLString = backendBaseURL
         self.paymentContext.delegate = self
         self.paymentContext.hostViewController = self
         self.paymentContext.paymentAmount = 1000 // This is in cents, i.e. $50 USD

@@ -74,7 +74,6 @@ class MembershipVC: UIViewController {
     }
     
     func updateUI(){
-        
         self.usernameLabel.text = currentUser.name
         self.creditsLabel.text = "\(currentUser.credits!)"
         self.membershipLabel.text = currentUser.membership
@@ -102,8 +101,9 @@ class MembershipVC: UIViewController {
     func unsubscribe(){
         serverRequestInProgress = true
         MyAPIClient.sharedClient.unusubscribeCustomer { (status, message) in
-            presentUIAlert(sender: self, title: status, message: message)
-            self.updateUI()
+            presentUIAlert(sender: self, title: status, message: message){
+                self.updateUI()
+            }
             self.serverRequestInProgress = false
         }
 

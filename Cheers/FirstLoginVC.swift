@@ -21,7 +21,8 @@ class FirstLoginVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         if let _  = KeychainWrapper.standard.string(forKey: KEY_UID ){
             print("CHUCK: ID found in keychain")
-            MyFireBaseAPIClient.sharedClient.getCurrentUser(){
+            
+            MyFireBaseAPIClient.sharedClient.startObservingUser(){
                 presentBarFeedVC(sender: self)
             }
         }
@@ -56,8 +57,8 @@ class FirstLoginVC: UIViewController {
                                         let dateFormatter = DateFormatter()
                                         dateFormatter.dateFormat = "dd/MM/yyyy"
                                         let date = dateFormatter.date(from: birthday)
-                                        print("birthday day formatted")
-                                   /* let age = (date?.timeIntervalSinceNow)! / (60 * 60 * 24 * 365)
+                                        //print("birthday day formatted")
+                                        /* let age = (date?.timeIntervalSinceNow)! / (60 * 60 * 24 * 365)
                                         if age > -21 {
                                             presentUIAlert(sender: self, title: "Does not meet age requirements", message: "User must be over 21 to use")
                                             return
@@ -130,7 +131,10 @@ class FirstLoginVC: UIViewController {
         DataService.ds.createFirebaseDBUser(uid: id, userData: userData)
         let KeychainResult = KeychainWrapper.standard.set(id, forKey: KEY_UID)
         print("Chuck: Data saved to keycahain \(KeychainResult)")
-        presentBarFeedVC(sender: self)
+        MyFireBaseAPIClient.sharedClient.startObservingUser(completion:{
+                presentBarFeedVC(sender: self)
+
+            })
     }
 
 

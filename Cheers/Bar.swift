@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 
+
 class Bar {
     struct dataTypes{
         static let img = "img"
@@ -23,7 +24,9 @@ class Bar {
         static let drinks = "drinks"
         static let hoursTime = "hoursTime"
         static let hoursAmPm = "hoursAmPm"
+        static let availableDays = "availableDays"
     }
+    var refFB:FIRDatabaseReference!
     var key:String!
     var barName:String!
     var locationStreet:String!
@@ -38,9 +41,12 @@ class Bar {
     var drinks: String!
     var hoursTime: Dictionary<String,String>!
     var hoursAmPm: Dictionary<String,String>!
+    var availableDays:[String:Bool] = [:] //contains a string for each day of the week that it is available e.g. Monday, Tuesday
+
     
     init(barKey:String, dataDict:Dictionary<String,AnyObject>){
         self.key = barKey
+        self.refFB = DataService.ds.REF_BARS.child(self.key) // This will change if we put the bars in more complex data architects
         if let barName = dataDict[dataTypes.barName] as? String {
             self.barName = barName
         }
@@ -74,6 +80,9 @@ class Bar {
         if let hoursAmPm = dataDict[dataTypes.hoursAmPm] as? Dictionary<String,String>{
             self.hoursAmPm = hoursAmPm
         }
+        if let availableDays = dataDict[dataTypes.availableDays] as? [String:Bool]{
+            self.availableDays = availableDays
+        } else { print("**** Couldn't add bar available days" )}
 
     }
     func getImage(returnBlock:@escaping ()->()){
@@ -125,3 +134,20 @@ class Bar {
  
 
 }
+
+/*
+ func to add days to bars
+ for bar in self.bars.values{
+ let daysavail = [
+ weekDays.Monday.toString:true,
+ weekDays.Tuesday.toString:true,
+ weekDays.Wednesday.toString:true,
+ weekDays.Thursday.toString:true,
+ weekDays.Friday.toString:true,
+ weekDays.Saturday.toString:true,
+ weekDays.Sunday.toString:true
+ ]
+ bar.refFB.child(Bar.dataTypes.availableDays).setValue(daysavail)
+
+ */
+

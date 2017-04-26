@@ -62,23 +62,26 @@ class BarDetailVC: UIViewController, hasBarVar {
         if let barDescript = bar.description{
             barDescriptLabel.text = barDescript
         }
+        //Check the next availability of bar
+        let dateAvailable:TimeInterval = 0
+        if bar.hasBeenUsed ?? false {
+            let dateUsed = currentUser.barsUsed[bar.key]
+            let dateAvailable = dateUsed! + 30 * 24 * 60 * 60 // one month
+        }
         if currentUser.credits <= 0 {
+            //User has no credits left to buy drins
             redeemDrinkBtn.setTitle("Upgrade to recieve more credits!", for: .normal)
             redeemDrinkBtn.isUserInteractionEnabled = false
-        } else if let barUsed = bar.hasBeenUsed{
-            if barUsed {
-                let dateUsed = currentUser.barsUsed[bar.key]
-                let dateAvailable = dateUsed! + 30 * 24 * 60 * 60
-                if dateAvailable > NSDate().timeIntervalSince1970 {
-                    redeemDrinkBtn.setTitle("Redeemed, available again: \(getDateStringFromTimeStamp(date: dateAvailable))", for: .normal)
-                    redeemDrinkBtn.isUserInteractionEnabled = false
-                } else{
-                    redeemDrinkBtn.setTitle("Have your server tap to redeem", for: .normal)
-                    
-                    redeemDrinkBtn.isUserInteractionEnabled = true
-                }
-            }
+        } else if dateAvailable != 0  &&  dateAvailable > NSDate().timeIntervalSince1970{
+            //Bar has been used and is not available yet
+            redeemDrinkBtn.setTitle("Redeemed, available again: \(getDateStringFromTimeStamp(date: dateAvailable))", for: .normal)
+            redeemDrinkBtn.isUserInteractionEnabled = false
+        } else if timeLeftBetweenDrinks() > 0{
+            //User has recently used a drink and must wait for TIME_BETWEEN_DRINKS
+            redeemDrinkBtn.isUserInteractionEnabled = false
+            redeemDrinkBtn.setTitle("\(timeStringFromIntervael(timeInterval: timeLeftBetweenDrinks())) left until another drink can be used", for: .normal)
         } else {
+            //User is good to use drink
             redeemDrinkBtn.setTitle("Have your server tap to redeem", for: .normal)
 
             redeemDrinkBtn.isUserInteractionEnabled = true
