@@ -14,3 +14,37 @@ protocol hasBarVar {
 protocol  hasDataDict {
     var dataDict:[String:Any]{get set}
 }
+
+extension Date {
+    func dayNumberOfWeek() -> Int? {
+        return Calendar.current.dateComponents([.weekday], from: self).weekday
+    }
+    func dayOfWeek() -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        return dateFormatter.string(from: self).capitalized
+        // or use capitalized(with: locale) if you want
+    }
+   /* func weekDayforNum(num:Int)->String{
+        switch(num){
+        case 1:
+            return weekDays.sunday.rawValue
+        case 2:
+            return weekDays.monday.rawValue
+        case 3:
+            return weekDays.tuesday.rawValue
+        case 4:
+            return weekDays.wednesday.rawValue
+        case 5:
+            return weekDays.thursday.rawValue
+        case 6:
+            return weekDays.friday.rawValue
+        case 7:
+            return weekDays.saturday.rawValue
+        default:
+            return "Error"
+        }
+    }*/
+}
+
+

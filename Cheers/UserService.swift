@@ -10,9 +10,12 @@ import Foundation
 
 class UserService {
     static let shareService = UserService()
-    init(){
-        
+
+    func signIn(completion:@escaping ()->Void){
+        MyFireBaseAPIClient.sharedClient.startObservingUser(){
+            completion()
+        }}
+    func signOut(){
+        MyFireBaseAPIClient.sharedClient.stopObservingUser()
     }
-    
-    
 }

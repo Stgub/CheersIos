@@ -11,28 +11,8 @@ import Firebase
 class MyFireBaseAPIClient:NSObject{
     static let sharedClient = MyFireBaseAPIClient()
     override init() { }
-    
-    /**
-     Sets the current user and retrieves any information stored on firebase about the user
- */
-    func getCurrentUser(returnBlock:(()->Void)? = nil){
-        print("Grabbing current users info")
-        DataService.ds.REF_USER_CURRENT.observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            print(snapshot)
-            let key = snapshot.key
-            if let dataDict = snapshot.value as? Dictionary<String, AnyObject> {
-                print("CHUCK: User Data Dict - \(dataDict)")
-                let user = User(userKey: key , userData: dataDict)
-                user.ref = snapshot.ref
-                currentUser = user
-                returnBlock!()
-                
-            } else { print("CHUCK: could not cast as Dictionary for user info")
-            }
-        })
-    }
-    func getBars(returnBlock:@escaping ([Bar])->Void){
+
+        func getBars(returnBlock:@escaping ([Bar])->Void){
         print("Backend: getting bars")
         DataService.ds.REF_BARS.observeSingleEvent(of: .value, with: {
             (snapshot) in
@@ -51,27 +31,47 @@ class MyFireBaseAPIClient:NSObject{
         })
     }
     
-    //NEED TO FIGURE OUT WHERE TO PUT THIS
-    private var databaseHandle: FIRDatabaseHandle!
-    func startObservingDatabase () {
-        databaseHandle = DataService.ds.REF_USER_CURRENT.observe(.value, with: { (snapshot) in
+    private var observeUserHandle: FIRDatabaseHandle!
+    
+    /**
+     Used to get the current user and update the user whenever anything changes, should be used at any sign in 
+     */
+    func startObservingUser(completion:@escaping ()->Void) {
+        print("startObservingUser")
+        observeUserHandle = DataService.ds.REF_USER_CURRENT.observe(.value, with: { (snapshot) in
+            print("Observed User")
             //Update current User
             let snapKey = snapshot.key
-            for userSnapShot in snapshot.children{
-                if let userData = userSnapShot as? Dictionary<String,AnyObject>{
+            if let userSnapShot = snapshot as? FIRDataSnapshot {
+                if let userData = userSnapShot.value as? Dictionary<String,AnyObject>{
                     if let user = currentUser {
-                        if user.key == snapKey{
-                            currentUser.updateData(userData: userData)
+                        if let key = user.userKey {
+                            if  user.userKey == snapKey{
+                                currentUser.updateData(userData: userData)
+                                print("Same user")
+                            }
                         } else {
                             let newUser = User(userKey: snapKey, userData:userData)
+                            currentUser = newUser
+                            print("Changed User")
                         }
+                        
+                    } else {
+                        let newUser = User(userKey: snapKey, userData:userData)
+                        currentUser = newUser
+                        print("New User")
                     }
-                }
-            }
-            //Update UI?
+                    print("Completion")
+                    completion()
+                } else { print("Could not cast 2")}
+            }  else { print("Could not cast 1") }
         })
     }
     deinit {
-        DataService.ds.REF_USER_CURRENT.removeObserver(withHandle: databaseHandle)
+        DataService.ds.REF_USER_CURRENT.removeObserver(withHandle: observeUserHandle)
+    }
+    func stopObservingUser(){
+        DataService.ds.REF_USER_CURRENT.removeObserver(withHandle: observeUserHandle)
+
     }
 }

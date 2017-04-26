@@ -101,8 +101,9 @@ class MembershipVC: UIViewController {
     func unsubscribe(){
         serverRequestInProgress = true
         MyAPIClient.sharedClient.unusubscribeCustomer { (status, message) in
-            presentUIAlert(sender: self, title: status, message: message)
-            self.updateUI()
+            presentUIAlert(sender: self, title: status, message: message){
+                self.updateUI()
+            }
             self.serverRequestInProgress = false
         }
 

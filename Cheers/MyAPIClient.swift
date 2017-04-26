@@ -160,7 +160,7 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
         print("retrieveCustomer function")
         guard let _ = currentUser else {
             print("Current user was nil, will try to grab but otherwise will fail")
-            MyFireBaseAPIClient.sharedClient.getCurrentUser(returnBlock: {
+            MyFireBaseAPIClient.sharedClient.startObservingUser(completion: {
                 self.retrieveCustomer({ (customer, error) in
                     completion(customer,error)
                 })
@@ -229,6 +229,7 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
                         return
                     }
                     if status == "Success" {
+                        print("Success unsubscribing")
                         currentUser.membership = membershipLevels.basic
                         
                     }

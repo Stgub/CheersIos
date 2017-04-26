@@ -21,7 +21,8 @@ class FirstLoginVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         if let _  = KeychainWrapper.standard.string(forKey: KEY_UID ){
             print("CHUCK: ID found in keychain")
-            MyFireBaseAPIClient.sharedClient.getCurrentUser(){
+            
+            MyFireBaseAPIClient.sharedClient.startObservingUser(){
                 presentBarFeedVC(sender: self)
             }
         }
@@ -130,7 +131,7 @@ class FirstLoginVC: UIViewController {
         DataService.ds.createFirebaseDBUser(uid: id, userData: userData)
         let KeychainResult = KeychainWrapper.standard.set(id, forKey: KEY_UID)
         print("Chuck: Data saved to keycahain \(KeychainResult)")
-         MyFireBaseAPIClient.sharedClient.getCurrentUser(returnBlock:{
+        MyFireBaseAPIClient.sharedClient.startObservingUser(completion:{
                 presentBarFeedVC(sender: self)
 
             })

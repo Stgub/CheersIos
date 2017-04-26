@@ -72,7 +72,7 @@ class EmailLoginVC: UIViewController {
         DataService.ds.createFirebaseDBUser(uid: id, userData: userData)
         let KeychainResult = KeychainWrapper.standard.set(id, forKey: KEY_UID)
         print("Chuck: Data saved to keycahain \(KeychainResult)")
-        MyFireBaseAPIClient.sharedClient.getCurrentUser(){
+        MyFireBaseAPIClient.sharedClient.startObservingUser(){
             presentBarFeedVC(sender: self)
 
         }

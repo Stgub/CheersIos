@@ -665,6 +665,9 @@
                                 <state key="normal" title="Today">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.87" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
+                                <connections>
+                                    <action selector="dayBtnTapped:" destination="stK-Uc-ckb" eventType="touchUpInside" id="H50-la-t0V"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4TO-1e-mLo">
                                 <rect key="frame" x="169" y="94.666666666666671" width="56" height="15"/>
@@ -846,6 +849,7 @@
                     </view>
                     <connections>
                         <outlet property="creditsLabel" destination="lo2-iU-8PZ" id="7vi-Q0-cGV"/>
+                        <outlet property="dayBtnOutlet" destination="Rlr-Qd-EoN" id="ebZ-Tv-y3c"/>
                         <outlet property="drinkTimeLeft" destination="FsO-2i-xD5" id="ERv-Ud-96A"/>
                         <outlet property="membershipLabel" destination="4TO-1e-mLo" id="Ke6-jB-tQZ"/>
                         <outlet property="renewDateLabel" destination="I1E-pH-phA" id="VML-gz-ESt"/>
