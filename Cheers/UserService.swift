@@ -18,4 +18,5 @@ class UserService {
     func signOut(){
         MyFireBaseAPIClient.sharedClient.stopObservingUser()
     }
+    //TODO should migrate sign in functions here
 }

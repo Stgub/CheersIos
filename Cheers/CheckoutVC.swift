@@ -22,8 +22,9 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
     
     // 3) Optionally, to enable Apple Pay, follow the instructions at https://stripe.com/docs/mobile/apple-pay
     // to create an Apple Merchant ID. Replace nil on the line below with it (it looks like merchant.com.yourappname).
-    let appleMerchantID: String? = nil
-    
+    let appleMerchantID: String? = "merchant.com.toast.stripe"
+    //STPPaymentConfiguration.shared().appleMerchantIdentifier = "merchant.com.toast.stripe"
+
     // These values will be shown to the user when they purchase with Apple Pay.
     let companyName = "Toast LLC"
     let paymentCurrency = "usd"

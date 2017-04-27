@@ -30,25 +30,7 @@ class HistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateUI()
-       DataService.ds.REF_BARS.observeSingleEvent(of: .value, with: {
-            (snapshot) in
-            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
-                for snap in snapshots {
-                    print("CHUCK: SNAP - \(snap)")
-                    let key = snap.key
-                    if self.history.keys.contains(key){
-                        if let barData = snap.value as? Dictionary<String, AnyObject>{
-                            let newBar = Bar(barKey: snap.key, dataDict: barData)
-                            newBar.getImage(){
-                                self.barHistory.append(newBar)
-                                 self.tableView.reloadData()
-                            }
-                        }
-                    }
-                }
-            }
-        })
+
     }
 
     @IBAction func backBtnTapped(_ sender: Any) {
@@ -72,7 +54,29 @@ class HistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 self.history = historyData
             }
         })
-
+        DataService.ds.REF_BARS.observeSingleEvent(of: .value, with: {
+            (snapshot) in
+            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                for snap in snapshots {
+                    print("CHUCK: SNAP - \(snap)")
+                    let key = snap.key
+                    if self.history.keys.contains(key){
+                        if let barData = snap.value as? Dictionary<String, AnyObject>{
+                            let newBar = Bar(barKey: snap.key, dataDict: barData)
+                            newBar.getImage(){
+                                self.barHistory.append(newBar)
+                                //sort bars by date of use
+                                self.barHistory.sort(by: { (bar1, bar2) -> Bool in
+                                    return self.history[bar1.key]! > self.history[bar2.key]!
+                                })
+                                self.tableView.reloadData()
+                            }
+                        }
+                    }
+                }
+            }
+            
+        })
     }
     //MARK: Tableview Functions
     

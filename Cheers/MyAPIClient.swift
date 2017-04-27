@@ -17,8 +17,7 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
     var defaultSource: STPCard? = nil
     let session: URLSession
     var sources: [STPCard] = []
-    
-    
+
     override init() {
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = 5
@@ -51,14 +50,43 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
     /**
      Updates the user and particularly currentPeriodStart and currentPeriodEnd from the server
     */
-    func updateCustomer( completion:(_ error:Error?)->Void){
-        self.retrieveCustomer { (customer, error) in
-            if error != nil {
-                print("Error updatign customer - \(error?.localizedDescription)")
-            } else {
+    func updateCustomer(){
+        print("Backend: Updating user")
+        guard let user = currentUser else {
+            print("Backend: No user to update")
+            return
+        }
+        let pathExtension = "/updateUser"
+        let params = [ "customerID":currentUser.stripeID]
+        let request = createRequest(pathExtension: pathExtension, params: params)
+        let task = self.session.dataTask(with: request) { (data, urlResponse, error) in
+            DispatchQueue.main.async {
+                if let error = self.decodeResponse(urlResponse, error: error as NSError?){
+                    //completion(error)
+                } else {
+                    //completion(nil)
+                    print("Success getting user info")
+                    let json = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! [String:AnyObject]
+                    print("JSON Data - \(json)")
+                    if let currentPeriodStart = json![userDataTypes.currentPeriodStart] as? TimeInterval{
+                        currentUser.currentPeriodStart = currentPeriodStart
+                    } else { print("Backend: could not get current start period") }
+                    if let currentPeriodEnd = json![userDataTypes.currentPeriodEnd] as? TimeInterval{
+                        currentUser.currentPeriodEnd = currentPeriodEnd
+                    } else { print("Backend: Ccould not get current end period") }
+                    if let email = json!["email"] as? String {
+                        currentUser.userEmail = email
+                    }
+                    if let numSubscriptions = json!["numSubscriptions"] as? Int {
+                        if numSubscriptions > 0 {
+                            currentUser.membership = membershipLevels.premium
+                        }
+                    }
+                }
             }
         }
-        
+        task.resume()
+
     }
     /**
      Adds the user to a subscription and charges them
@@ -137,8 +165,8 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
     }
     
     func retrieveCustomer(_ customerID:String, completion:@escaping (_ customer:STPCustomer? , _ error:Error?)-> Void){
+        print("/retrieveCustomer")
         let pathExtension = "/retrieveCustomer"
-        
         let params: [String: Any] = ["customerID": customerID]
         let request = createRequest(pathExtension: pathExtension, params: params)
         let task = self.session.dataTask(with: request) { (data, urlResponse, error) in
