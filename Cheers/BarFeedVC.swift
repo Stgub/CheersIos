@@ -56,6 +56,8 @@ class BarFeedVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        MyAPIClient.sharedClient.updateCustomer() // used to make sure the users subscription is correct
+
         _dayLookedAtNum = Date().dayNumberOfWeek()!
         dayLookedAtNum = _dayLookedAtNum
 
