@@ -32,7 +32,7 @@ class BarFeedVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     private var bars:[String:Bar] = [:]
     private var selectedBar:Bar!
     private var drinkTimer = Timer()
-    private var barPerDay:Dictionary<String,[String]>= [:]
+    private var barPerDay:Dictionary<String,[String]> = [:]
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var membershipLabel: UIButton!
