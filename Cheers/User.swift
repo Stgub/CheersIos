@@ -75,6 +75,7 @@ class User{
     var currentPeriodStart:TimeInterval! {
         get { return _currentPeriodStart }
         set(newVal) {
+            self._currentPeriodStart = newVal
             self.ref.child(userDataTypes.currentPeriodStart).setValue(newVal) //update server
         }
     }
@@ -82,6 +83,7 @@ class User{
     var currentPeriodEnd:TimeInterval! {
         get { return _currentPeriodEnd }
         set(newVal) {
+            self._currentPeriodEnd = newVal
             self.ref.child(userDataTypes.currentPeriodEnd).setValue(newVal) //update server
         }
     }
@@ -106,6 +108,7 @@ class User{
     var userEmail:String! {
         get{ return _userEmail }
         set(newVal){
+            self._userEmail = userEmail
             ref.child(userDataTypes.email).setValue(newVal)
         }
     }
@@ -114,6 +117,7 @@ class User{
     private var _stripeID:String!
     var stripeID:String?{
         set(newVal) {
+            self._stripeID = stripeID
             self.ref.child(userDataTypes.stripeId).setValue(newVal)
         }
         get{ return _stripeID }
@@ -143,11 +147,11 @@ class User{
             self._userEmail = email
         }
         
-        if let barsUsed = userData[userDataTypes.barsUsed]{
+        if let barsUsed = userData[userDataTypes.barsUsed] as? Dictionary<String,TimeInterval>{
             print("Bars used - \(barsUsed)")
-            self._barsUsed = barsUsed as! Dictionary<String,TimeInterval>
+            self._barsUsed = barsUsed
         } else {
-            print("No bars used")
+            print("No bars used could not cast")
             _barsUsed  = [:]
         }
         if let membership = userData[userDataTypes.membership] as? String {
@@ -160,8 +164,10 @@ class User{
             self._credits = credits
         } else {
             if _membership == membershipLevels.premium {
+                self._credits = 10
                 self.credits = 10
             } else {
+                self._credits = 1
                 self.credits = 1
             }
             

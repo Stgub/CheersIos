@@ -103,7 +103,9 @@ class BarFeedVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                             if self.barPerDay[dayString] == nil {
                                 self.barPerDay[dayString] = [bar.key]
                             } else {
-                                self.barPerDay[dayString]?.append(bar.key)
+                                if !self.barPerDay[dayString]!.contains(bar.key){
+                                    self.barPerDay[dayString]!.append(bar.key)
+                                }
                             }
                         }
                     }
