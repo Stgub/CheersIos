@@ -12,7 +12,7 @@ class MyFireBaseAPIClient:NSObject{
     static let sharedClient = MyFireBaseAPIClient()
     override init() { }
 
-        func getBars(returnBlock:@escaping ([Bar])->Void){
+    func getBars(returnBlock:@escaping ([Bar])->Void){
         print("Backend: getting bars")
         DataService.ds.REF_BARS.observeSingleEvent(of: .value, with: {
             (snapshot) in

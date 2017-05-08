@@ -13,7 +13,11 @@ import SwiftKeychainWrapper
 
 var imageCache: NSCache<NSString, UIImage> = NSCache()
  let SERVER_BASE = "http://52.41.104.17:5000"   // AWS server
+<<<<<<< HEAD
  //let SERVER_BASE = "http://0.0.0.0:5000" //local test
+=======
+ // let SERVER_BASE = "http://0.0.0.0:5000" //local test
+>>>>>>> b5dc5485d233170f74243c98e9cfb5bebd88cc2c
 
 
 let DB_BASE = FIRDatabase.database().reference() // gives the URL of the root of the db, also in the google plist
