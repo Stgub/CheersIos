@@ -13,7 +13,6 @@ import SwiftKeychainWrapper
 class EmailLoginVC: UIViewController {
 
     @IBOutlet weak var emailField: UITextField!
-    
     @IBOutlet weak var passwordField: UITextField!
     
     @IBAction func backBtnTapped(_ sender: UIButton) {
@@ -27,56 +26,17 @@ class EmailLoginVC: UIViewController {
             let vc = storyboard.instantiateViewController(withIdentifier: "SignUpBarIntialVC")
             self.present(vc, animated: true, completion: nil)
         }else {
-            
-            if let email = emailField.text, let pwd = passwordField.text{
-                FIRAuth.auth()?.signIn(withEmail: email, password: pwd, completion: { (user, error) in
-                    
-                    if error != nil {
-                        if (error != nil) {
-                            // an error occurred while attempting login
-                            if let errCode = FIRAuthErrorCode(rawValue: (error?._code)!) {
-                                switch errCode {
-                                case .errorCodeInvalidEmail:
-                                    presentUIAlert(sender:self,title: "Invalid email", message: "Email is not in the correct format")
-                                case .errorCodeWrongPassword:
-                                    presentUIAlert(sender:self,title: "Invalid password", message: "Please enter the correct password")
-                                case .errorCodeUserNotFound:
-                                    presentUIAlert(sender:self,title: "User not found", message: "Make sure email is correct, or create an account")
-                                default:
-                                    presentUIAlert(sender:self,title: "Error logging in", message: "Please try again")
-                                    print("Chuck - Error logging in went to default error \(error)")
-                                    
-                                }
-                            }
-                        }
-                    }else {
-                        print("Chuck: Email authenticated with Firebase")
-                        if let user = user {
-                            let userData = [
-                                "provider": user.providerID,
-                                "email" : user.email!
-                            ]
-                            self.completeSignIn(id: user.uid, userData: userData)
-                        }
-                    }
-                })
+            guard let email = emailField.text, let password = passwordField.text, email != "" && password != "" else {
+                print("Email or password invalid")
+                presentUIAlert(sender: self, title: "Fields not complete", message: "Fill in email and password fields")
+                return
             }
+            UserService.shareService.emailLogIn(sender: self, email: email, password: password)
         }
         
     }
     
     
-
-    func completeSignIn(id:String, userData:Dictionary<String, String>){
-        // for automatic sign in
-        DataService.ds.createFirebaseDBUser(uid: id, userData: userData)
-        let KeychainResult = KeychainWrapper.standard.set(id, forKey: KEY_UID)
-        print("Chuck: Data saved to keycahain \(KeychainResult)")
-        MyFireBaseAPIClient.sharedClient.startObservingUser(){
-            presentBarFeedVC(sender: self)
-
-        }
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
 

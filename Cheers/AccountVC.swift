@@ -28,10 +28,9 @@ class AccountVC: UIViewController {
     }
     @IBAction func logOutBtnTapped(_ sender: Any) {
         print("Log out btn tapped")
-        
-        try! FIRAuth.auth()!.signOut()
-        KeychainWrapper.standard.removeObject(forKey: KEY_UID)
+        UserService.shareService.signOut()
         presentFirstLoginVC(sender:self)
+
         
     }
     // Contact Us Buttons

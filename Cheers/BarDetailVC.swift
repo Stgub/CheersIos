@@ -63,10 +63,10 @@ class BarDetailVC: UIViewController, hasBarVar {
             barDescriptLabel.text = barDescript
         }
         //Check the next availability of bar
-        let dateAvailable:TimeInterval = 0
+        var dateAvailable: TimeInterval = 0
         if bar.hasBeenUsed ?? false {
             let dateUsed = currentUser.barsUsed[bar.key]
-            let dateAvailable = dateUsed! + 30 * 24 * 60 * 60 // one month
+            dateAvailable = dateUsed! + 30 * 24 * 60 * 60 // one month
         }
         if currentUser.credits <= 0 {
             //User has no credits left to buy drins
