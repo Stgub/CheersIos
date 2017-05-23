@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "76 - iPad (@1x).png",
+      "filename" : "toastLogoSGray.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "76 - iPad (@1x)@2x.png",
+      "filename" : "toastLogoSGray@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "76 - iPad (@1x)@3x.png",
+      "filename" : "toastLogoSGray@3x.png",
       "scale" : "3x"
     }
   ],
