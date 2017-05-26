@@ -32,6 +32,7 @@ struct userDataTypes {
     static let membership = "membership"
     static let imgUrl = "imgUrl"
     static let stripeId = "stripeId"
+    static let connectId = "connectId"
     static let currentPeriodStart = "current_period_start"
     static let currentPeriodEnd = "current_period_end"
     static let billingDate = "billingDate"
@@ -117,12 +118,18 @@ class User{
     private var _stripeID:String!
     var stripeID:String?{
         set(newVal) {
-            self._stripeID = stripeID
             self.ref.child(userDataTypes.stripeId).setValue(newVal)
         }
         get{ return _stripeID }
     }
-    
+    private var _connectId:String?
+    var connectId:String?{
+        get{return _connectId}
+        set(newVal){
+            self.ref.child(userDataTypes.connectId).setValue(newVal)
+        }
+    }
+    public var bankAccounts:[String:Any] = [:]
     init( userKey: String , userData: Dictionary<String, AnyObject> ){
         self._userKey = userKey
         self.updateData(userData: userData)
@@ -141,6 +148,9 @@ class User{
         }
         if let stripeId =  userData[userDataTypes.stripeId] as? String {
             self._stripeID = stripeId
+        }
+        if let connectId = userData[userDataTypes.connectId] as? String{
+            self._connectId = connectId
         }
         
         if let email = userData[userDataTypes.email] as? String {

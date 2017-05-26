@@ -23,6 +23,7 @@
 		5605D48C1E9806900098EC52 /* MyFirebaseAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5605D48B1E9806900098EC52 /* MyFirebaseAPIClient.swift */; };
 		56081B851EB03DAE00BF6671 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 56081B841EB03DAE00BF6671 /* GoogleService-Info.plist */; };
 		560861661E7B6924001E1F13 /* ScreenWithBackButtonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560861651E7B6924001E1F13 /* ScreenWithBackButtonVC.swift */; };
+		56322E7F1ED6737400A573BC /* AddBankVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56322E7E1ED6737400A573BC /* AddBankVC.swift */; };
 		5632C26B1E933716003C2D6B /* MyAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5632C26A1E933716003C2D6B /* MyAPIClient.swift */; };
 		56B00C3F1E70C9F400B64B71 /* CreateEmailLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B00C3E1E70C9F400B64B71 /* CreateEmailLoginVC.swift */; };
 		56B00C421E70CA2600B64B71 /* ForgotCredentialsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B00C411E70CA2600B64B71 /* ForgotCredentialsVC.swift */; };
@@ -33,6 +34,7 @@
 		56B91B041E651B6600CB40BB /* BarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B91B031E651B6600CB40BB /* BarTableViewCell.swift */; };
 		56B91B061E651C1700CB40BB /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B91B051E651C1700CB40BB /* DataService.swift */; };
 		56B91B081E651C7700CB40BB /* GeneralFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B91B071E651C7700CB40BB /* GeneralFunctions.swift */; };
+		56DC61201ECF5DE4001279F9 /* ReferralVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DC611F1ECF5DE4001279F9 /* ReferralVC.swift */; };
 		56DC6A4A1EADAB9800449739 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DC6A491EADAB9800449739 /* UserService.swift */; };
 		56F78A5E1E6A600E000E10F4 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F78A5D1E6A600E000E10F4 /* HistoryTableViewCell.swift */; };
 		56F78A601E6C866E000E10F4 /* MembershipVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F78A5F1E6C866E000E10F4 /* MembershipVC.swift */; };
@@ -95,6 +97,7 @@
 		56081B841EB03DAE00BF6671 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		56081B861EB1541E00BF6671 /* Cheers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cheers.entitlements; sourceTree = "<group>"; };
 		560861651E7B6924001E1F13 /* ScreenWithBackButtonVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenWithBackButtonVC.swift; sourceTree = "<group>"; };
+		56322E7E1ED6737400A573BC /* AddBankVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBankVC.swift; sourceTree = "<group>"; };
 		5632C26A1E933716003C2D6B /* MyAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAPIClient.swift; sourceTree = "<group>"; };
 		56B00C3E1E70C9F400B64B71 /* CreateEmailLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEmailLoginVC.swift; sourceTree = "<group>"; };
 		56B00C411E70CA2600B64B71 /* ForgotCredentialsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotCredentialsVC.swift; sourceTree = "<group>"; };
@@ -105,6 +108,7 @@
 		56B91B031E651B6600CB40BB /* BarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarTableViewCell.swift; sourceTree = "<group>"; };
 		56B91B051E651C1700CB40BB /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		56B91B071E651C7700CB40BB /* GeneralFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralFunctions.swift; sourceTree = "<group>"; };
+		56DC611F1ECF5DE4001279F9 /* ReferralVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReferralVC.swift; sourceTree = "<group>"; };
 		56DC6A491EADAB9800449739 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		56F78A5D1E6A600E000E10F4 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		56F78A5F1E6C866E000E10F4 /* MembershipVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipVC.swift; sourceTree = "<group>"; };
@@ -266,6 +270,8 @@
 				56F78A5F1E6C866E000E10F4 /* MembershipVC.swift */,
 				56B589501E94668D009F7786 /* CheckoutVC.swift */,
 				199AF66E1E6F969F00FBBAD1 /* contactUsVC.swift */,
+				56DC611F1ECF5DE4001279F9 /* ReferralVC.swift */,
+				56322E7E1ED6737400A573BC /* AddBankVC.swift */,
 				56B00C401E70C9F900B64B71 /* LoginSigninFlow */,
 				56FF178A1E6F9FE900089C7C /* CreateBarFlow */,
 			);
@@ -614,6 +620,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56322E7F1ED6737400A573BC /* AddBankVC.swift in Sources */,
 				199AF66D1E6F6DAA00FBBAD1 /* RoundedImageCorner.swift in Sources */,
 				56FF178C1E6FA0A300089C7C /* BarAddDetailsVC.swift in Sources */,
 				56FF178E1E6FA0BB00089C7C /* BarReviewVC.swift in Sources */,
@@ -621,6 +628,7 @@
 				56FF17891E6F8F3500089C7C /* BarHoursVC.swift in Sources */,
 				56B589511E94668D009F7786 /* CheckoutVC.swift in Sources */,
 				56FDE7751E666FD600BDE97F /* Bar.swift in Sources */,
+				56DC61201ECF5DE4001279F9 /* ReferralVC.swift in Sources */,
 				56F78A601E6C866E000E10F4 /* MembershipVC.swift in Sources */,
 				56FDE7711E666F3E00BDE97F /* BarDetailVC.swift in Sources */,
 				19FBCB871E635FE500AA10B5 /* BarFeedVC.swift in Sources */,

@@ -52,7 +52,7 @@ class BarReviewVC: UIViewController, hasDataDict {
                     })
                     alert.addAction(okayAction)
                 } else {
-                    print("Chuck: Error -\(error)")
+                    print("Chuck: Error -\(String(describing: error))")
                     presentUIAlert(sender: self, title: "Error", message: "\(error.debugDescription)")
                 }
             }

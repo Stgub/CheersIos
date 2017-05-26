@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import UIKit
 protocol hasBarVar {
     var bar:Bar! {get set}
 }
@@ -46,5 +46,37 @@ extension Date {
         }
     }*/
 }
+
+
+
+struct AsyncUIHandler{
+    var vc: UIViewController
+    var view: UIView
+    var asyncInProgress: Bool = false {
+        didSet {
+            if asyncInProgress {
+                self.view.isUserInteractionEnabled = false
+                self.activityIndicator.startAnimating()
+                self.activityIndicator.alpha = 1
+            } else {
+                self.view.isUserInteractionEnabled = true
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.alpha = 0
+            }
+        }
+    }
+    
+    var activityIndicator:UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    
+    init(vc: UIViewController){
+        self.vc = vc
+        self.view = vc.view
+        self.view.addSubview(self.activityIndicator)
+        self.activityIndicator.alpha = 0
+        self.activityIndicator.center = self.view.center
+    }
+
+}
+
 
 
