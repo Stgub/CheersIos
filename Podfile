@@ -14,7 +14,9 @@ target 'Cheers' do
   pod 'Firebase/Storage'
   pod 'FBSDKLoginKit'
   pod 'SwiftKeychainWrapper'
-
+  pod 'plaid-ios-sdk'
+  pod 'plaid-ios-link'
+  
   target 'CheersTests' do
     inherit! :search_paths
     # Pods for testing

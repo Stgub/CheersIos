@@ -10,9 +10,24 @@ import Foundation
 import Stripe
 import AFNetworking
 
+protocol RequestReturn{
+    func failed()
+    func success()
+}
 
 class MyAPIClient:NSObject, STPBackendAPIAdapter {
 
+
+
+    typealias CompletionHandler = (_ json:[String:Any]?, _ error:ServerError?) -> Void
+    
+    struct ServerError: Error{
+        var localizedDescription: String
+        init(localizedDescription:String){
+            self.localizedDescription = localizedDescription
+        }
+    }
+    
     static let sharedClient = MyAPIClient()
     var defaultSource: STPCard? = nil
     let session: URLSession
@@ -25,7 +40,8 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
         super.init()
     }
     
-    func createRequest( pathExtension: String, params: [String:Any])-> URLRequest{
+  
+    func createRequest( pathExtension: String, params: [String:Any]) -> URLRequest{
         let baseURL = URL(string: SERVER_BASE)!
         let url = baseURL.appendingPathComponent(pathExtension)
         var request = URLRequest(url: url)
@@ -37,13 +53,198 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
         return request
 
     }
+
+    func createRequest( pathExtension: String, params: [String:Any], completionHandler: @escaping CompletionHandler){
+        let request = self.createRequest(pathExtension: pathExtension, params: params)
+        let task = self.session.dataTask(with: request) { (data, urlResponse, error) in
+            DispatchQueue.main.async {
+                let (decodedError, json) =  self.decodeResponse(urlResponse, data: data, error: error as NSError?)
+                completionHandler(json, decodedError)
+            }
+        }
+        task.resume()
+
+
+    }
  
-    func decodeResponse(_ response: URLResponse?, error: NSError?) -> NSError? {
+    func decodeResponse(_ response: URLResponse?,data: Data?, error: NSError?) -> (ServerError?, [String:AnyObject]?){
         if let httpResponse = response as? HTTPURLResponse
             , httpResponse.statusCode != 200 {
-            return error ?? NSError(domain: "FailingStatusCode", code: httpResponse.statusCode, userInfo: nil)
+            return (ServerError(localizedDescription: "FailingStatusCode: \(httpResponse.statusCode)"), nil)
+        } else if error != nil  {
+            return (ServerError(localizedDescription: error!.localizedDescription) ,nil)
+        } else {
+            do {
+                let json = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! [String:AnyObject]
+                if let errorMessage = json["Error"] {
+                    return (ServerError(localizedDescription: errorMessage as! String) , nil)
+                } else {
+                    return (nil, json)
+                }
+            }catch {
+                return (ServerError(localizedDescription: "Could not serialize response") , nil)
+
+            }
         }
-        return error
+    }
+    
+    
+    //Referral system functions
+    func createConnectAccount(completion: @escaping (_ error: Error?)->()){
+        print("MYAPIClient: checkout")
+        
+        let pathExtension = "/connectCreateAccount"
+        let params = ["email":"Charlesfayal@gmail.com"]
+      
+        
+        _ = createRequest(pathExtension: pathExtension, params: params){
+            (json, error) in
+            if error != nil{
+                completion(error)
+            } else {
+                print("Success acccount creation")
+                guard let json = json else{
+                    print("Json error should not be nil")
+                    return
+                }
+                if let accountId = json["id"] as? String{
+                    currentUser.connectId = accountId
+                    completion(nil)
+                } else {
+                    print("Checkout Error: Could not retrieve id")
+                }
+            }
+        }
+
+
+    }
+    
+    
+    func connectAddBank(bankToken: String, completion:@escaping (_ error: Error?)->()){
+        print("MYAPIClient: connectAddBank")
+        let pathExtension = "/connectBank"
+        guard let connectId = currentUser.connectId else {
+            print("No connect account ID, need to create acccount")
+            
+            return
+        }
+    
+        let params = [userDataTypes.connectId: connectId,
+                      "token": bankToken
+            ] as [String : Any]
+        
+        _ = self.createRequest(pathExtension: pathExtension, params: params){
+            (json, error) in
+            if error != nil {
+                completion(error)
+            } else {
+                completion(nil)
+            }
+            
+        }
+
+        
+    }
+
+    func connectAddBank(bankParams: STPBankAccountParams, completion:@escaping (_ error: Error?)->()){
+        print("MYAPIClient: connectAddBank")
+        let pathExtension = "/connectAddBank"
+        guard let connectId = currentUser.connectId else {
+            print("No connect account ID, need to create acccount")
+            
+            return
+        }
+        STPAPIClient.shared().createToken(withBankAccount: bankParams) { (token, error) in
+            if error != nil {
+                completion(error)
+            } else {
+                let params = [userDataTypes.connectId: connectId,
+                              "token": token!.tokenId
+                    ] as [String : Any]
+                
+                _ = self.createRequest(pathExtension: pathExtension, params: params){
+                    (json, error) in
+                    if error != nil {
+                        completion(error)
+                    } else {
+                        completion(nil)
+                    }
+
+                }
+            }
+        }
+    }
+    
+    func connectVerifyBank(amount1:Int, amount2:Int, completion:@escaping (_ error:Error?)->()){
+        print("MYAPIClient: connectVerifyBank")
+        let pathExtension = "/verifyBank"
+        guard let connectId = currentUser.connectId else {
+            print("No connect account ID, need to create acccount")
+            return
+        }
+        
+        let params = [userDataTypes.connectId: connectId,
+                      "amount1": amount1,
+                      "amount2": amount2 ] as [String : Any]
+        _ = createRequest(pathExtension: pathExtension, params: params){
+            (json, error) in
+            if error != nil{
+                completion(error)
+            } else {
+                completion(nil)
+                print("Successfully verified bank")
+            }
+        }
+    }
+    
+    func getBankAccounts( completion:@escaping (_ error:Error?) -> Void){
+        print("MYAPIClient: getBankAccounts")
+        let pathExtension = "/getBankAccounts"
+        guard let connectId = currentUser.connectId else {
+            print("No connect account ID, need to create acccount")
+            return
+        }
+        
+        let params = [userDataTypes.connectId: connectId,
+                     ] as [String : Any]
+        _ = createRequest(pathExtension: pathExtension, params: params){
+            (json, error) in
+            if error != nil{
+                completion(error)
+            } else {
+                for account in json! {
+                    currentUser.bankAccounts[account.key] = account.value
+                }
+                completion(nil)
+                print("Successfully verified bank")
+            }
+        }
+    }
+    func payout(completion:@escaping (_ error:Error?)->()){
+        print("MYAPIClient: checkout")
+        let pathExtension = "/connectPayout"
+        guard let connectId = currentUser.connectId else {
+            print("No connect account ID, need to create acccount")
+            
+            return
+        }
+        let payoutAmount = 1000 // TODO get this for real *******
+        let params = [userDataTypes.connectId: connectId,
+                      "amount": payoutAmount] as [String : Any]
+        _ = createRequest(pathExtension: pathExtension, params: params){
+            (json, error) in
+            if error != nil{
+                completion(error)
+            } else {
+                completion(nil)
+                print("Success payout")
+                if let accountId = json!["id"] as? String{
+                    currentUser.connectId = accountId
+                } else {
+                    print("Checkout Error: Could not retrieve id")
+                }
+            }
+        }
     }
     
     
@@ -57,36 +258,32 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
             return
         }
         let pathExtension = "/updateUser"
-        let params = [ "customerID":currentUser.stripeID]
-        let request = createRequest(pathExtension: pathExtension, params: params)
-        let task = self.session.dataTask(with: request) { (data, urlResponse, error) in
-            DispatchQueue.main.async {
-                if let error = self.decodeResponse(urlResponse, error: error as NSError?){
-                    //completion(error)
-                } else {
-                    //completion(nil)
-                    print("Success getting user info")
-                    let json = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! [String:AnyObject]
-                    print("JSON Data - \(json)")
-                    if let currentPeriodStart = json![userDataTypes.currentPeriodStart] as? TimeInterval{
-                        currentUser.currentPeriodStart = currentPeriodStart
-                    } else { print("Backend: could not get current start period") }
-                    if let currentPeriodEnd = json![userDataTypes.currentPeriodEnd] as? TimeInterval{
-                        currentUser.currentPeriodEnd = currentPeriodEnd
-                    } else { print("Backend: Ccould not get current end period") }
-                    if let email = json!["email"] as? String {
-                        currentUser.userEmail = email
-                    }
-                    if let numSubscriptions = json!["numSubscriptions"] as? Int {
-                        if numSubscriptions > 0 {
-                            currentUser.membership = membershipLevels.premium
-                        }
+        let params = [ "customerID":currentUser.stripeID!] as [String:Any]
+        createRequest(pathExtension: pathExtension, params: params){
+            (json, error) in
+            if error != nil{
+                //completion(error)
+            } else {
+                //completion(nil)
+                print("Success getting user info")
+                if let currentPeriodStart = json![userDataTypes.currentPeriodStart] as? TimeInterval{
+                    currentUser.currentPeriodStart = currentPeriodStart
+                } else { print("Backend: could not get current start period") }
+                if let currentPeriodEnd = json![userDataTypes.currentPeriodEnd] as? TimeInterval{
+                    currentUser.currentPeriodEnd = currentPeriodEnd
+                } else { print("Backend: Ccould not get current end period") }
+                if let email = json!["email"] as? String {
+                    currentUser.userEmail = email
+                }
+                if let numSubscriptions = json!["numSubscriptions"] as? Int {
+                    if numSubscriptions > 0 {
+                        currentUser.membership = membershipLevels.premium
                     }
                 }
             }
-        }
-        task.resume()
 
+        }
+  
     }
     /**
      Adds the user to a subscription and charges them
@@ -103,10 +300,10 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
                     completion(error)
                 } else {
                     currentUser.stripeID = customer?.stripeID
-                    self.createCharge(result, amount: amount, completion: {
+                  /*  self.createCharge(result, amount: amount, completion: {
                     (error) in
                         completion(error)
-                    })
+                    })*/
                 }
             })
             return
@@ -115,25 +312,23 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
             "customerID": stripeID ,
             "amount": amount,
             "sourceID":result.source.stripeID]
-        let request = createRequest(pathExtension: pathExtension, params: params)
-        let task = self.session.dataTask(with: request) { (data, urlResponse, error) in
-            DispatchQueue.main.async {
-                if let error = self.decodeResponse(urlResponse, error: error as NSError?){
-                    completion(error)
-                } else {
-                    completion(nil)
-                    print("Success")
-                    let json = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! [String:AnyObject]
-                    if let currentPeriodStart = json![userDataTypes.currentPeriodStart] as? TimeInterval{
-                        currentUser.currentPeriodStart = currentPeriodStart
-                    } else { print("Backend: could not get current start period") }
-                    if let currentPeriodEnd = json![userDataTypes.currentPeriodEnd] as? TimeInterval{
-                        currentUser.currentPeriodEnd = currentPeriodEnd
-                    } else { print("Backend: Ccould not get current end period") }
-                }
+        let request = createRequest(pathExtension: pathExtension, params: params){
+            (json, error) in
+            if error != nil{
+                completion(error)
+            } else {
+                completion(nil)
+                print("Success")
+                if let currentPeriodStart = json![userDataTypes.currentPeriodStart] as? TimeInterval{
+                    currentUser.currentPeriodStart = currentPeriodStart
+                } else { print("Backend: could not get current start period") }
+                if let currentPeriodEnd = json![userDataTypes.currentPeriodEnd] as? TimeInterval{
+                    currentUser.currentPeriodEnd = currentPeriodEnd
+                } else { print("Backend: Ccould not get current end period") }
             }
+
         }
-        task.resume()
+
     }
     
     func createCutomer( completion: @escaping (_ customer:STPCustomer? , _ error:Error?) -> Void){
@@ -146,7 +341,8 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
         let request = createRequest(pathExtension: pathExtension, params: params)
         let task = self.session.dataTask(with: request) { (data, urlResponse, error) in
             DispatchQueue.main.async {
-                if let error = self.decodeResponse(urlResponse, error: error as NSError?){
+                let decodedError = self.decodeResponse(urlResponse,data: data!, error: error as NSError?)
+                if decodedError != nil{
                     completion(nil,error)
                 }
                 let deserializer = STPCustomerDeserializer(data: data, urlResponse: urlResponse, error: error)
@@ -182,8 +378,17 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
             }
         }
         task.resume()
-
     }
+        
+        /**
+         *  Retrieve the cards to be displayed inside a payment context. On your backend, retrieve the Stripe customer associated with your currently logged-in user (see https://stripe.com/docs/api#retrieve_customer ), and return the raw JSON response from the Stripe API. (For an example Ruby implementation of this API, see https://github.com/stripe/example-ios-backend/blob/master/web.rb#L40 ). Back in your iOS app, after you've called this API, deserialize your API response into an `STPCustomer` object (you can use the `STPCustomerDeserializer` class to do this). See MyAPIClient.swift in our example project to see this in action.
+         *
+         *  @see STPCard
+         *  @param completion call this callback when you're done fetching and parsing the above information from your backend. For example, `completion(customer, nil)` (if your call succeeds) or `completion(nil, error)` if an error is returned.
+         *
+         *  @note If you are on Swift 3, you must declare the completion block as `@escaping` or Xcode will give you a protocol conformance error. https://bugs.swift.org/browse/SR-2597
+         */
+
     func retrieveCustomer(_ completion: @escaping STPCustomerCompletionBlock) {
         print("retrieveCustomer function")
         guard let _ = currentUser else {
@@ -235,8 +440,9 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
         let request = createRequest(pathExtension: pathExtension, params: params)
         let task = self.session.dataTask(with: request) { (data, urlResponse, error) in
             DispatchQueue.main.async {
-                if let error = self.decodeResponse(urlResponse, error: error as NSError?){
-                    completion("Error unsubscribing","Please contact support@GetToastApp.com - error \(error.localizedDescription)")
+                let (decodedError, _) = self.decodeResponse(urlResponse,data:data!, error: error as NSError?)
+                if decodedError != nil {
+                    completion("Error unsubscribing","Please contact support@GetToastApp.com - error \(error?.localizedDescription)")
                     return
                 }
                 guard data != nil else {
@@ -277,7 +483,7 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
      *  @param completion call this callback when you're done adding the token to the customer on your backend. For example, `completion(nil)` (if your call succeeds) or `completion(error)` if an error is returned.
      *
      */
-    public func attachSource(toCustomer source: STPSource, completion: @escaping STPErrorBlock) {
+     func attachSource(toCustomer source: STPSource, completion: @escaping STPErrorBlock) {
         print("attachSource")
 
         let pathExtension = "/customer/sources"
@@ -289,8 +495,9 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
         let request = createRequest(pathExtension: pathExtension, params: params)
         let task = self.session.dataTask(with: request) { (data, urlResponse, error) in
             DispatchQueue.main.async {
-                if let error = self.decodeResponse(urlResponse, error: error as NSError?) {
-                    print("Backend: Error with attachSource - \(error.localizedDescription)")
+                let (decodedError, _) = self.decodeResponse(urlResponse,data:data!, error: error as NSError?)
+                if decodedError != nil {
+                    print("Backend: Error with attachSource - \(error?.localizedDescription)")
                     completion(error)
                     return
                 }
@@ -313,14 +520,16 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
         let request = createRequest(pathExtension: pathExtension, params: params)
         let task = self.session.dataTask(with: request) { (data, urlResponse, error) in
             DispatchQueue.main.async {
-                if let error = self.decodeResponse(urlResponse, error: error as NSError?) {
-                    print("Backend: Error with default source -\(error.localizedDescription)")
-                    completion(error)
-                    return
+                let (decodedError, _) = self.decodeResponse(urlResponse,data:data!, error: error as NSError?)
+                if decodedError != nil {
+                    print("Backend: Error with default source -\(error?.localizedDescription)")
+                    completion(decodedError)
+                    return}
                 }
                 completion(nil)
             }
-        }
-        task.resume()
+    task.resume()
+
     }
 }
+

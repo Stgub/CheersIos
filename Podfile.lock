@@ -69,6 +69,9 @@ PODS:
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMSessionFetcher/Core (1.1.8)
+  - plaid-ios-link (0.2.1):
+    - plaid-ios-sdk
+  - plaid-ios-sdk (0.3.6)
   - Stripe (9.4.0)
   - SwiftKeychainWrapper (3.0.1)
 
@@ -79,6 +82,8 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
+  - plaid-ios-link
+  - plaid-ios-sdk
   - Stripe
   - SwiftKeychainWrapper
 
@@ -96,9 +101,11 @@ SPEC CHECKSUMS:
   FirebaseStorage: 63628572a5fde258f8e933b5fb42697468da0158
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 6f8d8b28b7e345549ac471071608170b31cb4977
+  plaid-ios-link: 0ef45f18cdb2d1c3b9eaf6c2b457c950909df725
+  plaid-ios-sdk: e9865b0fe6a79b3d30d886171d7a26f7e1408935
   Stripe: 0957cc85df5c3df153e6fb44d307ea4b778b6bd1
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
 
-PODFILE CHECKSUM: 8256485c2a4cf690513a7a79a2e7992aef4c841a
+PODFILE CHECKSUM: f6c0332d73a988e8951278ecb939ef0199617c19
 
 COCOAPODS: 1.1.1

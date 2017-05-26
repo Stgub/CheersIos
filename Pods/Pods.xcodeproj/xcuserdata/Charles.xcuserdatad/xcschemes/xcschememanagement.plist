@@ -64,6 +64,26 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>plaid-ios-link-Resources.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>plaid-ios-link.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>plaid-ios-sdk-PLDResources.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>plaid-ios-sdk.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -73,6 +93,26 @@
 			<true/>
 		</dict>
 		<key>107A9565F9DF88517DFD3E28C05B2B96</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2D66FF494205FAE5F2E8D8365F7DBEAC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>31A13CE6241E0D7EEF538C98FBDA31F1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3A374D5128799F080A6DD02B7E8FA14E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>43DEF4076C0D740F3F2107A4958E1D81</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -87,22 +127,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6BF6725D4CC7EAE219125D2A2D9FB103</key>
+		<key>5497B6D858FAFE82E64CA36386879262</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6EA7277C4065428B2C3ABBED67B1803D</key>
+		<key>AA22438DD56CE1149D9BE716EECCF43D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A760F2DF43F714C4D7E7A4CCD88E08D2</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>AE4798A996A39B69265AED460328823E</key>
+		<key>B0D0538D5B892B74E51E98E60DE74323</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -123,6 +158,11 @@
 			<true/>
 		</dict>
 		<key>E09CC3CA9048A232BD292E2D56CDBC4C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EF850E498761BF44DFC77229172DED32</key>
 		<dict>
 			<key>primary</key>
 			<true/>
