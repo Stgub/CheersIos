@@ -34,7 +34,7 @@ class BarDetailVC: UIViewController, hasBarVar {
                 print("Successfully redeemed")
                 currentUser.usedBar(barId: self.bar.key, currentDate:dateStamp)
                 self.bar.hasBeenUsed = true
-                self.dismiss(animated: true, completion: nil)
+                self.performSegue(withIdentifier: "drinkRedeemedSegue", sender: self)
             }
         }
     }
