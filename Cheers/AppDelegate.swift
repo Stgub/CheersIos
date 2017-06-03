@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FBSDKLoginKit
 import Stripe
+import SlideMenuControllerSwift
 
 import plaid_ios_sdk
 
@@ -18,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
+   
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         Plaid.sharedInstance().setPublicKey("78f5f0a989c9046055b63980f37640")
@@ -28,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         STPPaymentConfiguration.shared().publishableKey = "pk_test_vbIvPl0JdKlVqMlrILx3A8Sf" //test
        //STPPaymentConfiguration.shared().publishableKey = "pk_live_PuYngGgOA2VX11E7NqNZ1vW3" // Live
 
+        
         return true
     }
 

@@ -10,11 +10,13 @@ import UIKit
 import Firebase
 import SwiftKeychainWrapper
 
-class AccountVC: UIViewController {
+class AccountVC: BaseMenuVC {
 
+    @IBOutlet weak var leftMenuButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        attachMenuButton(menuButton: leftMenuButton)
         // Do any additional setup after loading the view.
     }
 
@@ -22,10 +24,7 @@ class AccountVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    @IBAction func backBtnTapped(_ sender: Any) {
-        self.dismiss(animated: false, completion: nil)
-    }
+ 
     @IBAction func logOutBtnTapped(_ sender: Any) {
         print("Log out btn tapped")
         UserService.shareService.signOut()

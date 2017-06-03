@@ -8,8 +8,9 @@
 
 import UIKit
 import Firebase
+
 var currentUser:User!
-class BarFeedVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate {
 
     private var _dayLookedAtNum:Int!
     private var dayLookedAtNum:Int! {
@@ -33,6 +34,9 @@ class BarFeedVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     private var selectedBar:Bar!
     private var drinkTimer = Timer()
     private var barPerDay:Dictionary<String,[String]> = [:]
+    
+
+    @IBOutlet weak var leftMenuButton: UIButton!
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var membershipLabel: UIButton!
@@ -56,11 +60,14 @@ class BarFeedVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        attachMenuButton(menuButton: leftMenuButton)
+        
         MyAPIClient.sharedClient.updateCustomer() // used to make sure the users subscription is correct
 
         _dayLookedAtNum = Date().dayNumberOfWeek()!
         dayLookedAtNum = _dayLookedAtNum
-
+        self.slideMenuController()?.openLeft()
     }
     
     func updateUI(){

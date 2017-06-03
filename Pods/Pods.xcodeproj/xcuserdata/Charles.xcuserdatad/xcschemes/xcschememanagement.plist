@@ -49,6 +49,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SlideMenuControllerSwift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Stripe-Stripe.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -102,17 +107,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>31A13CE6241E0D7EEF538C98FBDA31F1</key>
+		<key>30F345290F9D08BD5C65B3F57DC5A10E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3149DEA60AC9A4AF833B8FF02414B2AD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>3A374D5128799F080A6DD02B7E8FA14E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>43DEF4076C0D740F3F2107A4958E1D81</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -132,12 +137,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AA22438DD56CE1149D9BE716EECCF43D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B0D0538D5B892B74E51E98E60DE74323</key>
+		<key>A6D708F98F1818801638EAE7E0640E8B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -163,6 +163,16 @@
 			<true/>
 		</dict>
 		<key>EF850E498761BF44DFC77229172DED32</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F625EA5228E887A8E53504259056D9D9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FF99B2A60F16529B5EF78451DB643A6D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
