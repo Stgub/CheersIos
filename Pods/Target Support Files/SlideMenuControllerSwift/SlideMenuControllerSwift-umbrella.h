@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_CheersUITestsVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_CheersUITestsVersionString[];
+FOUNDATION_EXPORT double SlideMenuControllerSwiftVersionNumber;
+FOUNDATION_EXPORT const unsigned char SlideMenuControllerSwiftVersionString[];
 

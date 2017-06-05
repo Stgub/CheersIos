@@ -28,7 +28,8 @@ func presentUIAlert(sender: UIViewController, title:String, message:String, retu
  */
 func presentBarFeedVC(sender: UIViewController){
     let storyboard = UIStoryboard(name: myStoryboards.main, bundle: Bundle.main)
-    let vc = storyboard.instantiateViewController(withIdentifier: "BarFeedVC")
+    
+    let vc = storyboard.instantiateViewController(withIdentifier: "MainNavController")
     sender.present(vc, animated: true, completion: nil)
 }
 func presentFirstLoginVC(sender:UIViewController){

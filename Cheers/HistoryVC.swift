@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 
-class HistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HistoryVC: BaseMenuVC, UITableViewDelegate, UITableViewDataSource {
 
     var history:[String:TimeInterval] = [:] // barkey and date
     var barHistory:[Bar] = []
@@ -20,7 +20,7 @@ class HistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var userRenewDateLabel: UILabel!
     @IBOutlet weak var creditsLabel: UILabel!
     @IBOutlet weak var userMembershipLabel: UIButton!
-    
+    @IBOutlet weak var leftMenuButton: UIButton!
     @IBOutlet weak var moneySavedLabel: UILabel!
     
     override func viewDidAppear(_ animated: Bool) {
@@ -30,13 +30,10 @@ class HistoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        attachMenuButton(menuButton: leftMenuButton)
     }
 
-    @IBAction func backBtnTapped(_ sender: Any) {
-        self.dismiss(animated: false, completion: nil)
-    }
-    
+ 
     func updateUI(){
         self.creditsLabel.text = "\(currentUser.credits!)"
         self.userMembershipLabel.setTitle(currentUser.membership, for: .normal)
