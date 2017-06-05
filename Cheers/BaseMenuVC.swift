@@ -23,50 +23,20 @@ class BaseMenuVC: UIViewController, SlideMenuDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func slideMenuItemSelectedAtIndex(_ index: Int) {
+    func slideMenuItemSelected(_ menuItem: MenuItem) {
         let topViewController : UIViewController = self.navigationController!.topViewController!
         print("View Controller is : \(topViewController) \n", terminator: "")
-        switch(index){
-        case 0:
-            print("BarFeed\n", terminator: "")
-            
-            self.openViewControllerBasedOnIdentifier("BarFeedVC")
-            
-            break
-        case 1:
-            print("HistoryVC\n", terminator: "")
-            
-            self.openViewControllerBasedOnIdentifier("HistoryVC")
-            
-            break
-        case 2:
-            print("Account\n", terminator: "")
-            
-            self.openViewControllerBasedOnIdentifier("AccountVC")
-            
-            break
-        default:
-            print("Default index for slide menu?")
-            print("BarFeed\n", terminator: "")
-            
-            self.openViewControllerBasedOnIdentifier("BarFeedVC")
-            
-            break
-        }
-    }
-    
-    func openViewControllerBasedOnIdentifier(_ strIdentifier:String){
-        let destViewController : UIViewController = self.storyboard!.instantiateViewController(withIdentifier: strIdentifier)
+        let storyboard = UIStoryboard(name: menuItem.storyboard, bundle: Bundle.main)
         
-        let topViewController : UIViewController = self.navigationController!.topViewController!
+        let destViewController : UIViewController = storyboard.instantiateViewController(withIdentifier: menuItem.storyboardID)
         
         if (topViewController.restorationIdentifier! == destViewController.restorationIdentifier!){
             print("Same VC")
         } else {
             self.navigationController!.pushViewController(destViewController, animated: true)
-        }
-    }
+        }    }
     
+
     func attachMenuButton(menuButton: UIButton){
         menuButton.addTarget(self, action: #selector(BaseMenuVC.onSlideMenuButtonPressed(_:)), for: UIControlEvents.touchUpInside)
     }
@@ -94,9 +64,10 @@ class BaseMenuVC: UIViewController, SlideMenuDelegate {
     } */
     
     func onSlideMenuButtonPressed(_ sender : UIButton){
-        print("slideMenuButtonPresseD")
+        print("onSlideMenuButtonPressed")
         //there was code here to close the menu if the show menu button was double clicked but I dont think it is necessary
-        let menuVC : SlideMenuVC = self.storyboard!.instantiateViewController(withIdentifier: "LeftMenuVC") as! SlideMenuVC
+        let storyboard:UIStoryboard =  UIStoryboard(name: myStoryboards.menu, bundle: Bundle.main)
+        let menuVC : SlideMenuVC = storyboard.instantiateViewController(withIdentifier: "LeftMenuVC") as! SlideMenuVC
         menuVC.btnMenu = sender
         menuVC.delegate = self
         self.view.addSubview(menuVC.view)

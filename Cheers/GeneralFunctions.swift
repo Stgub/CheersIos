@@ -28,12 +28,11 @@ func presentUIAlert(sender: UIViewController, title:String, message:String, retu
  */
 func presentBarFeedVC(sender: UIViewController){
     let storyboard = UIStoryboard(name: myStoryboards.main, bundle: Bundle.main)
-    
     let vc = storyboard.instantiateViewController(withIdentifier: "MainNavController")
     sender.present(vc, animated: true, completion: nil)
 }
 func presentFirstLoginVC(sender:UIViewController){
-    let storyboard = UIStoryboard(name: myStoryboards.main, bundle: Bundle.main)
+    let storyboard = UIStoryboard(name: myStoryboards.logOrSignIn, bundle: Bundle.main)
     let vc = storyboard.instantiateViewController(withIdentifier: "FirstLoginVC")
     sender.present(vc, animated: true, completion: nil)
 }
@@ -43,10 +42,11 @@ func presentMembershipVC(sender:UIViewController){
     sender.present(vc, animated: true, completion: nil)
 }
 func presentSignUpBarIntialVC(sender:UIViewController){
-    let storyboard = UIStoryboard(name: myStoryboards.main, bundle: Bundle.main)
+    let storyboard = UIStoryboard(name: myStoryboards.addBarFlow, bundle: Bundle.main)
     let vc = storyboard.instantiateViewController(withIdentifier: "SignUpBarIntialVC")
     sender.present(vc, animated: true, completion: nil)
 }
+
 
 
 func getDateStringFromTimeStamp(date: TimeInterval)-> String{

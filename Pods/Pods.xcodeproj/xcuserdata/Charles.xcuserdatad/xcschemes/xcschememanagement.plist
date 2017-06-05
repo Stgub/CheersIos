@@ -49,7 +49,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>SlideMenuControllerSwift.xcscheme</key>
+		<key>ReachabilitySwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -117,16 +117,6 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>30F345290F9D08BD5C65B3F57DC5A10E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3149DEA60AC9A4AF833B8FF02414B2AD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>3605BD2DFF8DCDB8B31EDF46D5A3A87B</key>
 		<dict>
 			<key>primary</key>
@@ -157,11 +147,6 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A6D708F98F1818801638EAE7E0640E8B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>BC5000D645EEAF961C85907CDC796FE1</key>
 		<dict>
 			<key>primary</key>
@@ -188,16 +173,6 @@
 			<true/>
 		</dict>
 		<key>EF850E498761BF44DFC77229172DED32</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F625EA5228E887A8E53504259056D9D9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FF99B2A60F16529B5EF78451DB643A6D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

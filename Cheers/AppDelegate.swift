@@ -10,14 +10,15 @@ import UIKit
 import Firebase
 import FBSDKLoginKit
 import Stripe
-import SlideMenuControllerSwift
-
+import ReachabilitySwift
 import plaid_ios_sdk
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let reachability = Reachability()!
+    
 
    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -30,7 +31,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        //STPPaymentConfiguration.shared().publishableKey = "pk_live_PuYngGgOA2VX11E7NqNZ1vW3" // Live
 
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged),name: ReachabilityChangedNotification,object: reachability)
+        do{
+            try reachability.startNotifier()
+        }catch{
+            print("could not start reachability notifier")
+        }
+        
         return true
+    }
+    func reachabilityChanged(note: NSNotification) {
+        print("AppDelegate:reachabilityChanged")
+        let reachability = note.object as! Reachability
+        
+        if reachability.isReachable {
+            if reachability.isReachableViaWiFi {
+                print("Reachable via WiFi")
+            } else {
+                print("Reachable via Cellular")
+            }
+        } else {
+            let mainStoryboardIpad : UIStoryboard = UIStoryboard(name: myStoryboards.splash, bundle: nil)
+            let initialViewControlleripad : UIViewController = mainStoryboardIpad.instantiateViewController(withIdentifier: "SplashVC") as UIViewController
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            self.window?.rootViewController = initialViewControlleripad
+            self.window?.makeKeyAndVisible()
+            print("Network not reachable")
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rd3-gj-9Ra">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--SplashVC-->
+        <scene sceneID="Sgh-2y-zeV">
+            <objects>
+                <viewController storyboardIdentifier="SplashVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rd3-gj-9Ra" customClass="SplashVC" customModule="Cheers" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zzh-48-mGC"/>
+                        <viewControllerLayoutGuide type="bottom" id="85X-fc-8EE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gfU-Bf-nWi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="toastLogo-1" translatesAutoresizingMaskIntoConstraints="NO" id="Oe5-Ou-agQ">
+                                <rect key="frame" x="102" y="212.5" width="170" height="241"/>
+                            </imageView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="No internet connection detected!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QMu-4b-NYb">
+                                <rect key="frame" x="61" y="152" width="253.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="6ck-bH-eOP">
+                                <rect key="frame" x="167" y="313.5" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="7IP-ON-Ag5"/>
+                                    <constraint firstAttribute="height" constant="40" id="UmR-kG-Zh8"/>
+                                </constraints>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Oe5-Ou-agQ" firstAttribute="top" secondItem="QMu-4b-NYb" secondAttribute="bottom" constant="40" id="1o8-z1-htq"/>
+                            <constraint firstItem="Oe5-Ou-agQ" firstAttribute="centerX" secondItem="gfU-Bf-nWi" secondAttribute="centerX" id="29Q-Fr-gx7"/>
+                            <constraint firstItem="6ck-bH-eOP" firstAttribute="centerX" secondItem="gfU-Bf-nWi" secondAttribute="centerX" id="LIF-NP-mCd"/>
+                            <constraint firstAttribute="bottom" secondItem="QMu-4b-NYb" secondAttribute="bottom" constant="494.5" id="Wwz-YB-nzM"/>
+                            <constraint firstItem="6ck-bH-eOP" firstAttribute="centerY" secondItem="gfU-Bf-nWi" secondAttribute="centerY" id="ckc-D5-da9"/>
+                            <constraint firstItem="Oe5-Ou-agQ" firstAttribute="centerY" secondItem="gfU-Bf-nWi" secondAttribute="centerY" id="xe6-At-EXU"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="noInternetLabel" destination="QMu-4b-NYb" id="i5P-DJ-fut"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xlr-lN-KbR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="587" y="-299"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="toastLogo-1" width="170" height="116"/>
+    </resources>
+</document>

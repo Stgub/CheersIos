@@ -16,8 +16,10 @@ let TIME_BETWEEN_DRINKS:TimeInterval = 90 * 60// in seconds
 
 struct myStoryboards {
     static let  main = "Main"
-    static let logOrSignIn = "SignOrLogin"
- 
+    static let logOrSignIn = "LoginFlow"
+    static let splash = "Splash"
+    static let menu = "Menu"
+    static let addBarFlow = "AddBarFlow"
 }
 
 

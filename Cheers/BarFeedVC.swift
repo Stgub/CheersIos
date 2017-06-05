@@ -67,7 +67,6 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate {
 
         _dayLookedAtNum = Date().dayNumberOfWeek()!
         dayLookedAtNum = _dayLookedAtNum
-        self.slideMenuController()?.openLeft()
     }
     
     func updateUI(){

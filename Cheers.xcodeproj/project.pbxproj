@@ -25,6 +25,12 @@
 		560861661E7B6924001E1F13 /* ScreenWithBackButtonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560861651E7B6924001E1F13 /* ScreenWithBackButtonVC.swift */; };
 		561DBACE1EE0FA6200D2DADD /* SlideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DBACD1EE0FA6200D2DADD /* SlideMenuVC.swift */; };
 		561DBAD01EE2501E00D2DADD /* BaseMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DBACF1EE2501E00D2DADD /* BaseMenuVC.swift */; };
+		561DBAE71EE4EF3500D2DADD /* AddBarFlow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 561DBAE61EE4EF3500D2DADD /* AddBarFlow.storyboard */; };
+		561DBAE91EE4EF4700D2DADD /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 561DBAE81EE4EF4700D2DADD /* Splash.storyboard */; };
+		561DBAEB1EE4EFD800D2DADD /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 561DBAEA1EE4EFD800D2DADD /* Menu.storyboard */; };
+		561DBAED1EE4F00A00D2DADD /* LoginFlow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 561DBAEC1EE4F00A00D2DADD /* LoginFlow.storyboard */; };
+		561DBAEF1EE4F18A00D2DADD /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DBAEE1EE4F18A00D2DADD /* SplashVC.swift */; };
+		561DBAF11EE4FDC100D2DADD /* MenuItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DBAF01EE4FDC100D2DADD /* MenuItemTableViewCell.swift */; };
 		56322E7F1ED6737400A573BC /* AddBankVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56322E7E1ED6737400A573BC /* AddBankVC.swift */; };
 		5632C26B1E933716003C2D6B /* MyAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5632C26A1E933716003C2D6B /* MyAPIClient.swift */; };
 		56B00C3F1E70C9F400B64B71 /* CreateEmailLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B00C3E1E70C9F400B64B71 /* CreateEmailLoginVC.swift */; };
@@ -101,6 +107,12 @@
 		560861651E7B6924001E1F13 /* ScreenWithBackButtonVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenWithBackButtonVC.swift; sourceTree = "<group>"; };
 		561DBACD1EE0FA6200D2DADD /* SlideMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuVC.swift; sourceTree = "<group>"; };
 		561DBACF1EE2501E00D2DADD /* BaseMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseMenuVC.swift; sourceTree = "<group>"; };
+		561DBAE61EE4EF3500D2DADD /* AddBarFlow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddBarFlow.storyboard; sourceTree = "<group>"; };
+		561DBAE81EE4EF4700D2DADD /* Splash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
+		561DBAEA1EE4EFD800D2DADD /* Menu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
+		561DBAEC1EE4F00A00D2DADD /* LoginFlow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginFlow.storyboard; sourceTree = "<group>"; };
+		561DBAEE1EE4F18A00D2DADD /* SplashVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
+		561DBAF01EE4FDC100D2DADD /* MenuItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItemTableViewCell.swift; sourceTree = "<group>"; };
 		56322E7E1ED6737400A573BC /* AddBankVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBankVC.swift; sourceTree = "<group>"; };
 		5632C26A1E933716003C2D6B /* MyAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAPIClient.swift; sourceTree = "<group>"; };
 		56B00C3E1E70C9F400B64B71 /* CreateEmailLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEmailLoginVC.swift; sourceTree = "<group>"; };
@@ -194,6 +206,10 @@
 				19FBCBB51E6378BC00AA10B5 /* View */,
 				19FBCB8B1E635FE500AA10B5 /* Assets.xcassets */,
 				19FBCB881E635FE500AA10B5 /* Main.storyboard */,
+				561DBAE61EE4EF3500D2DADD /* AddBarFlow.storyboard */,
+				561DBAE81EE4EF4700D2DADD /* Splash.storyboard */,
+				561DBAEA1EE4EFD800D2DADD /* Menu.storyboard */,
+				561DBAEC1EE4F00A00D2DADD /* LoginFlow.storyboard */,
 				19FBCB8D1E635FE500AA10B5 /* LaunchScreen.storyboard */,
 				56081B841EB03DAE00BF6671 /* GoogleService-Info.plist */,
 				19FBCB901E635FE500AA10B5 /* Info.plist */,
@@ -258,6 +274,7 @@
 				199AF66C1E6F6DAA00FBBAD1 /* RoundedImageCorner.swift */,
 				1916ADFA1E733AC3003EACC2 /* textViewRoundCorner.swift */,
 				193944751E9FEE3900557853 /* circlePP.swift */,
+				561DBAF01EE4FDC100D2DADD /* MenuItemTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -280,6 +297,7 @@
 				56FF178A1E6F9FE900089C7C /* CreateBarFlow */,
 				561DBACD1EE0FA6200D2DADD /* SlideMenuVC.swift */,
 				561DBACF1EE2501E00D2DADD /* BaseMenuVC.swift */,
+				561DBAEE1EE4F18A00D2DADD /* SplashVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -460,10 +478,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				561DBAEB1EE4EFD800D2DADD /* Menu.storyboard in Resources */,
 				19FBCB8F1E635FE500AA10B5 /* LaunchScreen.storyboard in Resources */,
 				56081B851EB03DAE00BF6671 /* GoogleService-Info.plist in Resources */,
 				19FBCB8C1E635FE500AA10B5 /* Assets.xcassets in Resources */,
+				561DBAED1EE4F00A00D2DADD /* LoginFlow.storyboard in Resources */,
 				19FBCB8A1E635FE500AA10B5 /* Main.storyboard in Resources */,
+				561DBAE71EE4EF3500D2DADD /* AddBarFlow.storyboard in Resources */,
+				561DBAE91EE4EF4700D2DADD /* Splash.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -631,7 +653,9 @@
 				199AF66D1E6F6DAA00FBBAD1 /* RoundedImageCorner.swift in Sources */,
 				56FF178C1E6FA0A300089C7C /* BarAddDetailsVC.swift in Sources */,
 				56FF178E1E6FA0BB00089C7C /* BarReviewVC.swift in Sources */,
+				561DBAEF1EE4F18A00D2DADD /* SplashVC.swift in Sources */,
 				56B91B061E651C1700CB40BB /* DataService.swift in Sources */,
+				561DBAF11EE4FDC100D2DADD /* MenuItemTableViewCell.swift in Sources */,
 				56FF17891E6F8F3500089C7C /* BarHoursVC.swift in Sources */,
 				56B589511E94668D009F7786 /* CheckoutVC.swift in Sources */,
 				56FDE7751E666FD600BDE97F /* Bar.swift in Sources */,
