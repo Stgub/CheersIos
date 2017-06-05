@@ -70,7 +70,7 @@ class BaseMenuVC: UIViewController, SlideMenuDelegate {
     func attachMenuButton(menuButton: UIButton){
         menuButton.addTarget(self, action: #selector(BaseMenuVC.onSlideMenuButtonPressed(_:)), for: UIControlEvents.touchUpInside)
     }
-    
+    /*
     func defaultMenuImage() -> UIImage {
         var defaultMenuImage = UIImage()
         
@@ -91,9 +91,10 @@ class BaseMenuVC: UIViewController, SlideMenuDelegate {
         UIGraphicsEndImageContext()
         
         return defaultMenuImage;
-    }
+    } */
     
     func onSlideMenuButtonPressed(_ sender : UIButton){
+        print("slideMenuButtonPresseD")
         //there was code here to close the menu if the show menu button was double clicked but I dont think it is necessary
         let menuVC : SlideMenuVC = self.storyboard!.instantiateViewController(withIdentifier: "LeftMenuVC") as! SlideMenuVC
         menuVC.btnMenu = sender
