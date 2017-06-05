@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Left Menu VC-->
+        <scene sceneID="upc-SC-3is">
+            <objects>
+                <viewController storyboardIdentifier="LeftMenuVC" title="Left Menu VC" id="sE9-X4-f8V" customClass="SlideMenuVC" customModule="Cheers" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y8k-wF-b67"/>
+                        <viewControllerLayoutGuide type="bottom" id="a18-n7-l6G"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Iq0-gA-R4X">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AccountBlack" translatesAutoresizingMaskIntoConstraints="NO" id="kEP-le-jBQ">
+                                <rect key="frame" x="112.5" y="40" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="L7v-5T-leH"/>
+                                    <constraint firstAttribute="height" constant="150" id="bhn-yf-Xom"/>
+                                </constraints>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ld8-Jd-6JV">
+                                <rect key="frame" x="0.0" y="200" width="375" height="467"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="menuItem" id="fgE-bH-fbb" customClass="MenuItemTableViewCell" customModule="Cheers" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fgE-bH-fbb" id="Rp3-6f-YNp">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Menu Item" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I93-VN-Ur4">
+                                                    <rect key="frame" x="13" y="20" width="81" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="1" green="0.65490196079999996" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="I93-VN-Ur4" firstAttribute="leading" secondItem="Rp3-6f-YNp" secondAttribute="leadingMargin" constant="5" id="RM1-ng-ppF"/>
+                                                <constraint firstItem="I93-VN-Ur4" firstAttribute="centerY" secondItem="Rp3-6f-YNp" secondAttribute="centerY" id="ngI-U2-07U"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="titleLabel" destination="I93-VN-Ur4" id="iKj-bx-zsh"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="sE9-X4-f8V" id="yqi-nz-XaR"/>
+                                    <outlet property="delegate" destination="sE9-X4-f8V" id="fWE-tb-muX"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gzj-N2-Kpk">
+                                <rect key="frame" x="243" y="37" width="50" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="close"/>
+                                <connections>
+                                    <action selector="closeMenuBtnTapped:" destination="sE9-X4-f8V" eventType="touchUpInside" id="K97-Fl-zpw"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ld8-Jd-6JV" firstAttribute="leading" secondItem="Iq0-gA-R4X" secondAttribute="leading" id="4LI-5G-9Hh"/>
+                            <constraint firstItem="ld8-Jd-6JV" firstAttribute="top" secondItem="kEP-le-jBQ" secondAttribute="bottom" constant="10" id="RSR-ML-4ns"/>
+                            <constraint firstItem="a18-n7-l6G" firstAttribute="top" secondItem="ld8-Jd-6JV" secondAttribute="bottom" id="W4u-Fv-aRW"/>
+                            <constraint firstItem="kEP-le-jBQ" firstAttribute="centerX" secondItem="Iq0-gA-R4X" secondAttribute="centerX" id="huF-EK-ZfW"/>
+                            <constraint firstItem="kEP-le-jBQ" firstAttribute="top" secondItem="y8k-wF-b67" secondAttribute="bottom" constant="20" id="jzw-Z0-yuv"/>
+                            <constraint firstAttribute="trailing" secondItem="ld8-Jd-6JV" secondAttribute="trailing" id="nNJ-wM-aY9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnMenu" destination="Gzj-N2-Kpk" id="Ena-ZJ-7or"/>
+                        <outlet property="profileImage" destination="kEP-le-jBQ" id="QA7-HJ-h8p"/>
+                        <outlet property="tableView" destination="ld8-Jd-6JV" id="Cs6-iX-fI1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ftt-XW-qNB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4271.25" y="2.112676056338028"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="AccountBlack" width="22" height="32"/>
+    </resources>
+</document>

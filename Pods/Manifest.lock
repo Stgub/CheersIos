@@ -72,7 +72,7 @@ PODS:
   - plaid-ios-link (0.2.1):
     - plaid-ios-sdk
   - plaid-ios-sdk (0.3.6)
-  - SlideMenuControllerSwift (3.0.1)
+  - ReachabilitySwift (3)
   - Stripe (9.4.0)
   - SwiftKeychainWrapper (3.0.1)
 
@@ -85,7 +85,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - plaid-ios-link
   - plaid-ios-sdk
-  - SlideMenuControllerSwift
+  - ReachabilitySwift
   - Stripe
   - SwiftKeychainWrapper
 
@@ -105,10 +105,10 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 6f8d8b28b7e345549ac471071608170b31cb4977
   plaid-ios-link: 0ef45f18cdb2d1c3b9eaf6c2b457c950909df725
   plaid-ios-sdk: e9865b0fe6a79b3d30d886171d7a26f7e1408935
-  SlideMenuControllerSwift: 9a163b16d54afab734add42858cba7ef7c307755
+  ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   Stripe: 0957cc85df5c3df153e6fb44d307ea4b778b6bd1
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
 
-PODFILE CHECKSUM: ddb47440cba2a5be11e03a456cc22f24d14acd3a
+PODFILE CHECKSUM: 9f15871f5dbaa9a3c298b02031b11ac8b647643e
 
 COCOAPODS: 1.2.1

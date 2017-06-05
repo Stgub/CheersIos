@@ -13,21 +13,6 @@ import SwiftKeychainWrapper
 
 class FirstLoginVC: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        if let _  = KeychainWrapper.standard.string(forKey: KEY_UID ){
-            print("CHUCK: ID found in keychain")
-            
-            MyFireBaseAPIClient.sharedClient.startObservingUser(){
-                presentBarFeedVC(sender: self)
-            }
-        }
-    }
-
     @IBAction func fbBtnTapped(_ sender: UIButton) {
         let facebookLogin = FBSDKLoginManager()
         

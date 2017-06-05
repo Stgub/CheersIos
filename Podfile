@@ -16,6 +16,7 @@ target 'Cheers' do
   pod 'SwiftKeychainWrapper'
   pod 'plaid-ios-sdk'
   pod 'plaid-ios-link'
+  pod 'ReachabilitySwift'
   
   target 'CheersTests' do
     inherit! :search_paths
