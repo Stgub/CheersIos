@@ -45,6 +45,7 @@ struct membershipLevels {
 }
 
 class User{
+    var myDbAPI: MyFireBaseAPIClient = MyFireBaseAPIClient.sharedClient
     var ref: FIRDatabaseReference!
     private var _membership:String!
     var membership:String!{
@@ -105,6 +106,13 @@ class User{
     }
     var _imgUrl:String!
     var usersImage:UIImage!
+    func saveUserImg(img: UIImage){
+        myDbAPI.saveUserImg(img: img, path: self._userKey){
+            (path) in
+            print("USER: User img saved")
+            self.ref.child(userDataTypes.imgUrl).setValue(path)
+        }
+    }
     private var _userEmail:String!
     var userEmail:String! {
         get{ return _userEmail }

@@ -11,8 +11,11 @@ import UIKit
 class circlePP: UIImageView {
 
     override func awakeFromNib() {
-        self.layer.cornerRadius = 28
+        let height = self.frame.width
+        self.layer.cornerRadius = height/2
         clipsToBounds = true
+        self.superview?.clipsToBounds = true
+
     }
 
 }

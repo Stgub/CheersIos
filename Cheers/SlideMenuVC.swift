@@ -28,6 +28,9 @@ class SlideMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         MenuItem(title: "Account", storyboardID: "AccountVC", storyboard: myStoryboards.main),
         MenuItem(title: "Contact Us", storyboardID: "ContactUsVC", storyboard: myStoryboards.main),
         MenuItem(title: "Refer a friend", storyboardID: "ReferralVC", storyboard: myStoryboards.main),
+        MenuItem(title: "Recommend a Business", storyboardID: "RecommendVC", storyboard: myStoryboards.main),
+        MenuItem(title: "Feedback", storyboardID: "FeedbackVC", storyboard: myStoryboards.main),
+        MenuItem(title: "Privacy Policy and Terms", storyboardID: "TermsAndPolicyVC", storyboard: myStoryboards.main),
         MenuItem(title: "Sign Out", storyboardID: "FirstLoginVC", storyboard: myStoryboards.logOrSignIn)
     ]
     
@@ -39,7 +42,14 @@ class SlideMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     @IBAction func closeMenuBtnTapped(_ sender: Any) {
         slideMenuAway()
     }
-
+    override func viewDidLoad() {
+        if let user = currentUser {
+            user.getUserImg(){
+                (image) in
+                self.profileImage.image = image
+            }
+        }
+    }
     func menuItemClicked( menuItem :MenuItem ){
         if (self.delegate != nil) {
             delegate?.slideMenuItemSelected(menuItem)
@@ -67,7 +77,9 @@ class SlideMenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         cell.setMenuItem(menuItem: menuItems[indexPath.row])
         return cell
     }
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 40
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! MenuItemTableViewCell
         if delegate == nil {

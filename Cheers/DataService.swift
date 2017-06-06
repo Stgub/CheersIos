@@ -12,9 +12,9 @@ import Firebase
 import SwiftKeychainWrapper
 
 var imageCache: NSCache<NSString, UIImage> = NSCache()
- //let SERVER_BASE = "https://52.41.104.17:5000"   // AWS server
+ let SERVER_BASE = "https://52.41.104.17:5000"   // AWS server
 
- let SERVER_BASE = "http://0.0.0.0:5000" //local test
+// let SERVER_BASE = "http://0.0.0.0:5000" //local test
 
 
 let DB_BASE = FIRDatabase.database().reference() // gives the URL of the root of the db, also in the google plist
@@ -28,7 +28,7 @@ class DataService {
     private var _REF_USERS = DB_BASE.child("users")
     private var _REF_DEVICE_IDS = DB_BASE.child("deviceIds")
     private var _REF_BAR_IMAGES = STORAGE_BASE.child("bar-pics")
-    
+    private var _REF_USER_IMAGES = STORAGE_BASE.child("user-pics")
     //make private varibales globally accessible
     
     var REF_BASE: FIRDatabaseReference {
@@ -51,7 +51,9 @@ class DataService {
     var REF_BAR_IMAGES: FIRStorageReference {
         return _REF_BAR_IMAGES
     }
-    
+    var REF_USER_IMAGES: FIRStorageReference {
+        return _REF_USER_IMAGES
+    }
     
     func createFirebaseDBUser(uid: String, userData: Dictionary<String, String> ){
         let deviceID = UIDevice.current.identifierForVendor!.uuidString

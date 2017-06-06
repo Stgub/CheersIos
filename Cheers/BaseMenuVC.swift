@@ -73,7 +73,8 @@ class BaseMenuVC: UIViewController, SlideMenuDelegate {
         self.view.addSubview(menuVC.view)
         self.addChildViewController(menuVC)
         menuVC.view.layoutIfNeeded()
-        let menuWidth = UIScreen.main.bounds.size.width - 30
+        let screenWidth = UIScreen.main.bounds.size.width
+        let menuWidth = screenWidth * 2/3
         menuVC.view.frame=CGRect(x: 0 - UIScreen.main.bounds.size.width, y: 0, width: menuWidth, height: UIScreen.main.bounds.size.height); //necessary or it goes to end then back?
         
         UIView.animate(withDuration: 0.3, animations: { () -> Void in
