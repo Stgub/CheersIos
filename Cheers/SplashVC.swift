@@ -22,6 +22,7 @@ class SplashVC: UIViewController {
         }catch{
             print("could not start reachability notifier")
         }
+        update()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -33,26 +34,32 @@ class SplashVC: UIViewController {
     
     func reachabilityChanged(note: NSNotification) {
         print("SplashVC:reachabilityChanged")
-        let reachability = note.object as! Reachability
-        
+        //let reachability = note.object as! Reachability
+        update()
+    }
+    func update(){
         if reachability.isReachable {
             noInternetLabel.isHidden = true
-
+            
             if reachability.isReachableViaWiFi {
                 print("Reachable via WiFi")
             } else {
                 print("Reachable via Cellular")
             }
             if currentUser != nil {
+                print("Presenting Bar Feed")
                 presentBarFeedVC(sender: self)
-
+                
             } else {
+            
                 if let _  = KeychainWrapper.standard.string(forKey: KEY_UID ){
                     print("CHUCK: ID found in keychain")
                     
                     MyFireBaseAPIClient.sharedClient.startObservingUser(){
                         presentBarFeedVC(sender: self)
                     }
+                } else {
+                    presentFirstLoginVC(sender: self)
                 }
             }
         } else {
@@ -60,6 +67,7 @@ class SplashVC: UIViewController {
             noInternetLabel.isHidden = false
             
         }
+
     }
 
 }

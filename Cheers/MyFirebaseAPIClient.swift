@@ -67,6 +67,9 @@ class MyFireBaseAPIClient:NSObject{
             }  else { print("Could not cast 1") }
         })
     }
+    
+    //MARK: - User functions 
+    
     deinit {
         DataService.ds.REF_USER_CURRENT.removeObserver(withHandle: observeUserHandle)
     }
@@ -74,4 +77,23 @@ class MyFireBaseAPIClient:NSObject{
         DataService.ds.REF_USER_CURRENT.removeObserver(withHandle: observeUserHandle)
 
     }
+    func saveUserImg(img:UIImage, path:String,returnBlock:@escaping (_ path:String)-> Void){
+        let metaData = FIRStorageMetadata()
+        metaData.contentType = "image/jpg"
+        let data = UIImageJPEGRepresentation(img, 0.8)
+        DataService.ds.REF_USER_IMAGES.child(path).put(data!, metadata: metaData){(metaData,error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }else{
+                //store downloadURL
+                let downloadURL = metaData!.downloadURL()!.absoluteString
+                //store downloadURL at database
+                returnBlock(downloadURL)
+            }
+            
+        }
+    }
+    
+
 }

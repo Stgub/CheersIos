@@ -11,16 +11,15 @@ import plaid_ios_link
 import plaid_ios_sdk
 
 
-class ReferralVC: UIViewController, PLDLinkNavigationControllerDelegate {
+class ReferralVC: BaseMenuVC, PLDLinkNavigationControllerDelegate {
+    @IBOutlet weak var leftMenuButton: UIButton!
 
     @IBOutlet weak var bankAccountNameL: UILabel!
     
     let myAPIClient = MyAPIClient.sharedClient
     var asyncUIHandler:AsyncUIHandler!
     
-    @IBAction func backBtnClicked(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
+
     
     @IBAction func checkoutBtnTapped(_ sender: Any) {
         
@@ -64,6 +63,7 @@ class ReferralVC: UIViewController, PLDLinkNavigationControllerDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        attachMenuButton(menuButton: leftMenuButton)
         asyncUIHandler = AsyncUIHandler(vc: self)
         // Do any additional setup after loading the view.
     }

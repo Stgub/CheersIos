@@ -10,7 +10,7 @@
 		1916ADFB1E733AC3003EACC2 /* textViewRoundCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1916ADFA1E733AC3003EACC2 /* textViewRoundCorner.swift */; };
 		193944761E9FEE3900557853 /* circlePP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193944751E9FEE3900557853 /* circlePP.swift */; };
 		199AF66D1E6F6DAA00FBBAD1 /* RoundedImageCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199AF66C1E6F6DAA00FBBAD1 /* RoundedImageCorner.swift */; };
-		199AF66F1E6F969F00FBBAD1 /* contactUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199AF66E1E6F969F00FBBAD1 /* contactUsVC.swift */; };
+		199AF66F1E6F969F00FBBAD1 /* ContactUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199AF66E1E6F969F00FBBAD1 /* ContactUsVC.swift */; };
 		19FBCB851E635FE500AA10B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FBCB841E635FE500AA10B5 /* AppDelegate.swift */; };
 		19FBCB871E635FE500AA10B5 /* BarFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FBCB861E635FE500AA10B5 /* BarFeedVC.swift */; };
 		19FBCB8A1E635FE500AA10B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19FBCB881E635FE500AA10B5 /* Main.storyboard */; };
@@ -31,6 +31,8 @@
 		561DBAED1EE4F00A00D2DADD /* LoginFlow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 561DBAEC1EE4F00A00D2DADD /* LoginFlow.storyboard */; };
 		561DBAEF1EE4F18A00D2DADD /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DBAEE1EE4F18A00D2DADD /* SplashVC.swift */; };
 		561DBAF11EE4FDC100D2DADD /* MenuItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DBAF01EE4FDC100D2DADD /* MenuItemTableViewCell.swift */; };
+		561DBAF31EE8ECA900D2DADD /* RecommendBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DBAF21EE8ECA900D2DADD /* RecommendBarVC.swift */; };
+		561DBAF51EE8EF2400D2DADD /* TermsAndPolicyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DBAF41EE8EF2400D2DADD /* TermsAndPolicyVC.swift */; };
 		56322E7F1ED6737400A573BC /* AddBankVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56322E7E1ED6737400A573BC /* AddBankVC.swift */; };
 		5632C26B1E933716003C2D6B /* MyAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5632C26A1E933716003C2D6B /* MyAPIClient.swift */; };
 		56B00C3F1E70C9F400B64B71 /* CreateEmailLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B00C3E1E70C9F400B64B71 /* CreateEmailLoginVC.swift */; };
@@ -84,7 +86,7 @@
 		1916ADFA1E733AC3003EACC2 /* textViewRoundCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = textViewRoundCorner.swift; sourceTree = "<group>"; };
 		193944751E9FEE3900557853 /* circlePP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = circlePP.swift; sourceTree = "<group>"; };
 		199AF66C1E6F6DAA00FBBAD1 /* RoundedImageCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedImageCorner.swift; sourceTree = "<group>"; };
-		199AF66E1E6F969F00FBBAD1 /* contactUsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = contactUsVC.swift; sourceTree = "<group>"; };
+		199AF66E1E6F969F00FBBAD1 /* ContactUsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUsVC.swift; sourceTree = "<group>"; };
 		19FBCB811E635FE500AA10B5 /* Cheers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cheers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19FBCB841E635FE500AA10B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19FBCB861E635FE500AA10B5 /* BarFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarFeedVC.swift; sourceTree = "<group>"; };
@@ -113,6 +115,8 @@
 		561DBAEC1EE4F00A00D2DADD /* LoginFlow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginFlow.storyboard; sourceTree = "<group>"; };
 		561DBAEE1EE4F18A00D2DADD /* SplashVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
 		561DBAF01EE4FDC100D2DADD /* MenuItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItemTableViewCell.swift; sourceTree = "<group>"; };
+		561DBAF21EE8ECA900D2DADD /* RecommendBarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendBarVC.swift; sourceTree = "<group>"; };
+		561DBAF41EE8EF2400D2DADD /* TermsAndPolicyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyVC.swift; sourceTree = "<group>"; };
 		56322E7E1ED6737400A573BC /* AddBankVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBankVC.swift; sourceTree = "<group>"; };
 		5632C26A1E933716003C2D6B /* MyAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAPIClient.swift; sourceTree = "<group>"; };
 		56B00C3E1E70C9F400B64B71 /* CreateEmailLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEmailLoginVC.swift; sourceTree = "<group>"; };
@@ -290,7 +294,9 @@
 				56FDE7701E666F3E00BDE97F /* BarDetailVC.swift */,
 				56F78A5F1E6C866E000E10F4 /* MembershipVC.swift */,
 				56B589501E94668D009F7786 /* CheckoutVC.swift */,
-				199AF66E1E6F969F00FBBAD1 /* contactUsVC.swift */,
+				199AF66E1E6F969F00FBBAD1 /* ContactUsVC.swift */,
+				561DBAF41EE8EF2400D2DADD /* TermsAndPolicyVC.swift */,
+				561DBAF21EE8ECA900D2DADD /* RecommendBarVC.swift */,
 				56DC611F1ECF5DE4001279F9 /* ReferralVC.swift */,
 				56322E7E1ED6737400A573BC /* AddBankVC.swift */,
 				56B00C401E70C9F900B64B71 /* LoginSigninFlow */,
@@ -663,7 +669,7 @@
 				56F78A601E6C866E000E10F4 /* MembershipVC.swift in Sources */,
 				56FDE7711E666F3E00BDE97F /* BarDetailVC.swift in Sources */,
 				19FBCB871E635FE500AA10B5 /* BarFeedVC.swift in Sources */,
-				199AF66F1E6F969F00FBBAD1 /* contactUsVC.swift in Sources */,
+				199AF66F1E6F969F00FBBAD1 /* ContactUsVC.swift in Sources */,
 				56FF17871E6F8E5D00089C7C /* SignUpBarIntialVC.swift in Sources */,
 				56B00C421E70CA2600B64B71 /* ForgotCredentialsVC.swift in Sources */,
 				560861661E7B6924001E1F13 /* ScreenWithBackButtonVC.swift in Sources */,
@@ -672,6 +678,7 @@
 				19FBCB851E635FE500AA10B5 /* AppDelegate.swift in Sources */,
 				56B91AFE1E651A2000CB40BB /* AccountVC.swift in Sources */,
 				5605D48C1E9806900098EC52 /* MyFirebaseAPIClient.swift in Sources */,
+				561DBAF51EE8EF2400D2DADD /* TermsAndPolicyVC.swift in Sources */,
 				56FF17851E6F8DC000089C7C /* EmailLoginVC.swift in Sources */,
 				19FBCBB81E6379A600AA10B5 /* Shadow&RoundBtn.swift in Sources */,
 				56B91B081E651C7700CB40BB /* GeneralFunctions.swift in Sources */,
@@ -682,6 +689,7 @@
 				56FDE76F1E6523DA00BDE97F /* HistoryVC.swift in Sources */,
 				193944761E9FEE3900557853 /* circlePP.swift in Sources */,
 				56B91AFC1E65195600CB40BB /* FirstLoginVC.swift in Sources */,
+				561DBAF31EE8ECA900D2DADD /* RecommendBarVC.swift in Sources */,
 				56DC6A4A1EADAB9800449739 /* UserService.swift in Sources */,
 				5632C26B1E933716003C2D6B /* MyAPIClient.swift in Sources */,
 				56B91B001E651A8C00CB40BB /* User.swift in Sources */,

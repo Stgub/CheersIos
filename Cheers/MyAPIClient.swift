@@ -253,8 +253,8 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
     */
     func updateCustomer(){
         print("Backend: Updating user")
-        guard let user = currentUser else {
-            print("Backend: No user to update")
+        guard let user = currentUser,  user.stripeID != nil else {
+            print("Backend: No user to update or no stripeID")
             return
         }
         let pathExtension = "/updateUser"
@@ -341,7 +341,7 @@ class MyAPIClient:NSObject, STPBackendAPIAdapter {
         let request = createRequest(pathExtension: pathExtension, params: params)
         let task = self.session.dataTask(with: request) { (data, urlResponse, error) in
             DispatchQueue.main.async {
-                let decodedError = self.decodeResponse(urlResponse,data: data!, error: error as NSError?)
+                let decodedError = self.decodeResponse(urlResponse,data: data, error: error as NSError?)
                 if decodedError != nil{
                     completion(nil,error)
                 }
