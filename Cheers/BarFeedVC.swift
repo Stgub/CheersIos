@@ -49,9 +49,7 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate {
     @IBAction func dayBtnTapped(_ sender: Any) {
         self.dayLookedAtNum = dayLookedAtNum + 1
     }
-    @IBAction func membershipBtnTapped(_ sender: Any) {
-        presentMembershipVC(sender:self)
-    }
+
 
     override func viewWillAppear(_ animated: Bool) {
         updateUI()

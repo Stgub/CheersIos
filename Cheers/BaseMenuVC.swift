@@ -40,28 +40,7 @@ class BaseMenuVC: UIViewController, SlideMenuDelegate {
     func attachMenuButton(menuButton: UIButton){
         menuButton.addTarget(self, action: #selector(BaseMenuVC.onSlideMenuButtonPressed(_:)), for: UIControlEvents.touchUpInside)
     }
-    /*
-    func defaultMenuImage() -> UIImage {
-        var defaultMenuImage = UIImage()
-        
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: 30, height: 22), false, 0.0)
-        
-        UIColor.black.setFill()
-        UIBezierPath(rect: CGRect(x: 0, y: 3, width: 30, height: 1)).fill()
-        UIBezierPath(rect: CGRect(x: 0, y: 10, width: 30, height: 1)).fill()
-        UIBezierPath(rect: CGRect(x: 0, y: 17, width: 30, height: 1)).fill()
-        
-        UIColor.white.setFill()
-        UIBezierPath(rect: CGRect(x: 0, y: 4, width: 30, height: 1)).fill()
-        UIBezierPath(rect: CGRect(x: 0, y: 11,  width: 30, height: 1)).fill()
-        UIBezierPath(rect: CGRect(x: 0, y: 18, width: 30, height: 1)).fill()
-        
-        defaultMenuImage = UIGraphicsGetImageFromCurrentImageContext()!
-        
-        UIGraphicsEndImageContext()
-        
-        return defaultMenuImage;
-    } */
+
     
     func onSlideMenuButtonPressed(_ sender : UIButton){
         print("onSlideMenuButtonPressed")
@@ -73,13 +52,9 @@ class BaseMenuVC: UIViewController, SlideMenuDelegate {
         self.view.addSubview(menuVC.view)
         self.addChildViewController(menuVC)
         menuVC.view.layoutIfNeeded()
-        let screenWidth = UIScreen.main.bounds.size.width
-        let menuWidth = screenWidth * 2/3
-        menuVC.view.frame=CGRect(x: 0 - UIScreen.main.bounds.size.width, y: 0, width: menuWidth, height: UIScreen.main.bounds.size.height); //necessary or it goes to end then back?
         
-        UIView.animate(withDuration: 0.3, animations: { () -> Void in
-           menuVC.view.frame=CGRect(x: 0, y: 0, width: menuWidth, height: UIScreen.main.bounds.size.height); // final width
-            sender.isEnabled = true
-        }, completion:nil)
+        menuVC.openMenu(superView: self.view)
+      
+    
     }
 }
