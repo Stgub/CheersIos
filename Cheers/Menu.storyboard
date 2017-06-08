@@ -22,15 +22,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AccountBlack" translatesAutoresizingMaskIntoConstraints="NO" id="kEP-le-jBQ" customClass="circlePP" customModule="Cheers" customModuleProvider="target">
-                                <rect key="frame" x="72.5" y="40" width="150" height="150"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="L7v-5T-leH"/>
-                                    <constraint firstAttribute="height" constant="150" id="bhn-yf-Xom"/>
-                                </constraints>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gzj-N2-Kpk">
-                                <rect key="frame" x="227.5" y="40" width="37" height="30"/>
+                                <rect key="frame" x="267.5" y="40" width="37" height="30"/>
                                 <state key="normal" title="close"/>
                                 <connections>
                                     <action selector="closeMenuBtnTapped:" destination="sE9-X4-f8V" eventType="touchUpInside" id="K97-Fl-zpw"/>
@@ -73,11 +66,18 @@
                                     <outlet property="delegate" destination="sE9-X4-f8V" id="fWE-tb-muX"/>
                                 </connections>
                             </tableView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="AccountBlack" translatesAutoresizingMaskIntoConstraints="NO" id="kEP-le-jBQ" customClass="circlePP" customModule="Cheers" customModuleProvider="target">
+                                <rect key="frame" x="69" y="40" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="L7v-5T-leH"/>
+                                    <constraint firstAttribute="height" constant="150" id="bhn-yf-Xom"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="ld8-Jd-6JV" firstAttribute="leading" secondItem="Iq0-gA-R4X" secondAttribute="leading" id="4LI-5G-9Hh"/>
-                            <constraint firstItem="kEP-le-jBQ" firstAttribute="centerX" secondItem="Iq0-gA-R4X" secondAttribute="centerX" constant="-40" id="CtP-dv-9zf"/>
+                            <constraint firstItem="kEP-le-jBQ" firstAttribute="centerX" secondItem="Iq0-gA-R4X" secondAttribute="centerX" id="CtP-dv-9zf"/>
                             <constraint firstItem="ld8-Jd-6JV" firstAttribute="top" secondItem="kEP-le-jBQ" secondAttribute="bottom" constant="10" id="RSR-ML-4ns"/>
                             <constraint firstItem="a18-n7-l6G" firstAttribute="top" secondItem="ld8-Jd-6JV" secondAttribute="bottom" id="W4u-Fv-aRW"/>
                             <constraint firstItem="kEP-le-jBQ" firstAttribute="top" secondItem="y8k-wF-b67" secondAttribute="bottom" constant="20" id="jzw-Z0-yuv"/>
