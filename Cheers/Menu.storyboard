@@ -22,13 +22,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gzj-N2-Kpk">
-                                <rect key="frame" x="267.5" y="40" width="37" height="30"/>
-                                <state key="normal" title="close"/>
-                                <connections>
-                                    <action selector="closeMenuBtnTapped:" destination="sE9-X4-f8V" eventType="touchUpInside" id="K97-Fl-zpw"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ld8-Jd-6JV">
                                 <rect key="frame" x="0.0" y="200" width="375" height="467"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -73,16 +66,23 @@
                                     <constraint firstAttribute="height" constant="150" id="bhn-yf-Xom"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gzj-N2-Kpk">
+                                <rect key="frame" x="13" y="30" width="21" height="22"/>
+                                <state key="normal" image="burger"/>
+                                <connections>
+                                    <action selector="closeMenuBtnTapped:" destination="sE9-X4-f8V" eventType="touchUpInside" id="K97-Fl-zpw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="ld8-Jd-6JV" firstAttribute="leading" secondItem="Iq0-gA-R4X" secondAttribute="leading" id="4LI-5G-9Hh"/>
+                            <constraint firstItem="Gzj-N2-Kpk" firstAttribute="top" secondItem="Iq0-gA-R4X" secondAttribute="top" constant="30" id="BPr-d6-WG9"/>
                             <constraint firstItem="kEP-le-jBQ" firstAttribute="centerX" secondItem="Iq0-gA-R4X" secondAttribute="centerX" id="CtP-dv-9zf"/>
                             <constraint firstItem="ld8-Jd-6JV" firstAttribute="top" secondItem="kEP-le-jBQ" secondAttribute="bottom" constant="10" id="RSR-ML-4ns"/>
                             <constraint firstItem="a18-n7-l6G" firstAttribute="top" secondItem="ld8-Jd-6JV" secondAttribute="bottom" id="W4u-Fv-aRW"/>
+                            <constraint firstItem="Gzj-N2-Kpk" firstAttribute="leading" secondItem="Iq0-gA-R4X" secondAttribute="leading" constant="13" id="feV-Hh-bK2"/>
                             <constraint firstItem="kEP-le-jBQ" firstAttribute="top" secondItem="y8k-wF-b67" secondAttribute="bottom" constant="20" id="jzw-Z0-yuv"/>
-                            <constraint firstItem="Gzj-N2-Kpk" firstAttribute="leading" secondItem="kEP-le-jBQ" secondAttribute="trailing" constant="5" id="lHT-mn-VuK"/>
-                            <constraint firstItem="Gzj-N2-Kpk" firstAttribute="top" secondItem="y8k-wF-b67" secondAttribute="bottom" constant="20" id="mcf-f6-93O"/>
                             <constraint firstAttribute="trailing" secondItem="ld8-Jd-6JV" secondAttribute="trailing" id="nNJ-wM-aY9"/>
                         </constraints>
                     </view>
@@ -99,5 +99,6 @@
     </scenes>
     <resources>
         <image name="AccountBlack" width="22" height="32"/>
+        <image name="burger" width="21" height="12"/>
     </resources>
 </document>
