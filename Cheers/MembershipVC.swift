@@ -41,8 +41,15 @@ class MembershipVC: UIViewController {
     @IBOutlet weak var clubMembershipBtn: UIButton!
 
     @IBAction func backBtnTapped(_ sender: Any) {
+        if let navContr = self.navigationController{
+            print("**********Navigation controllers on stack*********")
+            print(navContr.viewControllers)
+        } else {
+            print("No nav controller")
+        }
         self.dismiss(animated: true, completion: nil)
     }
+    
     @IBAction func basicMembershipBtnTapped(_ sender: Any) {
         let alertController = UIAlertController(title: "Downgrade clicked", message: "Are you sure you want to downgrade?", preferredStyle: .alert)
         let yesAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.destructive){ (action) in
@@ -100,7 +107,7 @@ class MembershipVC: UIViewController {
     
     func unsubscribe(){
         serverRequestInProgress = true
-        MyAPIClient.sharedClient.unusubscribeCustomer { (status, message) in
+        StripeAPIClient.sharedClient.unusubscribeCustomer { (status, message) in
             presentUIAlert(sender: self, title: status, message: message){
                 self.updateUI()
             }

@@ -11,21 +11,26 @@ import plaid_ios_link
 import plaid_ios_sdk
 
 
-class ReferralVC: BaseMenuVC, PLDLinkNavigationControllerDelegate {
+class ReferralVC: BaseMenuVC { //, PLDLinkNavigationControllerDelegate {
     @IBOutlet weak var leftMenuButton: UIButton!
 
-    @IBOutlet weak var bankAccountNameL: UILabel!
     
-    let myAPIClient = MyAPIClient.sharedClient
     var asyncUIHandler:AsyncUIHandler!
     
 
     
     @IBAction func checkoutBtnTapped(_ sender: Any) {
-        
+        PaypalAPIClient.sharedClient.createPayout(amount: 10, recipient_type: "PHONE", receiver: "860-941-5547") { (error) in
+            if error != nil {
+                print(error?.localizedDescription)
+            } else {
+                print("Successful checkout")
+            }
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        /*
         asyncUIHandler.asyncInProgress = true
         if currentUser.connectId == nil {
             myAPIClient.createConnectAccount(){
@@ -59,7 +64,7 @@ class ReferralVC: BaseMenuVC, PLDLinkNavigationControllerDelegate {
                     
                 }
             })
-        }
+        }*/
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,7 +73,7 @@ class ReferralVC: BaseMenuVC, PLDLinkNavigationControllerDelegate {
         // Do any additional setup after loading the view.
     }
     
-    
+    /*
     @IBAction func plaidConnectButton(_ sender: Any) {
         let plaidLink = PLDLinkNavigationViewController(environment: .tartan, product: .connect)!
 
@@ -103,6 +108,6 @@ class ReferralVC: BaseMenuVC, PLDLinkNavigationControllerDelegate {
     func linkNavigationControllerDidCancel(_ navigationController: PLDLinkNavigationViewController!) {
         self.dismiss(animated: true, completion: nil)
     }
-
+*/
 
 }

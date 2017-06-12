@@ -123,6 +123,7 @@ class User{
     }
     var userBirthday:String!
     var gender:String!
+    
     private var _stripeID:String!
     var stripeID:String?{
         set(newVal) {

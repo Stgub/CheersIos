@@ -56,12 +56,15 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate {
         drinkTimer = Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(self.updateDrinkTimer), userInfo: nil, repeats: true)
 
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        drinkTimer.invalidate()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
         attachMenuButton(menuButton: leftMenuButton)
         
-        MyAPIClient.sharedClient.updateCustomer() // used to make sure the users subscription is correct
+        StripeAPIClient.sharedClient.updateCustomer() // used to make sure the users subscription is correct
 
         _dayLookedAtNum = Date().dayNumberOfWeek()!
         dayLookedAtNum = _dayLookedAtNum
@@ -98,8 +101,8 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate {
                     bar = self.bars[newBar.key]!
                 }
                 let barDays = bar.availableDays
-                print("*********\(bar.barName)")
-                print(barDays)
+                print("*********\(bar.barName!) Added to Bar Feed#####")
+                //print(barDays)
                 for i in 1...7 {
                     let dayString = weekDays(rawValue:i)!.toString
                     if let dayBool = barDays[dayString]{
