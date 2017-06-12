@@ -13,21 +13,17 @@ class BaseMenuVC: UIViewController, SlideMenuDelegate {
     
 
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     func slideMenuItemSelected(_ menuItem: MenuItem) {
         let topViewController : UIViewController = self.navigationController!.topViewController!
         print("View Controller is : \(topViewController) \n", terminator: "")
-        let storyboard = UIStoryboard(name: menuItem.storyboard, bundle: Bundle.main)
         
+        if menuItem.storyboardID == "signout" {
+            UserService.shareService.signOut()
+            presentFirstLoginVC(sender: self)
+            return
+        }
+        
+        let storyboard = UIStoryboard(name: menuItem.storyboard, bundle: Bundle.main)
         let destViewController : UIViewController = storyboard.instantiateViewController(withIdentifier: menuItem.storyboardID)
         
         if (topViewController.restorationIdentifier! == destViewController.restorationIdentifier!){

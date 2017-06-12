@@ -15,14 +15,20 @@ class SplashVC: UIViewController {
     let reachability = Reachability()!
     @IBOutlet weak var noInternetLabel: UILabel!
 
+    override func viewDidLoad() {
+        print("Splah screen loaded")
+
+    }
     override func viewDidAppear(_ animated: Bool) {
+        print("Splash screen appeared")
         NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged),name: ReachabilityChangedNotification,object: reachability)
+        update()
         do{
-            try reachability.startNotifier()
+            print("starting notifier")
+            try reachability.startNotifier() // does an update automatically
         }catch{
             print("could not start reachability notifier")
         }
-        update()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -51,7 +57,7 @@ class SplashVC: UIViewController {
                 presentBarFeedVC(sender: self)
                 
             } else {
-            
+                print("Checking keychain for user")
                 if let _  = KeychainWrapper.standard.string(forKey: KEY_UID ){
                     print("CHUCK: ID found in keychain")
                     

@@ -26,6 +26,7 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
+  - CardIO (5.4.1)
   - FBSDKCoreKit (4.19.0):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.19.0):
@@ -69,6 +70,12 @@ PODS:
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMSessionFetcher/Core (1.1.8)
+  - PayPal-iOS-SDK (2.17.0):
+    - PayPal-iOS-SDK/CardIO (= 2.17.0)
+    - PayPal-iOS-SDK/Core (= 2.17.0)
+  - PayPal-iOS-SDK/CardIO (2.17.0):
+    - CardIO (~> 5.4.1)
+  - PayPal-iOS-SDK/Core (2.17.0)
   - plaid-ios-link (0.2.1):
     - plaid-ios-sdk
   - plaid-ios-sdk (0.3.6)
@@ -83,6 +90,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
+  - PayPal-iOS-SDK
   - plaid-ios-link
   - plaid-ios-sdk
   - ReachabilitySwift
@@ -92,6 +100,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  CardIO: 56983b39b62f495fc6dae9ad7cf875143df06443
   FBSDKCoreKit: 894b2b6eda6a4c8c4204e92e59cc355709ef045c
   FBSDKLoginKit: 83ca4d8f12a2022570af9fd6aacf27f6b425b99f
   Firebase: 5bc34d7b5ff5792e3386c8b28dc6265deeab0da4
@@ -103,12 +112,13 @@ SPEC CHECKSUMS:
   FirebaseStorage: 63628572a5fde258f8e933b5fb42697468da0158
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 6f8d8b28b7e345549ac471071608170b31cb4977
+  PayPal-iOS-SDK: 849321f6214a7187ee4cc684f63fe509df4c4a36
   plaid-ios-link: 0ef45f18cdb2d1c3b9eaf6c2b457c950909df725
   plaid-ios-sdk: e9865b0fe6a79b3d30d886171d7a26f7e1408935
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   Stripe: 0957cc85df5c3df153e6fb44d307ea4b778b6bd1
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
 
-PODFILE CHECKSUM: 9f15871f5dbaa9a3c298b02031b11ac8b647643e
+PODFILE CHECKSUM: 8b6c6a1f57095b96dc3aa5b9ba662a468e43e6ff
 
 COCOAPODS: 1.2.1

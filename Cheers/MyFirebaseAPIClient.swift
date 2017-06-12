@@ -19,7 +19,7 @@ class MyFireBaseAPIClient:NSObject{
             if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
                 var returnedBars:[Bar] = []
                 for snap in snapshots {
-                    print("Backend: SNAP - \(snap)")
+                    //print("Backend: SNAP - \(snap)")
                     if let barData = snap.value as? Dictionary<String, AnyObject>{
                         let newBar = Bar(barKey: snap.key, dataDict: barData)
                         returnedBars.append(newBar)

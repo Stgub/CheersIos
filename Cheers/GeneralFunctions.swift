@@ -45,6 +45,7 @@ func presentSignUpBarIntialVC(sender:UIViewController){
     let storyboard = UIStoryboard(name: myStoryboards.addBarFlow, bundle: Bundle.main)
     let vc = storyboard.instantiateViewController(withIdentifier: "SignUpBarIntialVC")
     sender.present(vc, animated: true, completion: nil)
+    
 }
 
 

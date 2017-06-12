@@ -31,7 +31,7 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
     
     let paymentContext: STPPaymentContext
     
-    let myAPIClient = MyAPIClient.sharedClient
+    let myAPIClient = StripeAPIClient.sharedClient
     let theme:STPTheme =  STPTheme.default()
 /*
     let totalRow: CheckoutRowView
@@ -89,6 +89,7 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
         self.paymentContext.paymentAmount = 1000 // This is in cents, i.e. $50 USD
 
     }
+    
     func paymentContextDidChange(_ paymentContext: STPPaymentContext) {
       //  self.paymentRow.loading = paymentContext.loading
         if let paymentMethod = paymentContext.selectedPaymentMethod {
@@ -102,6 +103,7 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
         }
 
     }
+    
     func paymentContext(_ paymentContext: STPPaymentContext,
                         didCreatePaymentResult paymentResult: STPPaymentResult,
                         completion: @escaping STPErrorBlock) {
@@ -113,6 +115,7 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
             }
         })
     }
+    
     func paymentContext(_ paymentContext: STPPaymentContext,
                         didFinishWith status: STPPaymentStatus,
                         error: Error?) {
@@ -136,6 +139,7 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
         }
 
     }
+    
     func completePurchase(title:String, message:String, error:Error?){
         paymentInProgress = false
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)

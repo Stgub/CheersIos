@@ -21,6 +21,7 @@ class AccountVC: BaseMenuVC, UIImagePickerControllerDelegate, UINavigationContro
         present(imagePicker, animated: true, completion: nil)
 
     }
+    
     @IBOutlet weak var leftMenuButton: UIButton!
     
     override func viewDidLoad() {
@@ -31,7 +32,6 @@ class AccountVC: BaseMenuVC, UIImagePickerControllerDelegate, UINavigationContro
                 self.profileImg.image = img
             })
         }
-        // Do any additional setup after loading the view.
     }
 
     
