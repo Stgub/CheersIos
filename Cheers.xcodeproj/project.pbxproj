@@ -11,6 +11,8 @@
 		193944761E9FEE3900557853 /* circlePP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193944751E9FEE3900557853 /* circlePP.swift */; };
 		199AF66D1E6F6DAA00FBBAD1 /* RoundedImageCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199AF66C1E6F6DAA00FBBAD1 /* RoundedImageCorner.swift */; };
 		199AF66F1E6F969F00FBBAD1 /* ContactUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199AF66E1E6F969F00FBBAD1 /* ContactUsVC.swift */; };
+		19BA3EEC1EEB1CAE00D07A96 /* ButtonTextLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BA3EEB1EEB1CAE00D07A96 /* ButtonTextLeft.swift */; };
+		19BA3EEE1EEB1F7F00D07A96 /* viewRoundCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BA3EED1EEB1F7F00D07A96 /* viewRoundCorner.swift */; };
 		19FBCB851E635FE500AA10B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FBCB841E635FE500AA10B5 /* AppDelegate.swift */; };
 		19FBCB871E635FE500AA10B5 /* BarFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FBCB861E635FE500AA10B5 /* BarFeedVC.swift */; };
 		19FBCB8A1E635FE500AA10B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19FBCB881E635FE500AA10B5 /* Main.storyboard */; };
@@ -92,6 +94,8 @@
 		193944751E9FEE3900557853 /* circlePP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = circlePP.swift; sourceTree = "<group>"; };
 		199AF66C1E6F6DAA00FBBAD1 /* RoundedImageCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedImageCorner.swift; sourceTree = "<group>"; };
 		199AF66E1E6F969F00FBBAD1 /* ContactUsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUsVC.swift; sourceTree = "<group>"; };
+		19BA3EEB1EEB1CAE00D07A96 /* ButtonTextLeft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTextLeft.swift; sourceTree = "<group>"; };
+		19BA3EED1EEB1F7F00D07A96 /* viewRoundCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = viewRoundCorner.swift; sourceTree = "<group>"; };
 		19FBCB811E635FE500AA10B5 /* Cheers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cheers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19FBCB841E635FE500AA10B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19FBCB861E635FE500AA10B5 /* BarFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarFeedVC.swift; sourceTree = "<group>"; };
@@ -293,6 +297,8 @@
 				1916ADFA1E733AC3003EACC2 /* textViewRoundCorner.swift */,
 				193944751E9FEE3900557853 /* circlePP.swift */,
 				561DBAF01EE4FDC100D2DADD /* MenuItemTableViewCell.swift */,
+				19BA3EEB1EEB1CAE00D07A96 /* ButtonTextLeft.swift */,
+				19BA3EED1EEB1F7F00D07A96 /* viewRoundCorner.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -697,10 +703,12 @@
 				561DBAF11EE4FDC100D2DADD /* MenuItemTableViewCell.swift in Sources */,
 				56FF17891E6F8F3500089C7C /* BarHoursVC.swift in Sources */,
 				56B589511E94668D009F7786 /* CheckoutVC.swift in Sources */,
+				19BA3EEE1EEB1F7F00D07A96 /* viewRoundCorner.swift in Sources */,
 				56FDE7751E666FD600BDE97F /* Bar.swift in Sources */,
 				561DBAF81EEA317800D2DADD /* PayPalCheckoutVC.swift in Sources */,
 				56DC61201ECF5DE4001279F9 /* ReferralVC.swift in Sources */,
 				56F78A601E6C866E000E10F4 /* MembershipVC.swift in Sources */,
+				19BA3EEC1EEB1CAE00D07A96 /* ButtonTextLeft.swift in Sources */,
 				56FDE7711E666F3E00BDE97F /* BarDetailVC.swift in Sources */,
 				19FBCB871E635FE500AA10B5 /* BarFeedVC.swift in Sources */,
 				199AF66F1E6F969F00FBBAD1 /* ContactUsVC.swift in Sources */,
