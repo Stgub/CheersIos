@@ -29,7 +29,7 @@ class BarDetailVC: UIViewController, hasBarVar {
         DataService.ds.REF_USER_CURRENT.child(userDataTypes.barsUsed).child(bar.key).setValue(dateStamp){
             (error, ref) in
             if error != nil {
-                print("Chuck: Error redeeming -\(error)")
+                print("Chuck: Error redeeming -\(String(describing: error))")
             } else {
                 print("Successfully redeemed")
                 currentUser.usedBar(barId: self.bar.key, currentDate:dateStamp)

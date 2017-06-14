@@ -27,11 +27,13 @@ func presentUIAlert(sender: UIViewController, title:String, message:String, retu
  Performs a segue from whatever UIViewController to the Feed VC
  */
 func presentBarFeedVC(sender: UIViewController){
+    print("presentBarFeeedVC:")
     let storyboard = UIStoryboard(name: myStoryboards.main, bundle: Bundle.main)
     let vc = storyboard.instantiateViewController(withIdentifier: "MainNavController")
     sender.present(vc, animated: true, completion: nil)
 }
 func presentFirstLoginVC(sender:UIViewController){
+    print("presentFirstLoginVC:")
     let storyboard = UIStoryboard(name: myStoryboards.logOrSignIn, bundle: Bundle.main)
     let vc = storyboard.instantiateViewController(withIdentifier: "FirstLoginVC")
     sender.present(vc, animated: true, completion: nil)

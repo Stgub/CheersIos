@@ -81,7 +81,7 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
             "customerID": stripeID ,
             "amount": amount,
             "sourceID":result.source.stripeID]
-        let request = createRequest(pathExtension: pathExtension, params: params){
+        let _ = createRequest(pathExtension: pathExtension, params: params){
             (json, error) in
             if error != nil{
                 completion(error)
