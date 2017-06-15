@@ -37,6 +37,7 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate {
     
 
     @IBOutlet weak var leftMenuButton: UIButton!
+    
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var membershipLabel: UIButton!
@@ -62,6 +63,7 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+   
         attachMenuButton(menuButton: leftMenuButton)
         
         StripeAPIClient.sharedClient.updateCustomer() // used to make sure the users subscription is correct
@@ -214,22 +216,6 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate {
             print("Segue to default controller type")
         }
     }
-    
-    func setUserImage(){
-        if let userImage = currentUser.usersImage {
-            print("Have current users image")
-            userImageView.image = userImage
-        } else {
-            print("Have not downloaded current users image")
-            currentUser.getUserImg(){
-                userImage in
-                self.userImageView.image = userImage
-            }
-        }
-    }
-
-
- 
 
 }
 

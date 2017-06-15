@@ -90,7 +90,7 @@ class UserService:NSObject {
     func firebaseAuth(_ sender: UIViewController, credential: FIRAuthCredential , userData:Dictionary<String, String>){
         FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
             if error != nil {
-                print("Chuck: Unable to authenticate with Firebase - \(error)")
+                print("Chuck: Unable to authenticate with Firebase - \(String(describing: error))")
                 
             } else {
                 print("Chuck: Succesfully authenticated with Firebase")
@@ -115,7 +115,7 @@ class UserService:NSObject {
                         presentUIAlert(sender: sender ,title: "User not found", message: "Make sure email is correct, or create an account")
                     default:
                         presentUIAlert(sender: sender ,title: "Error logging in", message: "Please try again")
-                        print("Chuck - Error logging in went to default error \(error)")
+                        print("Chuck - Error logging in went to default error \(String(describing: error?.localizedDescription))")
                     }
                 }
             }else {

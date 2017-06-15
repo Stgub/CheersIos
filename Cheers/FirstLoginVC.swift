@@ -18,12 +18,12 @@ class FirstLoginVC: UIViewController {
         
         facebookLogin.logIn(withReadPermissions: [ "public_profile", "email","user_birthday"], from: self) { (result, error) in
             if error != nil {
-                print("Chuck: Unable to authenticate with Facebook - \(error)")
+                print("Chuck: Unable to authenticate with Facebook - \(String(describing: error))")
             } else if result?.isCancelled == true {
                 print("Chuck: User cancelled Facebook authentication")
             } else {
                 print("Chuck: Successfully authenticated with Facebook")
-                print("result \(result)")
+                print("result \(String(describing: result))")
                 //Authenticate with Facebook
                 let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
                 //Authenticatre with Firebase
@@ -32,16 +32,16 @@ class FirstLoginVC: UIViewController {
                 if((FBSDKAccessToken.current()) != nil){
                     FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name,  email, gender, birthday, picture.type(large)"]).start(completionHandler:
                         { (connection, result, error) -> Void in
-                            print("Chuck: Graph request connection? \(connection)")
+                            print("Chuck: Graph request connection? \(String(describing: connection))")
                             if error != nil {
-                                print("Chuck: Error with FB graph request - \(error)")
+                                print("Chuck: Error with FB graph request - \(String(describing: error))")
                             } else {
-                                print("Chuck: Result from FB graph request - \(result)")
+                                print("Chuck: Result from FB graph request - \(String(describing: result))")
                                 if let result = result as? NSDictionary {
                                     if let birthday = result["birthday"] as? String{
                                         let dateFormatter = DateFormatter()
                                         dateFormatter.dateFormat = "dd/MM/yyyy"
-                                        let date = dateFormatter.date(from: birthday)
+                                        //_ = dateFormatter.date(from: birthday)
                                         //print("birthday day formatted")
                                         /* let age = (date?.timeIntervalSinceNow)! / (60 * 60 * 24 * 365)
                                         if age > -21 {

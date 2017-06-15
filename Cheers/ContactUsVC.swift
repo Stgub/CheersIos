@@ -23,7 +23,7 @@ class ContactUsVC: BaseMenuVC {
     @IBAction func emailBtnTapped(_ sender: Any) {
         let email = "ContactTheDrinkClub@gmail.com"
         if let url = URL(string: "mailto:\(email)") {
-            //UIApplication.shared.open(url)
+            UIApplication.shared.openURL(url)
             
         }
     }

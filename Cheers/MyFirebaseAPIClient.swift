@@ -42,29 +42,26 @@ class MyFireBaseAPIClient:NSObject{
             print("Observed User")
             //Update current User
             let snapKey = snapshot.key
-            if let userSnapShot = snapshot as? FIRDataSnapshot {
-                if let userData = userSnapShot.value as? Dictionary<String,AnyObject>{
-                    if let user = currentUser {
-                        if let key = user.userKey {
-                            if  user.userKey == snapKey{
-                                currentUser.updateData(userData: userData)
-                                print("Same user")
-                            }
-                        } else {
-                            let newUser = User(userKey: snapKey, userData:userData)
-                            currentUser = newUser
-                            print("Changed User")
+            if let userData = snapshot.value as? Dictionary<String,AnyObject>{
+                if let user = currentUser {
+                    if let key = user.userKey {
+                        if  key == snapKey {
+                            currentUser.updateData(userData: userData)
+                            print("Same user")
                         }
-                        
                     } else {
                         let newUser = User(userKey: snapKey, userData:userData)
                         currentUser = newUser
-                        print("New User")
+                        print("Changed User")
                     }
-                    print("Completion")
-                    completion()
-                } else { print("Could not cast 2")}
-            }  else { print("Could not cast 1") }
+                } else {
+                    let newUser = User(userKey: snapKey, userData:userData)
+                    currentUser = newUser
+                    print("New User")
+                }
+                print("Completion")
+                completion()
+            } else { print("Could not cast 2")}
         })
     }
     

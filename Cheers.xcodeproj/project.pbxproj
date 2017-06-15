@@ -131,6 +131,7 @@
 		561DBAF71EEA317800D2DADD /* PayPalCheckoutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayPalCheckoutVC.swift; sourceTree = "<group>"; };
 		56322E7E1ED6737400A573BC /* AddBankVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBankVC.swift; sourceTree = "<group>"; };
 		5632C26A1E933716003C2D6B /* StripeAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeAPIClient.swift; sourceTree = "<group>"; };
+		563E81161EF0B11B00AB1AE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = Base.lproj/XibView.swift; sourceTree = "<group>"; };
 		56839A521EEDC68E00A7E0ED /* PaypalWebViewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaypalWebViewVC.swift; sourceTree = "<group>"; };
 		56839A561EEDEA6B00A7E0ED /* PaypalAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaypalAPIClient.swift; sourceTree = "<group>"; };
 		56839A581EEDEAAB00A7E0ED /* RESTClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTClient.swift; sourceTree = "<group>"; };
@@ -299,6 +300,7 @@
 				561DBAF01EE4FDC100D2DADD /* MenuItemTableViewCell.swift */,
 				19BA3EEB1EEB1CAE00D07A96 /* ButtonTextLeft.swift */,
 				19BA3EED1EEB1F7F00D07A96 /* viewRoundCorner.swift */,
+				563E81151EF0B11B00AB1AE4 /* XibView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -789,6 +791,14 @@
 				19FBCB8E1E635FE500AA10B5 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		563E81151EF0B11B00AB1AE4 /* XibView.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				563E81161EF0B11B00AB1AE4 /* Base */,
+			);
+			name = XibView.swift;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

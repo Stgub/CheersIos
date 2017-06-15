@@ -86,7 +86,7 @@ class MembershipVC: UIViewController {
         self.membershipLabel.text = currentUser.membership
         self.renewsDateLabel.text = getDateStringFromTimeStamp(date: currentUser.currentPeriodEnd)
         if let userImage = currentUser.usersImage {
-            self.userImageView.image = currentUser.usersImage
+            self.userImageView.image = userImage
         }
         
         if currentUser.membership == membershipLevels.premium{
