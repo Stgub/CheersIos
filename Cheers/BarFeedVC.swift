@@ -55,19 +55,16 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         updateUI()
         drinkTimer = Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(self.updateDrinkTimer), userInfo: nil, repeats: true)
-
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         drinkTimer.invalidate()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-   
         attachMenuButton(menuButton: leftMenuButton)
-        
         StripeAPIClient.sharedClient.updateCustomer() // used to make sure the users subscription is correct
-
         _dayLookedAtNum = Date().dayNumberOfWeek()!
         dayLookedAtNum = _dayLookedAtNum
     }
@@ -75,10 +72,9 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate {
     func updateUI(){
         self.updateDrinkTimer()
         self.userNameLabel.text = currentUser.name
-        self.creditsLabel.text = "Credits: \(currentUser.credits!)"
+        self.creditsLabel.text = "\(currentUser.credits!)"
         self.membershipLabel.setTitle(currentUser.membership, for: .normal)
         self.renewDateLabel.text = getDateStringFromTimeStamp(date: currentUser.currentPeriodEnd)
-        
         currentUser.getUserImg(returnBlock: { (image) in
             DispatchQueue.main.async {
                 self.userImageView.image = image
