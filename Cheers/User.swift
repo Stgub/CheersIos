@@ -106,13 +106,7 @@ class User{
     }
     var _imgUrl:String!
     var usersImage:UIImage!
-    func saveUserImg(img: UIImage){
-        myDbAPI.saveUserImg(img: img, path: self._userKey){
-            (path) in
-            print("USER: User img saved")
-            self.ref.child(userDataTypes.imgUrl).setValue(path)
-        }
-    }
+
     private var _userEmail:String!
     var userEmail:String! {
         get{ return _userEmail }
@@ -211,7 +205,15 @@ class User{
 
 
     }
-
+    func saveUserImg(img: UIImage, returnBlock: @escaping () -> Void){
+        myDbAPI.saveUserImg(img: img, path: self._userKey){
+            (path) in
+            imageCache.setObject(img, forKey: path as NSString)
+            print("USER: User img saved")
+            self.ref.child(userDataTypes.imgUrl).setValue(path)
+            returnBlock()
+        }
+    }
     func getUserImg(returnBlock:((UIImage?)->Void)?){
         print("CHUCK: getUserImg()")
         if let url = self._imgUrl {

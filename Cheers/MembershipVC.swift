@@ -20,13 +20,11 @@ class MembershipVC: UIViewController {
                     self.view.isUserInteractionEnabled = false
                     self.activityIndicator.startAnimating()
                     self.activityIndicator.isHidden = false
-                    //self.buyButton.alpha = 0
                 }
                 else {
                     self.view.isUserInteractionEnabled = true
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
-                    //self.buyButton.alpha = 1
                 }
             }, completion: nil)
         }
@@ -72,10 +70,7 @@ class MembershipVC: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateUI()
-        self.activityIndicator.isHidden = true
-        self.activityIndicator.center = self.view.center
-        self.view.addSubview(activityIndicator)
+  
         
         
     }
