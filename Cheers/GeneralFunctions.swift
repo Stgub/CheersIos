@@ -10,6 +10,65 @@ import Foundation
 import UIKit
 import Firebase
 
+class GeneralFunctions:NSObject{
+    //MARK: UI Functions
+    static func updateUserBanner(controller: UIViewController, nameL:UILabel,
+                                 creditsL:UILabel,
+                                 membershipB:UIButton,
+                                 renewDateL:UILabel,
+                                 imgL:UIImageView)
+    {
+        nameL.text = currentUser.name
+        creditsL.text = "\(currentUser.credits!)"
+        membershipB.setTitle(currentUser.membership, for: .normal)
+        renewDateL.text = getDateStringFromTimeStamp(date: currentUser.currentPeriodEnd)
+        currentUser.getUserImg(returnBlock: { (image) in
+            DispatchQueue.main.async {
+            imgL.image = image
+            }
+        })
+        //TODO: Figure out how to move membership button action to here
+        //membershipB.addTarget(self, action: #selector(presentAccountVC(sender:)), for: .touchUpInside)
+    }
+    
+    /**
+     Performs a segue from whatever UIViewControlle3r to the Feed VC
+     */
+
+   static func presentBarFeedVC(sender: UIViewController){
+        print("presentBarFeeedVC:")
+        let storyboard = UIStoryboard(name: myStoryboards.main, bundle: Bundle.main)
+        let navController = storyboard.instantiateViewController(withIdentifier: "MainNavController")
+        let vc = storyboard.instantiateViewController(withIdentifier: "BarFeedVC")
+        sender.present(navController, animated: true, completion: nil)
+    
+    }
+    
+    static func presentFirstLoginVC(sender:UIViewController){
+        print("presentFirstLoginVC:")
+        let storyboard = UIStoryboard(name: myStoryboards.logOrSignIn, bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "FirstLoginVC")
+        sender.present(vc, animated: true, completion: nil)
+    }
+    
+    static func presentAccountVC(sender:UIViewController){
+        let storyboard = UIStoryboard(name: myStoryboards.main, bundle: Bundle.main)
+        let navController = storyboard.instantiateViewController(withIdentifier: "MainNavController")
+        let vc = storyboard.instantiateViewController(withIdentifier: "AccountVC")
+        //sender.present(vc, animated: true, completion: nil)
+        navController.addChildViewController(vc)
+        sender.present(navController, animated: true, completion: nil)
+    }
+    
+    static func presentSignUpBarIntialVC(sender:UIViewController){
+        let storyboard = UIStoryboard(name: myStoryboards.addBarFlow, bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "SignUpBarIntialVC")
+        sender.present(vc, animated: true, completion: nil)
+    }
+    
+}
+
+
 //Simple UIalert function...
 func presentUIAlert(sender: UIViewController, title:String, message:String, returnBlock: (()->Void)? = nil){
     let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -23,32 +82,7 @@ func presentUIAlert(sender: UIViewController, title:String, message:String, retu
     
 }
 
-/**
- Performs a segue from whatever UIViewController to the Feed VC
- */
-func presentBarFeedVC(sender: UIViewController){
-    print("presentBarFeeedVC:")
-    let storyboard = UIStoryboard(name: myStoryboards.main, bundle: Bundle.main)
-    let vc = storyboard.instantiateViewController(withIdentifier: "MainNavController")
-    sender.present(vc, animated: true, completion: nil)
-}
-func presentFirstLoginVC(sender:UIViewController){
-    print("presentFirstLoginVC:")
-    let storyboard = UIStoryboard(name: myStoryboards.logOrSignIn, bundle: Bundle.main)
-    let vc = storyboard.instantiateViewController(withIdentifier: "FirstLoginVC")
-    sender.present(vc, animated: true, completion: nil)
-}
-func presentMembershipVC(sender:UIViewController){
-    let storyboard = UIStoryboard(name: myStoryboards.main, bundle: Bundle.main)
-    let vc = storyboard.instantiateViewController(withIdentifier: "MembershipVC")
-    sender.present(vc, animated: true, completion: nil)
-}
-func presentSignUpBarIntialVC(sender:UIViewController){
-    let storyboard = UIStoryboard(name: myStoryboards.addBarFlow, bundle: Bundle.main)
-    let vc = storyboard.instantiateViewController(withIdentifier: "SignUpBarIntialVC")
-    sender.present(vc, animated: true, completion: nil)
-    
-}
+
 
 
 

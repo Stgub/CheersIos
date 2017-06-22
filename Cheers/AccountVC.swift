@@ -86,7 +86,7 @@ class AccountVC: BaseMenuVC, UIImagePickerControllerDelegate, UINavigationContro
     @IBAction func logOutBtnTapped(_ sender: Any) {
         print("Log out btn tapped")
         UserService.shareService.signOut()
-        presentFirstLoginVC(sender:self)
+        GeneralFunctions.presentFirstLoginVC(sender:self)
     }
     
     override func viewWillAppear(_ animated: Bool) {

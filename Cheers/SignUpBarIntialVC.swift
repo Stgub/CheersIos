@@ -16,7 +16,7 @@ class SignUpBarIntialVC: UIViewController, hasDataDict {
         
         try! FIRAuth.auth()!.signOut()
         KeychainWrapper.standard.removeObject(forKey: KEY_UID)
-        presentFirstLoginVC(sender: self)
+        GeneralFunctions.presentFirstLoginVC(sender: self)
     }
     
     var dataDict: [String : Any] = [:]

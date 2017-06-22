@@ -13,24 +13,28 @@ class BaseMenuVC: UIViewController, SlideMenuDelegate {
     
 
     
-    func slideMenuItemSelected(_ menuItem: MenuItem) {
-        let topViewController : UIViewController = self.navigationController!.topViewController!
+    func slideMenuItemSelected(_ menuItem: MenuItem)
+    {
+        let navigationController = self.navigationController!
+        let topViewController : UIViewController = navigationController.topViewController!
         print("View Controller is : \(topViewController) \n", terminator: "")
         
         if menuItem.storyboardID == "signout" {
             UserService.shareService.signOut()
-            presentFirstLoginVC(sender: self)
+            GeneralFunctions.presentFirstLoginVC(sender: self)
             return
         }
         
         let storyboard = UIStoryboard(name: menuItem.storyboard, bundle: Bundle.main)
         let destViewController : UIViewController = storyboard.instantiateViewController(withIdentifier: menuItem.storyboardID)
         
+        
         if (topViewController.restorationIdentifier! == destViewController.restorationIdentifier!){
             print("Same VC")
         } else {
             self.navigationController!.pushViewController(destViewController, animated: true)
-        }    }
+        }
+    }
     
 
     func attachMenuButton(menuButton: UIButton){

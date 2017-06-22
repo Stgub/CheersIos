@@ -156,7 +156,7 @@ func completeSignIn(sender: UIViewController, id:String, userData:Dictionary<Str
         let KeychainResult = KeychainWrapper.standard.set(id, forKey: KEY_UID)
         print("Chuck: Data saved to keycahain \(KeychainResult)")
         MyFireBaseAPIClient.sharedClient.startObservingUser(completion:{_ in 
-            presentBarFeedVC(sender: sender)
+            GeneralFunctions.presentBarFeedVC(sender: sender)
             
         })
     }

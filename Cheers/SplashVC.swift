@@ -54,7 +54,7 @@ class SplashVC: UIViewController {
             }
             if currentUser != nil {
                 print("Presenting Bar Feed")
-                presentBarFeedVC(sender: self)
+                GeneralFunctions.presentBarFeedVC(sender: self)
                 
             } else {
                 print("Checking keychain for user")
@@ -62,10 +62,10 @@ class SplashVC: UIViewController {
                     print("CHUCK: ID found in keychain")
                     
                     MyFireBaseAPIClient.sharedClient.startObservingUser(){
-                        presentBarFeedVC(sender: self)
+                        GeneralFunctions.presentBarFeedVC(sender: self)
                     }
                 } else {
-                    presentFirstLoginVC(sender: self)
+                    GeneralFunctions.presentFirstLoginVC(sender: self)
                 }
             }
         } else {

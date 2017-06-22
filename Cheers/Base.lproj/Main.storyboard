@@ -140,13 +140,6 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.54000000000000004" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="10C-Rv-ccP">
-                                                <rect key="frame" x="156" y="21.5" width="35" height="29"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <state key="normal" title="Basic">
-                                                    <color key="titleColor" red="1" green="0.65490196079999996" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                </state>
-                                            </button>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BSd-yU-nNl">
                                                 <rect key="frame" x="287.5" y="52" width="27.5" height="15"/>
                                                 <constraints>
@@ -156,6 +149,16 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.54000000000000004" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="10C-Rv-ccP">
+                                                <rect key="frame" x="156" y="21.5" width="35" height="29"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <state key="normal" title="Basic">
+                                                    <color key="titleColor" red="1" green="0.65490196079999996" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="membershipBtnTapped:" destination="stK-Uc-ckb" eventType="touchUpInside" id="8wC-2I-tWL"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -356,7 +359,7 @@
                         <outlet property="dayBtnOutlet" destination="Rlr-Qd-EoN" id="ebZ-Tv-y3c"/>
                         <outlet property="drinkTimeLeft" destination="BSd-yU-nNl" id="N3r-SY-oI1"/>
                         <outlet property="leftMenuButton" destination="1uH-lr-Cnv" id="hWI-Zp-FlS"/>
-                        <outlet property="membershipLabel" destination="10C-Rv-ccP" id="s6J-7h-hvf"/>
+                        <outlet property="membershipBtn" destination="10C-Rv-ccP" id="tzB-lX-BlF"/>
                         <outlet property="renewDateLabel" destination="J3n-Xy-go2" id="pbv-v2-sAb"/>
                         <outlet property="tableView" destination="doG-Rr-BCS" id="MC7-0Z-FkI"/>
                         <outlet property="userImageView" destination="tVp-0Q-fPU" id="tl2-yV-CEb"/>
@@ -660,6 +663,9 @@
                                                 <state key="normal" title="Basic">
                                                     <color key="titleColor" red="1" green="0.65490196079999996" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="membershipBtnTapped:" destination="Evp-ht-W1Q" eventType="touchUpInside" id="7sW-4w-1De"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -847,19 +853,19 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="creditsLabel" destination="Fy3-1u-5wU" id="efx-qr-czQ"/>
+                        <outlet property="creditsLabel" destination="Fy3-1u-5wU" id="nA4-5b-0py"/>
                         <outlet property="leftMenuButton" destination="Krj-2c-Bfh" id="Cyo-37-Bp0"/>
+                        <outlet property="membershipBtn" destination="lBh-fR-pJA" id="KOL-53-xze"/>
                         <outlet property="moneySavedLabel" destination="r8X-37-tGs" id="ec1-kf-Ni6"/>
                         <outlet property="tableView" destination="DMo-pd-btx" id="lbf-pK-d2P"/>
-                        <outlet property="userImageView" destination="xpq-US-GhX" id="JHv-87-ZUc"/>
-                        <outlet property="userMembershipLabel" destination="lBh-fR-pJA" id="sKk-TN-3jp"/>
-                        <outlet property="userNameLabel" destination="S0J-dH-iIK" id="7gd-aH-StJ"/>
-                        <outlet property="userRenewDateLabel" destination="RNp-gZ-uVm" id="h10-mD-abd"/>
+                        <outlet property="userImageView" destination="xpq-US-GhX" id="f4O-A2-ETw"/>
+                        <outlet property="userNameLabel" destination="S0J-dH-iIK" id="J4B-yY-vxV"/>
+                        <outlet property="userRenewDateLabel" destination="RNp-gZ-uVm" id="qOk-Wj-YRW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XOO-DX-iGM" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-858.75" y="-1516.9014084507041"/>
+            <point key="canvasLocation" x="-868" y="-1513"/>
         </scene>
         <!--redeemDrink-->
         <scene sceneID="c8r-rw-QUK">

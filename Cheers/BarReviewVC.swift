@@ -48,7 +48,7 @@ class BarReviewVC: UIViewController, hasDataDict {
                         style: UIAlertActionStyle.default,
                         handler: { (alertAction) in
                         
-                        presentSignUpBarIntialVC(sender:self)
+                        GeneralFunctions.presentFirstLoginVC(sender: self)
                     })
                     alert.addAction(okayAction)
                 } else {

@@ -40,7 +40,7 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var membershipLabel: UIButton!
+    @IBOutlet weak var membershipBtn: UIButton!
     @IBOutlet weak var creditsLabel: UILabel!
     @IBOutlet weak var renewDateLabel: UILabel!
     @IBOutlet weak var drinkTimeLeft: UILabel!
@@ -49,6 +49,9 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate {
     
     @IBAction func dayBtnTapped(_ sender: Any) {
         self.dayLookedAtNum = dayLookedAtNum + 1
+    }
+    @IBAction func membershipBtnTapped(_ sender: Any) {
+        GeneralFunctions.presentAccountVC(sender: self)
     }
 
 
@@ -71,16 +74,13 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate {
     
     func updateUI(){
         self.updateDrinkTimer()
-        self.userNameLabel.text = currentUser.name
-        self.creditsLabel.text = "\(currentUser.credits!)"
-        self.membershipLabel.setTitle(currentUser.membership, for: .normal)
-        self.renewDateLabel.text = getDateStringFromTimeStamp(date: currentUser.currentPeriodEnd)
-        currentUser.getUserImg(returnBlock: { (image) in
-            DispatchQueue.main.async {
-                self.userImageView.image = image
-            }
-            
-        })
+        GeneralFunctions.updateUserBanner(controller: self, nameL: userNameLabel,
+                                          creditsL: creditsLabel,
+                                          membershipB: membershipBtn,
+                                          renewDateL: renewDateLabel,
+                                          imgL: userImageView)
+        
+        
         let barsUsed = currentUser.barsUsed
         MyFireBaseAPIClient.sharedClient.getBars(){
             (returnedBars) in

@@ -82,7 +82,7 @@ class CreateEmailLoginVC: UIViewController {
         DataService.ds.createFirebaseDBUser(uid: id, userData: userData)
         let KeychainResult = KeychainWrapper.standard.set(id, forKey: KEY_UID)
         print("Chuck: Data saved to keycahain \(KeychainResult)")
-        presentBarFeedVC(sender: self)
+        GeneralFunctions.presentBarFeedVC(sender: self)
     }
     
     func dismissKeyboard() {
