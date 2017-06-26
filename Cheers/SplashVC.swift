@@ -61,7 +61,7 @@ class SplashVC: UIViewController {
                 if let _  = KeychainWrapper.standard.string(forKey: KEY_UID ){
                     print("CHUCK: ID found in keychain")
                     
-                    MyFireBaseAPIClient.sharedClient.startObservingUser(){
+                    MyFireBaseAPIClient.sharedClient.getUser{
                         GeneralFunctions.presentBarFeedVC(sender: self)
                     }
                 } else {

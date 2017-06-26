@@ -11,7 +11,11 @@ import UIKit
 // https://github.com/ashishkakkad8/AKSwiftSlideMenu/tree/master/AKSwiftSlideMenu
 class BaseMenuVC: UIViewController, SlideMenuDelegate {
     
-
+    override func viewDidLoad() {
+        var swipeRight = UISwipeGestureRecognizer(target: self, action:#selector(self.openLeftMenu))
+        swipeRight.direction = UISwipeGestureRecognizerDirection.right
+        self.view.addGestureRecognizer(swipeRight)
+    }
     
     func slideMenuItemSelected(_ menuItem: MenuItem)
     {
@@ -45,16 +49,16 @@ class BaseMenuVC: UIViewController, SlideMenuDelegate {
     func onSlideMenuButtonPressed(_ sender : UIButton){
         print("onSlideMenuButtonPressed")
         //there was code here to close the menu if the show menu button was double clicked but I dont think it is necessary
+        openLeftMenu()
+    }
+    func openLeftMenu(){
         let storyboard:UIStoryboard =  UIStoryboard(name: myStoryboards.menu, bundle: Bundle.main)
         let menuVC : SlideMenuVC = storyboard.instantiateViewController(withIdentifier: "LeftMenuVC") as! SlideMenuVC
-        menuVC.btnMenu = sender
+        //menuVC.btnMenu = self
         menuVC.delegate = self
         self.view.addSubview(menuVC.view)
         self.addChildViewController(menuVC)
         menuVC.view.layoutIfNeeded()
-        
         menuVC.openMenu(superView: self.view)
-      
-    
     }
 }

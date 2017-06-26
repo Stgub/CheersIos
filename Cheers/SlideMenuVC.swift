@@ -32,7 +32,7 @@ class SlideMenuVC: UIViewController, Menu, UITableViewDelegate, UITableViewDataS
         MenuItem(title: "History", storyboardID: "HistoryVC", storyboard: myStoryboards.main),
         MenuItem(title: "Account", storyboardID: "AccountVC", storyboard: myStoryboards.main),
         MenuItem(title: "Contact Us", storyboardID: "ContactUsVC", storyboard: myStoryboards.main),
-        MenuItem(title: "Refer a friend", storyboardID: "ReferralVC", storyboard: myStoryboards.main),
+       // MenuItem(title: "Refer a friend", storyboardID: "ReferralVC", storyboard: myStoryboards.main),
         MenuItem(title: "Recommend a Business", storyboardID: "RecommendBarVC", storyboard: myStoryboards.main),
         MenuItem(title: "Privacy Policy and Terms", storyboardID: "TermsAndPolicyVC", storyboard: myStoryboards.main),
         MenuItem(title: "Sign Out", storyboardID: "signout", storyboard: "signout")
@@ -47,6 +47,7 @@ class SlideMenuVC: UIViewController, Menu, UITableViewDelegate, UITableViewDataS
     @IBAction func closeMenuBtnTapped(_ sender: Any) {
         closeMenu()
     }
+    
     override func viewDidLoad() {
         tableView.tableFooterView = UIView() // get rid of extra rows
 
@@ -56,7 +57,11 @@ class SlideMenuVC: UIViewController, Menu, UITableViewDelegate, UITableViewDataS
                 self.profileImage.image = image
             }
         }
+        var swipeLeft = UISwipeGestureRecognizer(target: self, action:#selector(self.closeMenu))
+        swipeLeft.direction = UISwipeGestureRecognizerDirection.left
+        self.view.addGestureRecognizer(swipeLeft)
     }
+    
     func menuItemClicked( menuItem :MenuItem ){
         if (self.delegate != nil) {
             delegate?.slideMenuItemSelected(menuItem)
@@ -86,7 +91,7 @@ class SlideMenuVC: UIViewController, Menu, UITableViewDelegate, UITableViewDataS
     func openMenu(superView:UIView){
         let screenWidth = UIScreen.main.bounds.size.width
         let screenHeight =  UIScreen.main.bounds.size.height
-        let menuWidth = screenWidth * 2/3
+        let menuWidth = screenWidth * 4/5
         
         
         //setting up screen to take up blank space. Also when tapped will close menu
@@ -101,7 +106,6 @@ class SlideMenuVC: UIViewController, Menu, UITableViewDelegate, UITableViewDataS
         UIView.animate(withDuration: 0.3, animations: { () -> Void in
             self.view.frame=CGRect(x: 0, y: 0, width: menuWidth, height: UIScreen.main.bounds.size.height) // final posittion
             self.menuBlankSpaceView.frame = CGRect(x: menuWidth, y:0, width: screenWidth, height: screenHeight)
-            
         }, completion:nil)
     }
     

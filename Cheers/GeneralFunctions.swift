@@ -98,8 +98,12 @@ func getDateStringFromTimeStamp(date: TimeInterval)-> String{
  *@Return: time between drinks or the time now if there are no bars used  */
 func timeLeftBetweenDrinks()->TimeInterval{
     let timeNow = NSDate().timeIntervalSince1970
-    if let lastDrinkTime = currentUser.barsUsed.values.max() {
-        return TIME_BETWEEN_DRINKS - (timeNow - lastDrinkTime)
+    if let user = currentUser{
+        if let lastDrinkTime = user.barsUsed.values.max() {
+            return TIME_BETWEEN_DRINKS - (timeNow - lastDrinkTime)
+        } else {
+            return -1
+        }
     } else {
         return -1
     }

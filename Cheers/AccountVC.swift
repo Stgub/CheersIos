@@ -43,15 +43,25 @@ class AccountVC: BaseMenuVC, UIImagePickerControllerDelegate, UINavigationContro
             }
         }
     }
-    private var currentlyEditing :Bool = false {
+    
+    private var currentlyEditing :Bool = false
+    {
         didSet{
             if currentlyEditing {
                 editImgBtn.isHidden = false
                 editBtn.setTitle("Done", for: .normal)
+                emailTF.isHidden = false
+                nameTF.isHidden = false
+                usernameLabel.isHidden = true
+                userEmailLabel.isHidden = true
             } else
             {
                 editImgBtn.isHidden = true
                 editBtn.setTitle("Edit", for: .normal)
+                emailTF.isHidden = true
+                nameTF.isHidden = true
+                usernameLabel.isHidden = false
+                userEmailLabel.isHidden = false
             }
         }
     }
@@ -59,11 +69,16 @@ class AccountVC: BaseMenuVC, UIImagePickerControllerDelegate, UINavigationContro
     @IBOutlet weak var profileImg: circlePP!
     @IBOutlet weak var leftMenuButton: UIButton!
     @IBOutlet weak var membershiBtn: UIButton!
+    @IBOutlet weak var membershipLabel: UILabel!
     
     @IBOutlet weak var editBtn: UIButton!
     @IBOutlet weak var editImgBtn: UIButton!
     @IBOutlet weak var userEmailLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
+    
+    @IBOutlet weak var nameTF: UITextField!
+    @IBOutlet weak var emailTF: UITextField!
+    
     
     @IBAction func membershipBtnTapped(_ sender: Any) {
         if(isBasicMembership){
@@ -74,7 +89,21 @@ class AccountVC: BaseMenuVC, UIImagePickerControllerDelegate, UINavigationContro
     }
 
     @IBAction func editBtnTapped(_ sender: Any) {
+        if currentlyEditing
+        {
+            let name = nameTF.text!
+            let email = emailTF.text!
+            if !name.isEmpty{
+                currentUser.name = name
+                usernameLabel.text = name
+            }
+            if !email.isEmpty {
+                currentUser.userEmail = email
+                userEmailLabel.text = email
+            }
+        }
         currentlyEditing = !currentlyEditing
+        
     }
     
     @IBAction func editPicBtnTapped(_ sender: Any) {
@@ -101,17 +130,21 @@ class AccountVC: BaseMenuVC, UIImagePickerControllerDelegate, UINavigationContro
         self.view.addSubview(activityIndicator)
     }
 
-    func updateUI(){
-        if let user = currentUser{
+    func updateUI()
+    {
+        if let user = currentUser
+        {
             user.getUserImg(returnBlock: { (img) in
                 self.profileImg.image = img
             })
             isBasicMembership = currentUser.membership == membershipLevels.basic
+            membershipLabel.text = user.membership
+            usernameLabel.text = user.name
+            if let email = user.userEmail {
+                userEmailLabel.text = email
+            }
         }
-        usernameLabel.text = currentUser.name
-        if let email = currentUser.userEmail {
-            userEmailLabel.text = email
-        }
+
     }
 
     func userWantsToUpgrade(){
@@ -156,15 +189,12 @@ class AccountVC: BaseMenuVC, UIImagePickerControllerDelegate, UINavigationContro
         dismiss(animated:true, completion: nil) //5
         currentUser.saveUserImg(img: chosenImage)
         {
+            self.profileImg.image = chosenImage
             self.serverRequestInProgress = false
         }
     }
+    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-
-
-
-
-
 }

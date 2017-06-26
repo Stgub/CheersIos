@@ -13,9 +13,6 @@ import Stripe
 class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
     
     static let sharedClient = StripeAPIClient()
-
-    
-  
     
     /**
      Updates the user and particularly currentPeriodStart and currentPeriodEnd from the server
@@ -162,7 +159,7 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
         print("retrieveCustomer function")
         guard let _ = currentUser else {
             print("Current user was nil, will try to grab but otherwise will fail")
-            MyFireBaseAPIClient.sharedClient.startObservingUser(completion: {
+            MyFireBaseAPIClient.sharedClient.getUser(completion: {
                 self.retrieveCustomer({ (customer, error) in
                     completion(customer,error)
                 })
@@ -209,9 +206,9 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
         let request = createRequest(pathExtension: pathExtension, params: params)
         let task = self.session.dataTask(with: request) { (data, urlResponse, error) in
             DispatchQueue.main.async {
-                let (decodedError, _) = self.decodeResponse(urlResponse,data:data!, error: error as NSError?)
+                let (decodedError, _) = self.decodeResponse(urlResponse,data:data, error: error as NSError?)
                 if decodedError != nil {
-                    completion("Error unsubscribing","Please contact support@GetToastApp.com - error \(error?.localizedDescription)")
+                    completion("Error unsubscribing","Please contact support@GetToastApp.com - error \(String(describing: error!.localizedDescription))")
                     return
                 }
                 guard data != nil else {

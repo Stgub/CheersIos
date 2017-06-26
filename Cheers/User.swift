@@ -99,6 +99,11 @@ class User{
     private var  _name:String!
     var name:String {
         get{ return _name }
+        set(newVal)
+        {
+            print("Changing users name to \(newVal)")
+            self.ref.child(userDataTypes.name).setValue(newVal)
+        }
     }
     private var _barsUsed:Dictionary<String,TimeInterval> = [:]
     var barsUsed:Dictionary<String,TimeInterval> {
@@ -111,6 +116,7 @@ class User{
     var userEmail:String! {
         get{ return _userEmail }
         set(newVal){
+            print("Changing users email to \(newVal)")
             self._userEmail = userEmail
             ref.child(userDataTypes.email).setValue(newVal)
         }
@@ -125,6 +131,7 @@ class User{
         }
         get{ return _stripeID }
     }
+    
     private var _connectId:String?
     var connectId:String?{
         get{return _connectId}
@@ -132,11 +139,11 @@ class User{
             self.ref.child(userDataTypes.connectId).setValue(newVal)
         }
     }
+    
     public var bankAccounts:[String:Any] = [:]
     init( userKey: String , userData: Dictionary<String, AnyObject> ){
         self._userKey = userKey
         self.updateData(userData: userData)
-    
     }
     
     func updateData(userData:Dictionary<String,AnyObject>){
@@ -202,9 +209,8 @@ class User{
             self.currentPeriodEnd = NSDate().timeIntervalSince1970 + 60 * 60 * 24 * 30
             print("Backend: added new arbitrary periodEnd date")
         }
-
-
     }
+    
     func saveUserImg(img: UIImage, returnBlock: @escaping () -> Void){
         myDbAPI.saveUserImg(img: img, path: self._userKey){
             (path) in
@@ -214,6 +220,7 @@ class User{
             returnBlock()
         }
     }
+    
     func getUserImg(returnBlock:((UIImage?)->Void)?){
         print("CHUCK: getUserImg()")
         if let url = self._imgUrl {
@@ -239,7 +246,6 @@ class User{
             }
         } else { print("Backend: User has no imgUrl ") }
     }
-    
     
     func usedBar(barId:String, currentDate:TimeInterval){
         ref.child(userDataTypes.barsUsed).child(barId).setValue(currentDate)

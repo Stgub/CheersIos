@@ -13,12 +13,14 @@ class CreateEmailLoginVC: UIViewController {
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var passwordConfirmField: UITextField!
     @IBOutlet weak var nameField: UITextField!
-    @IBOutlet weak var genderField: UITextField!
-    @IBOutlet weak var birthdayField: UITextField!
     @IBOutlet weak var cityField: UITextField!
     @IBOutlet weak var zipCodeField: UITextField!
+    @IBOutlet weak var isMaleSwitch: UISwitch!
     
+    @IBOutlet weak var birthdayPicker: UIDatePicker!
+    @IBOutlet weak var genderSwitch: UISwitch!
     @IBAction func backBtnTapped(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -27,24 +29,33 @@ class CreateEmailLoginVC: UIViewController {
             print("Email error")
             return
         }
-        guard let password = passwordField.text else  {
+        guard let password = passwordField.text, let passwordConfirm = passwordConfirmField.text, !password.isEmpty && !passwordConfirm.isEmpty else  {
+            presentUIAlert(sender: self, title: "No password", message: "Please fill out passwords")
             print("Password error")
             return
         }
+        if password != passwordConfirm {
+            presentUIAlert(sender: self, title: "Passwords do not match", message: "Passwords must match")
+            return
+        }
+    
         guard let name = nameField.text else {
+            presentUIAlert(sender: self, title: "Fields not filled out", message: "Please fill out all fields")
             return
         }
-        guard let gender = genderField.text else {
-            return
-        }
-        guard let birthday = birthdayField.text else {
-            return
-        }
+
         guard let city = cityField.text else {
             return
         }
         guard let zipCode = zipCodeField.text else {
             return
+        }
+        let birthday = birthdayPicker.date.timeIntervalSince1970
+        var gender = ""
+        if isMaleSwitch.isOn {
+            gender = "male"
+        } else {
+            gender = "female"
         }
         FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
             if error == nil {
@@ -57,7 +68,7 @@ class CreateEmailLoginVC: UIViewController {
                         userDataTypes.gender: gender,
                         userDataTypes.birthday: birthday,
                         "locationCity": city,
-                        "locationZipCode":zipCode]
+                        "locationZipCode":zipCode] as [String : Any]
                     
                     self.completeSignIn(id: user.uid, userData: userData)
                 }
@@ -69,7 +80,7 @@ class CreateEmailLoginVC: UIViewController {
                     case .errorCodeInvalidEmail:
                         presentUIAlert(sender:self, title: "Invalid Email", message: "Email is not in the correct format")
                     default:
-                        print("Chuck: Erorr signing up with email - \(error)")
+                        print("Chuck: Erorr signing up with email - \(String(describing: error))")
                         
                     }
                 }
@@ -77,7 +88,7 @@ class CreateEmailLoginVC: UIViewController {
         })
     }
    
-    func completeSignIn(id:String, userData:Dictionary<String, String>){
+    func completeSignIn(id:String, userData:Dictionary<String, Any>){
         // for automatic sign in
         DataService.ds.createFirebaseDBUser(uid: id, userData: userData)
         let KeychainResult = KeychainWrapper.standard.set(id, forKey: KEY_UID)

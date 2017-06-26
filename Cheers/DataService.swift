@@ -55,7 +55,7 @@ class DataService {
         return _REF_USER_IMAGES
     }
     
-    func createFirebaseDBUser(uid: String, userData: Dictionary<String, String> ){
+    func createFirebaseDBUser(uid: String, userData: Dictionary<String, Any> ){
         let deviceID = UIDevice.current.identifierForVendor!.uuidString
         DataService.ds.REF_DEVICE_IDS.child(deviceID).setValue(uid) // Sets the device to the according account
 
