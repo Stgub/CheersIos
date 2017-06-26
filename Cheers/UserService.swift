@@ -132,7 +132,7 @@ class UserService:NSObject {
         
     }
     
-func completeSignIn(sender: UIViewController, id:String, userData:Dictionary<String, String>){
+    func completeSignIn(sender: UIViewController, id:String, userData:Dictionary<String, String>){
         // for automatic sign in
         //Check if there is a user with ID
         DataService.ds.REF_USERS.observeSingleEvent(of: .value, with:{
@@ -155,7 +155,7 @@ func completeSignIn(sender: UIViewController, id:String, userData:Dictionary<Str
         DataService.ds.createFirebaseDBUser(uid: id, userData: userData)
         let KeychainResult = KeychainWrapper.standard.set(id, forKey: KEY_UID)
         print("Chuck: Data saved to keycahain \(KeychainResult)")
-        MyFireBaseAPIClient.sharedClient.startObservingUser(completion:{_ in 
+        MyFireBaseAPIClient.sharedClient.getUser(completion:{_ in
             GeneralFunctions.presentBarFeedVC(sender: sender)
             
         })

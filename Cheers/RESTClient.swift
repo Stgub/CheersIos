@@ -46,7 +46,6 @@ class RESTClient:NSObject{
         let jsonData = try? JSONSerialization.data(withJSONObject: params)
         request.httpBody = jsonData
         return request
-        
     }
     
     func createRequest( pathExtension: String, params: [String:Any], completionHandler: @escaping CompletionHandler){
@@ -58,8 +57,6 @@ class RESTClient:NSObject{
             }
         }
         task.resume()
-        
-        
     }
     
     func decodeResponse(_ response: URLResponse?,data: Data?, error: NSError?) -> (ServerError?, [String:AnyObject]?){

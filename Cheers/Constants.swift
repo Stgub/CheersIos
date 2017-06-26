@@ -10,7 +10,7 @@ import UIKit
 
 let SHADOW_GRAY: CGFloat = 120.0 / 255.0
 
-let TOAST_PRIMARY_COLOR = UIColor(hex: "FF7F00", alpha: 1)
+let TOAST_PRIMARY_COLOR = UIColor(colorLiteralRed: 255/255, green: 128/255, blue: 0, alpha: 1)
 
 let KEY_UID = "uid"
 let TIME_BETWEEN_DRINKS:TimeInterval = 90 * 60// in seconds

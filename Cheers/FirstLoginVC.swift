@@ -116,7 +116,7 @@ class FirstLoginVC: UIViewController {
         DataService.ds.createFirebaseDBUser(uid: id, userData: userData)
         let KeychainResult = KeychainWrapper.standard.set(id, forKey: KEY_UID)
         print("Chuck: Data saved to keycahain \(KeychainResult)")
-        MyFireBaseAPIClient.sharedClient.startObservingUser(completion:{
+        MyFireBaseAPIClient.sharedClient.getUser(completion:{
                 GeneralFunctions.presentBarFeedVC(sender: self)
 
             })

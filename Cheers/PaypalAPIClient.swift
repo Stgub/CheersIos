@@ -34,8 +34,7 @@ class PaypalAPIClient:RESTClient{
                             print(payout_batch_id)
                             self.getPayout(payout_batch_id: payout_batch_id, completion: { (error) in
                                 if error != nil {
-                                    
-                                    print(error?.localizedDescription)
+                                    print(error!.localizedDescription)
                                 } else {
                                     
                                 }

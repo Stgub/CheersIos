@@ -33,12 +33,12 @@ class MyFireBaseAPIClient:NSObject{
     
     private var observeUserHandle: FIRDatabaseHandle!
     
-    /**
-     Used to get the current user and update the user whenever anything changes, should be used at any sign in 
-     */
-    func startObservingUser(completion:@escaping ()->Void) {
-        print("startObservingUser")
-        observeUserHandle = DataService.ds.REF_USER_CURRENT.observe(.value, with: { (snapshot) in
+    func getUser( completion:@escaping  ()-> Void )
+    {
+        print(#function)
+        print(DataService.ds.REF_USER_CURRENT)
+        DataService.ds.REF_USER_CURRENT.observeSingleEvent(of: .value, with:
+            {(snapshot) in
             print("Observed User")
             //Update current User
             let snapKey = snapshot.key
@@ -61,19 +61,58 @@ class MyFireBaseAPIClient:NSObject{
                 }
                 print("Completion")
                 completion()
-            } else { print("Could not cast 2")}
+                self.startObservingUser()
+            } else { print("Error - cast issue probably not a user")
+                UserService.shareService.signOut()
+            }
+        })
+
+    }
+    
+    /**
+     Used to get the current user and update the user whenever anything changes, should be used at any sign in 
+     */
+    func startObservingUser() {
+        print(#function)
+        observeUserHandle = DataService.ds.REF_USER_CURRENT.observe(.value, with: { (snapshot) in
+            print("Observed User")
+            //Update current User
+            let snapKey = snapshot.key
+            if let userData = snapshot.value as? Dictionary<String,AnyObject>{
+                if let user = currentUser {
+                    if let key = user.userKey {
+                        if  key == snapKey {
+                            currentUser.updateData(userData: userData)
+                            print("Same user")
+                        }
+                    } else {
+                        let newUser = User(userKey: snapKey, userData:userData)
+                        currentUser = newUser
+                        print("Changed User")
+                    }
+                } else {
+                    let newUser = User(userKey: snapKey, userData:userData)
+                    currentUser = newUser
+                    print("New User")
+                }
+            }
         })
     }
     
     //MARK: - User functions 
     
     deinit {
+        print("denit observing user")
         DataService.ds.REF_USER_CURRENT.removeObserver(withHandle: observeUserHandle)
     }
+    
     func stopObservingUser(){
-        DataService.ds.REF_USER_CURRENT.removeObserver(withHandle: observeUserHandle)
-
+        print(#function)
+        if let handle = observeUserHandle {
+            DataService.ds.REF_USER_CURRENT.removeObserver(withHandle: handle)
+        }
     }
+    
     func saveUserImg(img:UIImage, path:String,returnBlock:@escaping (_ path:String)-> Void){
         let metaData = FIRStorageMetadata()
         metaData.contentType = "image/jpg"
