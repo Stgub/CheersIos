@@ -66,11 +66,10 @@ class CreateEmailLoginVC: UIViewController {
                         userDataTypes.name: name ,
                         userDataTypes.email: email,
                         userDataTypes.gender: gender,
-                        userDataTypes.birthday: birthday,
+                        userDataTypes.birthday: "\(birthday)",
                         "locationCity": city,
-                        "locationZipCode":zipCode] as [String : Any]
-                    
-                    self.completeSignIn(id: user.uid, userData: userData)
+                        "locationZipCode":zipCode] 
+                    UserService.shareService.completeSignIn(sender: self, id: user.uid, userData: userData)
                 }
             } else {
                 if let errCode = FIRAuthErrorCode(rawValue: (error?._code)!) {
@@ -87,15 +86,7 @@ class CreateEmailLoginVC: UIViewController {
             }
         })
     }
-   
-    func completeSignIn(id:String, userData:Dictionary<String, Any>){
-        // for automatic sign in
-        DataService.ds.createFirebaseDBUser(uid: id, userData: userData)
-        let KeychainResult = KeychainWrapper.standard.set(id, forKey: KEY_UID)
-        print("Chuck: Data saved to keycahain \(KeychainResult)")
-        GeneralFunctions.presentBarFeedVC(sender: self)
-    }
-    
+
     func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
     }

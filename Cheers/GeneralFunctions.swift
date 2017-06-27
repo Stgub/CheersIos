@@ -19,7 +19,10 @@ class GeneralFunctions:NSObject{
                                  imgL:UIImageView)
     {
         nameL.text = currentUser.name
-        creditsL.text = "\(currentUser.credits!)"
+    
+        if let credits = currentUser.credits {
+            creditsL.text = "\(credits)"
+        }
         membershipB.setTitle(currentUser.membership, for: .normal)
         renewDateL.text = getDateStringFromTimeStamp(date: currentUser.currentPeriodEnd)
         currentUser.getUserImg(returnBlock: { (image) in
