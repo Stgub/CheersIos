@@ -31,14 +31,12 @@ class MyFireBaseAPIClient:NSObject{
         })
     }
     
-    private var observeUserHandle: FIRDatabaseHandle!
     
     func getUser( completion:@escaping  ()-> Void )
     {
         print(#function)
         print(DataService.ds.REF_USER_CURRENT)
-        DataService.ds.REF_USER_CURRENT.observeSingleEvent(of: .value, with:
-            {(snapshot) in
+        DataService.ds.REF_USER_CURRENT.observeSingleEvent(of: .value, with: { (snapshot) in
             print("Observed User")
             //Update current User
             let snapKey = snapshot.key
@@ -65,10 +63,13 @@ class MyFireBaseAPIClient:NSObject{
             } else { print("Error - cast issue probably not a user")
                 UserService.shareService.signOut()
             }
-        })
-
+        }) { (error) in
+            print("Error")
+            print(error.localizedDescription)
+        }
     }
     
+    private var observeUserHandle: FIRDatabaseHandle!
     /**
      Used to get the current user and update the user whenever anything changes, should be used at any sign in 
      */
@@ -96,7 +97,10 @@ class MyFireBaseAPIClient:NSObject{
                     print("New User")
                 }
             }
-        })
+        }){ (error) in
+            print("Error")
+            print(error.localizedDescription)
+        }
     }
     
     //MARK: - User functions 

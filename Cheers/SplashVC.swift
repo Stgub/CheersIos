@@ -55,13 +55,13 @@ class SplashVC: UIViewController {
             if currentUser != nil {
                 print("Presenting Bar Feed")
                 GeneralFunctions.presentBarFeedVC(sender: self)
-                
             } else {
                 print("Checking keychain for user")
                 if let _  = KeychainWrapper.standard.string(forKey: KEY_UID ){
                     print("CHUCK: ID found in keychain")
                     
                     MyFireBaseAPIClient.sharedClient.getUser{
+                        print(#function)
                         GeneralFunctions.presentBarFeedVC(sender: self)
                     }
                 } else {
