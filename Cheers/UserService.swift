@@ -156,6 +156,7 @@ class UserService:NSObject {
         let KeychainResult = KeychainWrapper.standard.set(id, forKey: KEY_UID)
         print("Chuck: Data saved to keycahain \(KeychainResult)")
         MyFireBaseAPIClient.sharedClient.getUser(completion:{_ in
+            print(#function)
             GeneralFunctions.presentBarFeedVC(sender: sender)
             
         })

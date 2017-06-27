@@ -38,10 +38,17 @@ class BarDetailVC: UIViewController, hasBarVar {
             }
         }
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        updateUI()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+
+    }
+    
+    func updateUI(){
         if let barName = bar.barName{
             barNameLabel.text = barName
         }
@@ -83,11 +90,10 @@ class BarDetailVC: UIViewController, hasBarVar {
         } else {
             //User is good to use drink
             redeemDrinkBtn.setTitle("Have your server tap to redeem", for: .normal)
-
+            
             redeemDrinkBtn.isUserInteractionEnabled = true
-
+            
         }
-
     }
     
 
