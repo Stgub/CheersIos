@@ -37,8 +37,10 @@ class RESTClient:NSObject{
     
     
     func createRequest( pathExtension: String, params: [String:Any]) -> URLRequest{
+        print(#function)
         let baseURL = URL(string: SERVER_BASE)!
         let url = baseURL.appendingPathComponent(pathExtension)
+        print("URL: \(url)")
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -49,6 +51,7 @@ class RESTClient:NSObject{
     }
     
     func createRequest( pathExtension: String, params: [String:Any], completionHandler: @escaping CompletionHandler){
+        print(#function)
         let request = self.createRequest(pathExtension: pathExtension, params: params)
         let task = self.session.dataTask(with: request) { (data, urlResponse, error) in
             DispatchQueue.main.async {
@@ -64,6 +67,7 @@ class RESTClient:NSObject{
             , httpResponse.statusCode != 200 {
             return (ServerError(localizedDescription: "FailingStatusCode: \(httpResponse.statusCode)"), nil)
         } else if error != nil  {
+            print("Error in decode response \(error.debugDescription)")
             return (ServerError(localizedDescription: error!.localizedDescription) ,nil)
         } else {
             do {
