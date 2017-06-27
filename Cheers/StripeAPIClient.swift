@@ -193,7 +193,7 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
  
     
     func unusubscribeCustomer(completion:@escaping (_ status:String,_ message:String)->Void){
-        print("unsubscribeUser")
+        print(#function)
         
         let pathExtension =  "/unsubscribeUser"
         guard let customerId = currentUser.stripeID else {
@@ -203,44 +203,38 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
         }
         let params = ["customerID":customerId] as [String:String]
         
-        let request = createRequest(pathExtension: pathExtension, params: params)
-        let task = self.session.dataTask(with: request) { (data, urlResponse, error) in
-            DispatchQueue.main.async {
-                let (decodedError, _) = self.decodeResponse(urlResponse,data:data, error: error as NSError?)
-                if decodedError != nil {
-                    completion("Error unsubscribing","Please contact support@GetToastApp.com - error \(String(describing: error!.localizedDescription))")
-                    return
+        createRequest(pathExtension: pathExtension, params: params){
+            (json, error) in
+        if error != nil {
+            completion("Error unsubscribing","Please contact support@GetToastApp.com - error \(String(describing: error!.localizedDescription))")
+            return
+        }
+            do {
+                guard let json = json else {
+                    completion("Error unsubscribing","Please contact support@GetToastApp.com - no data)")
+                    return 
                 }
-                guard data != nil else {
-                    print("Backend: No data returned")
-                    completion("Error unsubscribing","Please contact support@GetToastApp.com - No data")
+                if let error = json["Error"]{
+                    print("Error unsubscribing -\(error)")
+                    completion("Error","Failed to Unsubscribe, Please contact support@GetToastApp.com - error \(error)")
                     return
-                }
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! [String:AnyObject]
-                    if let error = json["Error"]{
-                        print("Error unsubscribing -\(error)")
-                        completion("Error","Failed to Unsubscribe, Please contact support@GetToastApp.com - error \(error)")
-                        return
 
-                    }
-                    guard let status = json["status"] as? String, let message = json["message"] as? String else {
-                        completion("Error unsubscribing","Please contact support@GetToastApp.com")
-                        return
-                    }
-                    if status == "Success" {
-                        print("Success unsubscribing")
-                        currentUser.membership = membershipLevels.basic
-                        
-                    }
-                    completion(status,message)
-                } catch {
-                    print("Error serializing json")
-                    completion("Error unsubscribing","Please contact support@GetToastApp.com")
                 }
+                guard let status = json["status"] as? String, let message = json["message"] as? String else {
+                    completion("Error unsubscribing","Please contact support@GetToastApp.com")
+                    return
+                }
+                if status == "Success" {
+                    print("Success unsubscribing")
+                    currentUser.membership = membershipLevels.basic
+                    
+                }
+                completion(status,message)
+            } catch {
+                print("Error serializing json")
+                completion("Error unsubscribing","Please contact support@GetToastApp.com")
             }
         }
-        task.resume()
     }
     /**
      *  Adds a payment source to a customer. On your backend, retrieve the Stripe customer associated with your logged-in user. Then, call the Update Customer method on that customer as described at https://stripe.com/docs/api#update_customer (for an example Ruby implementation of this API, see https://github.com/stripe/example-ios-backend/blob/master/web.rb#L60 ). If this API call succeeds, call `completion(nil)`. Otherwise, call `completion(error)` with the error that occurred.
