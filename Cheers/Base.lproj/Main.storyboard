@@ -1339,7 +1339,7 @@
         <!--drinkRedeemed-->
         <scene sceneID="GLa-CS-PbC">
             <objects>
-                <viewController id="BYe-5v-7nG" userLabel="drinkRedeemed" customClass="ScreenWithBackButtonVC" customModule="Cheers" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYe-5v-7nG" userLabel="drinkRedeemed" customClass="RedeemSuccessVC" customModule="Cheers" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ktu-n8-35m"/>
                         <viewControllerLayoutGuide type="bottom" id="0IA-xm-yXQ"/>
@@ -1358,15 +1358,27 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="toastLogo-1" translatesAutoresizingMaskIntoConstraints="NO" id="zBJ-wu-C9f" customClass="RoundedImageCorner" customModule="Cheers" customModuleProvider="target">
-                                        <rect key="frame" x="19.5" y="104.5" width="199" height="116"/>
+                                        <rect key="frame" x="19.5" y="70" width="199" height="116"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="zBJ-wu-C9f" secondAttribute="height" multiplier="208:121" id="gI5-BS-jyD"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't forget to tip your waiter!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yqo-Jk-5uD">
-                                        <rect key="frame" x="22.5" y="286" width="193.5" height="63"/>
+                                        <rect key="frame" x="22.5" y="217" width="193.5" height="63"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="23"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.87" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Screen disappears in:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="maJ-qZ-yVY">
+                                        <rect key="frame" x="37" y="311.5" width="164.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9bq-Lt-sK5">
+                                        <rect key="frame" x="108.5" y="363" width="21" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PmP-BG-uTm">
@@ -1377,7 +1389,7 @@
                                             <color key="titleColor" red="1" green="0.65490196079999996" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
                                         <connections>
-                                            <action selector="backBtnTapped:" destination="BYe-5v-7nG" eventType="touchUpInside" id="Pxa-rB-KfV"/>
+                                            <action selector="okayBtnTapped:" destination="BYe-5v-7nG" eventType="touchUpInside" id="bDo-QS-dDT"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1391,6 +1403,9 @@
                             <constraint firstItem="HYE-h0-hea" firstAttribute="top" secondItem="ktu-n8-35m" secondAttribute="bottom" constant="30" id="yNl-fo-hki"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="timeLabel" destination="9bq-Lt-sK5" id="Dij-8u-iux"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sgD-Px-KOZ" sceneMemberID="firstResponder"/>
             </objects>

@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 import SwiftKeychainWrapper
-class CreateEmailLoginVC: UIViewController {
+class CreateEmailLoginVC: UIViewController,UITextFieldDelegate {
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -87,24 +87,25 @@ class CreateEmailLoginVC: UIViewController {
         })
     }
 
-    func dismissKeyboard() {
-        resignFirstResponder()
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
-        view.addGestureRecognizer(tap)
-        // Do any additional setup after loading the view.
+        hideKeyboardWhenTappedAround() // In UIVC extension
+
+        //for hiding keyboard on return 
+        passwordField.delegate = self
+        emailField.delegate = self
+        passwordConfirmField.delegate = self
+        nameField.delegate = self
+        cityField.delegate = self
+        zipCodeField.delegate = self
+        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    //Along with setting delegate in viewDidLoad, gets rid of keyboard on return
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("ShouldReturn")
+        textField.resignFirstResponder()
+        return false
     }
-    
-
-
-
 }

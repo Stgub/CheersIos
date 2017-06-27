@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import SwiftKeychainWrapper
 
-class EmailLoginVC: UIViewController {
+class EmailLoginVC: UIViewController,UITextFieldDelegate {
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -39,10 +39,17 @@ class EmailLoginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        hideKeyboardWhenTappedAround() // In UIVC extension
+        emailField.delegate = self
+        passwordField.delegate = self
+    }
+    //Along with setting delegate in viewDidLoad, gets rid of keyboard on return 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("ShouldReturn")
+        textField.resignFirstResponder()
+        return false
     }
 
 
-
 }
+

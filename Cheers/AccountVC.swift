@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import SwiftKeychainWrapper
 
-class AccountVC: BaseMenuVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+class AccountVC: BaseMenuVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate{
     
     var imagePicker = UIImagePickerController()
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
@@ -124,6 +124,10 @@ class AccountVC: BaseMenuVC, UIImagePickerControllerDelegate, UINavigationContro
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        hideKeyboardWhenTappedAround() // In UIVC extension
+        nameTF.delegate = self
+        emailTF.delegate = self
+        
         attachMenuButton(menuButton: leftMenuButton)
         self.activityIndicator.isHidden = true
         self.activityIndicator.center = self.view.center
