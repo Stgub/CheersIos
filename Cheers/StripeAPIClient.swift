@@ -159,11 +159,15 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
         print("retrieveCustomer function")
         guard let _ = currentUser else {
             print("Current user was nil, will try to grab but otherwise will fail")
-            MyFireBaseAPIClient.sharedClient.getUser(completion: {
-                print(#function)
-                self.retrieveCustomer({ (customer, error) in
-                    completion(customer,error)
-                })
+            MyFireBaseAPIClient.sharedClient.getUser(completion: { error in
+                if error != nil {
+                    print(#function)
+                    self.retrieveCustomer({ (customer, error) in
+                        completion(customer,error)
+                    })
+                } else {
+                    print("Error \(#function) - \(error?.localizedDescription ?? "Error getting user")")
+                }
             })
             return
         }

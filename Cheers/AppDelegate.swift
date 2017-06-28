@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 import FBSDKLoginKit
 import Stripe
 import ReachabilitySwift
@@ -61,6 +62,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.makeKeyAndVisible()
             print("Network not reachable")
         }
+    }
+    
+    func application(_ application: UIApplication,
+                     didReceiveRemoteNotification notification: [AnyHashable : Any],
+                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        print(#function)
+//        if Auth.auth().canHandleNotification(notification) {
+//            completionHandler(UIBackgroundFetchResultNoData)
+//            return
+//        }
+        // This notification is not auth related, developer should handle it.
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

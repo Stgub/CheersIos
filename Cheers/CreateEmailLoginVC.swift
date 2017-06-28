@@ -57,34 +57,15 @@ class CreateEmailLoginVC: UIViewController,UITextFieldDelegate {
         } else {
             gender = "female"
         }
-        FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
-            if error == nil {
-                print("Chuck: Successfully authenticated with Firebase and email")
-                if let user = user {
-                    let userData = [
-                        userDataTypes.provider: user.providerID,
-                        userDataTypes.name: name ,
-                        userDataTypes.email: email,
-                        userDataTypes.gender: gender,
-                        userDataTypes.birthday: "\(birthday)",
-                        "locationCity": city,
-                        "locationZipCode":zipCode] 
-                    UserService.shareService.completeSignIn(sender: self, id: user.uid, userData: userData)
-                }
-            } else {
-                if let errCode = FIRAuthErrorCode(rawValue: (error?._code)!) {
-                    switch errCode {
-                    case .errorCodeEmailAlreadyInUse:
-                        presentUIAlert(sender:self, title: "Email already in use", message: "Please try another email")
-                    case .errorCodeInvalidEmail:
-                        presentUIAlert(sender:self, title: "Invalid Email", message: "Email is not in the correct format")
-                    default:
-                        print("Chuck: Erorr signing up with email - \(String(describing: error))")
-                        
-                    }
-                }
-            }
-        })
+        let userData = [
+            userDataTypes.name: name ,
+            userDataTypes.email: email,
+            userDataTypes.gender: gender,
+            userDataTypes.birthday: "\(birthday)",
+            "locationCity": city,
+            "locationZipCode":zipCode]
+
+        UserService.shareService.emailSignUp(sender:self, email: email, password: password, userData:userData)
     }
 
 
