@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 import SwiftKeychainWrapper
-class CreateEmailLoginVC: UIViewController {
+class CreateEmailLoginVC: UIViewController,UITextFieldDelegate {
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -57,54 +57,36 @@ class CreateEmailLoginVC: UIViewController {
         } else {
             gender = "female"
         }
-        FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
-            if error == nil {
-                print("Chuck: Successfully authenticated with Firebase and email")
-                if let user = user {
-                    let userData = [
-                        userDataTypes.provider: user.providerID,
-                        userDataTypes.name: name ,
-                        userDataTypes.email: email,
-                        userDataTypes.gender: gender,
-                        userDataTypes.birthday: "\(birthday)",
-                        "locationCity": city,
-                        "locationZipCode":zipCode] 
-                    UserService.shareService.completeSignIn(sender: self, id: user.uid, userData: userData)
-                }
-            } else {
-                if let errCode = FIRAuthErrorCode(rawValue: (error?._code)!) {
-                    switch errCode {
-                    case .errorCodeEmailAlreadyInUse:
-                        presentUIAlert(sender:self, title: "Email already in use", message: "Please try another email")
-                    case .errorCodeInvalidEmail:
-                        presentUIAlert(sender:self, title: "Invalid Email", message: "Email is not in the correct format")
-                    default:
-                        print("Chuck: Erorr signing up with email - \(String(describing: error))")
-                        
-                    }
-                }
-            }
-        })
+        let userData = [
+            userDataTypes.name: name ,
+            userDataTypes.email: email,
+            userDataTypes.gender: gender,
+            userDataTypes.birthday: "\(birthday)",
+            "locationCity": city,
+            "locationZipCode":zipCode]
+
+        UserService.shareService.emailSignUp(sender:self, email: email, password: password, userData:userData)
     }
 
-    func dismissKeyboard() {
-        resignFirstResponder()
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
-        view.addGestureRecognizer(tap)
-        // Do any additional setup after loading the view.
+        hideKeyboardWhenTappedAround() // In UIVC extension
+
+        //for hiding keyboard on return 
+        passwordField.delegate = self
+        emailField.delegate = self
+        passwordConfirmField.delegate = self
+        nameField.delegate = self
+        cityField.delegate = self
+        zipCodeField.delegate = self
+        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    //Along with setting delegate in viewDidLoad, gets rid of keyboard on return
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("ShouldReturn")
+        textField.resignFirstResponder()
+        return false
     }
-    
-
-
-
 }

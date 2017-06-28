@@ -8,10 +8,14 @@
 
 import Foundation
 import Firebase
+struct userError:Error{
+    var localizedDescription: String
+}
 class MyFireBaseAPIClient:NSObject{
     static let sharedClient = MyFireBaseAPIClient()
     override init() { }
 
+    
     func getBars(returnBlock:@escaping ([Bar])->Void){
         print("Backend: getting bars")
         DataService.ds.REF_BARS.observeSingleEvent(of: .value, with: {
@@ -32,7 +36,7 @@ class MyFireBaseAPIClient:NSObject{
     }
     
     
-    func getUser( completion:@escaping  ()-> Void )
+    func getUser( completion:@escaping  (Error?)-> Void )
     {
         print(#function)
         print(DataService.ds.REF_USER_CURRENT)
@@ -58,10 +62,10 @@ class MyFireBaseAPIClient:NSObject{
                     print("New User")
                 }
                 print("Completion")
-                completion()
+                completion(nil)
                 self.startObservingUser()
             } else { print("Error - cast issue probably not a user")
-                UserService.shareService.signOut()
+                completion(userError(localizedDescription: "Could not get user"))
             }
         }) { (error) in
             print("Error")

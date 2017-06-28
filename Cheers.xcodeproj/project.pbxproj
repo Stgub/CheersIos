@@ -39,6 +39,8 @@
 		561DBAF81EEA317800D2DADD /* PayPalCheckoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DBAF71EEA317800D2DADD /* PayPalCheckoutVC.swift */; };
 		56322E7F1ED6737400A573BC /* AddBankVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56322E7E1ED6737400A573BC /* AddBankVC.swift */; };
 		5632C26B1E933716003C2D6B /* StripeAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5632C26A1E933716003C2D6B /* StripeAPIClient.swift */; };
+		5669A3DC1F0299FB0098B9A0 /* RedeemSuccessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5669A3DB1F0299FB0098B9A0 /* RedeemSuccessVC.swift */; };
+		5669A3DE1F033AA10098B9A0 /* PhoneVerificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5669A3DD1F033AA10098B9A0 /* PhoneVerificationVC.swift */; };
 		56839A531EEDC68E00A7E0ED /* PaypalWebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56839A521EEDC68E00A7E0ED /* PaypalWebViewVC.swift */; };
 		56839A571EEDEA6B00A7E0ED /* PaypalAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56839A561EEDEA6B00A7E0ED /* PaypalAPIClient.swift */; };
 		56839A591EEDEAAB00A7E0ED /* RESTClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56839A581EEDEAAB00A7E0ED /* RESTClient.swift */; };
@@ -133,6 +135,8 @@
 		56322E7E1ED6737400A573BC /* AddBankVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBankVC.swift; sourceTree = "<group>"; };
 		5632C26A1E933716003C2D6B /* StripeAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeAPIClient.swift; sourceTree = "<group>"; };
 		563E81161EF0B11B00AB1AE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = Base.lproj/XibView.swift; sourceTree = "<group>"; };
+		5669A3DB1F0299FB0098B9A0 /* RedeemSuccessVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedeemSuccessVC.swift; sourceTree = "<group>"; };
+		5669A3DD1F033AA10098B9A0 /* PhoneVerificationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneVerificationVC.swift; sourceTree = "<group>"; };
 		56839A521EEDC68E00A7E0ED /* PaypalWebViewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaypalWebViewVC.swift; sourceTree = "<group>"; };
 		56839A561EEDEA6B00A7E0ED /* PaypalAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaypalAPIClient.swift; sourceTree = "<group>"; };
 		56839A581EEDEAAB00A7E0ED /* RESTClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTClient.swift; sourceTree = "<group>"; };
@@ -325,6 +329,8 @@
 				561DBAF21EE8ECA900D2DADD /* RecommendBarVC.swift */,
 				199AF66E1E6F969F00FBBAD1 /* ContactUsVC.swift */,
 				561DBAF41EE8EF2400D2DADD /* TermsAndPolicyVC.swift */,
+				5669A3DB1F0299FB0098B9A0 /* RedeemSuccessVC.swift */,
+				5669A3DD1F033AA10098B9A0 /* PhoneVerificationVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -485,6 +491,9 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplePay = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -703,7 +712,9 @@
 				56322E7F1ED6737400A573BC /* AddBankVC.swift in Sources */,
 				199AF66D1E6F6DAA00FBBAD1 /* RoundedImageCorner.swift in Sources */,
 				56FF178C1E6FA0A300089C7C /* BarAddDetailsVC.swift in Sources */,
+				5669A3DC1F0299FB0098B9A0 /* RedeemSuccessVC.swift in Sources */,
 				56FF178E1E6FA0BB00089C7C /* BarReviewVC.swift in Sources */,
+				5669A3DE1F033AA10098B9A0 /* PhoneVerificationVC.swift in Sources */,
 				561DBAEF1EE4F18A00D2DADD /* SplashVC.swift in Sources */,
 				56B91B061E651C1700CB40BB /* DataService.swift in Sources */,
 				561DBAF11EE4FDC100D2DADD /* MenuItemTableViewCell.swift in Sources */,

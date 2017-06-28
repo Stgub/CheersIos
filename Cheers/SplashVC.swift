@@ -60,9 +60,15 @@ class SplashVC: UIViewController {
                 if let _  = KeychainWrapper.standard.string(forKey: KEY_UID ){
                     print("CHUCK: ID found in keychain")
                     
-                    MyFireBaseAPIClient.sharedClient.getUser{
-                        print(#function)
-                        GeneralFunctions.presentBarFeedVC(sender: self)
+                    MyFireBaseAPIClient.sharedClient.getUser{ (userError) in
+                        if userError == nil {
+                            print(#function)
+                            GeneralFunctions.presentBarFeedVC(sender: self)
+                        } else {
+                            print(userError?.localizedDescription ?? "Error getting user")
+                            UserService.shareService.signOut()
+                            GeneralFunctions.presentFirstLoginVC(sender: self)
+                        }
                     }
                 } else {
                     GeneralFunctions.presentFirstLoginVC(sender: self)
