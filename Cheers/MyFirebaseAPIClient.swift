@@ -20,7 +20,7 @@ class MyFireBaseAPIClient:NSObject{
         print("Backend: getting bars")
         DataService.ds.REF_BARS.observeSingleEvent(of: .value, with: {
             (snapshot) in
-            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                 var returnedBars:[Bar] = []
                 for snap in snapshots {
                     //print("Backend: SNAP - \(snap)")
@@ -73,7 +73,7 @@ class MyFireBaseAPIClient:NSObject{
         }
     }
     
-    private var observeUserHandle: FIRDatabaseHandle!
+    private var observeUserHandle: DatabaseHandle!
     /**
      Used to get the current user and update the user whenever anything changes, should be used at any sign in 
      */
@@ -122,10 +122,10 @@ class MyFireBaseAPIClient:NSObject{
     }
     
     func saveUserImg(img:UIImage, path:String,returnBlock:@escaping (_ path:String)-> Void){
-        let metaData = FIRStorageMetadata()
+        let metaData = StorageMetadata()
         metaData.contentType = "image/jpg"
         let data = UIImageJPEGRepresentation(img, 0.8)
-        DataService.ds.REF_USER_IMAGES.child(path).put(data!, metadata: metaData){(metaData,error) in
+        DataService.ds.REF_USER_IMAGES.child(path).putData(data!, metadata: metaData){(metaData,error) in
             if let error = error {
                 print(error.localizedDescription)
                 return

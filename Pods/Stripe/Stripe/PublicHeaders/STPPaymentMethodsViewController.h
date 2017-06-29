@@ -52,7 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
 *  If you've already collected some information from your user, you can set it here and it'll be automatically filled out when possible/appropriate in any UI that the payment context creates.
 */
-@property(nonatomic)STPUserInformation *prefilledInformation;
+@property(nonatomic, strong, nullable)STPUserInformation *prefilledInformation;
 
 /**
  *  If you're pushing `STPPaymentMethodsViewController` onto an existing `UINavigationController`'s stack, you should use this method to dismiss it, since it may have pushed an additional add card view controller onto the navigation controller's stack.
@@ -69,16 +69,6 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol STPPaymentMethodsViewControllerDelegate <NSObject>
 
 /**
- *  This is called when the user either makes a selection, or adds a new card. This will be triggered after the view controller loads with the user's current selection (if they have one) and then subsequently when they change their choice. You should use this callback to update any necessary UI in your app that displays the user's currently selected payment method. You should *not* dismiss the view controller at this point, instead do this in `paymentMethodsViewControllerDidFinish:`. `STPPaymentMethodsViewController` will also call the necessary methods on your API adapter, so you don't need to call them directly during this method.
- *
- *  @param paymentMethodsViewController the view controller in question
- *  @param paymentMethod                the selected payment method
- */
-- (void)paymentMethodsViewController:(STPPaymentMethodsViewController *)paymentMethodsViewController
-              didSelectPaymentMethod:(id<STPPaymentMethod>)paymentMethod;
-
-
-/**
  *  This is called when the view controller encounters an error fetching the user's payment methods from its API adapter. You should dismiss the view controller when this is called.
  *
  *  @param paymentMethodsViewController the view controller in question
@@ -88,11 +78,29 @@ NS_ASSUME_NONNULL_BEGIN
               didFailToLoadWithError:(NSError *)error;
 
 /**
- *  This is called when the user taps "cancel". It's also called after the user directly selects or adds a payment method, so it will often be called immediately after calling `paymentMethodsViewController:didSelectPaymentMethod:`. You should dismiss the view controller when this is called.
+ *  This is called when the user selects or adds a payment method, so it will often be called immediately after calling `paymentMethodsViewController:didSelectPaymentMethod:`. You should dismiss the view controller when this is called.
  *
  *  @param paymentMethodsViewController the view controller that has finished
  */
 - (void)paymentMethodsViewControllerDidFinish:(STPPaymentMethodsViewController *)paymentMethodsViewController;
+
+/**
+ *  This is called when the user taps "cancel".
+ *  You should dismiss the view controller when this is called.
+ *
+ *  @param paymentMethodsViewController the view controller that has finished
+ */
+- (void)paymentMethodsViewControllerDidCancel:(STPPaymentMethodsViewController *)paymentMethodsViewController;
+
+@optional
+/**
+ *  This is called when the user either makes a selection, or adds a new card. This will be triggered after the view controller loads with the user's current selection (if they have one) and then subsequently when they change their choice. You should use this callback to update any necessary UI in your app that displays the user's currently selected payment method. You should *not* dismiss the view controller at this point, instead do this in `paymentMethodsViewControllerDidFinish:`. `STPPaymentMethodsViewController` will also call the necessary methods on your API adapter, so you don't need to call them directly during this method.
+ *
+ *  @param paymentMethodsViewController the view controller in question
+ *  @param paymentMethod                the selected payment method
+ */
+- (void)paymentMethodsViewController:(STPPaymentMethodsViewController *)paymentMethodsViewController
+              didSelectPaymentMethod:(id<STPPaymentMethod>)paymentMethod;
 
 @end
 

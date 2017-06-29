@@ -17,8 +17,8 @@ let SERVER_BASE = "http://ec2-34-202-232-113.compute-1.amazonaws.com:5000"   // 
 // let SERVER_BASE = "http://0.0.0.0:5000" //local test
 
 
-let DB_BASE = FIRDatabase.database().reference() // gives the URL of the root of the db, also in the google plist
-let STORAGE_BASE = FIRStorage.storage().reference()
+let DB_BASE = Database.database().reference() // gives the URL of the root of the db, also in the google plist
+let STORAGE_BASE = Storage.storage().reference()
 private var _REF_IMAGES = STORAGE_BASE.child("images")
 
 class DataService {
@@ -31,27 +31,27 @@ class DataService {
     private var _REF_USER_IMAGES = STORAGE_BASE.child("user-pics")
     //make private varibales globally accessible
     
-    var REF_BASE: FIRDatabaseReference {
+    var REF_BASE: DatabaseReference {
         return _REF_BASE
     }
-    var REF_BARS: FIRDatabaseReference {
+    var REF_BARS: DatabaseReference {
         return _REF_BARS
     }
-    var REF_USERS: FIRDatabaseReference {
+    var REF_USERS: DatabaseReference {
         return _REF_USERS
     }
-    var REF_DEVICE_IDS: FIRDatabaseReference {  return _REF_DEVICE_IDS }
+    var REF_DEVICE_IDS: DatabaseReference {  return _REF_DEVICE_IDS }
     
-    var REF_USER_CURRENT: FIRDatabaseReference {
+    var REF_USER_CURRENT: DatabaseReference {
         let uid = KeychainWrapper.standard.string(forKey: KEY_UID)
         let user = REF_USERS.child(uid!)
         return user
         
     }
-    var REF_BAR_IMAGES: FIRStorageReference {
+    var REF_BAR_IMAGES: StorageReference {
         return _REF_BAR_IMAGES
     }
-    var REF_USER_IMAGES: FIRStorageReference {
+    var REF_USER_IMAGES: StorageReference {
         return _REF_USER_IMAGES
     }
     

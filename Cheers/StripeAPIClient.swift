@@ -214,31 +214,27 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
             completion("Error unsubscribing","Please contact support@GetToastApp.com - error \(String(describing: error!.localizedDescription))")
             return
         }
-            do {
-                guard let json = json else {
-                    completion("Error unsubscribing","Please contact support@GetToastApp.com - no data)")
-                    return 
-                }
-                if let error = json["Error"]{
-                    print("Error unsubscribing -\(error)")
-                    completion("Error","Failed to Unsubscribe, Please contact support@GetToastApp.com - error \(error)")
-                    return
+        guard let json = json else {
+            completion("Error unsubscribing","Please contact support@GetToastApp.com - no data)")
+            return 
+        }
+        if let error = json["Error"]{
+            print("Error unsubscribing -\(error)")
+            completion("Error","Failed to Unsubscribe, Please contact support@GetToastApp.com - error \(error)")
+            return
 
-                }
-                guard let status = json["status"] as? String, let message = json["message"] as? String else {
-                    completion("Error unsubscribing","Please contact support@GetToastApp.com")
-                    return
-                }
-                if status == "Success" {
-                    print("Success unsubscribing")
-                    currentUser.membership = membershipLevels.basic
-                    
-                }
-                completion(status,message)
-            } catch {
-                print("Error serializing json")
-                completion("Error unsubscribing","Please contact support@GetToastApp.com")
-            }
+        }
+        guard let status = json["status"] as? String, let message = json["message"] as? String else {
+            completion("Error unsubscribing","Please contact support@GetToastApp.com")
+            return
+        }
+        if status == "Success" {
+            print("Success unsubscribing")
+            currentUser.membership = membershipLevels.basic
+            
+        }
+        completion(status,message)
+ 
         }
     }
     /**
@@ -248,7 +244,7 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
      *  @param completion call this callback when you're done adding the token to the customer on your backend. For example, `completion(nil)` (if your call succeeds) or `completion(error)` if an error is returned.
      *
      */
-     func attachSource(toCustomer source: STPSource, completion: @escaping STPErrorBlock) {
+    func attachSource(toCustomer source: STPSourceProtocol, completion: @escaping STPErrorBlock) {
         print("attachSource")
 
         let pathExtension = "/customer/sources"
@@ -262,7 +258,7 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
             DispatchQueue.main.async {
                 let (decodedError, _) = self.decodeResponse(urlResponse,data:data!, error: error as NSError?)
                 if decodedError != nil {
-                    print("Backend: Error with attachSource - \(error?.localizedDescription)")
+                    print("Backend: Error with attachSource - \(String(describing: error?.localizedDescription))")
                     completion(error)
                     return
                 }
@@ -275,7 +271,7 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
     /**
      Changes the default source (card) that a customer uses to pay
  */
-    func selectDefaultCustomerSource(_ source: STPSource, completion: @escaping STPErrorBlock) {
+    func selectDefaultCustomerSource(_ source: STPSourceProtocol, completion: @escaping STPErrorBlock) {
         print("selectDefaultCustomerSource")
         let pathExtension = "/customer/default_source"
         let params = [

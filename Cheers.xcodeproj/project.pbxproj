@@ -18,8 +18,6 @@
 		19FBCB8A1E635FE500AA10B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19FBCB881E635FE500AA10B5 /* Main.storyboard */; };
 		19FBCB8C1E635FE500AA10B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19FBCB8B1E635FE500AA10B5 /* Assets.xcassets */; };
 		19FBCB8F1E635FE500AA10B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19FBCB8D1E635FE500AA10B5 /* LaunchScreen.storyboard */; };
-		19FBCB9A1E635FE500AA10B5 /* CheersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FBCB991E635FE500AA10B5 /* CheersTests.swift */; };
-		19FBCBA51E635FE500AA10B5 /* CheersUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FBCBA41E635FE500AA10B5 /* CheersUITests.swift */; };
 		19FBCBB81E6379A600AA10B5 /* Shadow&RoundBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FBCBB71E6379A600AA10B5 /* Shadow&RoundBtn.swift */; };
 		19FBCBBA1E6379E200AA10B5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FBCBB91E6379E200AA10B5 /* Constants.swift */; };
 		5605D48C1E9806900098EC52 /* MyFirebaseAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5605D48B1E9806900098EC52 /* MyFirebaseAPIClient.swift */; };
@@ -107,11 +105,7 @@
 		19FBCB8E1E635FE500AA10B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		19FBCB901E635FE500AA10B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19FBCB951E635FE500AA10B5 /* CheersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CheersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		19FBCB991E635FE500AA10B5 /* CheersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheersTests.swift; sourceTree = "<group>"; };
-		19FBCB9B1E635FE500AA10B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19FBCBA01E635FE500AA10B5 /* CheersUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CheersUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		19FBCBA41E635FE500AA10B5 /* CheersUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheersUITests.swift; sourceTree = "<group>"; };
-		19FBCBA61E635FE500AA10B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19FBCBB71E6379A600AA10B5 /* Shadow&RoundBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shadow&RoundBtn.swift"; sourceTree = "<group>"; };
 		19FBCBB91E6379E200AA10B5 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		26B584204E8B800ADDF298D4 /* Pods_Cheers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cheers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -202,8 +196,6 @@
 			isa = PBXGroup;
 			children = (
 				19FBCB831E635FE500AA10B5 /* Cheers */,
-				19FBCB981E635FE500AA10B5 /* CheersTests */,
-				19FBCBA31E635FE500AA10B5 /* CheersUITests */,
 				19FBCB821E635FE500AA10B5 /* Products */,
 				CBD6B26D9B5D9A1CBC6C837C /* Pods */,
 				C387BBCABFA9C5ED466D521E /* Frameworks */,
@@ -229,7 +221,6 @@
 				19FBCBB31E6378AE00AA10B5 /* Utilities */,
 				19FBCBB41E6378B600AA10B5 /* Model */,
 				19FBCBB61E6378C200AA10B5 /* Controller */,
-				19FBCBB51E6378BC00AA10B5 /* View */,
 				19FBCB8B1E635FE500AA10B5 /* Assets.xcassets */,
 				19FBCB881E635FE500AA10B5 /* Main.storyboard */,
 				56CE08811EF21F3900778FB7 /* CurrentlyUnused.storyboard */,
@@ -243,24 +234,6 @@
 				561DBAF61EEA306300D2DADD /* Cheers-Bridging-Header.h */,
 			);
 			path = Cheers;
-			sourceTree = "<group>";
-		};
-		19FBCB981E635FE500AA10B5 /* CheersTests */ = {
-			isa = PBXGroup;
-			children = (
-				19FBCB991E635FE500AA10B5 /* CheersTests.swift */,
-				19FBCB9B1E635FE500AA10B5 /* Info.plist */,
-			);
-			path = CheersTests;
-			sourceTree = "<group>";
-		};
-		19FBCBA31E635FE500AA10B5 /* CheersUITests */ = {
-			isa = PBXGroup;
-			children = (
-				19FBCBA41E635FE500AA10B5 /* CheersUITests.swift */,
-				19FBCBA61E635FE500AA10B5 /* Info.plist */,
-			);
-			path = CheersUITests;
 			sourceTree = "<group>";
 		};
 		19FBCBB21E6378A700AA10B5 /* Services */ = {
@@ -331,6 +304,7 @@
 				561DBAF41EE8EF2400D2DADD /* TermsAndPolicyVC.swift */,
 				5669A3DB1F0299FB0098B9A0 /* RedeemSuccessVC.swift */,
 				5669A3DD1F033AA10098B9A0 /* PhoneVerificationVC.swift */,
+				19FBCBB51E6378BC00AA10B5 /* View */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -764,7 +738,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19FBCB9A1E635FE500AA10B5 /* CheersTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -772,7 +745,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19FBCBA51E635FE500AA10B5 /* CheersUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -23,6 +23,7 @@ import Firebase
 var userImage:UIImage! // out here because it is not actually stored in the databse
 struct userDataTypes {
     static let email = "email"
+    static let phoneNumber = "phoneNumber"
     static let name = "name"
     static let gender = "gender"
     static let provider = "provider"
@@ -46,7 +47,7 @@ struct membershipLevels {
 
 class User{
     var myDbAPI: MyFireBaseAPIClient = MyFireBaseAPIClient.sharedClient
-    var ref: FIRDatabaseReference!
+    var ref: DatabaseReference!
     private var _membership:String!
     var membership:String!{
         set(newVal){
@@ -119,6 +120,15 @@ class User{
             print("Changing users email to \(newVal)")
             self._userEmail = userEmail
             ref.child(userDataTypes.email).setValue(newVal)
+        }
+    }
+    private var _phoneNumber:String!
+    var phoneNumber:String!{
+        get{ return _phoneNumber}
+        set(newVal){
+            print("Adding phone number\(newVal)")
+            self._phoneNumber = newVal
+            ref.child(userDataTypes.phoneNumber).setValue(newVal)
         }
     }
     var userBirthday:String!
@@ -209,6 +219,9 @@ class User{
             self.currentPeriodEnd = NSDate().timeIntervalSince1970 + 60 * 60 * 24 * 30
             print("Backend: added new arbitrary periodEnd date")
         }
+        if let phoneNum = userData[userDataTypes.phoneNumber] as? String {
+            self._phoneNumber = phoneNum
+        }
     }
     
     func saveUserImg(img: UIImage, returnBlock: @escaping () -> Void){
@@ -240,7 +253,7 @@ class User{
                             imageCache.setObject(image, forKey: url as NSString)
                             returnBlock!(self.usersImage)
                         } else { print("Chuck: Could not get image from data") }
-                    } else {  print("Chuck: error with loading image -\(error)") }
+                    } else {  print("Chuck: error with loading image -\(String(describing: error))") }
                 })
                 dataTask.resume() // needed or the above will never happen
             }

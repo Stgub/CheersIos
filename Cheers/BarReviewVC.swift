@@ -136,10 +136,10 @@ class BarReviewVC: UIViewController, hasDataDict {
         if let productImgData = UIImageJPEGRepresentation(barImage, 0.2) {
             
             let imgUid = NSUUID().uuidString
-            let metadata = FIRStorageMetadata()
+            let metadata = StorageMetadata()
             metadata.contentType = "image/jpeg"
             
-            DataService.ds.REF_BAR_IMAGES.child(imgUid).put(productImgData, metadata: metadata) { (metadata, error) in
+            DataService.ds.REF_BAR_IMAGES.child(imgUid).putData(productImgData, metadata: metadata) { (metadata, error) in
                 if error != nil {
                     print("Chuck: Unable to upload image to Firebasee storage - \(error)")
                 } else {

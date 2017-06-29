@@ -16,7 +16,7 @@ class UserService:NSObject {
 
     func signOut(){
         MyFireBaseAPIClient.sharedClient.stopObservingUser()
-        try! FIRAuth.auth()!.signOut()
+        try! Auth.auth().signOut()
         KeychainWrapper.standard.removeObject(forKey: KEY_UID)
         currentUser = nil
     }
@@ -32,7 +32,7 @@ class UserService:NSObject {
                 print("Chuck: Successfully authenticated with Facebook")
                 print("result \(String(describing: result))")
                 //Authenticate with Facebook
-                let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
                 //Authenticatre with Firebase
                 var userData = [userDataTypes.provider: credential.provider]
                 //Grab user info
@@ -78,7 +78,7 @@ class UserService:NSObject {
 
     func emailSignUp(sender: UIViewController,email:String,password:String, userData:[String:String]){
         var userData = userData
-        FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
+        Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
             if error == nil {
                 print("Chuck: Successfully authenticated with Firebase and email")
                 if let user = user {
@@ -93,11 +93,11 @@ class UserService:NSObject {
                     })
                 }
             } else {
-                if let errCode = FIRAuthErrorCode(rawValue: (error?._code)!) {
+                if let errCode = AuthErrorCode(rawValue: (error?._code)!) {
                     switch errCode {
-                    case .errorCodeEmailAlreadyInUse:
+                    case .emailAlreadyInUse:
                         presentUIAlert(sender:sender, title: "Email already in use", message: "Please try another email")
-                    case .errorCodeInvalidEmail:
+                    case .invalidEmail:
                         presentUIAlert(sender:sender, title: "Invalid Email", message: "Email is not in the correct format")
                     default:
                         print("Chuck: Erorr signing up with email - \(String(describing: error))")
@@ -111,16 +111,16 @@ class UserService:NSObject {
     }
     
     func emailLogIn(sender: UIViewController, email: String, password: String){
-        FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
+        Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
             if (error != nil) {
                 // an error occurred while attempting login
-                if let errCode = FIRAuthErrorCode(rawValue: (error?._code)!) {
+                if let errCode = AuthErrorCode(rawValue: (error?._code)!) {
                     switch errCode {
-                    case .errorCodeInvalidEmail:
+                    case .invalidEmail:
                         presentUIAlert(sender: sender ,title: "Invalid email", message: "Email is not in the correct format")
-                    case .errorCodeWrongPassword:
+                    case .wrongPassword:
                         presentUIAlert(sender: sender ,title: "Invalid password", message: "Please enter the correct password")
-                    case .errorCodeUserNotFound:
+                    case .userNotFound:
                         presentUIAlert(sender: sender ,title: "User not found", message: "Make sure email is correct, or create an account")
                     default:
                         presentUIAlert(sender: sender ,title: "Error logging in", message: "Please try again")
@@ -149,17 +149,17 @@ class UserService:NSObject {
         
     }
     
-    func firebaseAuth(_ sender: UIViewController, credential: FIRAuthCredential , userData:Dictionary<String, String>){
-        FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
+    func firebaseAuth(_ sender: UIViewController, credential: AuthCredential , userData:Dictionary<String, String>){
+        Auth.auth().signIn(with: credential, completion: { (user, error) in
             if (error != nil) {
                 // an error occurred while attempting login
-                if let errCode = FIRAuthErrorCode(rawValue: (error?._code)!) {
+                if let errCode = AuthErrorCode(rawValue: (error?._code)!) {
                     switch errCode {
-                    case .errorCodeInvalidEmail:
+                    case .invalidEmail:
                         presentUIAlert(sender: sender ,title: "Invalid email", message: "Email is not in the correct format")
-                    case .errorCodeWrongPassword:
+                    case .wrongPassword:
                         presentUIAlert(sender: sender ,title: "Invalid password", message: "Please enter the correct password")
-                    case .errorCodeUserNotFound:
+                    case .userNotFound:
                         presentUIAlert(sender: sender ,title: "User not found", message: "Make sure credentials are correct")
                     default:
                         presentUIAlert(sender: sender ,title: "Error logging in", message: "Please try again")

@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return STPCardValidationStateValid if the number is valid, STPCardValidationStateInvalid if the number is invalid, or STPCardValidationStateIncomplete if the number is a substring of a valid card (e.g. @"4242").
  */
-+ (STPCardValidationState)validationStateForNumber:(NSString *)cardNumber
++ (STPCardValidationState)validationStateForNumber:(nullable NSString *)cardNumber
                                validatingCardBrand:(BOOL)validatingCardBrand;
 
 /**
@@ -54,7 +54,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (NSSet<NSNumber *>*)lengthsForCardBrand:(STPCardBrand)brand;
 + (NSInteger)maxLengthForCardBrand:(STPCardBrand)brand;
-+ (NSInteger)lengthForCardBrand:(STPCardBrand)brand __attribute__((deprecated("Card brands may have multiple lengths - use lengthsForCardBrand or maxLengthForCardBrand instead.")));
 
 /**
  *  The length of the final grouping of digits to use when formatting a card number for display. For example, Visa cards display their final 4 numbers, e.g. "4242", while American Express cards display their final 5 digits, e.g. "10005".

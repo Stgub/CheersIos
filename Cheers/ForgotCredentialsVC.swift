@@ -19,7 +19,7 @@ class ForgotCredentialsVC: UIViewController {
     
     @IBAction func submitBtnTapped(_ sender: Any) {
         if emailField.text != "" {
-            FIRAuth.auth()?.sendPasswordReset(withEmail: emailField.text!, completion: { (error) in
+            Auth.auth().sendPasswordReset(withEmail: emailField.text!, completion: { (error) in
                 if error != nil {
                     print("Chuck: Reset email error - \(error)")
                 } else {

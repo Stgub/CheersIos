@@ -60,7 +60,7 @@ class HistoryVC: BaseMenuVC, UITableViewDelegate, UITableViewDataSource {
         })
         DataService.ds.REF_BARS.observeSingleEvent(of: .value, with: {
             (snapshot) in
-            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshots {
                     print("CHUCK: SNAP - \(snap)")
                     let key = snap.key

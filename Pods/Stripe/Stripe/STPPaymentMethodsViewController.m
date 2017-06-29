@@ -61,6 +61,17 @@
                                 theme:(STPTheme *)theme
                            apiAdapter:(id<STPBackendAPIAdapter>)apiAdapter
                              delegate:(id<STPPaymentMethodsViewControllerDelegate>)delegate {
+    STPPromise<STPPaymentMethodTuple *> *promise = [self retrieveCustomerWithConfiguration:configuration apiAdapter:apiAdapter];
+    return [self initWithConfiguration:configuration
+                            apiAdapter:apiAdapter
+                        loadingPromise:promise
+                                 theme:theme
+                       shippingAddress:nil
+                              delegate:delegate];
+}
+
+- (STPPromise<STPPaymentMethodTuple *>*)retrieveCustomerWithConfiguration:(STPPaymentConfiguration *)configuration
+                                                               apiAdapter:(id<STPBackendAPIAdapter>)apiAdapter {
     STPPromise<STPPaymentMethodTuple *> *promise = [STPPromise new];
     [apiAdapter retrieveCustomer:^(STPCustomer * _Nullable customer, NSError * _Nullable error) {
         stpDispatchToMainThreadIfNecessary(^{
@@ -69,7 +80,7 @@
             } else {
                 STPCard *selectedCard;
                 NSMutableArray<STPCard *> *cards = [NSMutableArray array];
-                for (id<STPSource> source in customer.sources) {
+                for (id<STPSourceProtocol> source in customer.sources) {
                     if ([source isKindOfClass:[STPCard class]]) {
                         STPCard *card = (STPCard *)source;
                         [cards addObject:card];
@@ -85,12 +96,7 @@
             }
         });
     }];
-    return [self initWithConfiguration:configuration
-                            apiAdapter:apiAdapter
-                        loadingPromise:promise
-                                 theme:theme
-                       shippingAddress:nil
-                              delegate:delegate];
+    return promise;
 }
 
 - (void)createAndSetupViews {
@@ -137,6 +143,7 @@
             self.activityIndicator.animating = NO;
         }];
         [self.navigationItem setRightBarButtonItem:internal.stp_navigationItemProxy.rightBarButtonItem animated:YES];
+        self.internalViewController = internal;
     }];
     self.loading = YES;
 }
@@ -155,16 +162,14 @@
     self.activityIndicator.tintColor = self.theme.accentColor;
 }
 
-- (void)handleBackOrCancelTapped:(__unused id)sender {
-    [self.delegate paymentMethodsViewControllerDidFinish:self];
-}
-
 - (void)finishWithPaymentMethod:(id<STPPaymentMethod>)paymentMethod {
     if ([paymentMethod isKindOfClass:[STPCard class]]) {
         [self.apiAdapter selectDefaultCustomerSource:(STPCard *)paymentMethod completion:^(__unused NSError *error) {
         }];
     }
-    [self.delegate paymentMethodsViewController:self didSelectPaymentMethod:paymentMethod];
+    if ([self.delegate respondsToSelector:@selector(paymentMethodsViewController:didSelectPaymentMethod:)]) {
+        [self.delegate paymentMethodsViewController:self didSelectPaymentMethod:paymentMethod];
+    }
     [self.delegate paymentMethodsViewControllerDidFinish:self];
 }
 
@@ -173,7 +178,17 @@
 }
 
 - (void)internalViewControllerDidCreateToken:(STPToken *)token completion:(STPErrorBlock)completion {
-    [self.apiAdapter attachSourceToCustomer:token completion:^(NSError * _Nullable error) {
+    [self.apiAdapter attachSourceToCustomer:token completion:^(NSError *error) {
+        STPPromise<STPPaymentMethodTuple *> *promise = [self retrieveCustomerWithConfiguration:self.configuration apiAdapter:self.apiAdapter];
+        [promise onSuccess:^(STPPaymentMethodTuple *tuple) {
+            stpDispatchToMainThreadIfNecessary(^{
+                if ([self.internalViewController isKindOfClass:[STPPaymentMethodsInternalViewController class]]) {
+                    STPPaymentMethodsInternalViewController *paymentMethodsVC = (STPPaymentMethodsInternalViewController *)self.internalViewController;
+                    [paymentMethodsVC updateWithPaymentMethodTuple:tuple];
+                }
+            });
+        }];
+
         stpDispatchToMainThreadIfNecessary(^{
             completion(error);
             if (!error) {
@@ -183,8 +198,14 @@
     }];
 }
 
+- (void)internalViewControllerDidCancel {
+    [self.delegate paymentMethodsViewControllerDidCancel:self];
+}
+
 - (void)addCardViewControllerDidCancel:(__unused STPAddCardViewController *)addCardViewController {
-    [self.delegate paymentMethodsViewControllerDidFinish:self];
+    // Add card is only our direct delegate if there are no other payment methods possible
+    // and we skipped directly to this screen. In this case, a cancel from it is the same as a cancel to us.
+    [self.delegate paymentMethodsViewControllerDidCancel:self];
 }
 
 - (void)addCardViewController:(__unused STPAddCardViewController *)addCardViewController
@@ -241,8 +262,10 @@
         }] onSuccess:^(STPPaymentMethodTuple *tuple) {
             STRONG(self);
             if (tuple.selectedPaymentMethod) {
-                [self.delegate paymentMethodsViewController:self
+                if ([self.delegate respondsToSelector:@selector(paymentMethodsViewController:didSelectPaymentMethod:)]) {
+                    [self.delegate paymentMethodsViewController:self
                                          didSelectPaymentMethod:tuple.selectedPaymentMethod];
+                }
             }
         }] onFailure:^(NSError *error) {
             STRONG(self);

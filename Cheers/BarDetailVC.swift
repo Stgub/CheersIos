@@ -23,7 +23,21 @@ class BarDetailVC: UIViewController, hasBarVar {
     @IBAction func backBtnTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    @IBAction func redeemDrinkBtnTapped(_ sender: Any) {
+
+    override func viewWillAppear(_ animated: Bool) {
+        updateUI()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+
+    }
+    func verifyPhone(){
+        self.performSegue(withIdentifier: "verifyPhoneSegue", sender: self)
+    }
+    
+    func redeemDrink(){
         print("CHUCK: User redeemed bar -\(bar.barName)")
         let dateStamp = NSDate().timeIntervalSince1970
         DataService.ds.REF_USER_CURRENT.child(userDataTypes.barsUsed).child(bar.key).setValue(dateStamp){
@@ -37,15 +51,6 @@ class BarDetailVC: UIViewController, hasBarVar {
                 self.performSegue(withIdentifier: "drinkRedeemedSegue", sender: self)
             }
         }
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        updateUI()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-
     }
     
     func updateUI(){
@@ -75,7 +80,15 @@ class BarDetailVC: UIViewController, hasBarVar {
             let dateUsed = currentUser.barsUsed[bar.key]
             dateAvailable = dateUsed! + 30 * 24 * 60 * 60 // one month
         }
-        if currentUser.credits <= 0 {
+        //remove actions linked to button, if adding more there's a better way
+        redeemDrinkBtn.removeTarget(self, action: #selector(verifyPhone), for: .touchUpInside)
+        redeemDrinkBtn.removeTarget(self, action: #selector(redeemDrink), for: .touchUpInside)
+        
+        if currentUser.phoneNumber == nil {
+            redeemDrinkBtn.setTitle("Verify Phone", for: .normal)
+            redeemDrinkBtn.isUserInteractionEnabled = true
+            redeemDrinkBtn.addTarget(self, action: #selector(self.verifyPhone), for: .touchUpInside)
+        } else if currentUser.credits <= 0 {
             //User has no credits left to buy drins
             redeemDrinkBtn.setTitle("Upgrade to recieve more credits!", for: .normal)
             redeemDrinkBtn.isUserInteractionEnabled = false
@@ -90,9 +103,9 @@ class BarDetailVC: UIViewController, hasBarVar {
         } else {
             //User is good to use drink
             redeemDrinkBtn.setTitle("Have your server tap to redeem", for: .normal)
-            
             redeemDrinkBtn.isUserInteractionEnabled = true
-            
+            redeemDrinkBtn.addTarget(self, action: #selector(self.redeemDrink), for: .touchUpInside)
+
         }
     }
     

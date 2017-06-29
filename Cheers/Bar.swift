@@ -26,7 +26,7 @@ class Bar {
         static let hoursAmPm = "hoursAmPm"
         static let availableDays = "availableDays"
     }
-    var refFB:FIRDatabaseReference!
+    var refFB:DatabaseReference!
     var key:String!
     var barName:String!
     var locationStreet:String!
@@ -95,8 +95,9 @@ class Bar {
             self.img = image
             returnBlock()
         } else {
-            let ref = FIRStorage.storage().reference(forURL: imageUrl)
-            ref.data(withMaxSize: 2 * 1024 * 1024, completion: { (data, error) in
+            let ref = Storage.storage().reference(forURL: imageUrl)
+            
+            ref.getData(maxSize: 2 * 1024 * 1024, completion: { (data, error) in
                 if error != nil {
                     print("Chuck: Error downloading img -\(error)")
                     
