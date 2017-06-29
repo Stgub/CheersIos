@@ -127,6 +127,7 @@ class User{
         get{ return _phoneNumber}
         set(newVal){
             print("Adding phone number\(newVal)")
+            self._phoneNumber = newVal
             ref.child(userDataTypes.phoneNumber).setValue(newVal)
         }
     }
@@ -217,6 +218,9 @@ class User{
         } else {
             self.currentPeriodEnd = NSDate().timeIntervalSince1970 + 60 * 60 * 24 * 30
             print("Backend: added new arbitrary periodEnd date")
+        }
+        if let phoneNum = userData[userDataTypes.phoneNumber] as? String {
+            self._phoneNumber = phoneNum
         }
     }
     

@@ -83,12 +83,11 @@ class BarDetailVC: UIViewController, hasBarVar {
         //remove actions linked to button, if adding more there's a better way
         redeemDrinkBtn.removeTarget(self, action: #selector(verifyPhone), for: .touchUpInside)
         redeemDrinkBtn.removeTarget(self, action: #selector(redeemDrink), for: .touchUpInside)
-
+        
         if currentUser.phoneNumber == nil {
             redeemDrinkBtn.setTitle("Verify Phone", for: .normal)
             redeemDrinkBtn.isUserInteractionEnabled = true
             redeemDrinkBtn.addTarget(self, action: #selector(self.verifyPhone), for: .touchUpInside)
-
         } else if currentUser.credits <= 0 {
             //User has no credits left to buy drins
             redeemDrinkBtn.setTitle("Upgrade to recieve more credits!", for: .normal)
