@@ -9,41 +9,58 @@
 import UIKit
 import FirebaseAuth
 
-class PhoneVerificationVC: ScreenWithBackButtonVC {
+class PhoneVerificationVC: UIViewController, UITextFieldDelegate {
 
-    @IBOutlet weak var phoneNum1TF: UITextField!
     
-    @IBOutlet weak var phoneNum2TF: UITextField!
+    @IBOutlet weak var codeTF: UITextField!
+    var verifyId = ""
     
-    @IBOutlet weak var PhoneNum3TF: UITextField!
     
-
+    @IBAction func backBtnTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     @IBAction func verifyBtnTapped(_ sender: Any) {
-        
-        let phoneNumber = phoneNum1TF.text! + phoneNum2TF.text! + PhoneNum3TF.text!
-        //TODO verify phone number ? 
-        //cant figure out how to use PhoneVerify
+        print("verifying")
+        let phoneNumber = "+18609415547"
+        PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber) { (verificationID, error) in
+            if error != nil {
+                print("Error verifying phone num \(error.debugDescription)")
+            } else {
+                self.verifyId = verificationID!
+                self.pressedVerify()
+            }
+            
+        }
+    }
+    
+    
+    @IBAction func Done(_ sender: Any) {
+        let code = codeTF.text!
+        print("Entered Code: \(code)")
+        let credential = PhoneAuthProvider.provider().credential(
+                withVerificationID: verifyId,
+                verificationCode: code)
+        print(credential)
+        Auth.auth().currentUser?.link(with: credential, completion: { (user, error) in
+            if let err = error {
+                presentUIAlert(sender: self, title: "Error", message: err.localizedDescription)
+                print("Error authenticating phone num \(err.localizedDescription)")
+            } else {
+                print("Successfully added users phone number- \(String(describing: user?.phoneNumber))")
+                self.dismiss(animated: true, completion: nil)
+            }
+        })
+    }
+    func pressedVerify(){
+        print(#function)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        hideKeyboardWhenTappedAround()
+        UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [/*.badge, .sound, .alert*/], categories: nil))
 
-        // Do any additional setup after loading the view.
+        UIApplication.shared.registerForRemoteNotifications()
+
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

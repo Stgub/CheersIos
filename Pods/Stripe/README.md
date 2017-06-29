@@ -23,10 +23,10 @@ For more fine-grained information on all of the classes and methods in our SDK, 
 ## Example apps
 
 There are 2 example apps included in the repository:
-- Stripe iOS Example (Simple) shows a Swift integration using our prebuilt UI components.
-- Stripe iOS Example (Custom) demonstrates 2 different ways of collecting your user's payment details: via Apple Pay, and STPPaymentCardTextField, a native credit card UI form component we provide. It, too, uses a small example backend to make charges.
+- Stripe iOS Example (Simple) shows an integration using our prebuilt UI components [Swift]
+- Stripe iOS Example (Custom) shows how to use our low-level methods to accept payments using several different payment methods [Objective-C].
 
-To build and run the example apps, open `Stripe.xcworkspace` and choose the appropriate scheme.
+To build the example apps, you'll need to first run `./setup.sh`. Then, open `Stripe.xcworkspace` and choose the appropriate scheme.
 
 ### Getting started with the iOS example apps
 
@@ -37,17 +37,23 @@ Before you can run the apps, you need to provide them with your Stripe publishab
 1. If you haven't already, sign up for a [Stripe account](https://dashboard.stripe.com/register) (it takes seconds). Then go to https://dashboard.stripe.com/account/apikeys.
 2. Replace the `stripePublishableKey` constant in CheckoutViewController.swift (for the Simple app) or Constants.m (for the Custom app) with your Test Publishable Key.
 3. Head to https://github.com/stripe/example-ios-backend and click "Deploy to Heroku" (you may have to sign up for a Heroku account as part of this process). Provide your Stripe test secret key for the STRIPE_TEST_SECRET_KEY field under 'Env'. Click "Deploy for Free".
-4. Replace the `backendChargeURLString` variable in the example iOS app with the app URL Heroku provides you with (e.g. "https://my-example-app.herokuapp.com")
+4. Replace the `backendBaseURL` variable in the example iOS app with the app URL Heroku provides you with (e.g. "https://my-example-app.herokuapp.com")
 
-After this is done, you can make test payments through the app (use credit card number 4242 4242 4242 4242, along with any cvc and any future expiration date) and then view them in your Stripe Dashboard!
+After this is done, you can make test payments through the app and see them in your Stripe dashboard. Head to https://stripe.com/docs/testing#cards for a list of test card numbers.
+
+## card.io
+
+To add card scanning capabilities to our prebuilt UI components, you can simply [install card.io](https://github.com/card-io/card.io-iOS-SDK#setup) alongside our SDK. You'll also need to set `NSCameraUsageDescription` in your application's plist, and provide a reason for accessing the camera (e.g. "To scan cards").
+
+To try this out, you can run `./install_cardio.rb`, which will download and install card.io in Stripe iOS Example (Simple). Now, when you run the example app on a device, you'll see a "Scan Card" button when adding a new card.
 
 ## Running the tests
 
 1. Install Carthage (if you have homebrew installed, `brew install carthage`)
-1. From the root of the repo, install test dependencies by running `carthage bootstrap --platform ios --configuration Release --no-use-binaries`
-1. Open Stripe.xcworkspace
-1. Choose the "StripeiOS" scheme with the iPhone 6, iOS 10.1 simulator (required for snapshot tests to pass)
-1. Run Product -> Test
+2. From the root of the repo, install test dependencies by running `carthage bootstrap --platform ios --configuration Release --no-use-binaries`
+3. Open Stripe.xcworkspace
+4. Choose the "StripeiOS" scheme with the iPhone 6, iOS 10.3 simulator (required for snapshot tests to pass)
+5. Run Product -> Test
 
 ## Migrating from older versions
 

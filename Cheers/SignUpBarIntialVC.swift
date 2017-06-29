@@ -14,7 +14,7 @@ class SignUpBarIntialVC: UIViewController, hasDataDict {
     
     @IBAction func signOutBtnTapped(_ sender: Any) {
         
-        try! FIRAuth.auth()!.signOut()
+        try! Auth.auth().signOut()
         KeychainWrapper.standard.removeObject(forKey: KEY_UID)
         GeneralFunctions.presentFirstLoginVC(sender: self)
     }
@@ -47,18 +47,18 @@ class SignUpBarIntialVC: UIViewController, hasDataDict {
         super.viewDidLoad()
             let email = "charlesfayal@gmail.com"
             let pwd = "Gorby123"
-            FIRAuth.auth()?.signIn(withEmail: email, password: pwd, completion: { (user, error) in
+            Auth.auth().signIn(withEmail: email, password: pwd, completion: { (user, error) in
                 
                 if error != nil {
                     if (error != nil) {
                         // an error occurred while attempting login
-                        if let errCode = FIRAuthErrorCode(rawValue: (error?._code)!) {
+                        if let errCode = AuthErrorCode(rawValue: (error?._code)!) {
                             switch errCode {
-                            case .errorCodeInvalidEmail:
+                            case .invalidEmail:
                                 presentUIAlert(sender:self,title: "Invalid email", message: "Email is not in the correct format")
-                            case .errorCodeWrongPassword:
+                            case .wrongPassword:
                                 presentUIAlert(sender:self,title: "Invalid password", message: "Please enter the correct password")
-                            case .errorCodeUserNotFound:
+                            case .userNotFound:
                                 presentUIAlert(sender:self,title: "User not found", message: "Make sure email is correct, or create an account")
                             default:
                                 presentUIAlert(sender:self,title: "Error logging in", message: "Please try again")
