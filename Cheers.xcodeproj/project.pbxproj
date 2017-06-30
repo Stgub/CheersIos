@@ -294,6 +294,8 @@
 				56B91AFD1E651A2000CB40BB /* AccountVC.swift */,
 				56FDE76E1E6523DA00BDE97F /* HistoryVC.swift */,
 				56FDE7701E666F3E00BDE97F /* BarDetailVC.swift */,
+				5669A3DD1F033AA10098B9A0 /* PhoneVerificationVC.swift */,
+				5669A3DB1F0299FB0098B9A0 /* RedeemSuccessVC.swift */,
 				56B00C401E70C9F900B64B71 /* LoginSigninFlow */,
 				56FF178A1E6F9FE900089C7C /* CreateBarFlow */,
 				561DBAEE1EE4F18A00D2DADD /* SplashVC.swift */,
@@ -301,8 +303,6 @@
 				561DBAF21EE8ECA900D2DADD /* RecommendBarVC.swift */,
 				199AF66E1E6F969F00FBBAD1 /* ContactUsVC.swift */,
 				561DBAF41EE8EF2400D2DADD /* TermsAndPolicyVC.swift */,
-				5669A3DB1F0299FB0098B9A0 /* RedeemSuccessVC.swift */,
-				5669A3DD1F033AA10098B9A0 /* PhoneVerificationVC.swift */,
 				19FBCBB51E6378BC00AA10B5 /* View */,
 			);
 			name = Controller;

@@ -63,6 +63,7 @@ class MyFireBaseAPIClient:NSObject{
                 }
                 print("Completion")
                 completion(nil)
+                UserService.shareService.updateUser()
                 self.startObservingUser()
             } else { print("Error - cast issue probably not a user")
                 completion(userError(localizedDescription: "Could not get user"))

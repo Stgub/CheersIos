@@ -15,6 +15,7 @@ class UserService:NSObject {
     static let shareService = UserService()
 
     func updateUser(){
+        print(#function)
         if currentUser.membership == membershipLevels.premium {
             StripeAPIClient.sharedClient.updateCustomer()
         } else {

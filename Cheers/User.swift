@@ -147,7 +147,6 @@ class User{
     init( userKey: String , userData: Dictionary<String, AnyObject> ){
         self._userKey = userKey
         self.updateData(userData: userData)
-        UserService.shareService.updateUser()
     }
     
     func updateData(userData:Dictionary<String,AnyObject>){

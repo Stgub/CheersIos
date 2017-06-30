@@ -113,7 +113,9 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate,BarServi
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let day =  weekDays(rawValue: _dayLookedAtNum)!
-        bars = BarService.sharedService.getBars(forDay:day).sorted()
+        bars = BarService.sharedService.getBars(forDay:day).sorted(by: { (a, b) -> Bool in
+            return a < b
+        })
         return bars.count
     }
     

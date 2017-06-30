@@ -74,8 +74,9 @@ class HistoryVC: BaseMenuVC, UITableViewDelegate, UITableViewDataSource {
     //MARK: Tableview Functions
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return currentUser.barsUsed.count
+        return barHistory.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell") as! HistoryTableViewCell
         let bar = barHistory[indexPath.row]
