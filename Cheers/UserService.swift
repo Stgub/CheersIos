@@ -14,6 +14,22 @@ import FBSDKLoginKit
 class UserService:NSObject {
     static let shareService = UserService()
 
+    func updateUser(){
+        if currentUser.membership == membershipLevels.premium {
+            StripeAPIClient.sharedClient.updateCustomer()
+        } else {
+            if currentUser.currentPeriodEnd < NSDate().timeIntervalSince1970{
+                currentUser.credits = 1
+                let now =  NSDate().timeIntervalSince1970
+                let aMonth:TimeInterval = 60*60*24*30 // in seconds
+                if currentUser.currentPeriodEnd + aMonth < now {
+                    currentUser.currentPeriodEnd = currentUser.currentPeriodEnd + aMonth
+                } else {
+                    currentUser.currentPeriodEnd = now + aMonth
+                }
+            }
+        }
+    }
     func signOut(){
         MyFireBaseAPIClient.sharedClient.stopObservingUser()
         try! Auth.auth().signOut()

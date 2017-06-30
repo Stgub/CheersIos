@@ -114,6 +114,12 @@ class Bar {
             })
         }
     }
+    
+    func setImage(imageView: UIImageView){
+        getImage {
+            imageView.image = self.img
+        }
+    }
     //used to get a paragraph of the bar hours for labels throughout the app
     static func getHoursParagraph(hoursDict:Dictionary<String,String>,amPmDict:Dictionary<String,String>)-> String{
         var barHoursPara = ""

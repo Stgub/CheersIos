@@ -31,30 +31,43 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
                 //completion(error)
             } else {
                 //completion(nil)
-                print("Success getting user info")
-                if let currentPeriodStart = json![userDataTypes.currentPeriodStart] as? TimeInterval{
-                    currentUser.currentPeriodStart = currentPeriodStart
-                } else { print("Backend: could not get current start period") }
-                if let currentPeriodEnd = json![userDataTypes.currentPeriodEnd] as? TimeInterval{
-                    currentUser.currentPeriodEnd = currentPeriodEnd
-                } else { print("Backend: Ccould not get current end period") }
-                if let email = json!["email"] as? String {
-                    currentUser.userEmail = email
-                }
                 if let numSubscriptions = json!["numSubscriptions"] as? Int {
                     if numSubscriptions > 0 {
+                        print("Num subscriptions = \(numSubscriptions)")
                         currentUser.membership = membershipLevels.premium
                     }
                 }
+                print("Success getting user from Stripe, updating info")
+                if let currentPeriodStart = json![userDataTypes.currentPeriodStart] as? TimeInterval{
+                    print("Current start date \(currentUser.currentPeriodStart) - stripe Start \(currentPeriodStart)")
+                    currentUser.currentPeriodStart = currentPeriodStart
+                } else { print("Backend: could not get current start period") }
+                if let currentPeriodEnd = json![userDataTypes.currentPeriodEnd] as? TimeInterval{
+                    print("Current start date \(currentUser.currentPeriodEnd) - stripe Start \(currentPeriodEnd)")
+                    if currentUser.currentPeriodEnd < currentPeriodEnd {
+                        print("New month, adding credits")
+                        if currentUser.membership == membershipLevels.premium {
+                            print("Set to 10")
+                            currentUser.credits = 10
+                        } else {
+                            print("Set to 1")
+                            currentUser.credits = 1
+                        }
+                    }
+                    currentUser.currentPeriodEnd = currentPeriodEnd
+                    
+                } else { print("Backend: Ccould not get current end period") }
+               /* if let email = json!["email"] as? String {
+                    currentUser.userEmail = email
+                }*/ // Dont want to change email because it may be what they use to login with
+                
             }
-
         }
-  
     }
+    
     /**
      Adds the user to a subscription and charges them
- */
-
+     */
     func createCharge(_ result: STPPaymentResult, amount: Int, completion:  @escaping (_ error: Error?)->Void){
         print("Create charge")
         let pathExtension = "/charge"
@@ -92,9 +105,7 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
                     currentUser.currentPeriodEnd = currentPeriodEnd
                 } else { print("Backend: Ccould not get current end period") }
             }
-
         }
-
     }
     
     func createCutomer( completion: @escaping (_ customer:STPCustomer? , _ error:Error?) -> Void){
@@ -123,7 +134,6 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
             }
         }
         task.resume()
-        
     }
     
     func retrieveCustomer(_ customerID:String, completion:@escaping (_ customer:STPCustomer? , _ error:Error?)-> Void){
@@ -270,7 +280,7 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
     
     /**
      Changes the default source (card) that a customer uses to pay
- */
+     */
     func selectDefaultCustomerSource(_ source: STPSourceProtocol, completion: @escaping STPErrorBlock) {
         print("selectDefaultCustomerSource")
         let pathExtension = "/customer/default_source"
@@ -283,7 +293,7 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
             DispatchQueue.main.async {
                 let (decodedError, _) = self.decodeResponse(urlResponse,data:data!, error: error as NSError?)
                 if decodedError != nil {
-                    print("Backend: Error with default source -\(error?.localizedDescription)")
+                    print("Backend: Error with default source -\(String(describing: error?.localizedDescription))")
                     completion(decodedError)
                     return}
                 }
@@ -292,140 +302,5 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
     task.resume()
 
     }
-    
-    //MARK: Stripe connect functions, used for paying customers 
-    //but was not found to be a good way, have to trasnfer from a payment
-    /*
-    
-    func connectAddBank(bankToken: String, completion:@escaping (_ error: Error?)->()){
-        print("MYAPIClient: connectAddBank")
-        let pathExtension = "/connectBank"
-        guard let connectId = currentUser.connectId else {
-            print("No connect account ID, need to create acccount")
-            
-            return
-        }
-        
-        let params = [userDataTypes.connectId: connectId,
-                      "token": bankToken
-            ] as [String : Any]
-        
-        _ = self.createRequest(pathExtension: pathExtension, params: params){
-            (json, error) in
-            if error != nil {
-                completion(error)
-            } else {
-                completion(nil)
-            }
-            
-        }
-        
-        
-    }
-    
-    func connectAddBank(bankParams: STPBankAccountParams, completion:@escaping (_ error: Error?)->()){
-        print("MYAPIClient: connectAddBank")
-        let pathExtension = "/connectAddBank"
-        guard let connectId = currentUser.connectId else {
-            print("No connect account ID, need to create acccount")
-            
-            return
-        }
-        STPAPIClient.shared().createToken(withBankAccount: bankParams) { (token, error) in
-            if error != nil {
-                completion(error)
-            } else {
-                let params = [userDataTypes.connectId: connectId,
-                              "token": token!.tokenId
-                    ] as [String : Any]
-                
-                _ = self.createRequest(pathExtension: pathExtension, params: params){
-                    (json, error) in
-                    if error != nil {
-                        completion(error)
-                    } else {
-                        completion(nil)
-                    }
-                    
-                }
-            }
-        }
-    }
-    
-    func connectVerifyBank(amount1:Int, amount2:Int, completion:@escaping (_ error:Error?)->()){
-        print("MYAPIClient: connectVerifyBank")
-        let pathExtension = "/verifyBank"
-        guard let connectId = currentUser.connectId else {
-            print("No connect account ID, need to create acccount")
-            return
-        }
-        
-        let params = [userDataTypes.connectId: connectId,
-                      "amount1": amount1,
-                      "amount2": amount2 ] as [String : Any]
-        _ = createRequest(pathExtension: pathExtension, params: params){
-            (json, error) in
-            if error != nil{
-                completion(error)
-            } else {
-                completion(nil)
-                print("Successfully verified bank")
-            }
-        }
-    }
-    
-    
-    func getBankAccounts( completion:@escaping (_ error:Error?) -> Void){
-        print("MYAPIClient: getBankAccounts")
-        let pathExtension = "/getBankAccounts"
-        guard let connectId = currentUser.connectId else {
-            print("No connect account ID, need to create acccount")
-            return
-        }
-        
-        let params = [userDataTypes.connectId: connectId,
-                      ] as [String : Any]
-        _ = createRequest(pathExtension: pathExtension, params: params){
-            (json, error) in
-            if error != nil{
-                completion(error)
-            } else {
-                for account in json! {
-                    currentUser.bankAccounts[account.key] = account.value
-                }
-                completion(nil)
-                print("Successfully verified bank")
-            }
-        }
-    }
-    
-    func payout(completion:@escaping (_ error:Error?)->()){
-        print("MYAPIClient: checkout")
-        let pathExtension = "/connectPayout"
-        guard let connectId = currentUser.connectId else {
-            print("No connect account ID, need to create acccount")
-            
-            return
-        }
-        let payoutAmount = 1000 // TODO get this for real *******
-        let params = [userDataTypes.connectId: connectId,
-                      "amount": payoutAmount] as [String : Any]
-        _ = createRequest(pathExtension: pathExtension, params: params){
-            (json, error) in
-            if error != nil{
-                completion(error)
-            } else {
-                completion(nil)
-                print("Success payout")
-                if let accountId = json!["id"] as? String{
-                    currentUser.connectId = accountId
-                } else {
-                    print("Checkout Error: Could not retrieve id")
-                }
-            }
-        }
-    }
-    */
-    
 }
 

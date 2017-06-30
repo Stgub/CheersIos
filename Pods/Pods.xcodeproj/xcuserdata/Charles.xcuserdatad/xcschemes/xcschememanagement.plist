@@ -69,29 +69,14 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>plaid-ios-link-Resources.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>plaid-ios-link.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>plaid-ios-sdk-PLDResources.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>plaid-ios-sdk.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>0130274D2278A9D150244AE808AE1325</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>0BD659E21DA1CDA96BE2DD70EBA13298</key>
 		<dict>
 			<key>primary</key>
@@ -102,27 +87,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>26A48FFA97B8A359B51068DEA294408B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>2C307D6F8503BC86D28EC13628D34A15</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>2D66FF494205FAE5F2E8D8365F7DBEAC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3605BD2DFF8DCDB8B31EDF46D5A3A87B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3A374D5128799F080A6DD02B7E8FA14E</key>
+		<key>266D20CF3306A41383810D7899C629D1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -137,12 +102,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5497B6D858FAFE82E64CA36386879262</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>785FFF25216DEA5584DB45201A32602E</key>
+		<key>B295D1092EFE664FB38600C598434AFE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -157,11 +117,6 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BF714C47B8768866F06AEFF112790476</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>C052BEBFBD0AB5218CC64BA3450F6547</key>
 		<dict>
 			<key>primary</key>
@@ -172,7 +127,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EF850E498761BF44DFC77229172DED32</key>
+		<key>E91EB5B4C858F898A0427B2FF958F086</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E929EBA0EF18B55227D2A5ECDCA1BB1A</key>
 		<dict>
 			<key>primary</key>
 			<true/>

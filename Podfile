@@ -14,8 +14,8 @@ target 'Cheers' do
   pod 'Firebase/Storage'
   pod 'FBSDKLoginKit'
   pod 'SwiftKeychainWrapper'
-  pod 'plaid-ios-sdk'
-  pod 'plaid-ios-link'
+  #pod 'plaid-ios-sdk'
+  #pod 'plaid-ios-link'
   pod 'ReachabilitySwift'
   pod 'PayPal-iOS-SDK'
   

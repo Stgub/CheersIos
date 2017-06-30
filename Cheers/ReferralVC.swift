@@ -7,8 +7,7 @@
 //
 
 import UIKit
-import plaid_ios_link
-import plaid_ios_sdk
+
 
 
 class ReferralVC: BaseMenuVC { //, PLDLinkNavigationControllerDelegate {
@@ -74,17 +73,7 @@ class ReferralVC: BaseMenuVC { //, PLDLinkNavigationControllerDelegate {
     }
     
     /*
-    @IBAction func plaidConnectButton(_ sender: Any) {
-        let plaidLink = PLDLinkNavigationViewController(environment: .tartan, product: .connect)!
-
-        plaidLink.linkDelegate = self
-        plaidLink.providesPresentationContextTransitionStyle = true
-        plaidLink.definesPresentationContext = true
-        plaidLink.modalPresentationStyle = .custom
-        
-        self.present(plaidLink, animated: true, completion: nil)
-    }
-    
+      
     
     func linkNavigationContoller(_ navigationController: PLDLinkNavigationViewController!, didFinishWithAccessToken accessToken: String!) {
         print("success \(accessToken)")
