@@ -12,7 +12,6 @@ import Firebase
 
 class HistoryVC: BaseMenuVC, UITableViewDelegate, UITableViewDataSource {
 
-    var history:[String:TimeInterval] = [:] // barkey and date
     var barHistory:[Bar] = []
     @IBOutlet weak var tableView: UITableView!
     
@@ -48,33 +47,22 @@ class HistoryVC: BaseMenuVC, UITableViewDelegate, UITableViewDataSource {
         
         let drinksUsed = currentUser.barsUsed.count
         self.moneySavedLabel.text = "$\(drinksUsed * 10).00" // Update with actual prices??
-        if let image = currentUser.usersImage {
-            self.userImageView.image = image
-        }
-        DataService.ds.REF_USER_CURRENT.child(userDataTypes.barsUsed).observeSingleEvent(of: .value, with: {
-            (snapshot) in
-            if let historyData = snapshot.value as? Dictionary<String,TimeInterval>{
-                print(historyData)
-                self.history = historyData
-            }
-        })
+        
+        
+        //TODO move this to bar service
         DataService.ds.REF_BARS.observeSingleEvent(of: .value, with: {
             (snapshot) in
             if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshots {
                     print("CHUCK: SNAP - \(snap)")
                     let key = snap.key
-                    if self.history.keys.contains(key){
+                    if currentUser.barsUsed.keys.contains(key){
                         if let barData = snap.value as? Dictionary<String, AnyObject>{
                             let newBar = Bar(barKey: snap.key, dataDict: barData)
-                            newBar.getImage(){
-                                self.barHistory.append(newBar)
-                                //sort bars by date of use
-                                self.barHistory.sort(by: { (bar1, bar2) -> Bool in
-                                    return self.history[bar1.key]! > self.history[bar2.key]!
-                                })
-                                self.tableView.reloadData()
-                            }
+                            self.barHistory.append(newBar)
+                        
+                            self.tableView.reloadData()
+                            
                         }
                     }
                 }
@@ -88,11 +76,12 @@ class HistoryVC: BaseMenuVC, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return barHistory.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell") as! HistoryTableViewCell
         let bar = barHistory[indexPath.row]
-        let date = history[bar.key]
-        cell.barImageView.image = bar.img
+        let date = currentUser.barsUsed[bar.key]
+        bar.setImage(imageView: cell.barImageView)
         cell.barNameLabel.text = bar.barName
         cell.barStreetLabel.text = bar.locationStreet
         cell.dateLabel.text = getDateStringFromTimeStamp(date: date!)

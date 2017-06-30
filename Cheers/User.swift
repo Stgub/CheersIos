@@ -142,15 +142,8 @@ class User{
         get{ return _stripeID }
     }
     
-    private var _connectId:String?
-    var connectId:String?{
-        get{return _connectId}
-        set(newVal){
-            self.ref.child(userDataTypes.connectId).setValue(newVal)
-        }
-    }
     
-    public var bankAccounts:[String:Any] = [:]
+
     init( userKey: String , userData: Dictionary<String, AnyObject> ){
         self._userKey = userKey
         self.updateData(userData: userData)
@@ -168,9 +161,6 @@ class User{
         }
         if let stripeId =  userData[userDataTypes.stripeId] as? String {
             self._stripeID = stripeId
-        }
-        if let connectId = userData[userDataTypes.connectId] as? String{
-            self._connectId = connectId
         }
         
         if let email = userData[userDataTypes.email] as? String {
@@ -200,12 +190,12 @@ class User{
                 self._credits = 1
                 self.credits = 1
             }
-            
             print("Backend: No Credits information on Firebase")
         }
+        
         if let currentPeriodStart = userData[userDataTypes.currentPeriodStart] as? TimeInterval {
             self._currentPeriodStart = currentPeriodStart
-            print("Backend: start date from FB")
+            print("Backend: start date from FireBase")
         } else {
             self.currentPeriodStart = NSDate().timeIntervalSince1970
             print("Backend: added new arbitrary periodStart date")
@@ -214,7 +204,7 @@ class User{
         if let currentPeriodEnd = userData[userDataTypes.currentPeriodEnd] as? TimeInterval {
             self._currentPeriodEnd = currentPeriodEnd
             print("Backend: end date from FB")
-
+            
         } else {
             self.currentPeriodEnd = NSDate().timeIntervalSince1970 + 60 * 60 * 24 * 30
             print("Backend: added new arbitrary periodEnd date")
@@ -263,6 +253,5 @@ class User{
     func usedBar(barId:String, currentDate:TimeInterval){
         ref.child(userDataTypes.barsUsed).child(barId).setValue(currentDate)
         ref.child(userDataTypes.credits).setValue(self._credits - 1)
-
     }
 }

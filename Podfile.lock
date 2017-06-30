@@ -78,9 +78,6 @@ PODS:
   - PayPal-iOS-SDK/CardIO (2.17.0):
     - CardIO (~> 5.4.1)
   - PayPal-iOS-SDK/Core (2.17.0)
-  - plaid-ios-link (0.2.1):
-    - plaid-ios-sdk
-  - plaid-ios-sdk (0.3.6)
   - ReachabilitySwift (3)
   - Stripe (10.2.0)
   - SwiftKeychainWrapper (3.0.1)
@@ -93,8 +90,6 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Storage
   - PayPal-iOS-SDK
-  - plaid-ios-link
-  - plaid-ios-sdk
   - ReachabilitySwift
   - Stripe
   - SwiftKeychainWrapper
@@ -115,12 +110,10 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
   PayPal-iOS-SDK: 849321f6214a7187ee4cc684f63fe509df4c4a36
-  plaid-ios-link: 0ef45f18cdb2d1c3b9eaf6c2b457c950909df725
-  plaid-ios-sdk: e9865b0fe6a79b3d30d886171d7a26f7e1408935
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   Stripe: 5c5a49d750952b1801e4c1f5c4264a08e427c67d
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
 
-PODFILE CHECKSUM: 52c688ce7c960716d4b0a5a125d2a1fced081187
+PODFILE CHECKSUM: 0b19ec06db444334d2689e7753aa5c3066a7905d
 
 COCOAPODS: 1.2.1

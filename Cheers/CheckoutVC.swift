@@ -95,7 +95,7 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
         if let paymentMethod = paymentContext.selectedPaymentMethod {
             //self.paymentRow.detail = paymentMethod.label
             purchaseBtnView.isHidden = false
-            print("Payment label \(paymentContext.selectedPaymentMethod)")
+            print("Payment label \(String(describing: paymentMethod))")
         }
         else {
             purchaseBtnView.isHidden = true
@@ -129,8 +129,10 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
             completePurchase(title: title, message: message, error: error)
         case .success:
             currentUser.membership = membershipLevels.premium
+            UserService.shareService.updateUser()
             title = "Success"
             message = "Welcome to the premium membership!"
+            
             self.completePurchase(title: title, message: message, error: nil)
             
         case .userCancellation:

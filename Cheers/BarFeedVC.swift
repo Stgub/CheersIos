@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 var currentUser:User!
-class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate {
+class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate,BarServiceObserver {
 
     private var _dayLookedAtNum:Int!
     private var dayLookedAtNum:Int! {
@@ -30,14 +30,11 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate {
             return self._dayLookedAtNum
         }
     }
-    private var bars:[String:Bar] = [:]
     private var selectedBar:Bar!
     private var drinkTimer = Timer()
-    private var barPerDay:Dictionary<String,[String]> = [:]
-    
 
     @IBOutlet weak var leftMenuButton: UIButton!
-    
+    //UserBanner stuff
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var membershipBtn: UIButton!
@@ -62,17 +59,24 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate {
     
     override func viewWillDisappear(_ animated: Bool) {
         drinkTimer.invalidate()
+        BarService.sharedService.removeObserver(observer: self)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         attachMenuButton(menuButton: leftMenuButton)
-        StripeAPIClient.sharedClient.updateCustomer() // used to make sure the users subscription is correct
+        UserService.shareService.updateUser() // used to make sure the users subscription is correct
         _dayLookedAtNum = Date().dayNumberOfWeek()!
         dayLookedAtNum = _dayLookedAtNum
+        BarService.sharedService.addObserver(observer: self)
+        BarService.sharedService.getBars()
     }
     
-    func updateUI(){
+    func updatedBars(){
+        self.tableView.reloadData()
+    }
+    
+    private func updateUI(){
         self.updateDrinkTimer()
         GeneralFunctions.updateUserBanner(controller: self, nameL: userNameLabel,
                                           creditsL: creditsLabel,
@@ -80,55 +84,10 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate {
                                           renewDateL: renewDateLabel,
                                           imgL: userImageView)
         
-        
-        let barsUsed = currentUser.barsUsed
-        MyFireBaseAPIClient.sharedClient.getBars(){
-            (returnedBars) in
-            print("Backend API returned bars")
-            for newBar in returnedBars{
-                var bar:Bar
-                
-                if self.bars[newBar.key] == nil {
-                    bar = newBar
-                    self.bars[bar.key] = bar
-                    bar.getImage(){
-                        print("Appending \(bar.barName) to tableview")
-                        self.tableView.reloadData()
-                    }
-                } else {
-                    bar = self.bars[newBar.key]!
-                }
-                let barDays = bar.availableDays
-                print("*********\(bar.barName!) Added to Bar Feed#####")
-                //print(barDays)
-                for i in 1...7 {
-                    let dayString = weekDays(rawValue:i)!.toString
-                    if let dayBool = barDays[dayString]{
-                        if dayBool{
-                            if self.barPerDay[dayString] == nil {
-                                self.barPerDay[dayString] = [bar.key]
-                            } else {
-                                if !self.barPerDay[dayString]!.contains(bar.key){
-                                    self.barPerDay[dayString]!.append(bar.key)
-                                }
-                            }
-                        }
-                    }
-                }
-    
-                if barsUsed.keys.contains(bar.key){
-                    bar.hasBeenUsed = true
-                } else {
-                    bar.hasBeenUsed = false
-                }
-
-            }
-        
-        }
         tableView.reloadData()
     }
     
-    func updateDrinkTimer(){
+    @objc private func updateDrinkTimer(){
         let timeLeft = timeLeftBetweenDrinks()
         if timeLeft < 0 {
             drinkTimer.invalidate()
@@ -138,6 +97,8 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate {
             drinkTimeLeft.text = timeStringFromIntervael(timeInterval: timeLeft)
         }
     }
+    
+    
     /**
      Called from BarTableViewCell
     */
@@ -145,22 +106,26 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate {
         selectedBar = forBar
         self.performSegue(withIdentifier: "toBarDetailSegue", sender: self)
     }
+    
     //MARK: Table View functions
+    private var bars:[String] = []
     @IBOutlet weak var tableView: UITableView!
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let barArray = barPerDay[weekDays(rawValue:_dayLookedAtNum)!.toString] else {
-            return 0
-        }
-        print("barArray------\(barArray)")
-        return barArray.count
+        let day =  weekDays(rawValue: _dayLookedAtNum)!
+        bars = BarService.sharedService.getBars(forDay:day).sorted(by: { (a, b) -> Bool in
+            return a < b
+        })
+        return bars.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell (withIdentifier: "BarTableViewCell") as! BarTableViewCell
-        cell.delegate = self // used to call back when a bar is tapped 
-        let barString = barPerDay[weekDays(rawValue:_dayLookedAtNum)!.toString]![indexPath.row]
-        let bar = bars[barString]!
+        cell.delegate = self // used to call back when a bar is tapped
+        let barString = bars[indexPath.row]
+        guard let bar = BarService.sharedService.getBar(id:barString) else {
+            return cell
+        }
         cell.bar = bar
     
         if let barName = bar.barName {
@@ -183,9 +148,8 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate {
         }
         cell.barAreaLabel.text = locationString
         
-        if let barImage = bar.img {
-            cell.barImageView.image = barImage
-        }
+        bar.setImage(imageView: cell.barImageView!)
+        
         if let barUsed = bar.hasBeenUsed{
             if barUsed{
                 cell.freeDrinkBtn.setTitle("Drink Used", for: .normal)
