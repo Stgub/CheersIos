@@ -36,7 +36,6 @@ class Bar {
     var phoneNumber:String!
     var img:UIImage!
     var imgUrl:String!
-    var hasBeenUsed:Bool!
     var description:String!
     var drinks: String!
     var hoursTime: Dictionary<String,String>!

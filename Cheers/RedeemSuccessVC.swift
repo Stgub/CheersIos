@@ -16,8 +16,8 @@ class RedeemSuccessVC: UIViewController {
     @IBAction func okayBtnTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    override func viewDidAppear(_ animated: Bool) {
-        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+    override func viewWillAppear(_ animated: Bool) {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
     }
 
     func updateTimer(){

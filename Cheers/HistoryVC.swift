@@ -60,7 +60,16 @@ class HistoryVC: BaseMenuVC, UITableViewDelegate, UITableViewDataSource {
                         if let barData = snap.value as? Dictionary<String, AnyObject>{
                             let newBar = Bar(barKey: snap.key, dataDict: barData)
                             self.barHistory.append(newBar)
-                        
+                            // sort bars based of date used
+                            self.barHistory = self.barHistory.sorted(by: { (a, b) -> Bool in
+                                guard let aDate = currentUser.barsUsed[a.key] else {
+                                    return true
+                                }
+                                guard let bDate = currentUser.barsUsed[b.key] else {
+                                    return true
+                                }
+                                return aDate > bDate
+                            })
                             self.tableView.reloadData()
                             
                         }

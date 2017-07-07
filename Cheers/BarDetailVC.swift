@@ -47,7 +47,6 @@ class BarDetailVC: UIViewController, hasBarVar {
             } else {
                 print("Successfully redeemed")
                 currentUser.usedBar(barId: self.bar.key, currentDate:dateStamp)
-                self.bar.hasBeenUsed = true
                 self.performSegue(withIdentifier: "drinkRedeemedSegue", sender: self)
             }
         }
@@ -76,9 +75,9 @@ class BarDetailVC: UIViewController, hasBarVar {
         }
         //Check the next availability of bar
         var dateAvailable: TimeInterval = 0
-        if bar.hasBeenUsed ?? false {
+        if currentUser.barsUsed.keys.contains(bar.key){
             let dateUsed = currentUser.barsUsed[bar.key]
-            dateAvailable = dateUsed! + 30 * 24 * 60 * 60 // one month
+            dateAvailable = dateUsed! + ConfigUtil.MONTH_IN_SEC // one month
         }
         //remove actions linked to button, if adding more there's a better way
         redeemDrinkBtn.removeTarget(self, action: #selector(verifyPhone), for: .touchUpInside)

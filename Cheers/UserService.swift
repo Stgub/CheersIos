@@ -11,9 +11,23 @@ import Firebase
 import SwiftKeychainWrapper
 import FBSDKLoginKit
 
+var currentUser:User!
+
+//protocol UserObserver{
+//    func updateUser()
+//}
+
 class UserService:NSObject {
     static let shareService = UserService()
-
+    
+//    var observer:UserObserver!
+//    func addObserver(observer:UserObserver){
+//        self.observer = observer
+//    }
+//    func removeObserver(observer:UserObserver){
+//        self.observer = nil
+//    }
+//    
     func updateUser(){
         print(#function)
         if currentUser.membership == membershipLevels.premium {
@@ -204,26 +218,4 @@ class UserService:NSObject {
             
         })
     }
-    
-    
-//    func checkuuid(){
-//        DataService.ds.REF_USERS.observeSingleEvent(of: .value, with:{
-//            (snapshot) in
-//            if snapshot.hasChild(id) {
-//                
-//            } else {
-//                //If there is not a user with ID but this device is already associated with an account, don't let them create multiple accounts on device
-//                DataService.ds.REF_DEVICE_IDS.observeSingleEvent(of: .value, with: {
-//                    (deviceSnapshot) in
-//                    let deviceId = UIDevice.current.identifierForVendor!.uuidString
-//                    if deviceSnapshot.hasChild(deviceId) {
-//                        presentUIAlert(sender: sender, title: "Device is already associated with an account", message: "Please contact support at support@GetToastApp.com")
-//                        return
-//                    }
-//                })
-//            }
-//        })
-//    }
-//    
-
 }

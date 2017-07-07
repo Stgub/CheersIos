@@ -9,7 +9,6 @@
 import UIKit
 import Firebase
 
-var currentUser:User!
 class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate,BarServiceObserver {
 
     private var _dayLookedAtNum:Int!
@@ -150,9 +149,12 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate,BarServi
         
         bar.setImage(imageView: cell.barImageView!)
         
-        if let barUsed = bar.hasBeenUsed{
-            if barUsed{
-                cell.freeDrinkBtn.setTitle("Drink Used", for: .normal)
+        if currentUser.barsUsed.keys.contains(bar.key){
+            if let date = currentUser.barsUsed[bar.key] {
+                if Date().timeIntervalSince1970 - date < ConfigUtil.MONTH_IN_SEC {
+                    cell.freeDrinkBtn.setTitle("Drink Used", for: .normal)
+                }
+
             }
         }
         return cell
