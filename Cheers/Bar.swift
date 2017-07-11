@@ -36,7 +36,6 @@ class Bar {
     var phoneNumber:String!
     var img:UIImage!
     var imgUrl:String!
-    var hasBeenUsed:Bool!
     var description:String!
     var drinks: String!
     var hoursTime: Dictionary<String,String>!
@@ -86,20 +85,22 @@ class Bar {
 
     }
     func getImage(returnBlock:@escaping ()->()){
-        print("Getting image for \(self.barName)")
+        //print("Getting image for \(self.barName)")
         guard let imageUrl = self.imgUrl else {
             print("CHUCK: no image url")
             return
         }
         if let image = imageCache.object(forKey: imageUrl as NSString) {
+            print("Image from cache \(self.barName)")
             self.img = image
             returnBlock()
         } else {
+            print("Image from database \(self.barName)")
             let ref = Storage.storage().reference(forURL: imageUrl)
             
             ref.getData(maxSize: 2 * 1024 * 1024, completion: { (data, error) in
                 if error != nil {
-                    print("Chuck: Error downloading img -\(error)")
+                    print("Chuck: Error downloading img -\(String(describing: error))")
                     
                 } else {
                     print("Chuck: Img downloaded from Firebase storage")

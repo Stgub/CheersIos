@@ -14,10 +14,10 @@ class RedeemSuccessVC: UIViewController {
     var countdown = 30
     @IBOutlet weak var timeLabel: UILabel!
     @IBAction func okayBtnTapped(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        GeneralFunctions.presentBarFeedVC(sender: self)
     }
-    override func viewDidAppear(_ animated: Bool) {
-        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+    override func viewWillAppear(_ animated: Bool) {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
     }
 
     func updateTimer(){

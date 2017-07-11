@@ -9,20 +9,20 @@
 import UIKit
 import Firebase
 
-var currentUser:User!
 class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate,BarServiceObserver {
 
     private var _dayLookedAtNum:Int!
+    private var _lookingAtToday:Bool = false
     private var dayLookedAtNum:Int! {
         set(newVal){
             self._dayLookedAtNum = newVal % 7
             if _dayLookedAtNum <= 0 { _dayLookedAtNum = 7}
             if _dayLookedAtNum == Date().dayNumberOfWeek() {
+                _lookingAtToday = true
                 self.dayBtnOutlet.setTitle("Today", for: .normal) //
-
             } else {
                 self.dayBtnOutlet.setTitle(weekDays(rawValue:_dayLookedAtNum)!.toString, for: .normal) //
-
+                _lookingAtToday = false
             }
             self.tableView.reloadData()
         }
@@ -94,7 +94,7 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate,BarServi
             drinkTimeLeft.isHidden = true
         } else {
             drinkTimeLeft.isHidden = false
-            drinkTimeLeft.text = timeStringFromIntervael(timeInterval: timeLeft)
+            drinkTimeLeft.text = timeStringFromInterval(timeInterval: timeLeft)
         }
     }
     
@@ -149,10 +149,12 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate,BarServi
         cell.barAreaLabel.text = locationString
         
         bar.setImage(imageView: cell.barImageView!)
-        
-        if let barUsed = bar.hasBeenUsed{
-            if barUsed{
-                cell.freeDrinkBtn.setTitle("Drink Used", for: .normal)
+        if currentUser.barsUsed.keys.contains(bar.key){
+            if let date = currentUser.barsUsed[bar.key] {
+                if Date().timeIntervalSince1970 - date < ConfigUtil.MONTH_IN_SEC {
+                    cell.freeDrinkBtn.setTitle("Drink Used", for: .normal)
+                }
+
             }
         }
         return cell

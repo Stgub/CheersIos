@@ -16,7 +16,7 @@ class PaypalWebViewVC: UIViewController, UIWebViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         webView.delegate = self
-        webView.loadRequest(URLRequest(url: URL(string: SERVER_BASE + "/subscribe")!))
+        webView.loadRequest(URLRequest(url: URL(string: ConfigUtil.SERVER_BASE + "/subscribe")!))
 
 
         // Do any additional setup after loading the view.

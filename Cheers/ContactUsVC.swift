@@ -21,7 +21,7 @@ class ContactUsVC: BaseMenuVC {
     
     //Send to email
     @IBAction func emailBtnTapped(_ sender: Any) {
-        let email = "ContactTheDrinkClub@gmail.com"
+        let email = "contact@thetoastclub.com"
         if let url = URL(string: "mailto:\(email)") {
             UIApplication.shared.openURL(url)
             

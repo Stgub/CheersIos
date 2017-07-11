@@ -37,6 +37,8 @@
 		561DBAF81EEA317800D2DADD /* PayPalCheckoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DBAF71EEA317800D2DADD /* PayPalCheckoutVC.swift */; };
 		5632C26B1E933716003C2D6B /* StripeAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5632C26A1E933716003C2D6B /* StripeAPIClient.swift */; };
 		5657A9701F055FDA008CA2FF /* BarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5657A96F1F055FDA008CA2FF /* BarService.swift */; };
+		5657A9721F0F28F1008CA2FF /* ConfigUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5657A9711F0F28F1008CA2FF /* ConfigUtil.swift */; };
+		5657A9761F146D7A008CA2FF /* BarUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5657A9751F146D7A008CA2FF /* BarUtil.swift */; };
 		5669A3DC1F0299FB0098B9A0 /* RedeemSuccessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5669A3DB1F0299FB0098B9A0 /* RedeemSuccessVC.swift */; };
 		5669A3DE1F033AA10098B9A0 /* PhoneVerificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5669A3DD1F033AA10098B9A0 /* PhoneVerificationVC.swift */; };
 		56839A531EEDC68E00A7E0ED /* PaypalWebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56839A521EEDC68E00A7E0ED /* PaypalWebViewVC.swift */; };
@@ -128,6 +130,8 @@
 		5632C26A1E933716003C2D6B /* StripeAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeAPIClient.swift; sourceTree = "<group>"; };
 		563E81161EF0B11B00AB1AE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = Base.lproj/XibView.swift; sourceTree = "<group>"; };
 		5657A96F1F055FDA008CA2FF /* BarService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarService.swift; sourceTree = "<group>"; };
+		5657A9711F0F28F1008CA2FF /* ConfigUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigUtil.swift; sourceTree = "<group>"; };
+		5657A9751F146D7A008CA2FF /* BarUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarUtil.swift; sourceTree = "<group>"; };
 		5669A3DB1F0299FB0098B9A0 /* RedeemSuccessVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedeemSuccessVC.swift; sourceTree = "<group>"; };
 		5669A3DD1F033AA10098B9A0 /* PhoneVerificationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneVerificationVC.swift; sourceTree = "<group>"; };
 		56839A521EEDC68E00A7E0ED /* PaypalWebViewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaypalWebViewVC.swift; sourceTree = "<group>"; };
@@ -254,6 +258,8 @@
 				19FBCBB91E6379E200AA10B5 /* Constants.swift */,
 				56B91B071E651C7700CB40BB /* GeneralFunctions.swift */,
 				56FDE7721E666F9D00BDE97F /* Protocols.swift */,
+				5657A9711F0F28F1008CA2FF /* ConfigUtil.swift */,
+				5657A9751F146D7A008CA2FF /* BarUtil.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -679,6 +685,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5657A9721F0F28F1008CA2FF /* ConfigUtil.swift in Sources */,
 				561DBACE1EE0FA6200D2DADD /* SlideMenuVC.swift in Sources */,
 				199AF66D1E6F6DAA00FBBAD1 /* RoundedImageCorner.swift in Sources */,
 				56FF178C1E6FA0A300089C7C /* BarAddDetailsVC.swift in Sources */,
@@ -697,6 +704,7 @@
 				19BA3EEC1EEB1CAE00D07A96 /* ButtonTextLeft.swift in Sources */,
 				56FDE7711E666F3E00BDE97F /* BarDetailVC.swift in Sources */,
 				19FBCB871E635FE500AA10B5 /* BarFeedVC.swift in Sources */,
+				5657A9761F146D7A008CA2FF /* BarUtil.swift in Sources */,
 				199AF66F1E6F969F00FBBAD1 /* ContactUsVC.swift in Sources */,
 				56839A531EEDC68E00A7E0ED /* PaypalWebViewVC.swift in Sources */,
 				56FF17871E6F8E5D00089C7C /* SignUpBarIntialVC.swift in Sources */,

@@ -47,7 +47,7 @@ class PhoneVerificationVC: UIViewController, UITextFieldDelegate {
             presentUIAlert(sender: self, title: "Did not enter full number", message: "Please complete number")
             return
         }
-        let phoneNumber = "+" + phoneNum1TF.text! + phoneNum2TF.text! + phoneNum3TF.text!
+        let phoneNumber = "+1" + phoneNum1TF.text! + phoneNum2TF.text! + phoneNum3TF.text!
         PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber) { (verificationID, error) in
             if error != nil {
                 print("Error verifying phone num \(error.debugDescription)")

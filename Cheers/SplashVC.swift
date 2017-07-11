@@ -59,7 +59,6 @@ class SplashVC: UIViewController {
                 print("Checking keychain for user")
                 if let _  = KeychainWrapper.standard.string(forKey: KEY_UID ){
                     print("CHUCK: ID found in keychain")
-                    
                     MyFireBaseAPIClient.sharedClient.getUser{ (userError) in
                         if userError == nil {
                             print(#function)
