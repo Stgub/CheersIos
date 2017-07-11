@@ -58,9 +58,14 @@ class BarDetailVC: UIViewController, hasBarVar {
         }
     }
     
-    var updateTimer = Timer()
+    private var updateTimer = Timer()
     func updateTimeLabel(){
-        redeemDrinkBtn.setTitle("\(timeStringFromInterval(timeInterval: timeLeftBetweenDrinks()))", for: .normal)
+        if timeLeftBetweenDrinks() < 0 {
+            updateTimer.invalidate()
+            updateUI()
+        } else {
+            redeemDrinkBtn.setTitle("\(timeStringFromInterval(timeInterval: timeLeftBetweenDrinks()))", for: .normal)
+        }
     }
     
     func updateUI(){
