@@ -54,7 +54,7 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate,BarServi
 
     override func viewWillAppear(_ animated: Bool) {
         updateUI()
-        drinkTimer = Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(self.updateDrinkTimer), userInfo: nil, repeats: true)
+        drinkTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateDrinkTimer), userInfo: nil, repeats: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
