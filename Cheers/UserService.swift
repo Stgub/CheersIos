@@ -108,6 +108,7 @@ class UserService:NSObject {
     }
 
     func emailSignUp(sender: UIViewController,email:String,password:String, userData:[String:String]){
+        print("Signing up \(email)")
         var userData = userData
         Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
             if error == nil {

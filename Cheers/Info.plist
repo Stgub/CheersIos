@@ -28,7 +28,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>4</string>
 	<key>FacebookAppID</key>
 	<string>1275398559211925</string>
 	<key>FacebookDisplayName</key>
@@ -47,6 +47,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Used to update profile image</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>$(PRODUCT_NAME) needs acces to your photo libary to upload pictures.</string>
 	<key>UILaunchStoryboardName</key>

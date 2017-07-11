@@ -247,7 +247,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e1n-h0-460" id="dRF-Zo-fkb">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="86.666666666666671"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="86.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEw-oq-9uQ">
@@ -731,7 +731,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6H3-6P-WFP" id="UeR-X4-UaQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="86.666666666666671"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="86.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32P-ih-Bfi">
@@ -1070,7 +1070,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gx1-AO-wOK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="186.95652173913044" y="-2188.858695652174"/>
+            <point key="canvasLocation" x="861" y="-2165"/>
         </scene>
         <!--redeemDrink-->
         <scene sceneID="c8r-rw-QUK">
@@ -1172,7 +1172,7 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXm-ib-lDC">
                                 <rect key="frame" x="20" y="168" width="374" height="49.333333333333343"/>
-                                <string key="text">This swanky place has evefyhting you could have from pool tables and a chill vibe to the back club whree the real action happens. C'mon through and enjoya free drink!</string>
+                                <string key="text">This swanky place has everyhting you could have from pool tables and a chill vibe to the back club whree the real action happens. C'mon through and enjoya free drink!</string>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.54000000000000004" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
@@ -1308,7 +1308,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9aO-x1-X0c" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="186.95652173913044" y="-1446.1956521739132"/>
+            <point key="canvasLocation" x="101" y="-1451"/>
         </scene>
         <!--Checkout View Controller-->
         <scene sceneID="YdS-HI-umO">
@@ -1592,7 +1592,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sgD-Px-KOZ" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1046" y="-1482"/>
+            <point key="canvasLocation" x="1045" y="-1451"/>
         </scene>
         <!--Terms And PolicyVC-->
         <scene sceneID="tXV-wm-sNT">
