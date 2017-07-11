@@ -15,6 +15,7 @@ let TOAST_PRIMARY_COLOR = UIColor(colorLiteralRed: 255/255, green: 128/255, blue
 let KEY_UID = "uid"
 let TIME_BETWEEN_DRINKS:TimeInterval = 90 * 60// in seconds
 
+let DAY_IN_SECS:TimeInterval = 24*60*60
 struct myStoryboards {
     static let  main = "Main"
     static let logOrSignIn = "LoginFlow"

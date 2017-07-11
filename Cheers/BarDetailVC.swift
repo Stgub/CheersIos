@@ -37,6 +37,9 @@ class BarDetailVC: UIViewController, hasBarVar {
         self.performSegue(withIdentifier: "verifyPhoneSegue", sender: self)
     }
     
+    func goToAccount(){
+        GeneralFunctions.presentAccountVC(sender: self)
+    }
     func redeemDrink(){
         print("CHUCK: User redeemed bar -\(bar.barName)")
         let dateStamp = NSDate().timeIntervalSince1970
@@ -73,17 +76,11 @@ class BarDetailVC: UIViewController, hasBarVar {
         if let barDescript = bar.description{
             barDescriptLabel.text = barDescript
         }
-        //Check the next availability of bar
-        var dateAvailable: TimeInterval = 0
-        if currentUser.barsUsed.keys.contains(bar.key){
-            let dateUsed = currentUser.barsUsed[bar.key]
-            dateAvailable = dateUsed! + ConfigUtil.MONTH_IN_SEC // one month
-        }
-        //remove actions linked to button, if adding more there's a better way
-        redeemDrinkBtn.removeTarget(self, action: #selector(verifyPhone), for: .touchUpInside)
-        redeemDrinkBtn.removeTarget(self, action: #selector(redeemDrink), for: .touchUpInside)
         
-        if currentUser.phoneNumber == nil {
+        //remove actions linked to button, if adding more there's a better way
+        redeemDrinkBtn.removeTarget(nil, action: nil, for: .touchUpInside)
+
+        if currentUser.phoneNumber == nil && !ConfigUtil.inTesting{
             redeemDrinkBtn.setTitle("Verify Phone", for: .normal)
             redeemDrinkBtn.isUserInteractionEnabled = true
             redeemDrinkBtn.addTarget(self, action: #selector(self.verifyPhone), for: .touchUpInside)
@@ -91,19 +88,27 @@ class BarDetailVC: UIViewController, hasBarVar {
             //User has no credits left to buy drins
             redeemDrinkBtn.setTitle("Upgrade to recieve more credits!", for: .normal)
             redeemDrinkBtn.isUserInteractionEnabled = false
-        } else if dateAvailable != 0  &&  dateAvailable > NSDate().timeIntervalSince1970{
+            redeemDrinkBtn.addTarget(self, action: #selector(self.goToAccount),for: .touchUpInside)
+        } else if !BarUtil.isBarAvailable(bar:bar) {
             //Bar has been used and is not available yet
-            redeemDrinkBtn.setTitle("Redeemed, available again: \(getDateStringFromTimeStamp(date: dateAvailable))", for: .normal)
-            redeemDrinkBtn.isUserInteractionEnabled = false
+            self.redeemDrinkBtn.setTitle("Drink Redeemed!", for: .normal) //, available again: \(getDateStringFromTimeStamp(date: dateAvailable))"
+            self.redeemDrinkBtn.isUserInteractionEnabled = false
         } else if timeLeftBetweenDrinks() > 0{
             //User has recently used a drink and must wait for TIME_BETWEEN_DRINKS
             redeemDrinkBtn.isUserInteractionEnabled = false
-            redeemDrinkBtn.setTitle("\(timeStringFromIntervael(timeInterval: timeLeftBetweenDrinks())) left until another drink can be used", for: .normal)
-        } else {
-            //User is good to use drink
-            redeemDrinkBtn.setTitle("Have your server tap to redeem", for: .normal)
-            redeemDrinkBtn.isUserInteractionEnabled = true
-            redeemDrinkBtn.addTarget(self, action: #selector(self.redeemDrink), for: .touchUpInside)
+            redeemDrinkBtn.setTitle("\(timeStringFromInterval(timeInterval: timeLeftBetweenDrinks()))", for: .normal)
+        } else{
+            guard let dayNum = Date().dayNumberOfWeek(), let dayStr:String = weekDays(rawValue:dayNum)?.toString, let isAvailable:Bool = bar.availableDays[dayStr], isAvailable else {
+                self.redeemDrinkBtn.setTitle("Bar is not available today", for: .normal)
+                self.redeemDrinkBtn.isUserInteractionEnabled = false
+                return
+            }
+            if isAvailable {
+                self.redeemDrinkBtn.setTitle("Have your server tap to redeem", for: .normal)
+                self.redeemDrinkBtn.isUserInteractionEnabled = true
+                self.redeemDrinkBtn.addTarget(self, action: #selector(self.redeemDrink), for: .touchUpInside)
+            }
+        
 
         }
     }

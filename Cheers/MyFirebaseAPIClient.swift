@@ -40,9 +40,14 @@ class MyFireBaseAPIClient:NSObject{
     {
         print(#function)
         print(DataService.ds.REF_USER_CURRENT)
+        //TODO when user gets deleted, the phone gets stuck on the splash screen
+        
         DataService.ds.REF_USER_CURRENT.observeSingleEvent(of: .value, with: { (snapshot) in
             print("Observed User")
             //Update current User
+            if !snapshot.exists() {
+                print("ERROR: User does not exist")
+            }
             let snapKey = snapshot.key
             if let userData = snapshot.value as? Dictionary<String,AnyObject>{
                 if let user = currentUser {
@@ -80,6 +85,7 @@ class MyFireBaseAPIClient:NSObject{
      */
     func startObservingUser() {
         print(#function)
+
         observeUserHandle = DataService.ds.REF_USER_CURRENT.observe(.value, with: { (snapshot) in
             print("Observed User")
             //Update current User

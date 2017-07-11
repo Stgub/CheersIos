@@ -1232,9 +1232,12 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.54000000000000004" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HSS-Ga-u1A">
-                                <rect key="frame" x="69.666666666666686" y="623" width="275" height="37"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="HSS-Ga-u1A">
+                                <rect key="frame" x="20" y="560" width="374" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="x46-S8-bRp"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="18"/>
                                 <state key="normal" title="Have your server tap to redeem">
                                     <color key="titleColor" red="1" green="0.65490196079999996" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1251,11 +1254,13 @@
                             <constraint firstItem="j7a-Og-qZa" firstAttribute="top" secondItem="sAM-Nq-9ql" secondAttribute="bottom" id="9AD-J3-5TM"/>
                             <constraint firstItem="dkK-OB-sDY" firstAttribute="top" secondItem="j7a-Og-qZa" secondAttribute="bottom" constant="8" id="9DH-ze-smu"/>
                             <constraint firstItem="mke-wp-Tdf" firstAttribute="leading" secondItem="bP3-Wy-GnX" secondAttribute="leadingMargin" id="B7Z-al-FDm"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="HSS-Ga-u1A" secondAttribute="trailing" id="Ccn-BY-6xj"/>
                             <constraint firstItem="HSS-Ga-u1A" firstAttribute="centerX" secondItem="bP3-Wy-GnX" secondAttribute="centerX" id="E5t-lV-oa0"/>
                             <constraint firstItem="3Q4-Ex-bu3" firstAttribute="centerX" secondItem="bP3-Wy-GnX" secondAttribute="centerX" id="EFq-8u-zvK"/>
                             <constraint firstItem="a8Y-yq-cYB" firstAttribute="top" secondItem="jO9-aY-gFO" secondAttribute="bottom" constant="8" id="F3r-QB-GTB"/>
                             <constraint firstItem="jO9-aY-gFO" firstAttribute="top" secondItem="vgc-mB-L8J" secondAttribute="bottom" constant="2" id="FRS-Ib-dzX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Obi-Sp-7if" secondAttribute="trailing" id="H9Q-Ue-4Ar"/>
+                            <constraint firstItem="HSS-Ga-u1A" firstAttribute="leading" secondItem="bP3-Wy-GnX" secondAttribute="leadingMargin" id="HK2-aP-Mak"/>
                             <constraint firstItem="j7a-Og-qZa" firstAttribute="leading" secondItem="bP3-Wy-GnX" secondAttribute="leading" id="HjF-UR-CVV"/>
                             <constraint firstItem="WXm-ib-lDC" firstAttribute="top" secondItem="3Q4-Ex-bu3" secondAttribute="bottom" constant="2" id="I8w-03-nQE"/>
                             <constraint firstItem="Obi-Sp-7if" firstAttribute="top" secondItem="MJ5-A2-iTE" secondAttribute="bottom" constant="2" id="Ibh-Dq-kFu"/>
@@ -1303,7 +1308,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9aO-x1-X0c" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="188" y="-1446"/>
+            <point key="canvasLocation" x="186.95652173913044" y="-1446.1956521739132"/>
         </scene>
         <!--Checkout View Controller-->
         <scene sceneID="YdS-HI-umO">

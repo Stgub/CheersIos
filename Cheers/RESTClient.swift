@@ -38,7 +38,7 @@ class RESTClient:NSObject{
     
     func createRequest( pathExtension: String, params: [String:Any]) -> URLRequest{
         print(#function)
-        let baseURL = URL(string: SERVER_BASE)!
+        let baseURL = URL(string: ConfigUtil.SERVER_BASE)!
         let url = baseURL.appendingPathComponent(pathExtension)
         print("URL: \(url)")
         var request = URLRequest(url: url)
