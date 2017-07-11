@@ -115,7 +115,7 @@ func timeLeftBetweenDrinks()->TimeInterval{
 func timeStringFromInterval(timeInterval:TimeInterval)->String{
     let hrs = Int(timeInterval/(60*60))
     let mins = Int(timeInterval .truncatingRemainder(dividingBy: 60*60) / 60 )
-    let secs = Int(timeInterval.truncatingRemainder(dividingBy: 60*60))
+    let secs = Int(timeInterval.truncatingRemainder(dividingBy: 60))
 //    var minsStr = "\(mins)"
 //    if mins < 10 {
 //        minsStr = "0\(mins)"

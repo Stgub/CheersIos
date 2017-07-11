@@ -11,20 +11,17 @@ import Firebase
 import SwiftKeychainWrapper
 class CreateEmailLoginVC: UIViewController,UITextFieldDelegate {
 
+    var userData:[String:AnyObject] = [:]
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var passwordConfirmField: UITextField!
     @IBOutlet weak var nameField: UITextField!
-    @IBOutlet weak var cityField: UITextField!
-    @IBOutlet weak var zipCodeField: UITextField!
-    @IBOutlet weak var isMaleSwitch: UISwitch!
-    
-    @IBOutlet weak var birthdayPicker: UIDatePicker!
-    @IBOutlet weak var genderSwitch: UISwitch!
-    @IBAction func backBtnTapped(_ sender: UIButton) {
+      @IBAction func backBtnTapped(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
-    @IBAction func signUpBtnPressed(_ sender: Any) {
+    
+    
+    @IBAction func nextBtnTapped(_ sender: Any) {
         guard let email = emailField.text else {
             print("Email error")
             return
@@ -44,28 +41,13 @@ class CreateEmailLoginVC: UIViewController,UITextFieldDelegate {
             return
         }
 
-        guard let city = cityField.text else {
-            return
-        }
-        guard let zipCode = zipCodeField.text else {
-            return
-        }
-        let birthday = birthdayPicker.date.timeIntervalSince1970
-        var gender = ""
-        if isMaleSwitch.isOn {
-            gender = "male"
-        } else {
-            gender = "female"
-        }
-        let userData = [
-            userDataTypes.name: name ,
-            userDataTypes.email: email,
-            userDataTypes.gender: gender,
-            userDataTypes.birthday: "\(birthday)",
-            "locationCity": city,
-            "locationZipCode":zipCode]
+          userData = [
+            userDataTypes.name: name as AnyObject ,
+            userDataTypes.email: email as AnyObject,
+            "password": password as AnyObject
+            ]
+        performSegue(withIdentifier: "toFinishEmailSegue", sender: self)
 
-        UserService.shareService.emailSignUp(sender:self, email: email, password: password, userData:userData)
     }
 
 
@@ -79,14 +61,18 @@ class CreateEmailLoginVC: UIViewController,UITextFieldDelegate {
         emailField.delegate = self
         passwordConfirmField.delegate = self
         nameField.delegate = self
-        cityField.delegate = self
-        zipCodeField.delegate = self
-        
     }
     //Along with setting delegate in viewDidLoad, gets rid of keyboard on return
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print("ShouldReturn")
         textField.resignFirstResponder()
         return false
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let dest = segue.destination
+        if var destVC = dest as? hasDataDict {
+            destVC.dataDict = userData
+        }
     }
 }
