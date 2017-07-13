@@ -120,7 +120,7 @@ func timeStringFromInterval(timeInterval:TimeInterval)->String{
 //    if mins < 10 {
 //        minsStr = "0\(mins)"
 //    }
-    return "h\(hrs)m\(mins)s\(secs)"
+    return "\(hrs)h \(mins)m \(secs)s"
 }
 
 /*

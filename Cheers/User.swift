@@ -184,11 +184,11 @@ class User{
             self._credits = credits
         } else {
             if _membership == membershipLevels.premium {
-                self._credits = 10
-                self.credits = 10
+                self._credits = ConfigUtil.PREMIUM_NUM_CREDITS
+                self.credits = ConfigUtil.PREMIUM_NUM_CREDITS
             } else {
-                self._credits = 1
-                self.credits = 1
+                self._credits = ConfigUtil.BASIC_NUM_CREDITS
+                self.credits = ConfigUtil.BASIC_NUM_CREDITS
             }
             print("Backend: No Credits information on Firebase")
         }

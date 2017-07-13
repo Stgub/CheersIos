@@ -48,10 +48,10 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
                         print("New month, adding credits")
                         if currentUser.membership == membershipLevels.premium {
                             print("Set to 10")
-                            currentUser.credits = 10
+                            currentUser.credits = ConfigUtil.PREMIUM_NUM_CREDITS
                         } else {
                             print("Set to 1")
-                            currentUser.credits = 1
+                            currentUser.credits = ConfigUtil.BASIC_NUM_CREDITS
                         }
                     }
                     currentUser.currentPeriodEnd = currentPeriodEnd
