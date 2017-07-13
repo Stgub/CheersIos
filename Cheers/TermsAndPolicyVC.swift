@@ -9,12 +9,13 @@
 import UIKit
 
 class TermsAndPolicyVC: BaseMenuVC {
+    @IBOutlet weak var leftMenuBtn: UIButton!
 
-    @IBOutlet weak var leftMenuButton: UIButton!
+    @IBOutlet weak var webView: UIWebView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        attachMenuButton(menuButton: leftMenuButton)
-        // Do any additional setup after loading the view.
+        self.attachMenuButton(menuButton: leftMenuBtn)
+        webView.loadRequest(URLRequest(url: URL(string:ConfigUtil.PRIVACY_POLICY_URL)!))
     }
 
  

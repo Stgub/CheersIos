@@ -13,6 +13,9 @@ class ConfigUtil{
     public static let PREMIUM_NUM_CREDITS = 30
     public static let BASIC_NUM_CREDITS = 1 
     public static let CONTACT_EMAIL = "Contact@TheToastClub.com"
+    
+    public static let PRIVACY_POLICY_URL = "https://thetoastclub.com"
+    
     static let SERVER_BASE = "http://ec2-34-202-232-113.compute-1.amazonaws.com:5000"   // AWS server 34.202.232.113*
     //static let SERVER_BASE = "http://0.0.0.0:5000" //local test
     

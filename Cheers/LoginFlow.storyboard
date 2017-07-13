@@ -29,8 +29,8 @@
                                     <constraint firstAttribute="width" secondItem="2BR-pM-dBA" secondAttribute="height" multiplier="251:87" id="IeB-HF-f9I"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 free drink a month 10 drinks for $10" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="75c-zJ-HKx">
-                                <rect key="frame" x="96.5" y="207.5" width="182" height="49.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 free drink a month 30 drinks for $10" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="75c-zJ-HKx">
+                                <rect key="frame" x="97" y="208" width="182" height="49.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="182" id="7jO-nD-Y4X"/>
                                 </constraints>
@@ -39,7 +39,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log in with" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pWq-Ib-GRi">
-                                <rect key="frame" x="153" y="305" width="69" height="19.5"/>
+                                <rect key="frame" x="153" y="305.5" width="69" height="19.5"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.54000000000000004" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
@@ -57,13 +57,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g49-8R-nVq">
-                                <rect key="frame" x="181" y="412.5" width="13" height="19.5"/>
+                                <rect key="frame" x="181" y="413" width="13" height="19.5"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.54000000000000004" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1hx-Pc-ybp" customClass="Shadow_RoundBtn" customModule="Cheers" customModuleProvider="target">
-                                <rect key="frame" x="63.5" y="348.5" width="248" height="48"/>
+                                <rect key="frame" x="63.5" y="349" width="248" height="48"/>
                                 <color key="backgroundColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="KIU-Ox-FeJ"/>
@@ -78,7 +78,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U09-P6-dsJ" customClass="Shadow_RoundBtn" customModule="Cheers" customModuleProvider="target">
-                                <rect key="frame" x="63.5" y="448" width="248" height="48"/>
+                                <rect key="frame" x="63.5" y="448.5" width="248" height="48"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="248" id="WCU-nZ-jgr"/>
@@ -137,7 +137,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gJY-OO-YxY" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="105" y="599"/>
+            <point key="canvasLocation" x="104.8" y="598.65067466266873"/>
         </scene>
         <!--logInSignUp-->
         <scene sceneID="UVO-LJ-zoC">
