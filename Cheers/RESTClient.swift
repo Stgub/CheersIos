@@ -38,6 +38,12 @@ class RESTClient:NSObject{
     
     func createRequest( pathExtension: String, params: [String:Any]) -> URLRequest{
         print(#function)
+        var data = params
+        if(ConfigUtil.inTesting){
+            data["DevStatus"] = "inDev"
+        } else {
+            data["DevStatus"] = "inProd"
+        }
         let baseURL = URL(string: ConfigUtil.SERVER_BASE)!
         let url = baseURL.appendingPathComponent(pathExtension)
         print("URL: \(url)")
@@ -45,7 +51,7 @@ class RESTClient:NSObject{
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
-        let jsonData = try? JSONSerialization.data(withJSONObject: params)
+        let jsonData = try? JSONSerialization.data(withJSONObject: data)
         request.httpBody = jsonData
         return request
     }

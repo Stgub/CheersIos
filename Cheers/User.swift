@@ -20,7 +20,6 @@
 import Foundation
 import UIKit
 import Firebase
-var userImage:UIImage! // out here because it is not actually stored in the databse
 struct userDataTypes {
     static let email = "email"
     static let phoneNumber = "phoneNumber"

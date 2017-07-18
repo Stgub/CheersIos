@@ -97,6 +97,13 @@
                                                            [client setApiUsage:[client.apiUsage setByAddingObject:NSStringFromClass([STPShippingAddressViewController class])]];
                                                        } error:nil];
 
+        [STPCustomerContext stp_aspect_hookSelector:@selector(initWithKeyProvider:)
+                                        withOptions:STPAspectPositionAfter
+                                         usingBlock:^{
+                                             STPAnalyticsClient *client = [self sharedClient];
+                                             [client setApiUsage:[client.apiUsage setByAddingObject:NSStringFromClass([STPCustomerContext class])]];
+                                         } error:nil];
+
     });
 }
 
@@ -149,15 +156,6 @@
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:NSStringFromSelector(@selector(description)) ascending:YES];
     NSArray *additionalInfo = [self.additionalInfoSet sortedArrayUsingDescriptors:@[sortDescriptor]];
     return additionalInfo ?: @[];
-}
-
-- (void)logRememberMeConversion:(STPAddCardRememberMeUsage)selected {
-    NSMutableDictionary *payload = [self.class commonPayload];
-    [payload addEntriesFromDictionary:@{
-                                        @"event": @"stripeios.remember_me",
-                                        @"selected": @(selected),
-                                        }];
-    [self logPayload:payload];
 }
 
 - (NSArray *)productUsage {
@@ -311,7 +309,6 @@
     }
     dictionary[@"company_name"] = configuration.companyName ?: @"unknown";
     dictionary[@"apple_merchant_identifier"] = configuration.appleMerchantIdentifier ?: @"unknown";
-    dictionary[@"sms_autofill_disabled"] = @(configuration.smsAutofillDisabled);
     return [dictionary copy];
 }
 

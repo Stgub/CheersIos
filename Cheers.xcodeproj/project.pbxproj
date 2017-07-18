@@ -33,7 +33,7 @@
 		561DBAEF1EE4F18A00D2DADD /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DBAEE1EE4F18A00D2DADD /* SplashVC.swift */; };
 		561DBAF11EE4FDC100D2DADD /* MenuItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DBAF01EE4FDC100D2DADD /* MenuItemTableViewCell.swift */; };
 		561DBAF31EE8ECA900D2DADD /* RecommendBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DBAF21EE8ECA900D2DADD /* RecommendBarVC.swift */; };
-		561DBAF51EE8EF2400D2DADD /* TermsAndPolicyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DBAF41EE8EF2400D2DADD /* TermsAndPolicyVC.swift */; };
+		561DBAF51EE8EF2400D2DADD /* TermsAndConditionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DBAF41EE8EF2400D2DADD /* TermsAndConditionsVC.swift */; };
 		561DBAF81EEA317800D2DADD /* PayPalCheckoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DBAF71EEA317800D2DADD /* PayPalCheckoutVC.swift */; };
 		5632C26B1E933716003C2D6B /* StripeAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5632C26A1E933716003C2D6B /* StripeAPIClient.swift */; };
 		5657A9701F055FDA008CA2FF /* BarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5657A96F1F055FDA008CA2FF /* BarService.swift */; };
@@ -54,6 +54,7 @@
 		56B91B041E651B6600CB40BB /* BarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B91B031E651B6600CB40BB /* BarTableViewCell.swift */; };
 		56B91B061E651C1700CB40BB /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B91B051E651C1700CB40BB /* DataService.swift */; };
 		56B91B081E651C7700CB40BB /* GeneralFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B91B071E651C7700CB40BB /* GeneralFunctions.swift */; };
+		56B963261F1E9A6900F63517 /* PrivacyPolicyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B963251F1E9A6800F63517 /* PrivacyPolicyVC.swift */; };
 		56CE08821EF21F3900778FB7 /* CurrentlyUnused.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56CE08811EF21F3900778FB7 /* CurrentlyUnused.storyboard */; };
 		56DC61201ECF5DE4001279F9 /* ReferralVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DC611F1ECF5DE4001279F9 /* ReferralVC.swift */; };
 		56DC6A4A1EADAB9800449739 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DC6A491EADAB9800449739 /* UserService.swift */; };
@@ -125,7 +126,7 @@
 		561DBAEE1EE4F18A00D2DADD /* SplashVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
 		561DBAF01EE4FDC100D2DADD /* MenuItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItemTableViewCell.swift; sourceTree = "<group>"; };
 		561DBAF21EE8ECA900D2DADD /* RecommendBarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendBarVC.swift; sourceTree = "<group>"; };
-		561DBAF41EE8EF2400D2DADD /* TermsAndPolicyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyVC.swift; sourceTree = "<group>"; };
+		561DBAF41EE8EF2400D2DADD /* TermsAndConditionsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsVC.swift; sourceTree = "<group>"; };
 		561DBAF61EEA306300D2DADD /* Cheers-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cheers-Bridging-Header.h"; sourceTree = "<group>"; };
 		561DBAF71EEA317800D2DADD /* PayPalCheckoutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayPalCheckoutVC.swift; sourceTree = "<group>"; };
 		5632C26A1E933716003C2D6B /* StripeAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeAPIClient.swift; sourceTree = "<group>"; };
@@ -148,6 +149,7 @@
 		56B91B031E651B6600CB40BB /* BarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarTableViewCell.swift; sourceTree = "<group>"; };
 		56B91B051E651C1700CB40BB /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		56B91B071E651C7700CB40BB /* GeneralFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralFunctions.swift; sourceTree = "<group>"; };
+		56B963251F1E9A6800F63517 /* PrivacyPolicyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyVC.swift; sourceTree = "<group>"; };
 		56CE08811EF21F3900778FB7 /* CurrentlyUnused.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CurrentlyUnused.storyboard; sourceTree = "<group>"; };
 		56DC611F1ECF5DE4001279F9 /* ReferralVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReferralVC.swift; sourceTree = "<group>"; };
 		56DC6A491EADAB9800449739 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
@@ -310,7 +312,8 @@
 				560861651E7B6924001E1F13 /* ScreenWithBackButtonVC.swift */,
 				561DBAF21EE8ECA900D2DADD /* RecommendBarVC.swift */,
 				199AF66E1E6F969F00FBBAD1 /* ContactUsVC.swift */,
-				561DBAF41EE8EF2400D2DADD /* TermsAndPolicyVC.swift */,
+				561DBAF41EE8EF2400D2DADD /* TermsAndConditionsVC.swift */,
+				56B963251F1E9A6800F63517 /* PrivacyPolicyVC.swift */,
 				19FBCBB51E6378BC00AA10B5 /* View */,
 			);
 			name = Controller;
@@ -720,9 +723,10 @@
 				19FBCB851E635FE500AA10B5 /* AppDelegate.swift in Sources */,
 				56B91AFE1E651A2000CB40BB /* AccountVC.swift in Sources */,
 				5605D48C1E9806900098EC52 /* MyFirebaseAPIClient.swift in Sources */,
-				561DBAF51EE8EF2400D2DADD /* TermsAndPolicyVC.swift in Sources */,
+				561DBAF51EE8EF2400D2DADD /* TermsAndConditionsVC.swift in Sources */,
 				56FF17851E6F8DC000089C7C /* EmailLoginVC.swift in Sources */,
 				56839A591EEDEAAB00A7E0ED /* RESTClient.swift in Sources */,
+				56B963261F1E9A6900F63517 /* PrivacyPolicyVC.swift in Sources */,
 				5657A9701F055FDA008CA2FF /* BarService.swift in Sources */,
 				19FBCBB81E6379A600AA10B5 /* Shadow&RoundBtn.swift in Sources */,
 				56B91B081E651C7700CB40BB /* GeneralFunctions.swift in Sources */,
