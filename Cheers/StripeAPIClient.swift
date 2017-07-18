@@ -13,10 +13,12 @@ import Stripe
 class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
     
     static let sharedClient = StripeAPIClient()
-    
+
     /**
      Updates the user and particularly currentPeriodStart and currentPeriodEnd from the server
     */
+
+    
     func updateCustomer(){
         print("Backend: Updating user")
         guard let user = currentUser,  user.stripeID != nil else {
@@ -165,7 +167,7 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
          *  @note If you are on Swift 3, you must declare the completion block as `@escaping` or Xcode will give you a protocol conformance error. https://bugs.swift.org/browse/SR-2597
          */
 
-    func retrieveCustomer(_ completion: @escaping STPCustomerCompletionBlock) {
+    func retrieveCustomer(_ completion: STPCustomerCompletionBlock?) {
         print("retrieveCustomer function")
         guard let _ = currentUser else {
             print("Current user was nil, will try to grab but otherwise will fail")
@@ -173,7 +175,7 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
                 if error != nil {
                     print(#function)
                     self.retrieveCustomer({ (customer, error) in
-                        completion(customer,error)
+                        completion!(customer,error)
                     })
                 } else {
                     print("Error \(#function) - \(error?.localizedDescription ?? "Error getting user")")
@@ -186,20 +188,20 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
                 (customer,error) in
                 if let error = error {
                     print("Error in retrieving customer \(error)")
-                    completion(nil, error)
+                    completion!(nil, error)
                     return
                 } else if let customer = customer {
-                    completion(customer, nil)
+                    completion!(customer, nil)
                 }
             }
         } else {
             self.createCutomer(completion: { (customer, error) in
                 if let error = error {
                     print("Error in creating customer \(error)")
-                    completion(nil, error)
+                    completion!(nil, error)
                     return
                 } else if let customer = customer {
-                    completion(customer, nil)
+                    completion!(customer, nil)
                 }
             })
             

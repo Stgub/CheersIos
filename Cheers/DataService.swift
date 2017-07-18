@@ -24,7 +24,6 @@ class DataService {
     private var _REF_BASE = DB_BASE
     private var _REF_BARS = DB_BASE.child("bars")
     private var _REF_USERS = DB_BASE.child("users")
-    private var _REF_DEVICE_IDS = DB_BASE.child("deviceIds")
     private var _REF_BAR_IMAGES = STORAGE_BASE.child("bar-pics")
     private var _REF_USER_IMAGES = STORAGE_BASE.child("user-pics")
     //make private varibales globally accessible
@@ -38,7 +37,6 @@ class DataService {
     var REF_USERS: DatabaseReference {
         return _REF_USERS
     }
-    var REF_DEVICE_IDS: DatabaseReference {  return _REF_DEVICE_IDS }
     
     var REF_USER_CURRENT: DatabaseReference {
         let uid = KeychainWrapper.standard.string(forKey: KEY_UID)
@@ -54,9 +52,6 @@ class DataService {
     }
     
     func createFirebaseDBUser(uid: String, userData: Dictionary<String, Any> ){
-        let deviceID = UIDevice.current.identifierForVendor!.uuidString
-        DataService.ds.REF_DEVICE_IDS.child(deviceID).setValue(uid) // Sets the device to the according account
-
         REF_USERS.child(uid).updateChildValues(userData) //will not wipe out a value that is already there.. set value will
     }
     

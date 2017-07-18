@@ -28,7 +28,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         //Stripe payment service
-        STPPaymentConfiguration.shared().publishableKey = ConfigUtil.STRIPE_KEY
+        if ConfigUtil.inTesting {
+            STPPaymentConfiguration.shared().publishableKey = ConfigUtil.STRIPE_DEV_KEY
+        } else {
+            STPPaymentConfiguration.shared().publishableKey = ConfigUtil.STRIPE_PROD_KEY
+        }
+        STPPaymentConfiguration.shared().appleMerchantIdentifier = ConfigUtil.APPLE_PAY_ID
 
         PayPalMobile .initializeWithClientIds(forEnvironments: [PayPalEnvironmentProduction: "YOUR_CLIENT_ID_FOR_PRODUCTION",
             PayPalEnvironmentSandbox: "access_token$sandbox$n9bfwjym9fcgxvj6$d71c48d8a388b60d22ae989db1ca440a"])

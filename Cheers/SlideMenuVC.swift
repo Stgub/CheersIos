@@ -34,7 +34,8 @@ class SlideMenuVC: UIViewController, Menu, UITableViewDelegate, UITableViewDataS
         MenuItem(title: "Contact Us", storyboardID: "ContactUsVC", storyboard: myStoryboards.main),
        // MenuItem(title: "Refer a friend", storyboardID: "ReferralVC", storyboard: myStoryboards.main),
         MenuItem(title: "Recommend a Business", storyboardID: "RecommendBarVC", storyboard: myStoryboards.main),
-        MenuItem(title: "Privacy Policy and Terms", storyboardID: "TermsAndPolicyVC", storyboard: myStoryboards.main),
+        MenuItem(title: "Privacy Policy", storyboardID: "PrivacyPolicyVC", storyboard: myStoryboards.main),
+           MenuItem(title: "Terms and Conditions", storyboardID: "TermsAndConditionsVC", storyboard: myStoryboards.main),
         MenuItem(title: "Sign Out", storyboardID: "signout", storyboard: "signout")
     ]
     

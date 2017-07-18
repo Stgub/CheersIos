@@ -30,6 +30,7 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
     let paymentCurrency = "usd"
     
     let paymentContext: STPPaymentContext
+
     
     let myAPIClient = StripeAPIClient.sharedClient
     let theme:STPTheme =  STPTheme.default()

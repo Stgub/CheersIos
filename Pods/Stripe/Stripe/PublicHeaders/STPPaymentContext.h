@@ -19,7 +19,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class STPPaymentContext, STPAPIClient, STPTheme;
+@class STPPaymentContext, STPAPIClient, STPTheme, STPCustomerContext;
 @protocol STPBackendAPIAdapter, STPPaymentMethod, STPPaymentContextDelegate;
 
 /**
@@ -27,15 +27,46 @@ NS_ASSUME_NONNULL_BEGIN
  
  `STPPaymentContext` also provides a unified interface to multiple payment methods - for example, you can write a single integration to accept both credit card payments and Apple Pay.
  
- `STPPaymentContext` requires an "API Adapter" to communicate with your backend API to retrieve and modify a customer's payment methods - see https://stripe.com/docs/mobile/ios/standard#prepare-your-api for how to implement this. You can also look at CheckoutViewController.swift in our example app to see `STPPaymentContext` in action.
+ `STPPaymentContext` saves information about a user's payment methods to a Stripe customer object, and requires an `STPCustomerContext` to manage retrieving and modifying the customer.
  */
 @interface STPPaymentContext : NSObject
 
 /**
+ This is a convenience initializer; it is equivalent to calling 
+ `initWithCustomerContext:customerContext 
+            configuration:[STPPaymentConfiguration sharedConfiguration] 
+                    theme:[STPTheme defaultTheme]`.
+
+ @param customerContext  The customer context the payment context will use to fetch
+ and modify its Stripe customer. @see STPCustomerContext.h
+ @return the newly-instantiated payment context
+ */
+- (instancetype)initWithCustomerContext:(STPCustomerContext *)customerContext;
+
+/**
+ Initializes a new Payment Context with the provided customer context, configuration,
+ and theme. After this class is initialized, you should also make sure to set its 
+ `delegate` and `hostViewController` properties.
+
+ @param customerContext   The customer context the payment context will use to fetch
+ and modify its Stripe customer. @see STPCustomerContext.h
+ @param configuration     The configuration for the payment context to use. This lets you set your Stripe publishable API key, required billing address fields, etc. @see STPPaymentConfiguration.h
+ @param theme             The theme describing the visual appearance of all UI that the payment context automatically creates for you. @see STPTheme.h
+ @return the newly-instantiated payment context
+ */
+- (instancetype)initWithCustomerContext:(STPCustomerContext *)customerContext
+                          configuration:(STPPaymentConfiguration *)configuration
+                                  theme:(STPTheme *)theme;
+
+/**
  *  This is a convenience initializer; it is equivalent to calling `initWithAPIAdapter:apiAdapter configuration:[STPPaymentConfiguration sharedConfiguration] theme:[STPTheme defaultTheme]`.
  *
+ *  @deprecated Use `initWithCustomerContext:`.
+ *  Instead of providing your own backend API adapter, you can now create an
+ *  `STPCustomerContext`, which will manage retrieving and updating a
+ *  Stripe customer for you. @see STPCustomerContext.h
  */
-- (instancetype)initWithAPIAdapter:(id<STPBackendAPIAdapter>)apiAdapter;
+- (instancetype)initWithAPIAdapter:(id<STPBackendAPIAdapter>)apiAdapter __attribute__((deprecated));
 
 /**
  *  Initializes a new Payment Context with the provided API adapter and configuration. After this class is initialized, you should also make sure to set its `delegate` and `hostViewController` properties.
@@ -45,15 +76,25 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param theme         The theme describing the visual appearance of all UI that the payment context automatically creates for you. @see STPTheme.h
  *
  *  @return the newly-instantiated payment context
+ *
+ *  @deprecated Use `initWithCustomerContext:configuration:theme:`.
+ *  Instead of providing your own backend API adapter, you can now create an
+ *  `STPCustomerContext`, which will manage retrieving and updating a
+ *  Stripe customer for you. @see STPCustomerContext.h
  */
 - (instancetype)initWithAPIAdapter:(id<STPBackendAPIAdapter>)apiAdapter
                      configuration:(STPPaymentConfiguration *)configuration
-                             theme:(STPTheme *)theme;
+                             theme:(STPTheme *)theme __attribute__((deprecated));
 
 /**
  *  The API adapter the payment context will use to fetch and modify its contents. You need to make a class conforming to this protocol that talks to your server. @see STPBackendAPIAdapter.h
+ *
+ *  @deprecated Use `customerContext`.
+ *  Instead of providing your own backend API adapter, you can now  create an
+ *  `STPCustomerContext`, which will manage retrieving and updating a
+ *  Stripe customer for you. @see STPCustomerContext.h
  */
-@property(nonatomic, readonly)id<STPBackendAPIAdapter> apiAdapter;
+@property(nonatomic, readonly)id<STPBackendAPIAdapter> apiAdapter __attribute__((deprecated));
 
 /**
  *  The configuration for the payment context to use internally. @see STPPaymentConfiguration.h
@@ -107,6 +148,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  The user's shipping address. May be nil.
+ *  If you've already collected a shipping address from your user, you may
+ *  prefill it by setting a shippingAddress in PaymentContext's prefilledInformation.
+ *  When your user enters a new shipping address, PaymentContext will save it to 
+ *  the current customer object. When PaymentContext loads, if you haven't
+ *  manually set a prefilled value, any shipping information saved on the customer 
+ *  will be used to prefill the shipping address form. Note that because your
+ *  customer's email may not be the same as the email provided with their shipping
+ *  info, PaymentContext will not prefill the shipping form's email using your 
+ *  customer's email.
+ *
+ *  You should not rely on the shipping information stored on the Stripe customer 
+ *  for order fulfillment, as your user may change this information if they make 
+ *  multiple purchases. We recommend adding shipping information when you create
+ *  a charge (which can also help prevent fraud), or saving it to your own
+ *  database. https://stripe.com/docs/api#create_charge-shipping
+ *
+ *  Note: by default, your user will still be prompted to verify a prefilled 
+ *  shipping address. To change this behavior, you can set 
+ *  `verifyPrefilledShippingAddress` to NO in your `STPPaymentConfiguration`.
  */
 @property(nonatomic, readonly, nullable)STPAddress *shippingAddress;
 

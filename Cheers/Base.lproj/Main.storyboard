@@ -1681,10 +1681,10 @@
             </objects>
             <point key="canvasLocation" x="-2424" y="300"/>
         </scene>
-        <!--contactUs-->
+        <!--Terms And Conditions-->
         <scene sceneID="Ydt-OQ-mwT">
             <objects>
-                <viewController storyboardIdentifier="TermsAndPolicyVC" title="RecommendBarVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TiC-ku-Riv" userLabel="contactUs" customClass="TermsAndPolicyVC" customModule="Cheers" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TermsAndConditionsVC" title="RecommendBarVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TiC-ku-Riv" userLabel="Terms And Conditions" customClass="TermsAndConditionsVC" customModule="Cheers" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="S7O-4H-I4y"/>
                         <viewControllerLayoutGuide type="bottom" id="qxD-M8-2F2"/>
@@ -1707,8 +1707,8 @@
                                         <rect key="frame" x="13" y="30" width="21" height="22"/>
                                         <state key="normal" image="burger"/>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terms and Policy" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqm-Yc-CNZ">
-                                        <rect key="frame" x="139.66666666666669" y="31" width="135.00000000000006" height="20"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terms and Conditions" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqm-Yc-CNZ">
+                                        <rect key="frame" x="119.66666666666669" y="31" width="176" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="PZ2-sc-rTf"/>
                                         </constraints>
@@ -1746,13 +1746,86 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="leftMenuBtn" destination="6AA-9X-TOs" id="bJ9-4y-Zc9"/>
-                        <outlet property="webView" destination="jpD-ed-IcF" id="wMI-3n-4qs"/>
+                        <outlet property="leftMenuBtn" destination="6AA-9X-TOs" id="H26-bR-kIO"/>
+                        <outlet property="webView" destination="jpD-ed-IcF" id="rwa-In-kpK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ra1-mh-Je1" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-884.05797101449286" y="287.77173913043481"/>
+        </scene>
+        <!--Privacy Policy-->
+        <scene sceneID="eGk-8E-DjH">
+            <objects>
+                <viewController storyboardIdentifier="PrivacyPolicyVC" title="RecommendBarVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="UO7-zm-bzT" userLabel="Privacy Policy" customClass="PrivacyPolicyVC" customModule="Cheers" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wbd-4v-HNo"/>
+                        <viewControllerLayoutGuide type="bottom" id="qki-If-Da7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BJS-w7-rI4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lui-sE-te3">
+                                <rect key="frame" x="0.0" y="64" width="414" height="1"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.17000000000000001" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="cHX-r0-XSh"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ibj-l8-XV9">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sd5-n9-nZi">
+                                        <rect key="frame" x="13" y="30" width="21" height="22"/>
+                                        <state key="normal" image="burger"/>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pivacy Policy" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o5l-DY-xFt">
+                                        <rect key="frame" x="156.33333333333331" y="31" width="102.33333333333331" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="Yud-Lq-3bS"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.87" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="o5l-DY-xFt" firstAttribute="centerX" secondItem="ibj-l8-XV9" secondAttribute="centerX" id="YLF-GL-CGY"/>
+                                    <constraint firstAttribute="height" constant="64" id="YTL-af-tCP"/>
+                                    <constraint firstItem="Sd5-n9-nZi" firstAttribute="top" secondItem="ibj-l8-XV9" secondAttribute="topMargin" constant="22" id="kRA-DZ-u5u"/>
+                                    <constraint firstItem="Sd5-n9-nZi" firstAttribute="leading" secondItem="ibj-l8-XV9" secondAttribute="leadingMargin" constant="5" id="sBG-U2-IPn"/>
+                                    <constraint firstItem="o5l-DY-xFt" firstAttribute="centerY" secondItem="Sd5-n9-nZi" secondAttribute="centerY" id="za8-Bt-uVb"/>
+                                </constraints>
+                            </view>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hu8-eV-aao">
+                                <rect key="frame" x="20" y="65" width="374" height="671"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="hu8-eV-aao" secondAttribute="trailing" id="0wA-zK-Trx"/>
+                            <constraint firstItem="ibj-l8-XV9" firstAttribute="leading" secondItem="BJS-w7-rI4" secondAttribute="leading" id="Tx2-FL-6Sx"/>
+                            <constraint firstItem="ibj-l8-XV9" firstAttribute="top" secondItem="BJS-w7-rI4" secondAttribute="top" id="VyH-9f-Fe3"/>
+                            <constraint firstItem="qki-If-Da7" firstAttribute="top" secondItem="hu8-eV-aao" secondAttribute="bottom" id="cq6-jr-lib"/>
+                            <constraint firstItem="Lui-sE-te3" firstAttribute="leading" secondItem="BJS-w7-rI4" secondAttribute="leading" id="ePd-Bp-0hd"/>
+                            <constraint firstItem="hu8-eV-aao" firstAttribute="leading" secondItem="BJS-w7-rI4" secondAttribute="leadingMargin" id="eYu-oZ-Eiw"/>
+                            <constraint firstItem="Lui-sE-te3" firstAttribute="top" secondItem="ibj-l8-XV9" secondAttribute="bottom" id="iOu-1t-J3t"/>
+                            <constraint firstAttribute="trailing" secondItem="ibj-l8-XV9" secondAttribute="trailing" id="lI6-iA-L9q"/>
+                            <constraint firstAttribute="trailing" secondItem="Lui-sE-te3" secondAttribute="trailing" id="y3c-PB-fqL"/>
+                            <constraint firstItem="hu8-eV-aao" firstAttribute="top" secondItem="Lui-sE-te3" secondAttribute="bottom" id="zge-3f-7C5"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="leftMenuBtn" destination="Sd5-n9-nZi" id="PC0-Oc-aaL"/>
+                        <outlet property="webView" destination="hu8-eV-aao" id="P6u-ut-xgi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jcr-E8-TwL" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-184" y="241"/>
         </scene>
     </scenes>
     <resources>
