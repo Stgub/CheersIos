@@ -17,8 +17,8 @@ class SplashVC: UIViewController {
 
     override func viewDidLoad() {
         print("Splah screen loaded")
-
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         print("Splash screen appeared")
         NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged),name: ReachabilityChangedNotification,object: reachability)
@@ -41,42 +41,43 @@ class SplashVC: UIViewController {
     func reachabilityChanged(note: NSNotification) {
         print("SplashVC:reachabilityChanged")
         //let reachability = note.object as! Reachability
-        update()
+        self.update()
     }
     func update(){
-        if reachability.isReachable {
-            noInternetLabel.isHidden = true
-            
-            if reachability.isReachableViaWiFi {
-                print("Reachable via WiFi")
-            } else {
-                print("Reachable via Cellular")
-            }
-            if currentUser != nil {
-                print("Presenting Bar Feed")
-                GeneralFunctions.presentBarFeedVC(sender: self)
-            } else {
-                print("Checking keychain for user")
-                if let _  = KeychainWrapper.standard.string(forKey: KEY_UID ){
-                    print("CHUCK: ID found in keychain")
-                    MyFireBaseAPIClient.sharedClient.getUser{ (userError) in
-                        if userError == nil {
-                            print(#function)
-                            GeneralFunctions.presentBarFeedVC(sender: self)
-                        } else {
-                            print(userError?.localizedDescription ?? "Error getting user")
-                            UserService.shareService.signOut()
-                            GeneralFunctions.presentFirstLoginVC(sender: self)
-                        }
-                    }
+        if !reachability.isReachable {
+            print("Network not reachable")
+            noInternetLabel.isHidden = false
+            return
+        }
+        
+        noInternetLabel.isHidden = true
+        if reachability.isReachableViaWiFi {
+            print("Reachable via WiFi")
+        } else {
+            print("Reachable via Cellular")
+        }
+        
+        if currentUser != nil {
+            print("Splash - user already signed in")
+            GeneralFunctions.presentBarFeedVC(sender: self)
+            return
+        }
+        
+        if let _  = KeychainWrapper.standard.string(forKey: KEY_UID ){
+            print("SplashVC - found user in key chain")
+            MyFireBaseAPIClient.sharedClient.getUser{ (userError) in
+                if userError == nil {
+                    print(#function)
+                    GeneralFunctions.presentBarFeedVC(sender: self)
                 } else {
+                    print(userError?.localizedDescription ?? "Error getting user")
+                    UserService.shareService.signOut()
                     GeneralFunctions.presentFirstLoginVC(sender: self)
                 }
             }
         } else {
-            print("Network not reachable")
-            noInternetLabel.isHidden = false
-            
+            print("SplashVC - no user in key chain, send to login screen")
+            GeneralFunctions.presentFirstLoginVC(sender: self)
         }
 
     }

@@ -15,6 +15,7 @@ class MyFireBaseAPIClient:NSObject{
     static let sharedClient = MyFireBaseAPIClient()
     override init() { }
 
+    private var watchdogTimer:Timer = Timer()
     
     func getBars(returnBlock:@escaping ([Bar])->Void){
         print("Backend: getting bars")
@@ -35,18 +36,25 @@ class MyFireBaseAPIClient:NSObject{
         })
     }
     
+    func watchdogTimerFired(){
+        print(#function)
+        UserService.shareService.signOut()
+    }
     
     func getUser( completion:@escaping  (Error?)-> Void )
     {
         print(#function)
         print(DataService.ds.REF_USER_CURRENT)
-        //TODO when user gets deleted, the phone gets stuck on the splash screen
+        
+        watchdogTimer = Timer.scheduledTimer(timeInterval: 120, target: self, selector: #selector(self.watchdogTimerFired), userInfo: nil, repeats: false)
         
         DataService.ds.REF_USER_CURRENT.observeSingleEvent(of: .value, with: { (snapshot) in
             print("Observed User")
             //Update current User
+            self.watchdogTimer.invalidate()
             if !snapshot.exists() {
                 print("ERROR: User does not exist")
+                UserService.shareService.signOut()
             }
             let snapKey = snapshot.key
             if let userData = snapshot.value as? Dictionary<String,AnyObject>{
@@ -74,8 +82,8 @@ class MyFireBaseAPIClient:NSObject{
                 completion(userError(localizedDescription: "Could not get user"))
             }
         }) { (error) in
-            print("Error")
             print(error.localizedDescription)
+            completion(userError(localizedDescription: error.localizedDescription))
         }
     }
     

@@ -50,13 +50,13 @@ class PhoneVerificationVC: UIViewController, UITextFieldDelegate {
         let phoneNumber = "+1" + phoneNum1TF.text! + phoneNum2TF.text! + phoneNum3TF.text!
         PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber) { (verificationID, error) in
             if error != nil {
+                presentUIAlert(sender: self, title: "Error", message: error!.localizedDescription)
                 print("Error verifying phone num \(error.debugDescription)")
             } else {
                 self.verifyId = verificationID!
                 print("Phone verification complete, sending SMS")
                 self.state = .enterCode
             }
-            
         }
     }
     

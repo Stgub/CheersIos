@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import SwiftKeychainWrapper
 
-class EmailLoginVC: UIViewController,UITextFieldDelegate {
+class EmailLoginVC: AsyncControllerBase, LoginController,UITextFieldDelegate {
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -31,11 +31,21 @@ class EmailLoginVC: UIViewController,UITextFieldDelegate {
                 presentUIAlert(sender: self, title: "Fields not complete", message: "Fill in email and password fields")
                 return
             }
-            UserService.shareService.emailLogIn(sender: self, email: email, password: password)
+            self.startAsyncProcess()
+            UserService.shareService.emailLogIn(loginController: self, email: email, password: password)
         }
         
     }
-    
+    //Call backs from Userservice when login fails or succeeds
+    func loginComplete(){
+        self.stopAsyncProcess()
+        GeneralFunctions.presentBarFeedVC(sender: self)
+    }
+    func loginFailed(title: String, message: String) {
+        self.stopAsyncProcess()
+        presentUIAlert(sender: self, title: title, message: message)
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()

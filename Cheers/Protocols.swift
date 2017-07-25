@@ -8,6 +8,11 @@
 
 import Foundation
 import UIKit
+
+protocol LoginController {
+    func loginComplete()
+    func loginFailed(title:String,message:String)
+}
 protocol hasBarVar {
     var bar:Bar! {get set}
 }

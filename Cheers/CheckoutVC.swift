@@ -8,19 +8,12 @@
 import UIKit
 import Stripe
 
-class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
+class CheckoutViewController: AsyncControllerBase, STPPaymentContextDelegate {
     
-    // 1) To get started with this demo, first head to https://dashboard.stripe.com/account/apikeys
-    // and copy your "Test Publishable Key" (it looks like pk_test_abcdef) into the line below.
-    //let stripePublishableKey = ""
+
+       let backendBaseURL: String? = ConfigUtil.SERVER_BASE
     
-    // 2) Next, optionally, to have this demo save your user's payment details, head to
-    // https://github.com/stripe/example-ios-backend , click "Deploy to Heroku", and follow
-    // the instructions (don't worry, it's free). Replace nil on the line below with your
-    // Heroku URL (it looks like https://blazing-sunrise-1234.herokuapp.com ).
-    let backendBaseURL: String? = ConfigUtil.SERVER_BASE
-    
-    // 3) Optionally, to enable Apple Pay, follow the instructions at https://stripe.com/docs/mobile/apple-pay
+   // Optionally, to enable Apple Pay, follow the instructions at https://stripe.com/docs/mobile/apple-pay
     // to create an Apple Merchant ID. Replace nil on the line below with it (it looks like merchant.com.yourappname).
     let appleMerchantID: String? = "merchant.com.toast.stripe"
     //STPPaymentConfiguration.shared().appleMerchantIdentifier = "merchant.com.toast.stripe"
@@ -34,30 +27,9 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
     
     let myAPIClient = StripeAPIClient.sharedClient
     let theme:STPTheme =  STPTheme.default()
-/*
-    let totalRow: CheckoutRowView
-    let buyButton: BuyButton */
-    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+
     var product = "Premium Toast Membership"
-    
-    var paymentInProgress: Bool = false {
-        didSet {
-            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
-                if self.paymentInProgress {
-                    self.view.isUserInteractionEnabled = false
-                    self.activityIndicator.startAnimating()
-                    self.activityIndicator.alpha = 1
-                    //self.buyButton.alpha = 0
-                }
-                else {
-                    self.view.isUserInteractionEnabled = true
-                    self.activityIndicator.stopAnimating()
-                    self.activityIndicator.alpha = 0
-                    //self.buyButton.alpha = 1
-                }
-            }, completion: nil)
-        }
-    }
+
     
     @IBOutlet weak var purchaseBtnView: UIView!
     @IBAction func choosePaymentOptionsBtnTapped(_ sender: Any) {
@@ -68,16 +40,12 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
     }
     
     @IBAction func payBtnTapped(_ sender: Any) {
-        paymentInProgress = true
+        self.startAsyncProcess()
         self.paymentContext.requestPayment()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         print("view did load")
-        self.view.addSubview(self.activityIndicator)
-        self.activityIndicator.alpha = 0
-        self.activityIndicator.center = self.view.center
-        self.view.backgroundColor = self.theme.primaryBackgroundColor
     }
    
 
@@ -137,14 +105,14 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
             self.completePurchase(title: title, message: message, error: nil)
             
         case .userCancellation:
-            paymentInProgress = false
+            self.stopAsyncProcess()
             return // Do nothing
         }
 
     }
     
     func completePurchase(title:String, message:String, error:Error?){
-        paymentInProgress = false
+        self.stopAsyncProcess()
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .default, handler: {
             (alert) in

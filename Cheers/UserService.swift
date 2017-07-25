@@ -17,6 +17,7 @@ var currentUser:User!
 //    func updateUser()
 //}
 
+
 class UserService:NSObject {
     static let shareService = UserService()
     
@@ -52,9 +53,9 @@ class UserService:NSObject {
         currentUser = nil
     }
     
-    func facebookLogIn(sender:UIViewController){
+    func facebookLogIn(loginController:LoginController){
         let facebookLogin = FBSDKLoginManager()
-        facebookLogin.logIn(withReadPermissions: [ "public_profile", "email","user_birthday"], from: sender) { (result, error) in
+        facebookLogin.logIn(withReadPermissions: [ "public_profile", "email","user_birthday"], from: nil) { (result, error) in
             if error != nil {
                 print("Chuck: Unable to authenticate with Facebook - \(String(describing: error))")
             } else if result?.isCancelled == true {
@@ -98,16 +99,14 @@ class UserService:NSObject {
                                     } else { print("Chuck : No facebook image grabbed") }
                                 } else { print("Chuck: Could'nt cast result to NSDictionary") }
                             }
-                            self.firebaseAuth(sender, credential: credential,userData:userData)
+                            self.firebaseAuth(loginController, credential: credential,userData:userData)
                     })
                 }
-                
             }
-            
         }
     }
 
-    func emailSignUp(sender: UIViewController,email:String,password:String, userData:[String:String]){
+    func emailSignUp(loginController: LoginController,email:String,password:String, userData:[String:String]){
         print("Signing up \(email)")
         var userData = userData
         Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
@@ -118,7 +117,7 @@ class UserService:NSObject {
                     user.sendEmailVerification(completion: { (error) in
                         if error == nil {
                             userData[userDataTypes.provider] = user.providerID
-                            self.completeSignIn(sender: sender, id: user.uid, userData: userData)
+                            self.completeSignIn(loginController: loginController, id: user.uid, userData: userData)
                         } else {
                             print("Error verifying email \(error.debugDescription)")
                         }
@@ -126,45 +125,30 @@ class UserService:NSObject {
                 }
             } else {
                 if let errCode = AuthErrorCode(rawValue: (error?._code)!) {
-                    switch errCode {
-                    case .emailAlreadyInUse:
-                        presentUIAlert(sender:sender, title: "Email already in use", message: "Please try another email")
-                    case .invalidEmail:
-                        presentUIAlert(sender:sender, title: "Invalid Email", message: "Email is not in the correct format")
-                    default:
-                        print("Chuck: Erorr signing up with email - \(String(describing: error))")
-                        
-                    }
+                    self.handleAuthErrorCodes(error: errCode, loginController: loginController)
                 }
             }
         })
-
-        
     }
     
-    func emailLogIn(sender: UIViewController, email: String, password: String){
+    func emailLogIn(loginController: LoginController, email: String, password: String){
         Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
             if (error != nil) {
                 // an error occurred while attempting login
                 if let errCode = AuthErrorCode(rawValue: (error?._code)!) {
-                    switch errCode {
-                    case .invalidEmail:
-                        presentUIAlert(sender: sender ,title: "Invalid email", message: "Email is not in the correct format")
-                    case .wrongPassword:
-                        presentUIAlert(sender: sender ,title: "Invalid password", message: "Please enter the correct password")
-                    case .userNotFound:
-                        presentUIAlert(sender: sender ,title: "User not found", message: "Make sure email is correct, or create an account")
-                    default:
-                        presentUIAlert(sender: sender ,title: "Error logging in", message: "Please try again")
-                        print("Chuck - Error logging in went to default error \(String(describing: error?.localizedDescription))")
-                    }
+                    self.handleAuthErrorCodes(error: errCode, loginController: loginController)
+                    
                 }
             }else {
-            
                 print("Chuck: Email authenticated with Firebase")
-              
                 if error != nil {
+                    loginController.loginFailed(title: "Error logging in", message: "Please try again")
                     print("Email verification error -\(error.debugDescription)")
+                    do{
+                        try Auth.auth().signOut()
+                    } catch {
+                        print("Error signging out after failed sign in ")
+                    }
                 } else {
                     if let user = user {
 
@@ -172,51 +156,55 @@ class UserService:NSObject {
                             "provider": user.providerID,
                             "email" : user.email!
                         ]
-                        self.completeSignIn(sender:sender, id: user.uid, userData: userData)
+                        self.completeSignIn(loginController: loginController, id: user.uid, userData: userData)
                     }
                 }
                 
             }
         })
-        
     }
     
-    func firebaseAuth(_ sender: UIViewController, credential: AuthCredential , userData:Dictionary<String, String>){
+    func firebaseAuth(_ loginController: LoginController, credential: AuthCredential , userData:Dictionary<String, String>){
         Auth.auth().signIn(with: credential, completion: { (user, error) in
             if (error != nil) {
                 // an error occurred while attempting login
                 if let errCode = AuthErrorCode(rawValue: (error?._code)!) {
-                    switch errCode {
-                    case .invalidEmail:
-                        presentUIAlert(sender: sender ,title: "Invalid email", message: "Email is not in the correct format")
-                    case .wrongPassword:
-                        presentUIAlert(sender: sender ,title: "Invalid password", message: "Please enter the correct password")
-                    case .userNotFound:
-                        presentUIAlert(sender: sender ,title: "User not found", message: "Make sure credentials are correct")
-                    default:
-                        presentUIAlert(sender: sender ,title: "Error logging in", message: "Please try again")
-                        print("Chuck - Error logging in went to default error \(String(describing: error?.localizedDescription))")
-                    }
+                    self.handleAuthErrorCodes(error: errCode, loginController: loginController)
                 }
             } else {
                 print("Chuck: Succesfully authenticated with Firebase")
                 if let user = user {
-                    self.completeSignIn(sender: sender, id: user.uid, userData: userData)
+                    self.completeSignIn(loginController: loginController, id: user.uid, userData: userData)
                 }
             }
         })
     }
     
- 
-    
-    func completeSignIn(sender: UIViewController, id:String, userData:Dictionary<String, String>){
+    func completeSignIn(loginController: LoginController, id:String, userData:Dictionary<String, String>){
         DataService.ds.createFirebaseDBUser(uid: id, userData: userData)
         let KeychainResult = KeychainWrapper.standard.set(id, forKey: KEY_UID)
         print("Chuck: Data saved to keycahain \(KeychainResult)")
         MyFireBaseAPIClient.sharedClient.getUser(completion:{_ in
             print(#function)
-            GeneralFunctions.presentBarFeedVC(sender: sender)
-            
+            loginController.loginComplete()
         })
     }
+
+    func handleAuthErrorCodes(error: AuthErrorCode, loginController: LoginController){
+        switch error {
+        case .emailAlreadyInUse:
+            loginController.loginFailed(title: "Email already in use", message: "Please try another email")
+        case .invalidEmail:
+            loginController.loginFailed(title: "Invalid Email", message: "Email is not in the correct format")
+        case .wrongPassword:
+            loginController.loginFailed(title: "Invalid Password", message: "Please enter the correct password")
+        case .userNotFound:
+            loginController.loginFailed(title: "User not found", message: "Make sure email is correct, or create an account")
+        default:
+            print("ERROR: logging in \(error.rawValue)")
+            loginController.loginFailed(title: "Error logging in", message: "Please try again")
+        }
+    }
 }
+
+
