@@ -46,6 +46,7 @@
 		56839A571EEDEA6B00A7E0ED /* PaypalAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56839A561EEDEA6B00A7E0ED /* PaypalAPIClient.swift */; };
 		56839A591EEDEAAB00A7E0ED /* RESTClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56839A581EEDEAAB00A7E0ED /* RESTClient.swift */; };
 		56866C9F1F26D06E00906EC6 /* AsyncControllerBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56866C9E1F26D06E00906EC6 /* AsyncControllerBase.swift */; };
+		56866CA31F27716100906EC6 /* FAQVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56866CA21F27716100906EC6 /* FAQVC.swift */; };
 		56B00C3F1E70C9F400B64B71 /* CreateEmailLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B00C3E1E70C9F400B64B71 /* CreateEmailLoginVC.swift */; };
 		56B00C421E70CA2600B64B71 /* ForgotCredentialsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B00C411E70CA2600B64B71 /* ForgotCredentialsVC.swift */; };
 		56B589511E94668D009F7786 /* CheckoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B589501E94668D009F7786 /* CheckoutVC.swift */; };
@@ -142,6 +143,7 @@
 		56839A561EEDEA6B00A7E0ED /* PaypalAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaypalAPIClient.swift; sourceTree = "<group>"; };
 		56839A581EEDEAAB00A7E0ED /* RESTClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTClient.swift; sourceTree = "<group>"; };
 		56866C9E1F26D06E00906EC6 /* AsyncControllerBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncControllerBase.swift; sourceTree = "<group>"; };
+		56866CA21F27716100906EC6 /* FAQVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQVC.swift; sourceTree = "<group>"; };
 		56B00C3E1E70C9F400B64B71 /* CreateEmailLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEmailLoginVC.swift; sourceTree = "<group>"; };
 		56B00C411E70CA2600B64B71 /* ForgotCredentialsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotCredentialsVC.swift; sourceTree = "<group>"; };
 		56B589501E94668D009F7786 /* CheckoutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutVC.swift; sourceTree = "<group>"; };
@@ -314,9 +316,7 @@
 				561DBAEE1EE4F18A00D2DADD /* SplashVC.swift */,
 				560861651E7B6924001E1F13 /* ScreenWithBackButtonVC.swift */,
 				561DBAF21EE8ECA900D2DADD /* RecommendBarVC.swift */,
-				199AF66E1E6F969F00FBBAD1 /* ContactUsVC.swift */,
-				561DBAF41EE8EF2400D2DADD /* TermsAndConditionsVC.swift */,
-				56B963251F1E9A6800F63517 /* PrivacyPolicyVC.swift */,
+				56866CA41F2771FF00906EC6 /* Misc Menu Items */,
 				19FBCBB51E6378BC00AA10B5 /* View */,
 			);
 			name = Controller;
@@ -348,6 +348,17 @@
 				5614B34D1EEA35CC00357244 /* FlipSideVC.swift */,
 			);
 			name = "Payout and Subscribe";
+			sourceTree = "<group>";
+		};
+		56866CA41F2771FF00906EC6 /* Misc Menu Items */ = {
+			isa = PBXGroup;
+			children = (
+				199AF66E1E6F969F00FBBAD1 /* ContactUsVC.swift */,
+				56866CA21F27716100906EC6 /* FAQVC.swift */,
+				561DBAF41EE8EF2400D2DADD /* TermsAndConditionsVC.swift */,
+				56B963251F1E9A6800F63517 /* PrivacyPolicyVC.swift */,
+			);
+			name = "Misc Menu Items";
 			sourceTree = "<group>";
 		};
 		56B00C401E70C9F900B64B71 /* LoginSigninFlow */ = {
@@ -736,6 +747,7 @@
 				56B963261F1E9A6900F63517 /* PrivacyPolicyVC.swift in Sources */,
 				5657A9701F055FDA008CA2FF /* BarService.swift in Sources */,
 				19FBCBB81E6379A600AA10B5 /* Shadow&RoundBtn.swift in Sources */,
+				56866CA31F27716100906EC6 /* FAQVC.swift in Sources */,
 				56B91B081E651C7700CB40BB /* GeneralFunctions.swift in Sources */,
 				56F78A5E1E6A600E000E10F4 /* HistoryTableViewCell.swift in Sources */,
 				19FBCBBA1E6379E200AA10B5 /* Constants.swift in Sources */,
