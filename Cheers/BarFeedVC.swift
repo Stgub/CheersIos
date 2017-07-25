@@ -65,7 +65,6 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate,BarServi
     override func viewDidLoad() {
         super.viewDidLoad()
         attachMenuButton(menuButton: leftMenuButton)
-        UserService.shareService.updateUser() // used to make sure the users subscription is correct
         _dayLookedAtNum = Date().dayNumberOfWeek()!
         dayLookedAtNum = _dayLookedAtNum
         BarService.sharedService.addObserver(observer: self)
@@ -149,14 +148,27 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate,BarServi
         cell.barAreaLabel.text = locationString
         
         bar.setImage(imageView: cell.barImageView!)
-        if currentUser.barsUsed.keys.contains(bar.key){
-            if let date = currentUser.barsUsed[bar.key] {
-                if Date().timeIntervalSince1970 - date < ConfigUtil.MONTH_IN_SEC {
-                    cell.freeDrinkBtn.setTitle("Drink Used", for: .normal)
-                }
+        
+        var today = Date()
+        cell.freeDrinkBtn.setTitle("Free Drink", for: .normal)
+        cell.freeDrinkBtn.setTitleColor(TOAST_PRIMARY_COLOR, for: UIControlState.normal)
+        if dayLookedAtNum! != today.dayNumberOfWeek()! {
+            cell.freeDrinkBtn.setTitle("Available \(weekDays(rawValue: dayLookedAtNum)!)", for: .normal)
+            cell.freeDrinkBtn.setTitleColor(UIColor.lightGray, for: UIControlState.normal)
+        } else {
+            if currentUser.barsUsed.keys.contains(bar.key){
+                if let timeIntUsed = currentUser.barsUsed[bar.key] {
+                    let dateUsed = Date(timeIntervalSince1970: timeIntUsed)
+                    if dateUsed.timeIntervalSinceNow  > -60 * 60 * 24 { //used less than a day ago
+                        cell.freeDrinkBtn.setTitle("Drink Redeemed", for: .normal)
+                        cell.freeDrinkBtn.setTitleColor(UIColor.lightGray, for: UIControlState.normal)
 
+                    }
+                }
+                
             }
         }
+
         return cell
     }
     

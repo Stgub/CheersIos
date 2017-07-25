@@ -17,8 +17,6 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
     /**
      Updates the user and particularly currentPeriodStart and currentPeriodEnd from the server
     */
-
-    
     func updateCustomer(){
         print("Backend: Updating user")
         guard let user = currentUser,  user.stripeID != nil else {
@@ -62,7 +60,6 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
                /* if let email = json!["email"] as? String {
                     currentUser.userEmail = email
                 }*/ // Dont want to change email because it may be what they use to login with
-                
             }
         }
     }

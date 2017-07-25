@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FinishEmailVC: UIViewController,hasDataDict, UITextFieldDelegate{
+class FinishEmailVC: AsyncControllerBase,LoginController,hasDataDict, UITextFieldDelegate{
     var dataDict: [String : Any] = [:]
     @IBOutlet weak var zipCodeField: UITextField!
     @IBOutlet weak var isMaleSwitch: UISwitch!
@@ -41,10 +41,21 @@ class FinishEmailVC: UIViewController,hasDataDict, UITextFieldDelegate{
             "locationZipCode":zipCode]
         userData[userDataTypes.name] = dataDict[userDataTypes.name] as? String
         userData[userDataTypes.email] = email
-        UserService.shareService.emailSignUp(sender:self, email: email, password: password, userData:userData)
+        self.startAsyncProcess()
+        UserService.shareService.emailSignUp(loginController:self, email: email, password: password, userData:userData)
     }
     
-    
+    //Call backs from Userservice when login fails or succeeds
+    func loginComplete(){
+        self.stopAsyncProcess()
+        GeneralFunctions.presentBarFeedVC(sender: self)
+    }
+    func loginFailed(title: String, message: String) {
+        self.stopAsyncProcess()
+        presentUIAlert(sender: self, title: title, message: message)
+    }
+
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +63,6 @@ class FinishEmailVC: UIViewController,hasDataDict, UITextFieldDelegate{
         
         //for hiding keyboard on return
         zipCodeField.delegate = self
-        
     }
     //Along with setting delegate in viewDidLoad, gets rid of keyboard on return
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
