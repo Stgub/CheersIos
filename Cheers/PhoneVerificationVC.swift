@@ -84,7 +84,6 @@ class PhoneVerificationVC: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         self.state = .phoneNum
         hideKeyboardWhenTappedAround()
-        UIApplication.shared.registerForRemoteNotifications() // needed for phone verification
 
     }
 

@@ -57,8 +57,10 @@ class UserService:NSObject {
         let facebookLogin = FBSDKLoginManager()
         facebookLogin.logIn(withReadPermissions: [ "public_profile", "email","user_birthday"], from: nil) { (result, error) in
             if error != nil {
+                loginController.loginFailed(title: "Error", message: "Please try again. Error - \(error?.localizedDescription)")
                 print("Chuck: Unable to authenticate with Facebook - \(String(describing: error))")
             } else if result?.isCancelled == true {
+                loginController.loginFailed(title: "Cancelled", message: "User cancelled")
                 print("Chuck: User cancelled Facebook authentication")
             } else {
                 print("Chuck: Successfully authenticated with Facebook")
@@ -71,6 +73,8 @@ class UserService:NSObject {
                 if((FBSDKAccessToken.current()) != nil){
                     FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name,  email, gender, birthday, picture.type(large)"]).start(completionHandler:
                         { (connection, result, error) -> Void in
+                            loginController.loginFailed(title: "Error", message: "Please try again. Error - \(error?.localizedDescription)")
+
                             print("Chuck: Graph request connection? \(String(describing: connection))")
                             if error != nil {
                                 print("Chuck: Error with FB graph request - \(String(describing: error))")
@@ -200,9 +204,13 @@ class UserService:NSObject {
             loginController.loginFailed(title: "Invalid Password", message: "Please enter the correct password")
         case .userNotFound:
             loginController.loginFailed(title: "User not found", message: "Make sure email is correct, or create an account")
+        case .weakPassword:
+               loginController.loginFailed(title: "Weak Password", message: "Please use a stronger password")
+    
         default:
+            
             print("ERROR: logging in \(error.rawValue)")
-            loginController.loginFailed(title: "Error logging in", message: "Please try again")
+            loginController.loginFailed(title: "Error logging in", message: "Please try again - \(error.rawValue)")
         }
     }
 }
