@@ -25,6 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        UIApplication.shared.registerForRemoteNotifications() // needed for phone verification
+
         FirebaseApp.configure()
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         //Stripe payment service
@@ -94,8 +96,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        print("Successfully registered for remote notifications")
         // Pass device token to auth
-        Auth.auth().setAPNSToken(deviceToken, type: AuthAPNSTokenType.prod) // Needed for phone verification
+        Auth.auth().setAPNSToken(deviceToken, type: AuthAPNSTokenType.sandbox) // Needed for phone verification
         //Swizzling turned off in infolist with FirebaseAppDelegateProxyEnabled = No
     
     }
@@ -112,6 +115,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if Auth.auth().canHandleNotification(notification) {
             print(#function)
             print(notification.debugDescription)
+            completionHandler(UIBackgroundFetchResult.noData)
+            
             return
         }
         // This notification is not auth related, developer should handle it.
