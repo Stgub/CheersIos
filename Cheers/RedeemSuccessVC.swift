@@ -17,6 +17,7 @@ class RedeemSuccessVC: UIViewController {
         GeneralFunctions.presentBarFeedVC(sender: self)
     }
     override func viewWillAppear(_ animated: Bool) {
+        timeLabel.text = String(countdown)
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
     }
 

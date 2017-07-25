@@ -18,7 +18,12 @@ class GeneralFunctions:NSObject{
                                  renewDateL:UILabel,
                                  imgL:UIImageView)
     {
-        nameL.text = currentUser.name
+        guard let user = currentUser else {
+            return
+        }
+        if let name = currentUser.name as? String{
+            nameL.text = currentUser.name
+        }
     
         if let credits = currentUser.credits {
             creditsL.text = "\(credits)"

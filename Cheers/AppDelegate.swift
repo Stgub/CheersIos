@@ -48,6 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
     func reachabilityChanged(note: NSNotification) {
         print("AppDelegate:reachabilityChanged")
         let reachability = note.object as! Reachability
@@ -67,23 +68,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Network not reachable")
         }
     }
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        print(#function)
-    }
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print(#function)
-        print(error.localizedDescription)
-    }
-    func application(_ application: UIApplication,
-                     didReceiveRemoteNotification notification: [AnyHashable : Any],
-                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        print(#function)
-//        if Auth.auth().canHandleNotification(notification) {
-//            completionHandler(UIBackgroundFetchResultNoData)
-//            return
-//        }
-        // This notification is not auth related, developer should handle it.
-    }
+
+
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -106,6 +92,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        // Pass device token to auth
+        Auth.auth().setAPNSToken(deviceToken, type: AuthAPNSTokenType.prod) // Needed for phone verification
+        //Swizzling turned off in infolist with FirebaseAppDelegateProxyEnabled = No
+    
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print(#function)
+        print(error.localizedDescription)
+    }
+
+    
+    func application(_ application: UIApplication,
+                     didReceiveRemoteNotification notification: [AnyHashable : Any],
+                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        if Auth.auth().canHandleNotification(notification) {
+            print(#function)
+            print(notification.debugDescription)
+            return
+        }
+        // This notification is not auth related, developer should handle it.
+    }
+    
     
     //For Facebook Login
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
