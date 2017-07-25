@@ -16,6 +16,7 @@ class ConfigUtil{
     
     public static let PRIVACY_POLICY_URL = "http://www.thetoastclub.com/privacy-policy/"
     public static let TERMS_AND_CONDITIONS_URL = "http://thetoastclub.com/terms-and-conditions/"
+    public static let FAQ_URL = "http://www.thetoastclub.com/faq/"
     
     static let SERVER_BASE = "http://ec2-34-202-232-113.compute-1.amazonaws.com:5000"   // AWS server 34.202.232.113*
     //static let SERVER_BASE = "http://0.0.0.0:5000" //local test
