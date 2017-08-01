@@ -38,7 +38,7 @@ class MyFireBaseAPIClient:NSObject{
     
     func watchdogTimerFired(){
         print(#function)
-        UserService.shareService.signOut()
+        UserService.sharedService.signOut()
     }
     
     func getUser( completion:@escaping  (Error?)-> Void )
@@ -50,39 +50,19 @@ class MyFireBaseAPIClient:NSObject{
         
         DataService.ds.REF_USER_CURRENT.observeSingleEvent(of: .value, with: { (snapshot) in
             print("Observed User")
-            //Update current User
             self.watchdogTimer.invalidate()
             if !snapshot.exists() {
                 print("ERROR: User does not exist")
-                UserService.shareService.signOut()
+                UserService.sharedService.signOut()
             }
             let snapKey = snapshot.key
             if let userData = snapshot.value as? Dictionary<String,AnyObject>{
-                if let user = currentUser {
-                    if let key = user.userKey {
-                        if  key == snapKey {
-                            currentUser.updateData(userData: userData)
-                            print("Same user")
-                        }
-                    } else {
-                        let newUser = User(userKey: snapKey, userData:userData)
-                        currentUser = newUser
-                        print("Changed User")
-                    }
-                } else {
-                    let newUser = User(userKey: snapKey, userData:userData)
-                    currentUser = newUser
-                    print("New User")
-                }
-                print("Completion")
-                completion(nil)
-                UserService.shareService.updateUser()
-                self.startObservingUser()
+                UserService.sharedService.updateUser(key: snapKey, data: userData, completion: completion)
             } else { print("Error - cast issue probably not a user")
                 completion(userError(localizedDescription: "Could not get user"))
             }
         }) { (error) in
-            print(error.localizedDescription)
+            print("Error: \(#function) \(error.localizedDescription)")
             completion(userError(localizedDescription: error.localizedDescription))
         }
     }
@@ -93,28 +73,12 @@ class MyFireBaseAPIClient:NSObject{
      */
     func startObservingUser() {
         print(#function)
-
         observeUserHandle = DataService.ds.REF_USER_CURRENT.observe(.value, with: { (snapshot) in
             print("Observed User")
             //Update current User
             let snapKey = snapshot.key
             if let userData = snapshot.value as? Dictionary<String,AnyObject>{
-                if let user = currentUser {
-                    if let key = user.userKey {
-                        if  key == snapKey {
-                            currentUser.updateData(userData: userData)
-                            print("Same user")
-                        }
-                    } else {
-                        let newUser = User(userKey: snapKey, userData:userData)
-                        currentUser = newUser
-                        print("Changed User")
-                    }
-                } else {
-                    let newUser = User(userKey: snapKey, userData:userData)
-                    currentUser = newUser
-                    print("New User")
-                }
+                UserService.sharedService.updateUser(key: snapKey, data: userData, completion: nil)
             }
         }){ (error) in
             print("Error")

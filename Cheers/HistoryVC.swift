@@ -44,7 +44,10 @@ class HistoryVC: BaseMenuVC, UITableViewDelegate, UITableViewDataSource {
                                           renewDateL: userRenewDateLabel,
                                           imgL: userImageView)
         
-        
+        guard let currentUser = UserService.sharedService.getCurrentUser() else {
+            print("Error: no current user")
+            return
+        }
         let drinksUsed = currentUser.barsUsed.count
         self.moneySavedLabel.text = "$\(drinksUsed * 10).00" // Update with actual prices??
         
@@ -89,6 +92,10 @@ class HistoryVC: BaseMenuVC, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell") as! HistoryTableViewCell
         let bar = barHistory[indexPath.row]
+        guard let currentUser = UserService.sharedService.getCurrentUser() else {
+            print("Error: no current user")
+            return cell
+        }
         let date = currentUser.barsUsed[bar.key]
         bar.setImage(imageView: cell.barImageView)
         cell.barNameLabel.text = bar.barName

@@ -18,7 +18,7 @@ class GeneralFunctions:NSObject{
                                  renewDateL:UILabel,
                                  imgL:UIImageView)
     {
-        guard let user = currentUser else {
+        guard let currentUser = UserService.sharedService.getCurrentUser() else {
             return
         }
         if let name = currentUser.name as? String{
@@ -106,8 +106,8 @@ func getDateStringFromTimeStamp(date: TimeInterval)-> String{
  *@Return: time between drinks or the time now if there are no bars used  */
 func timeLeftBetweenDrinks()->TimeInterval{
     let timeNow = NSDate().timeIntervalSince1970
-    if let user = currentUser{
-        if let lastDrinkTime = user.barsUsed.values.max() {
+    if let currentUser = UserService.sharedService.getCurrentUser(){
+        if let lastDrinkTime = currentUser.barsUsed.values.max() {
             return TIME_BETWEEN_DRINKS - (timeNow - lastDrinkTime)
         } else {
             return -1

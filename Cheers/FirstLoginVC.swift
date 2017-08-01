@@ -15,7 +15,7 @@ class FirstLoginVC: AsyncControllerBase, LoginController {
 
     @IBAction func fbBtnTapped(_ sender: UIButton) {
         self.startAsyncProcess()
-        UserService.shareService.facebookLogIn(loginController: self)
+        UserService.sharedService.facebookLogIn(loginController: self)
     }
     
     override func viewDidLoad() {

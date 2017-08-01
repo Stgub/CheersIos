@@ -13,7 +13,6 @@
 		199AF66F1E6F969F00FBBAD1 /* ContactUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199AF66E1E6F969F00FBBAD1 /* ContactUsVC.swift */; };
 		19BA3EEC1EEB1CAE00D07A96 /* ButtonTextLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BA3EEB1EEB1CAE00D07A96 /* ButtonTextLeft.swift */; };
 		19BA3EEE1EEB1F7F00D07A96 /* viewRoundCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BA3EED1EEB1F7F00D07A96 /* viewRoundCorner.swift */; };
-		19F88B481F30E36700EEBB95 /* BarDetailTransparentBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F88B471F30E36700EEBB95 /* BarDetailTransparentBar.swift */; };
 		19FBCB851E635FE500AA10B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FBCB841E635FE500AA10B5 /* AppDelegate.swift */; };
 		19FBCB871E635FE500AA10B5 /* BarFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FBCB861E635FE500AA10B5 /* BarFeedVC.swift */; };
 		19FBCB8A1E635FE500AA10B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19FBCB881E635FE500AA10B5 /* Main.storyboard */; };
@@ -57,7 +56,6 @@
 		56B91B061E651C1700CB40BB /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B91B051E651C1700CB40BB /* DataService.swift */; };
 		56B91B081E651C7700CB40BB /* GeneralFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B91B071E651C7700CB40BB /* GeneralFunctions.swift */; };
 		56B963261F1E9A6900F63517 /* PrivacyPolicyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B963251F1E9A6800F63517 /* PrivacyPolicyVC.swift */; };
-		56CE08821EF21F3900778FB7 /* CurrentlyUnused.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56CE08811EF21F3900778FB7 /* CurrentlyUnused.storyboard */; };
 		56DC61201ECF5DE4001279F9 /* ReferralVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DC611F1ECF5DE4001279F9 /* ReferralVC.swift */; };
 		56DC6A4A1EADAB9800449739 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DC6A491EADAB9800449739 /* UserService.swift */; };
 		56F0C7A01F27B5BB002C79F5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 56F0C79F1F27B5BB002C79F5 /* GoogleService-Info.plist */; };
@@ -103,7 +101,6 @@
 		199AF66E1E6F969F00FBBAD1 /* ContactUsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUsVC.swift; sourceTree = "<group>"; };
 		19BA3EEB1EEB1CAE00D07A96 /* ButtonTextLeft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTextLeft.swift; sourceTree = "<group>"; };
 		19BA3EED1EEB1F7F00D07A96 /* viewRoundCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = viewRoundCorner.swift; sourceTree = "<group>"; };
-		19F88B471F30E36700EEBB95 /* BarDetailTransparentBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarDetailTransparentBar.swift; sourceTree = "<group>"; };
 		19FBCB811E635FE500AA10B5 /* Cheers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cheers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19FBCB841E635FE500AA10B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19FBCB861E635FE500AA10B5 /* BarFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarFeedVC.swift; sourceTree = "<group>"; };
@@ -155,7 +152,6 @@
 		56B91B051E651C1700CB40BB /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		56B91B071E651C7700CB40BB /* GeneralFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralFunctions.swift; sourceTree = "<group>"; };
 		56B963251F1E9A6800F63517 /* PrivacyPolicyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyVC.swift; sourceTree = "<group>"; };
-		56CE08811EF21F3900778FB7 /* CurrentlyUnused.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CurrentlyUnused.storyboard; sourceTree = "<group>"; };
 		56DC611F1ECF5DE4001279F9 /* ReferralVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReferralVC.swift; sourceTree = "<group>"; };
 		56DC6A491EADAB9800449739 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		56F0C79F1F27B5BB002C79F5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -235,7 +231,6 @@
 				19FBCBB61E6378C200AA10B5 /* Controller */,
 				19FBCB8B1E635FE500AA10B5 /* Assets.xcassets */,
 				19FBCB881E635FE500AA10B5 /* Main.storyboard */,
-				56CE08811EF21F3900778FB7 /* CurrentlyUnused.storyboard */,
 				561DBAE61EE4EF3500D2DADD /* AddBarFlow.storyboard */,
 				561DBAE81EE4EF4700D2DADD /* Splash.storyboard */,
 				561DBAEA1EE4EFD800D2DADD /* Menu.storyboard */,
@@ -296,7 +291,6 @@
 				19BA3EEB1EEB1CAE00D07A96 /* ButtonTextLeft.swift */,
 				19BA3EED1EEB1F7F00D07A96 /* viewRoundCorner.swift */,
 				563E81151EF0B11B00AB1AE4 /* XibView.swift */,
-				19F88B471F30E36700EEBB95 /* BarDetailTransparentBar.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -540,7 +534,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				56CE08821EF21F3900778FB7 /* CurrentlyUnused.storyboard in Resources */,
 				561DBAEB1EE4EFD800D2DADD /* Menu.storyboard in Resources */,
 				56F0C7A01F27B5BB002C79F5 /* GoogleService-Info.plist in Resources */,
 				19FBCB8F1E635FE500AA10B5 /* LaunchScreen.storyboard in Resources */,
@@ -718,7 +711,6 @@
 				5669A3DC1F0299FB0098B9A0 /* RedeemSuccessVC.swift in Sources */,
 				56FF178E1E6FA0BB00089C7C /* BarReviewVC.swift in Sources */,
 				5669A3DE1F033AA10098B9A0 /* PhoneVerificationVC.swift in Sources */,
-				19F88B481F30E36700EEBB95 /* BarDetailTransparentBar.swift in Sources */,
 				561DBAEF1EE4F18A00D2DADD /* SplashVC.swift in Sources */,
 				56B91B061E651C1700CB40BB /* DataService.swift in Sources */,
 				561DBAF11EE4FDC100D2DADD /* MenuItemTableViewCell.swift in Sources */,

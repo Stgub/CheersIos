@@ -24,7 +24,7 @@ class BaseMenuVC: UIViewController, SlideMenuDelegate {
         print("View Controller is : \(topViewController) \n", terminator: "")
         
         if menuItem.storyboardID == "signout" {
-            UserService.shareService.signOut()
+            UserService.sharedService.signOut()
             GeneralFunctions.presentFirstLoginVC(sender: self)
             return
         }

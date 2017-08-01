@@ -11,7 +11,6 @@ import Firebase
 import SwiftKeychainWrapper
 import FBSDKLoginKit
 
-var currentUser:User!
 
 //protocol UserObserver{
 //    func updateUser()
@@ -19,7 +18,9 @@ var currentUser:User!
 
 
 class UserService:NSObject {
-    static let shareService = UserService()
+    private var _currentUser:User!
+    
+    static let sharedService = UserService()
     
 //    var observer:UserObserver!
 //    func addObserver(observer:UserObserver){
@@ -29,35 +30,100 @@ class UserService:NSObject {
 //        self.observer = nil
 //    }
 //    
+    func getCurrentUser() -> User? {
+        return _currentUser
+    }
+    
+    func isUserSignedIn() -> Bool {
+        return _currentUser != nil
+    }
+    
+    func updateUserMembership(membership:String){
+        self._currentUser.membership = membership
+        UserService.sharedService.updateUser()
+    }
+    
+    func updateUser(data:Dictionary<String,String>){
+        _currentUser.updateData(userData: data as Dictionary<String, AnyObject>)
+    }
+    
     func updateUser(){
         print(#function)
-        if currentUser.membership == membershipLevels.premium {
-            StripeAPIClient.sharedClient.updateCustomer()
+        if _currentUser.membership == membershipLevels.premium {
+            StripeAPIClient.sharedClient.updateCustomer(user: _currentUser)
         } else {
-            if currentUser.currentPeriodEnd < NSDate().timeIntervalSince1970{
-                currentUser.credits = 1
+            if _currentUser.currentPeriodEnd < NSDate().timeIntervalSince1970{
+                _currentUser.credits = 1
                 let now =  NSDate().timeIntervalSince1970
                 let aMonth:TimeInterval = 60*60*24*30 // in seconds
-                if currentUser.currentPeriodEnd + aMonth < now {
-                    currentUser.currentPeriodEnd = currentUser.currentPeriodEnd + aMonth
+                if _currentUser.currentPeriodEnd + aMonth < now {
+                    _currentUser.currentPeriodEnd = _currentUser.currentPeriodEnd + aMonth
                 } else {
-                    currentUser.currentPeriodEnd = now + aMonth
+                    _currentUser.currentPeriodEnd = now + aMonth
                 }
             }
         }
     }
+    
+    func updateUser(key:String,data:Dictionary<String, AnyObject>, completion:((Error?)-> Void)?){
+        if let user = _currentUser {
+            if let key = user.userKey {
+                if  key == key {
+                    _currentUser.updateData(userData: data)
+                    print("Same user")
+                }
+            } else {
+                let newUser = User(userKey: key, userData:data)
+                _currentUser = newUser
+                print("Changed User")
+            }
+        } else {
+            let newUser = User(userKey: key, userData:data)
+            _currentUser = newUser
+            print("New User")
+        }
+        if completion != nil {
+            completion!(nil)
+        }
+        self.updateUser()
+    }
+    
+    func updateUserImg(image:UIImage, completion:@escaping ()-> Void)
+    {
+        _currentUser.usersImage = image
+        
+        _currentUser.saveUserImg(img: image, returnBlock: completion)
+        
+    }
+    
+    func redeemedDrink(bar:Bar, completion:@escaping ()->Void){
+        let dateStamp = NSDate().timeIntervalSince1970
+        DataService.ds.REF_USER_CURRENT.child(userDataTypes.barsUsed).child(bar.key).setValue(dateStamp){
+            (error, ref) in
+            if error != nil {
+                print("Chuck: Error redeeming -\(String(describing: error))")
+            } else {
+                print("Successfully redeemed")
+                self._currentUser.usedBar(barId: bar.key, currentDate:dateStamp)
+                completion()
+            }
+        }
+    }
+    
     func signOut(){
+        print(#function)
         MyFireBaseAPIClient.sharedClient.stopObservingUser()
         try! Auth.auth().signOut()
         KeychainWrapper.standard.removeObject(forKey: KEY_UID)
-        currentUser = nil
+        _currentUser = nil
     }
     
     func facebookLogIn(loginController:LoginController){
         let facebookLogin = FBSDKLoginManager()
         facebookLogin.logIn(withReadPermissions: [ "public_profile", "email","user_birthday"], from: nil) { (result, error) in
             if error != nil {
-                loginController.loginFailed(title: "Error", message: "Please try again. Error - \(error?.localizedDescription)")
+                print("\(#function) error \(error.debugDescription)")
+                loginController.loginFailed(title: "Error", message: "Please try again. Error - \(String(describing: error?.localizedDescription))")
                 print("Chuck: Unable to authenticate with Facebook - \(String(describing: error))")
             } else if result?.isCancelled == true {
                 loginController.loginFailed(title: "Cancelled", message: "User cancelled")
@@ -73,11 +139,10 @@ class UserService:NSObject {
                 if((FBSDKAccessToken.current()) != nil){
                     FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name,  email, gender, birthday, picture.type(large)"]).start(completionHandler:
                         { (connection, result, error) -> Void in
-                            loginController.loginFailed(title: "Error", message: "Please try again. Error - \(error?.localizedDescription)")
-
                             print("Chuck: Graph request connection? \(String(describing: connection))")
                             if error != nil {
-                                print("Chuck: Error with FB graph request - \(String(describing: error))")
+                                print("Chuck: Error with FB graph request - \(String(describing: error.debugDescription))")
+                                loginController.loginFailed(title: "Error", message: "Please try again. Error - \(String(describing: error?.localizedDescription))")
                             } else {
                                 print("Chuck: Result from FB graph request - \(String(describing: result))")
                                 if let result = result as? NSDictionary {
