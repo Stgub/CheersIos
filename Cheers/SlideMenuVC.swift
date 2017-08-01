@@ -28,7 +28,7 @@ class SlideMenuVC: UIViewController, Menu, UITableViewDelegate, UITableViewDataS
     
     var delegate: SlideMenuDelegate?
     var menuItems:[MenuItem] =  [
-        MenuItem(title: "Bar Feed", storyboardID: "BarFeedVC", storyboard: myStoryboards.main),
+        MenuItem(title: "Venues", storyboardID: "BarFeedVC", storyboard: myStoryboards.main),
         MenuItem(title: "History", storyboardID: "HistoryVC", storyboard: myStoryboards.main),
         MenuItem(title: "Account", storyboardID: "AccountVC", storyboard: myStoryboards.main),
         MenuItem(title: "Contact Us", storyboardID: "ContactUsVC", storyboard: myStoryboards.main),
