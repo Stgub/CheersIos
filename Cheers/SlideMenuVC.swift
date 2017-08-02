@@ -41,7 +41,6 @@ class SlideMenuVC: UIViewController, Menu, UITableViewDelegate, UITableViewDataS
     ]
     
     @IBOutlet weak var btnMenu: UIButton!
-    @IBOutlet weak var profileImage: UIImageView!
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -53,13 +52,7 @@ class SlideMenuVC: UIViewController, Menu, UITableViewDelegate, UITableViewDataS
     override func viewDidLoad() {
         tableView.tableFooterView = UIView() // get rid of extra rows
 
-        if let currentUser = UserService.sharedService.getCurrentUser() {
-            currentUser.getUserImg(){
-                (image) in
-                self.profileImage.image = image
-            }
-        }
-        var swipeLeft = UISwipeGestureRecognizer(target: self, action:#selector(self.closeMenu))
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action:#selector(self.closeMenu))
         swipeLeft.direction = UISwipeGestureRecognizerDirection.left
         self.view.addGestureRecognizer(swipeLeft)
     }

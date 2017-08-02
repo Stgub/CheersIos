@@ -91,14 +91,7 @@ class UserService:NSObject {
         }
         self.updateUser()
     }
-    
-    func updateUserImg(image:UIImage, completion:@escaping ()-> Void)
-    {
-        _currentUser.usersImage = image
-        
-        _currentUser.saveUserImg(img: image, returnBlock: completion)
-        
-    }
+
     
     func redeemedDrink(bar:Bar, completion:@escaping ()->Void){
         let dateStamp = NSDate().timeIntervalSince1970
@@ -164,13 +157,6 @@ class UserService:NSObject {
                                     if let gender = result["gender"] as? String {
                                         userData[userDataTypes.gender] = gender
                                     } else { print("Chuck: Could'nt grab FB gender")}
-                                    if let picture = result["picture"] as? NSDictionary {
-                                        let data = picture["data"] as! NSDictionary
-                                        let imgURL = data["url"]
-                                        print("setting URL")
-                                        userData[userDataTypes.imgUrl] = imgURL as! String?
-                                        
-                                    } else { print("Chuck : No facebook image grabbed") }
                                 } else { print("Chuck: Could'nt cast result to NSDictionary") }
                             }
                             self.firebaseAuth(loginController, credential: credential,userData:userData)
