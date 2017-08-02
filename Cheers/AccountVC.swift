@@ -10,9 +10,8 @@ import UIKit
 import Firebase
 import SwiftKeychainWrapper
 
-class AccountVC: BaseMenuVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate{
+class AccountVC: BaseMenuVC, UITextFieldDelegate{
     
-    var imagePicker = UIImagePickerController()
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
     private var serverRequestInProgress: Bool = false {
@@ -48,7 +47,6 @@ class AccountVC: BaseMenuVC, UIImagePickerControllerDelegate, UINavigationContro
     {
         didSet{
             if currentlyEditing {
-                editImgBtn.isHidden = false
                 editBtn.setTitle("Done", for: .normal)
                 emailTF.isHidden = false
                 nameTF.isHidden = false
@@ -56,7 +54,6 @@ class AccountVC: BaseMenuVC, UIImagePickerControllerDelegate, UINavigationContro
                 userEmailLabel.isHidden = true
             } else
             {
-                editImgBtn.isHidden = true
                 editBtn.setTitle("Edit", for: .normal)
                 emailTF.isHidden = true
                 nameTF.isHidden = true
@@ -66,13 +63,11 @@ class AccountVC: BaseMenuVC, UIImagePickerControllerDelegate, UINavigationContro
         }
     }
     
-    @IBOutlet weak var profileImg: circlePP!
     @IBOutlet weak var leftMenuButton: UIButton!
     @IBOutlet weak var membershiBtn: UIButton!
     @IBOutlet weak var membershipLabel: UILabel!
     
     @IBOutlet weak var editBtn: UIButton!
-    @IBOutlet weak var editImgBtn: UIButton!
     @IBOutlet weak var userEmailLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     
@@ -109,11 +104,6 @@ class AccountVC: BaseMenuVC, UIImagePickerControllerDelegate, UINavigationContro
         
     }
     
-    @IBAction func editPicBtnTapped(_ sender: Any) {
-        imagePicker.delegate = self
-        imagePicker.allowsEditing = false
-        present(imagePicker, animated: true, completion: nil)
-    }
     
     @IBAction func logOutBtnTapped(_ sender: Any) {
         print("Log out btn tapped")
@@ -141,9 +131,6 @@ class AccountVC: BaseMenuVC, UIImagePickerControllerDelegate, UINavigationContro
     {
         if let currentUser = UserService.sharedService.getCurrentUser()
         {
-            currentUser.getUserImg(returnBlock: { (img) in
-                self.profileImg.image = img
-            })
             isBasicMembership = currentUser.membership == membershipLevels.basic
             membershipLabel.text = currentUser.membership
             usernameLabel.text = currentUser.name
@@ -184,23 +171,4 @@ class AccountVC: BaseMenuVC, UIImagePickerControllerDelegate, UINavigationContro
         }
     }
     
-    //MARK: - Delegates
-    // In order to work you need to put in a photo access description in Plist. Need to add one for camera if we wish to add
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        
-        var  chosenImage = UIImage()
-        chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
-        profileImg.image = chosenImage //4
-        serverRequestInProgress = true
-        UserService.sharedService.updateUserImg(image:chosenImage){
-            self.serverRequestInProgress = false
-        }
-        //TODO figure out async for updating user image
-        self.dismiss(animated:true, completion: nil) //5
-
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
-    }
 }

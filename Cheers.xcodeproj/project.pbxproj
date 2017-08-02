@@ -281,9 +281,9 @@
 		19FBCBB51E6378BC00AA10B5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				56B91B031E651B6600CB40BB /* BarTableViewCell.swift */,
 				19FBCBB71E6379A600AA10B5 /* Shadow&RoundBtn.swift */,
 				56F78A5D1E6A600E000E10F4 /* HistoryTableViewCell.swift */,
-				56B91B031E651B6600CB40BB /* BarTableViewCell.swift */,
 				199AF66C1E6F6DAA00FBBAD1 /* RoundedImageCorner.swift */,
 				1916ADFA1E733AC3003EACC2 /* textViewRoundCorner.swift */,
 				193944751E9FEE3900557853 /* circlePP.swift */,

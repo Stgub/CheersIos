@@ -35,7 +35,6 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate,BarServi
 
     @IBOutlet weak var leftMenuButton: UIButton!
     //UserBanner stuff
-    @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var membershipBtn: UIButton!
     @IBOutlet weak var creditsLabel: UILabel!
@@ -80,8 +79,7 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate,BarServi
         GeneralFunctions.updateUserBanner(controller: self, nameL: userNameLabel,
                                           creditsL: creditsLabel,
                                           membershipB: membershipBtn,
-                                          renewDateL: renewDateLabel,
-                                          imgL: userImageView)
+                                          renewDateL: renewDateLabel)
         
         tableView.reloadData()
     }
@@ -120,7 +118,6 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate,BarServi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell (withIdentifier: "BarTableViewCell") as! BarTableViewCell
-        cell.delegate = self // used to call back when a bar is tapped
         let barString = bars[indexPath.row]
         guard let bar = BarService.sharedService.getBar(id:barString) else {
             return cell
@@ -148,7 +145,11 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate,BarServi
         cell.barAreaLabel.text = locationString
         
         bar.setImage(imageView: cell.barImageView!)
+        // Below code deleted with button
         
+       //cell.delegate = self // used to call back when a bar is tapped
+
+        /*
         var today = Date()
         cell.freeDrinkBtn.setTitle("Free Drink", for: .normal)
         cell.freeDrinkBtn.setTitleColor(TOAST_PRIMARY_COLOR, for: UIControlState.normal)
@@ -161,7 +162,7 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate,BarServi
                 cell.freeDrinkBtn.setTitleColor(UIColor.lightGray, for: UIControlState.normal)
     
             }
-        }
+        } */
 
         return cell
     }

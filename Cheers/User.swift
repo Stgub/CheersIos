@@ -30,7 +30,6 @@ struct userDataTypes {
     static let barsUsed = "barsUsed"
     static let credits = "credits"
     static let membership = "membership"
-    static let imgUrl = "imgUrl"
     static let stripeId = "stripeId"
     static let testStripeId = "testStripeId"
     static let connectId = "connectId"
@@ -99,8 +98,6 @@ class User{
     var barsUsed:Dictionary<String,TimeInterval> {
         get{ return _barsUsed }
     }
-    var _imgUrl:String!
-    var usersImage:UIImage!
 
     private var _userEmail:String!
     var userEmail:String! {
@@ -151,9 +148,6 @@ class User{
             self._name = name
         } else {
             self._name = "Anonymous" //TODO need to make sure we get users name
-        }
-        if let imgUrl = userData[userDataTypes.imgUrl] as? String {
-            self._imgUrl = imgUrl
         }
         var stripeKey:String
         if ConfigUtil.inTesting {
@@ -211,41 +205,4 @@ class User{
             self._phoneNumber = phoneNum
         }
     }
-    
-    func saveUserImg(img: UIImage, returnBlock: @escaping () -> Void){
-        myDbAPI.saveUserImg(img: img, path: self._userKey){
-            (path) in
-            imageCache.setObject(img, forKey: path as NSString)
-            print("USER: User img saved")
-            self.ref.child(userDataTypes.imgUrl).setValue(path)
-            returnBlock()
-        }
-    }
-    
-    func getUserImg(returnBlock:((UIImage?)->Void)?){
-        print("CHUCK: getUserImg()")
-        if let url = self._imgUrl {
-            if let image = imageCache.object(forKey: url as NSString){
-                self.usersImage = image
-                returnBlock!(self.usersImage)
-            } else {
-
-                let nsUrl = NSURL(string: url as String)
-                let urlRequest = NSURLRequest(url: nsUrl! as URL)
-                let dataSession = URLSession.shared
-                let dataTask = dataSession.dataTask(with: urlRequest as URLRequest, completionHandler:{ (data, response, error) in
-                    if error == nil {
-                        if let image = UIImage(data: data!) {
-                            print("Chuck: successfully got image")
-                            self.usersImage = image
-                            imageCache.setObject(image, forKey: url as NSString)
-                            returnBlock!(self.usersImage)
-                        } else { print("Chuck: Could not get image from data") }
-                    } else {  print("Chuck: error with loading image -\(String(describing: error))") }
-                })
-                dataTask.resume() // needed or the above will never happen
-            }
-        } else { print("Backend: User has no imgUrl ") }
-    }
-    
 }

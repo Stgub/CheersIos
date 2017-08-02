@@ -15,8 +15,7 @@ class GeneralFunctions:NSObject{
     static func updateUserBanner(controller: UIViewController, nameL:UILabel,
                                  creditsL:UILabel,
                                  membershipB:UIButton,
-                                 renewDateL:UILabel,
-                                 imgL:UIImageView)
+                                 renewDateL:UILabel)
     {
         guard let currentUser = UserService.sharedService.getCurrentUser() else {
             return
@@ -30,11 +29,7 @@ class GeneralFunctions:NSObject{
         }
         membershipB.setTitle(currentUser.membership, for: .normal)
         renewDateL.text = getDateStringFromTimeStamp(date: currentUser.currentPeriodEnd)
-        currentUser.getUserImg(returnBlock: { (image) in
-            DispatchQueue.main.async {
-            imgL.image = image
-            }
-        })
+        
         //TODO: Figure out how to move membership button action to here
         //membershipB.addTarget(self, action: #selector(presentAccountVC(sender:)), for: .touchUpInside)
     }

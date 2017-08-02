@@ -15,7 +15,6 @@ class HistoryVC: BaseMenuVC, UITableViewDelegate, UITableViewDataSource {
     var barHistory:[Bar] = []
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userRenewDateLabel: UILabel!
     @IBOutlet weak var creditsLabel: UILabel!
@@ -41,8 +40,7 @@ class HistoryVC: BaseMenuVC, UITableViewDelegate, UITableViewDataSource {
                                           nameL: userNameLabel,
                                           creditsL: creditsLabel,
                                           membershipB:membershipBtn,
-                                          renewDateL: userRenewDateLabel,
-                                          imgL: userImageView)
+                                          renewDateL: userRenewDateLabel)
         
         guard let currentUser = UserService.sharedService.getCurrentUser() else {
             print("Error: no current user")
