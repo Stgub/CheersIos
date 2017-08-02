@@ -14,11 +14,13 @@ class FinishEmailVC: AsyncControllerBase,LoginController,hasDataDict, UITextFiel
     @IBOutlet weak var isMaleSwitch: UISwitch!
     
     @IBOutlet weak var birthdayPicker: UIDatePicker!
+    
     @IBAction func backBtnTapped(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
+    
     @IBAction func signUpBtnPressed(_ sender: Any) {
-             guard let zipCode = zipCodeField.text else {
+        guard let zipCode = zipCodeField.text else {
             return
         }
         guard let email = dataDict[userDataTypes.email] as? String else {
@@ -42,7 +44,7 @@ class FinishEmailVC: AsyncControllerBase,LoginController,hasDataDict, UITextFiel
         userData[userDataTypes.name] = dataDict[userDataTypes.name] as? String
         userData[userDataTypes.email] = email
         self.startAsyncProcess()
-        UserService.shareService.emailSignUp(loginController:self, email: email, password: password, userData:userData)
+        UserService.sharedService.emailSignUp(loginController:self, email: email, password: password, userData:userData)
     }
     
     //Call backs from Userservice when login fails or succeeds

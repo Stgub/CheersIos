@@ -45,16 +45,9 @@ class BarDetailVC: UIViewController, hasBarVar {
     }
     func redeemDrink(){
         print("CHUCK: User redeemed bar -\(bar.barName)")
-        let dateStamp = NSDate().timeIntervalSince1970
-        DataService.ds.REF_USER_CURRENT.child(userDataTypes.barsUsed).child(bar.key).setValue(dateStamp){
-            (error, ref) in
-            if error != nil {
-                print("Chuck: Error redeeming -\(String(describing: error))")
-            } else {
-                print("Successfully redeemed")
-                currentUser.usedBar(barId: self.bar.key, currentDate:dateStamp)
-                self.performSegue(withIdentifier: "drinkRedeemedSegue", sender: self)
-            }
+        UserService.sharedService.redeemedDrink(bar:bar){
+            self.performSegue(withIdentifier: "drinkRedeemedSegue", sender: self)
+
         }
     }
     
@@ -93,6 +86,11 @@ class BarDetailVC: UIViewController, hasBarVar {
         //remove actions linked to button, if adding more there's a better way
         redeemDrinkBtn.removeTarget(nil, action: nil, for: .touchUpInside)
         updateTimer.invalidate()
+        
+        guard let currentUser = UserService.sharedService.getCurrentUser() else {
+            print("ERROR: No current user")
+            return
+        }
         if currentUser.phoneNumber == nil && !ConfigUtil.inTesting{
             redeemDrinkBtn.setTitle("Verify Phone", for: .normal)
             redeemDrinkBtn.isUserInteractionEnabled = true

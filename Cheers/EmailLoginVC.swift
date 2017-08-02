@@ -32,7 +32,7 @@ class EmailLoginVC: AsyncControllerBase, LoginController,UITextFieldDelegate {
                 return
             }
             self.startAsyncProcess()
-            UserService.shareService.emailLogIn(loginController: self, email: email, password: password)
+            UserService.sharedService.emailLogIn(loginController: self, email: email, password: password)
         }
         
     }

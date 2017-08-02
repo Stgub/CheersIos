@@ -53,8 +53,8 @@ class SlideMenuVC: UIViewController, Menu, UITableViewDelegate, UITableViewDataS
     override func viewDidLoad() {
         tableView.tableFooterView = UIView() // get rid of extra rows
 
-        if let user = currentUser {
-            user.getUserImg(){
+        if let currentUser = UserService.sharedService.getCurrentUser() {
+            currentUser.getUserImg(){
                 (image) in
                 self.profileImage.image = image
             }

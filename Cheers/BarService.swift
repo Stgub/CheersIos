@@ -36,6 +36,25 @@ class BarService {
     func removeObserver(observer:BarServiceObserver){
         self.observer = nil
     }
+    
+    func isBarAvailable(key:String) -> Bool {
+        guard let currentUser = UserService.sharedService.getCurrentUser() else {
+            print("no current user")
+            return false
+        }
+        
+        if currentUser.barsUsed.keys.contains(key){
+            if let timeIntUsed = currentUser.barsUsed[key] {
+                let dateUsed = Date(timeIntervalSince1970: timeIntUsed)
+                if dateUsed.timeIntervalSinceNow  > -60 * 60 * 24 { //used less than a day ago
+                    return false
+                    
+                }
+            }
+        }
+        return true
+    }
+        
     func getBars(){
         MyFireBaseAPIClient.sharedClient.getBars(){
             (returnedBars) in

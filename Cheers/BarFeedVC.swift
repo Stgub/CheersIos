@@ -156,16 +156,10 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate,BarServi
             cell.freeDrinkBtn.setTitle("Available \(weekDays(rawValue: dayLookedAtNum)!)", for: .normal)
             cell.freeDrinkBtn.setTitleColor(UIColor.lightGray, for: UIControlState.normal)
         } else {
-            if currentUser.barsUsed.keys.contains(bar.key){
-                if let timeIntUsed = currentUser.barsUsed[bar.key] {
-                    let dateUsed = Date(timeIntervalSince1970: timeIntUsed)
-                    if dateUsed.timeIntervalSinceNow  > -60 * 60 * 24 { //used less than a day ago
-                        cell.freeDrinkBtn.setTitle("Drink Redeemed", for: .normal)
-                        cell.freeDrinkBtn.setTitleColor(UIColor.lightGray, for: UIControlState.normal)
-
-                    }
-                }
-                
+            if !BarService.sharedService.isBarAvailable(key:bar.key) {
+                cell.freeDrinkBtn.setTitle("Drink Redeemed", for: .normal)
+                cell.freeDrinkBtn.setTitleColor(UIColor.lightGray, for: UIControlState.normal)
+    
             }
         }
 

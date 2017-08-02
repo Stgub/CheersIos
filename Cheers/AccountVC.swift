@@ -91,16 +91,19 @@ class AccountVC: BaseMenuVC, UIImagePickerControllerDelegate, UINavigationContro
     @IBAction func editBtnTapped(_ sender: Any) {
         if currentlyEditing
         {
+            var userData:Dictionary<String,AnyObject> = [:]
             let name = nameTF.text!
             let email = emailTF.text!
             if !name.isEmpty{
-                currentUser.name = name
                 usernameLabel.text = name
+                userData[userDataTypes.name] = name as AnyObject
             }
             if !email.isEmpty {
-                currentUser.userEmail = email
                 userEmailLabel.text = email
+                userData[userDataTypes.email] = email as AnyObject
+
             }
+            UserService.sharedService.updateUser(data:[userDataTypes.name:name])
         }
         currentlyEditing = !currentlyEditing
         
@@ -114,7 +117,7 @@ class AccountVC: BaseMenuVC, UIImagePickerControllerDelegate, UINavigationContro
     
     @IBAction func logOutBtnTapped(_ sender: Any) {
         print("Log out btn tapped")
-        UserService.shareService.signOut()
+        UserService.sharedService.signOut()
         GeneralFunctions.presentFirstLoginVC(sender:self)
     }
     
@@ -136,15 +139,15 @@ class AccountVC: BaseMenuVC, UIImagePickerControllerDelegate, UINavigationContro
 
     func updateUI()
     {
-        if let user = currentUser
+        if let currentUser = UserService.sharedService.getCurrentUser()
         {
-            user.getUserImg(returnBlock: { (img) in
+            currentUser.getUserImg(returnBlock: { (img) in
                 self.profileImg.image = img
             })
             isBasicMembership = currentUser.membership == membershipLevels.basic
-            membershipLabel.text = user.membership
-            usernameLabel.text = user.name
-            if let email = user.userEmail {
+            membershipLabel.text = currentUser.membership
+            usernameLabel.text = currentUser.name
+            if let email = currentUser.userEmail {
                 userEmailLabel.text = email
             }
         }
@@ -188,14 +191,13 @@ class AccountVC: BaseMenuVC, UIImagePickerControllerDelegate, UINavigationContro
         var  chosenImage = UIImage()
         chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
         profileImg.image = chosenImage //4
-        currentUser.usersImage = chosenImage
-        self.serverRequestInProgress = true
-        dismiss(animated:true, completion: nil) //5
-        currentUser.saveUserImg(img: chosenImage)
-        {
-            self.profileImg.image = chosenImage
+        serverRequestInProgress = true
+        UserService.sharedService.updateUserImg(image:chosenImage){
             self.serverRequestInProgress = false
         }
+        //TODO figure out async for updating user image
+        self.dismiss(animated:true, completion: nil) //5
+
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

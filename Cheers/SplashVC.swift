@@ -57,7 +57,7 @@ class SplashVC: UIViewController {
             print("Reachable via Cellular")
         }
         
-        if currentUser != nil {
+        if UserService.sharedService.isUserSignedIn() {
             print("Splash - user already signed in")
             GeneralFunctions.presentBarFeedVC(sender: self)
             return
@@ -67,11 +67,11 @@ class SplashVC: UIViewController {
             print("SplashVC - found user in key chain")
             MyFireBaseAPIClient.sharedClient.getUser{ (userError) in
                 if userError == nil {
-                    print(#function)
+                    print("SplashVC \(#function) presentingBarVC:")
                     GeneralFunctions.presentBarFeedVC(sender: self)
                 } else {
-                    print(userError?.localizedDescription ?? "Error getting user")
-                    UserService.shareService.signOut()
+                    print("SplashVC \(#function) error getting user - \(userError?.localizedDescription)")
+                    UserService.sharedService.signOut()
                     GeneralFunctions.presentFirstLoginVC(sender: self)
                 }
             }

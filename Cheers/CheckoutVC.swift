@@ -97,8 +97,7 @@ class CheckoutViewController: AsyncControllerBase, STPPaymentContextDelegate {
             message = error!.localizedDescription
             completePurchase(title: title, message: message, error: error)
         case .success:
-            currentUser.membership = membershipLevels.premium
-            UserService.shareService.updateUser()
+            UserService.sharedService.updateUserMembership(membership: membershipLevels.premium)
             title = "Success"
             message = "Welcome to the premium membership!"
             
