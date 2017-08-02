@@ -29,29 +29,31 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
         createRequest(pathExtension: pathExtension, params: params){
             (json, error) in
             if error != nil{
-                print("Error: StripAPIClient \(#function) \(error?.localizedDescription)")
+                print("Error: StripAPIClient \(#function) \(String(describing: error?.localizedDescription))")
             } else {
+                print("Success getting user from Stripe, updating info")
+
                 if let numSubscriptions = json!["numSubscriptions"] as? Int {
                     if numSubscriptions > 0 {
                         print("Num subscriptions = \(numSubscriptions)")
-                        user.membership = membershipLevels.premium
+                        UserService.sharedService.updateUserMembership(membership: membershipLevels.premium)
                     }
                 }
-                print("Success getting user from Stripe, updating info")
                 if let currentPeriodStart = json![userDataTypes.currentPeriodStart] as? TimeInterval{
                     print("Current start date \(user.currentPeriodStart) - stripe Start \(currentPeriodStart)")
                     user.currentPeriodStart = currentPeriodStart
                 } else { print("Backend: could not get current start period") }
+                
                 if let currentPeriodEnd = json![userDataTypes.currentPeriodEnd] as? TimeInterval{
                     print("Current start date \(user.currentPeriodEnd) - stripe Start \(currentPeriodEnd)")
                     if user.currentPeriodEnd < currentPeriodEnd {
                         print("New month, adding credits")
                         if user.membership == membershipLevels.premium {
                             print("Set to 10")
-                            user.credits = ConfigUtil.PREMIUM_NUM_CREDITS
+                            UserService.sharedService.updateUserCredits(credits:ConfigUtil.PREMIUM_NUM_CREDITS)
                         } else {
                             print("Set to 1")
-                            user.credits = ConfigUtil.BASIC_NUM_CREDITS
+                            UserService.sharedService.updateUserCredits(credits:ConfigUtil.BASIC_NUM_CREDITS)
                         }
                     }
                     user.currentPeriodEnd = currentPeriodEnd
@@ -76,17 +78,16 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
             return
         }
             
-        guard let stripeID = currentUser.stripeID else {
+        guard let stripeID = UserService.sharedService.getStripeId() else {
             createCutomer(completion: { (customer, error) in
                 if error != nil {
                     print("Backend: Could not create customer for charge")
                     completion(error)
                 } else {
-                    currentUser.stripeID = customer?.stripeID
-                  /*  self.createCharge(result, amount: amount, completion: {
-                    (error) in
-                        completion(error)
-                    })*/
+                    guard customer != nil , let id = customer?.stripeID else {
+                        return
+                    }
+                    UserService.sharedService.setStripeId(id: id)
                 }
             })
             return
@@ -238,7 +239,7 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
         }
         if status == "Success" {
             print("Success unsubscribing")
-            currentUser.membership = membershipLevels.basic
+            UserService.sharedService.updateUserMembership(membership: membershipLevels.basic)
             
         }
         completion(status,message)
@@ -254,8 +255,8 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
      */
     func attachSource(toCustomer source: STPSourceProtocol, completion: @escaping STPErrorBlock) {
         print("attachSource")
-        guard let currentUser = UserService.sharedService.getCurrentUser() else {
-            print("Error: \(#function) no currentUser")
+        guard let currentUser = UserService.sharedService.getCurrentUser(), let stripeId = currentUser.stripeID else {
+            print("Error: \(#function) no currentUser or no stripe id ")
             return
         }
         
@@ -263,7 +264,7 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
         print("Sending source \(source.stripeID)")
         let params: [String: Any] = [
             "sourceID": source.stripeID,
-            "customerID": currentUser.stripeID!
+            "customerID": stripeId
             ]
         let request = createRequest(pathExtension: pathExtension, params: params)
         let task = self.session.dataTask(with: request) { (data, urlResponse, error) in

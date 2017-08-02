@@ -32,6 +32,7 @@ struct userDataTypes {
     static let membership = "membership"
     static let imgUrl = "imgUrl"
     static let stripeId = "stripeId"
+    static let testStripeId = "testStripeId"
     static let connectId = "connectId"
     static let currentPeriodStart = "current_period_start"
     static let currentPeriodEnd = "current_period_end"
@@ -49,23 +50,12 @@ class User{
     var ref: DatabaseReference!
     private var _membership:String!
     var membership:String!{
-        set(newVal){
-            self.ref.child(userDataTypes.membership).setValue(newVal)
-            if newVal == membershipLevels.premium {
-                credits = 10
-            } else {
-                credits = 1
-            }
-        }
         get{
             return _membership
         }
     }
     private var _credits:Int!
     var credits:Int! {
-        set(newVal){
-            self.ref.child(userDataTypes.credits).setValue(newVal)
-        }
         get{
             if self._credits < 0 {
                 return 0
@@ -136,7 +126,14 @@ class User{
     private var _stripeID:String!
     var stripeID:String?{
         set(newVal) {
-            self.ref.child(userDataTypes.stripeId).setValue(newVal)
+            var child:String
+            if ConfigUtil.inTesting {
+                child = userDataTypes.testStripeId
+            } else {
+                child = userDataTypes.stripeId
+            }
+            self.ref.child(child).setValue(newVal)
+
         }
         get{ return _stripeID }
     }
@@ -158,7 +155,13 @@ class User{
         if let imgUrl = userData[userDataTypes.imgUrl] as? String {
             self._imgUrl = imgUrl
         }
-        if let stripeId =  userData[userDataTypes.stripeId] as? String {
+        var stripeKey:String
+        if ConfigUtil.inTesting {
+            stripeKey = userDataTypes.testStripeId
+        } else {
+            stripeKey = userDataTypes.stripeId
+        }
+        if let stripeId =  userData[stripeKey] as? String {
             self._stripeID = stripeId
         }
         
@@ -177,19 +180,15 @@ class User{
             self._membership = membership
         } else {
             self._membership = membershipLevels.basic
+            self.ref.child(userDataTypes.credits).setValue(self._membership)
         }
         
         if let credits = userData[userDataTypes.credits] as? Int {
             self._credits = credits
         } else {
-            if _membership == membershipLevels.premium {
-                self._credits = ConfigUtil.PREMIUM_NUM_CREDITS
-                self.credits = ConfigUtil.PREMIUM_NUM_CREDITS
-            } else {
-                self._credits = ConfigUtil.BASIC_NUM_CREDITS
-                self.credits = ConfigUtil.BASIC_NUM_CREDITS
-            }
             print("Backend: No Credits information on Firebase")
+            self._credits = 1
+            self.ref.child(userDataTypes.credits).setValue(self._credits)
         }
         
         if let currentPeriodStart = userData[userDataTypes.currentPeriodStart] as? TimeInterval {
@@ -205,7 +204,7 @@ class User{
             print("Backend: end date from FB")
             
         } else {
-            self.currentPeriodEnd = NSDate().timeIntervalSince1970 + 60 * 60 * 24 * 30
+            self.currentPeriodEnd = NSDate().timeIntervalSince1970 + ConfigUtil.MONTH_IN_SEC
             print("Backend: added new arbitrary periodEnd date")
         }
         if let phoneNum = userData[userDataTypes.phoneNumber] as? String {
@@ -249,8 +248,4 @@ class User{
         } else { print("Backend: User has no imgUrl ") }
     }
     
-    func usedBar(barId:String, currentDate:TimeInterval){
-        ref.child(userDataTypes.barsUsed).child(barId).setValue(currentDate)
-        ref.child(userDataTypes.credits).setValue(self._credits - 1)
-    }
 }

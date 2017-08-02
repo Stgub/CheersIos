@@ -18,14 +18,16 @@ class ConfigUtil{
     public static let TERMS_AND_CONDITIONS_URL = "http://thetoastclub.com/terms-and-conditions/"
     public static let FAQ_URL = "http://www.thetoastclub.com/faq/"
     
-    static let SERVER_BASE = "http://ec2-34-202-232-113.compute-1.amazonaws.com:5000"   // AWS server 34.202.232.113*
-    //static let SERVER_BASE = "http://0.0.0.0:5000" //local test
+    //static let SERVER_BASE = "http://ec2-34-202-232-113.compute-1.amazonaws.com:5000"   // AWS server 34.202.232.113*
+    static let SERVER_BASE = "http://0.0.0.0:5000" //local test
     
     static let STRIPE_DEV_KEY =  "pk_test_vbIvPl0JdKlVqMlrILx3A8Sf" //test
     static let STRIPE_PROD_KEY = "pk_live_PuYngGgOA2VX11E7NqNZ1vW3" // Live
     static let APPLE_PAY_ID = "merchant.com.toast.stripe"
     
-    static let inTesting = false // true means no phone verification and test stripe keys
+    static let inTesting = true
+    // true means no phone verification and test stripe keys
+    // true uses test stripe IDs instead of normal stripe ids for from firebase 
     
     
 }

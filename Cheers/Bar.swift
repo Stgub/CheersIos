@@ -91,25 +91,25 @@ class Bar {
             return
         }
         if let image = imageCache.object(forKey: imageUrl as NSString) {
-            print("Image from cache \(self.barName)")
+            //print("Image from cache \(self.barName)")
             self.img = image
             returnBlock()
         } else {
-            print("Image from database \(self.barName)")
+            //print("Image from database \(self.barName)")
             let ref = Storage.storage().reference(forURL: imageUrl)
             
             ref.getData(maxSize: 2 * 1024 * 1024, completion: { (data, error) in
                 if error != nil {
-                    print("Chuck: Error downloading img -\(String(describing: error))")
+                    print("Error: loading bar image -\(String(describing: error))")
                     
                 } else {
-                    print("Chuck: Img downloaded from Firebase storage")
+                    //print("Chuck: Img downloaded from Firebase storage")
                     if let imgData = data {
                         if let img = UIImage(data: imgData) {
                                 imageCache.setObject(img, forKey: self.imgUrl as NSString)
                                 self.img = img
                                 returnBlock()
-                        } else { print("Could not load image from data")}
+                        } else { print("Error: Could not load bar image from data")}
                     }
                 }
             })

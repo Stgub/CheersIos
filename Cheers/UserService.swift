@@ -12,35 +12,39 @@ import SwiftKeychainWrapper
 import FBSDKLoginKit
 
 
-//protocol UserObserver{
-//    func updateUser()
-//}
-
 
 class UserService:NSObject {
     private var _currentUser:User!
     
     static let sharedService = UserService()
     
-//    var observer:UserObserver!
-//    func addObserver(observer:UserObserver){
-//        self.observer = observer
-//    }
-//    func removeObserver(observer:UserObserver){
-//        self.observer = nil
-//    }
-//    
     func getCurrentUser() -> User? {
         return _currentUser
+    }
+    
+    func getStripeId() -> String? {
+        return _currentUser.stripeID
+    }
+    
+    func setStripeId(id:String){
+        self._currentUser.stripeID = id
     }
     
     func isUserSignedIn() -> Bool {
         return _currentUser != nil
     }
     
+    
     func updateUserMembership(membership:String){
-        self._currentUser.membership = membership
-        UserService.sharedService.updateUser()
+        if membership != self._currentUser.membership {
+            self._currentUser.ref.child(userDataTypes.membership).setValue(membership)
+        }
+    }
+    
+    func updateUserCredits(credits:Int){
+        if credits != self._currentUser.credits {
+            self._currentUser.ref.child(userDataTypes.credits).setValue(credits)
+        }
     }
     
     func updateUser(data:Dictionary<String,String>){
@@ -53,7 +57,7 @@ class UserService:NSObject {
             StripeAPIClient.sharedClient.updateCustomer(user: _currentUser)
         } else {
             if _currentUser.currentPeriodEnd < NSDate().timeIntervalSince1970{
-                _currentUser.credits = 1
+                self.updateUserCredits(credits: 1)
                 let now =  NSDate().timeIntervalSince1970
                 let aMonth:TimeInterval = 60*60*24*30 // in seconds
                 if _currentUser.currentPeriodEnd + aMonth < now {
@@ -104,8 +108,9 @@ class UserService:NSObject {
                 print("Chuck: Error redeeming -\(String(describing: error))")
             } else {
                 print("Successfully redeemed")
-                self._currentUser.usedBar(barId: bar.key, currentDate:dateStamp)
-                completion()
+                var updateData = [ userDataTypes.barsUsed: dateStamp,
+                                   userDataTypes.credits: self._currentUser.credits - 1 ] as [String : Any]
+                self._currentUser.ref.updateChildValues(updateData)
             }
         }
     }
