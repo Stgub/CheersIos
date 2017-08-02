@@ -37,8 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         STPPaymentConfiguration.shared().appleMerchantIdentifier = ConfigUtil.APPLE_PAY_ID
 
-        PayPalMobile .initializeWithClientIds(forEnvironments: [PayPalEnvironmentProduction: "YOUR_CLIENT_ID_FOR_PRODUCTION",
-            PayPalEnvironmentSandbox: "access_token$sandbox$n9bfwjym9fcgxvj6$d71c48d8a388b60d22ae989db1ca440a"])
+//        PayPalMobile .initializeWithClientIds(forEnvironments: [PayPalEnvironmentProduction: "YOUR_CLIENT_ID_FOR_PRODUCTION",
+//            PayPalEnvironmentSandbox: "access_token$sandbox$n9bfwjym9fcgxvj6$d71c48d8a388b60d22ae989db1ca440a"])
         
         //For internet connection checking
         NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged),name: ReachabilityChangedNotification,object: reachability)
