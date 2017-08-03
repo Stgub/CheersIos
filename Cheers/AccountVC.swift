@@ -157,7 +157,6 @@ class AccountVC: BaseMenuVC, UITextFieldDelegate{
         alertController.addAction(yesAction)
         alertController.addAction(noAction)
         self.present(alertController, animated: true, completion: nil)
-        
     }
     
 

@@ -35,22 +35,16 @@ class MyFireBaseAPIClient:NSObject{
             }
         })
     }
-    
-    func watchdogTimerFired(){
-        print(#function)
-        UserService.sharedService.signOut()
-    }
+
     
     func getUser( completion:@escaping  (Error?)-> Void )
     {
         print(#function)
         print(DataService.ds.REF_USER_CURRENT)
         
-        watchdogTimer = Timer.scheduledTimer(timeInterval: 120, target: self, selector: #selector(self.watchdogTimerFired), userInfo: nil, repeats: false)
         
         DataService.ds.REF_USER_CURRENT.observeSingleEvent(of: .value, with: { (snapshot) in
             print("Observed User")
-            self.watchdogTimer.invalidate()
             if !snapshot.exists() {
                 print("ERROR: User does not exist")
                 UserService.sharedService.signOut()
@@ -117,6 +111,4 @@ class MyFireBaseAPIClient:NSObject{
             
         }
     }
-    
-
 }
