@@ -247,8 +247,8 @@
 			isa = PBXGroup;
 			children = (
 				56B91B051E651C1700CB40BB /* DataService.swift */,
-				5605D48B1E9806900098EC52 /* MyFirebaseAPIClient.swift */,
 				56839A581EEDEAAB00A7E0ED /* RESTClient.swift */,
+				5605D48B1E9806900098EC52 /* MyFirebaseAPIClient.swift */,
 				5632C26A1E933716003C2D6B /* StripeAPIClient.swift */,
 				56839A561EEDEA6B00A7E0ED /* PaypalAPIClient.swift */,
 				56DC6A491EADAB9800449739 /* UserService.swift */,

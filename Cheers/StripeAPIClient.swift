@@ -70,7 +70,7 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
      Adds the user to a subscription and charges them
      */
     func createCharge(_ result: STPPaymentResult, amount: Int, completion:  @escaping (_ error: Error?)->Void){
-        print("Create charge")
+        print(#function)
         let pathExtension = "/charge"
         
         guard let currentUser = UserService.sharedService.getCurrentUser() else {
@@ -92,6 +92,7 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
             })
             return
         }
+        
         let params: [String: Any] = [
             "customerID": stripeID ,
             "amount": amount,

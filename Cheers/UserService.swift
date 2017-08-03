@@ -19,6 +19,9 @@ class UserService:NSObject {
     static let sharedService = UserService()
     
     func getCurrentUser() -> User? {
+        if _currentUser == nil {
+            print("Error: \(#function) current user is nil")
+        }
         return _currentUser
     }
     
@@ -34,17 +37,14 @@ class UserService:NSObject {
         return _currentUser != nil
     }
     
-    
     func updateUserMembership(membership:String){
-        if membership != self._currentUser.membership {
-            self._currentUser.ref.child(userDataTypes.membership).setValue(membership)
-        }
+        print("Updating user to: \(membership)")
+        self._currentUser.membership = membership
+        self._currentUser.ref.child(userDataTypes.membership).setValue(membership)
     }
     
     func updateUserCredits(credits:Int){
-        if credits != self._currentUser.credits {
-            self._currentUser.ref.child(userDataTypes.credits).setValue(credits)
-        }
+        self._currentUser.ref.child(userDataTypes.credits).setValue(credits)
     }
     
     func updateUser(data:Dictionary<String,String>){
@@ -92,7 +92,6 @@ class UserService:NSObject {
         self.updateUser()
     }
 
-    
     func redeemedDrink(bar:Bar, completion:@escaping ()->Void){
         let dateStamp = NSDate().timeIntervalSince1970
         DataService.ds.REF_USER_CURRENT.child(userDataTypes.barsUsed).child(bar.key).setValue(dateStamp){

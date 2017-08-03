@@ -47,14 +47,26 @@ struct membershipLevels {
 class User{
     var myDbAPI: MyFireBaseAPIClient = MyFireBaseAPIClient.sharedClient
     var ref: DatabaseReference!
-    private var _membership:String!
+    var _membership:String!
     var membership:String!{
+        set{
+            self._membership = newValue
+            if self._membership == membershipLevels.basic {
+                self.credits = 1
+            } else {
+                self.credits = 10
+            }
+        }
         get{
             return _membership
         }
     }
     private var _credits:Int!
     var credits:Int! {
+        set{
+            self._credits = newValue
+            self.ref.child(userDataTypes.credits).setValue(self._credits)
+        }
         get{
             if self._credits < 0 {
                 return 0
@@ -80,7 +92,6 @@ class User{
     }
     private var _currentPeriodEnd:TimeInterval!
 
-    var updatedCreditsDate:TimeInterval!
     private var _userKey:String!
     var userKey:String!{
         get{ return _userKey }
@@ -143,18 +154,21 @@ class User{
     }
     
     func updateData(userData:Dictionary<String,AnyObject>){
+        
         self.ref = DataService.ds.REF_USER_CURRENT
         if let name = userData[userDataTypes.name] as? String {
             self._name = name
         } else {
             self._name = "Anonymous" //TODO need to make sure we get users name
         }
+        
         var stripeKey:String
         if ConfigUtil.inTesting {
             stripeKey = userDataTypes.testStripeId
         } else {
             stripeKey = userDataTypes.stripeId
         }
+        
         if let stripeId =  userData[stripeKey] as? String {
             self._stripeID = stripeId
         }
@@ -170,6 +184,7 @@ class User{
             print("No bars used could not cast")
             _barsUsed  = [:]
         }
+        
         if let membership = userData[userDataTypes.membership] as? String {
             self._membership = membership
         } else {
@@ -191,8 +206,8 @@ class User{
         } else {
             self.currentPeriodStart = NSDate().timeIntervalSince1970
             print("Backend: added new arbitrary periodStart date")
-
         }
+        
         if let currentPeriodEnd = userData[userDataTypes.currentPeriodEnd] as? TimeInterval {
             self._currentPeriodEnd = currentPeriodEnd
             print("Backend: end date from FB")
@@ -201,6 +216,7 @@ class User{
             self.currentPeriodEnd = NSDate().timeIntervalSince1970 + ConfigUtil.MONTH_IN_SEC
             print("Backend: added new arbitrary periodEnd date")
         }
+        
         if let phoneNum = userData[userDataTypes.phoneNumber] as? String {
             self._phoneNumber = phoneNum
         }
