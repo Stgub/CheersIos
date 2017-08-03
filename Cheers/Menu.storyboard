@@ -60,8 +60,8 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gzj-N2-Kpk">
-                                <rect key="frame" x="13" y="30" width="30" height="22"/>
-                                <state key="normal" image="burger"/>
+                                <rect key="frame" x="16" y="30" width="38" height="22"/>
+                                <state key="normal" image="burger2-1"/>
                                 <connections>
                                     <action selector="closeMenuBtnTapped:" destination="sE9-X4-f8V" eventType="touchUpInside" id="K97-Fl-zpw"/>
                                 </connections>
@@ -73,7 +73,7 @@
                             <constraint firstItem="Gzj-N2-Kpk" firstAttribute="top" secondItem="Iq0-gA-R4X" secondAttribute="top" constant="30" id="BPr-d6-WG9"/>
                             <constraint firstItem="ld8-Jd-6JV" firstAttribute="top" secondItem="Gzj-N2-Kpk" secondAttribute="bottom" constant="10" id="SGA-YB-Qen"/>
                             <constraint firstItem="a18-n7-l6G" firstAttribute="top" secondItem="ld8-Jd-6JV" secondAttribute="bottom" id="W4u-Fv-aRW"/>
-                            <constraint firstItem="Gzj-N2-Kpk" firstAttribute="leading" secondItem="Iq0-gA-R4X" secondAttribute="leading" constant="13" id="feV-Hh-bK2"/>
+                            <constraint firstItem="Gzj-N2-Kpk" firstAttribute="leading" secondItem="Iq0-gA-R4X" secondAttribute="leading" constant="16" id="feV-Hh-bK2"/>
                             <constraint firstAttribute="trailing" secondItem="ld8-Jd-6JV" secondAttribute="trailing" id="nNJ-wM-aY9"/>
                         </constraints>
                     </view>
@@ -88,6 +88,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="burger" width="30" height="17"/>
+        <image name="burger2-1" width="38" height="18"/>
     </resources>
 </document>
