@@ -98,7 +98,8 @@ class AccountVC: BaseMenuVC, UITextFieldDelegate{
                 userData[userDataTypes.email] = email as AnyObject
 
             }
-            UserService.sharedService.updateUser(data:[userDataTypes.name:name])
+            
+            UserService.sharedService.getCurrentUser()?.updateChildValues(data:userData)
         }
         currentlyEditing = !currentlyEditing
         
@@ -125,6 +126,11 @@ class AccountVC: BaseMenuVC, UITextFieldDelegate{
         self.activityIndicator.isHidden = true
         self.activityIndicator.center = self.view.center
         self.view.addSubview(activityIndicator)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateUI), name: NSNotification.Name(rawValue: notificationKeys.userObserver.rawValue), object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     func updateUI()
@@ -162,7 +168,12 @@ class AccountVC: BaseMenuVC, UITextFieldDelegate{
 
     func unsubscribe(){
         serverRequestInProgress = true
-        StripeAPIClient.sharedClient.unusubscribeCustomer { (status, message) in
+        guard let currentUser = UserService.sharedService.getCurrentUser() else {
+            print("No current user")
+            return
+        }
+        
+        StripeAPIClient.sharedClient.unusubscribeCustomer(user:currentUser){ (status, message) in
             presentUIAlert(sender: self, title: status, message: message){
                 self.updateUI()
             }

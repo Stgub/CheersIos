@@ -33,8 +33,9 @@ class BarDetailVC: UIViewController, hasBarVar {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
+        var swipeGesture = UISwipeGestureRecognizer(target: self , action: #selector(self.backBtnTapped(_:)))
+        swipeGesture.direction = .right
+        self.view.addGestureRecognizer(swipeGesture)
     }
     func verifyPhone(){
         self.performSegue(withIdentifier: "verifyPhoneSegue", sender: self)
@@ -111,6 +112,7 @@ class BarDetailVC: UIViewController, hasBarVar {
         } else if timeLeftBetweenDrinks() > 0{
             //User has recently used a drink and must wait for TIME_BETWEEN_DRINKS
             redeemDrinkBtn.isUserInteractionEnabled = false
+            updateTimeLabel()
             updateTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimeLabel), userInfo: nil, repeats: true)
             
         } else{

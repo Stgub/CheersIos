@@ -68,13 +68,20 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate,BarServi
         dayLookedAtNum = _dayLookedAtNum
         BarService.sharedService.addObserver(observer: self)
         BarService.sharedService.getBars()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateUI), name: NSNotification.Name(rawValue: notificationKeys.userObserver.rawValue), object: nil)
+
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     func updatedBars(){
         self.tableView.reloadData()
     }
     
-    private func updateUI(){
+    func updateUI(){
         self.updateDrinkTimer()
         GeneralFunctions.updateUserBanner(controller: self, nameL: userNameLabel,
                                           creditsL: creditsLabel,

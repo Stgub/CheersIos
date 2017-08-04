@@ -31,37 +31,50 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
             if error != nil{
                 print("Error: StripAPIClient \(#function) \(String(describing: error?.localizedDescription))")
             } else {
+                var membershipLevel:String = user.membership
+                var updatedData: Dictionary<String,AnyObject> = [:]
                 print("Success getting user from Stripe, updating info")
 
                 if let numSubscriptions = json!["numSubscriptions"] as? Int {
                     if numSubscriptions > 0 {
-                        print("Num subscriptions = \(numSubscriptions)")
-                        UserService.sharedService.updateUserMembership(membership: membershipLevels.premium)
+                        print("StripeAPIClient: Num subscriptions = \(numSubscriptions) updating membership to premium")
+                        membershipLevel = membershipLevels.premium
+                        updatedData[userDataTypes.membership] = membershipLevel as AnyObject
+                    } else {
+                        print("StripeAPIClient: Num subscriptions = \(numSubscriptions) updating membership to basic")
+                        membershipLevel = membershipLevels.basic
+                        updatedData[userDataTypes.membership] = membershipLevel as AnyObject
                     }
                 }
-                if let currentPeriodStart = json![userDataTypes.currentPeriodStart] as? TimeInterval{
-                    print("Current start date \(user.currentPeriodStart) - stripe Start \(currentPeriodStart)")
-                    user.currentPeriodStart = currentPeriodStart
-                } else { print("Backend: could not get current start period") }
                 
-                if let currentPeriodEnd = json![userDataTypes.currentPeriodEnd] as? TimeInterval{
-                    print("Current start date \(user.currentPeriodEnd) - stripe Start \(currentPeriodEnd)")
-                    if user.currentPeriodEnd < currentPeriodEnd {
-                        print("New month, adding credits")
-                        if user.membership == membershipLevels.premium {
-                            print("Set to 10")
-                            UserService.sharedService.updateUserCredits(credits:ConfigUtil.PREMIUM_NUM_CREDITS)
-                        } else {
-                            print("Set to 1")
-                            UserService.sharedService.updateUserCredits(credits:ConfigUtil.BASIC_NUM_CREDITS)
-                        }
-                    }
-                    user.currentPeriodEnd = currentPeriodEnd
+                // Only update start stop times with stripe info if premium
+                if membershipLevel == membershipLevels.premium {
+                    if let currentPeriodStart = json![userDataTypes.currentPeriodStart] as? TimeInterval{
+                        print("StripeAPIClient: Current start date \(user.currentPeriodStart) - stripe Start \(currentPeriodStart)")
+                        updatedData[userDataTypes.currentPeriodStart] = currentPeriodStart as AnyObject
+                    } else { print("StripeAPIClient: could not get current start period") }
                     
-                } else { print("Backend: Ccould not get current end period") }
+                    if let currentPeriodEnd = json![userDataTypes.currentPeriodEnd] as? TimeInterval{
+                        print("StripeAPIClient: Current end date \(user.currentPeriodEnd) - stripe end \(currentPeriodEnd)")
+                        if user.currentPeriodEnd < currentPeriodEnd {
+                            print("StripeAPIClient: currentPeriodEnd past, new month, updating credits depending on memberhip")
+                            if membershipLevel == membershipLevels.premium {
+                                updatedData[userDataTypes.credits] = ConfigUtil.PREMIUM_NUM_CREDITS as AnyObject
+                            } else {
+                                print("StripeAPIClient: Set to \(ConfigUtil.BASIC_NUM_CREDITS)")
+                                updatedData[userDataTypes.credits] = ConfigUtil.BASIC_NUM_CREDITS as AnyObject
+                            }
+                        }
+                        updatedData[userDataTypes.currentPeriodEnd] = currentPeriodEnd as AnyObject
+                    } else { print("StripeAPIClient: Could not get current end period") }
+                } else {
+                    print("StipeAPIClient: None premium member, dates based off local")
+                    UserService.sharedService.updateBasicUser(user:user)
+                }
                /* if let email = json!["email"] as? String {
                     user = email
                 }*/ // Dont want to change email because it may be what they use to login with
+                user.updateChildValues(data: updatedData)
             }
         }
     }
@@ -207,7 +220,7 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
     }
  
     
-    func unusubscribeCustomer(completion:@escaping (_ status:String,_ message:String)->Void){
+    func unusubscribeCustomer(user:User, completion:@escaping (_ status:String,_ message:String)->Void){
         print(#function)
         
         let pathExtension =  "/unsubscribeUser"
@@ -240,8 +253,7 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
         }
         if status == "Success" {
             print("Success unsubscribing")
-            UserService.sharedService.updateUserMembership(membership: membershipLevels.basic)
-            
+            user.membership = membershipLevels.basic
         }
         completion(status,message)
  
