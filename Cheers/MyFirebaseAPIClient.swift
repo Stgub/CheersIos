@@ -52,6 +52,7 @@ class MyFireBaseAPIClient:NSObject{
             let snapKey = snapshot.key
             if let userData = snapshot.value as? Dictionary<String,AnyObject>{
                 UserService.sharedService.updateUser(key: snapKey, data: userData, completion: completion)
+                self.startObservingUser()
             } else { print("Error - cast issue probably not a user")
                 completion(userError(localizedDescription: "Could not get user"))
             }

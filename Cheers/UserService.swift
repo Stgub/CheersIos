@@ -39,7 +39,6 @@ class UserService:NSObject {
     
     func updateUserMembership(membership:String){
         print("Updating user to: \(membership)")
-        self._currentUser.membership = membership
         self._currentUser.ref.child(userDataTypes.membership).setValue(membership)
     }
     

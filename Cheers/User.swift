@@ -45,27 +45,35 @@ struct membershipLevels {
 }
 
 class User{
+    
     var myDbAPI: MyFireBaseAPIClient = MyFireBaseAPIClient.sharedClient
     var ref: DatabaseReference!
+    
     var _membership:String!
     var membership:String!{
         set{
-            self._membership = newValue
-            if self._membership == membershipLevels.basic {
-                self.credits = 1
-            } else {
-                self.credits = 10
+            if newValue != self._membership {
+                self._membership = newValue
+                self.ref.child(userDataTypes.membership).setValue(self._membership)
+                if self._membership == membershipLevels.basic {
+                    self.credits = ConfigUtil.BASIC_NUM_CREDITS
+                } else {
+                    self.credits = ConfigUtil.PREMIUM_NUM_CREDITS
+                }
             }
         }
         get{
             return _membership
         }
     }
+    
     private var _credits:Int!
     var credits:Int! {
         set{
-            self._credits = newValue
-            self.ref.child(userDataTypes.credits).setValue(self._credits)
+            if newValue != self._credits {
+                self._credits = newValue
+                self.ref.child(userDataTypes.credits).setValue(self._credits)
+            }
         }
         get{
             if self._credits < 0 {
@@ -75,19 +83,25 @@ class User{
             }
         }
     }
+    
     var currentPeriodStart:TimeInterval! {
         get { return _currentPeriodStart }
-        set(newVal) {
-            self._currentPeriodStart = newVal
-            self.ref.child(userDataTypes.currentPeriodStart).setValue(newVal) //update server
+        set {
+            if newValue != self._currentPeriodStart {
+                self._currentPeriodStart = newValue
+                self.ref.child(userDataTypes.currentPeriodStart).setValue(newValue) //update server
+            }
         }
     }
+    
     private var _currentPeriodStart:TimeInterval!
     var currentPeriodEnd:TimeInterval! {
         get { return _currentPeriodEnd }
-        set(newVal) {
-            self._currentPeriodEnd = newVal
-            self.ref.child(userDataTypes.currentPeriodEnd).setValue(newVal) //update server
+        set {
+            if newValue != self._currentPeriodEnd {
+                self._currentPeriodEnd = newValue
+                self.ref.child(userDataTypes.currentPeriodEnd).setValue(newValue) //update server
+            }
         }
     }
     private var _currentPeriodEnd:TimeInterval!
@@ -99,10 +113,9 @@ class User{
     private var  _name:String!
     var name:String {
         get{ return _name }
-        set(newVal)
-        {
-            print("Changing users name to \(newVal)")
-            self.ref.child(userDataTypes.name).setValue(newVal)
+        set {
+            print("Changing users name to \(newValue)")
+            self.ref.child(userDataTypes.name).setValue(newValue)
         }
     }
     private var _barsUsed:Dictionary<String,TimeInterval> = [:]
@@ -128,19 +141,20 @@ class User{
             ref.child(userDataTypes.phoneNumber).setValue(newVal)
         }
     }
+    
     var userBirthday:String!
     var gender:String!
     
     private var _stripeID:String!
     var stripeID:String?{
-        set(newVal) {
+        set{
             var child:String
             if ConfigUtil.inTesting {
                 child = userDataTypes.testStripeId
             } else {
                 child = userDataTypes.stripeId
             }
-            self.ref.child(child).setValue(newVal)
+            self.ref.child(child).setValue(newValue)
 
         }
         get{ return _stripeID }
@@ -196,7 +210,7 @@ class User{
             self._credits = credits
         } else {
             print("Backend: No Credits information on Firebase")
-            self._credits = 1
+            self._credits = ConfigUtil.BASIC_NUM_CREDITS
             self.ref.child(userDataTypes.credits).setValue(self._credits)
         }
         
