@@ -47,10 +47,13 @@ struct membershipLevels {
 class User{
     
     var myDbAPI: MyFireBaseAPIClient = MyFireBaseAPIClient.sharedClient
-    var ref: DatabaseReference!
+    private var ref: DatabaseReference!
     
-    private var _membership:String!
-    var membership:String!{
+    private var _membership:String = membershipLevels.basic
+    var membership:String{
+        get{
+            return _membership
+        }
         set{
             if newValue != self._membership {
                 self._membership = newValue
@@ -62,19 +65,10 @@ class User{
                 }
             }
         }
-        get{
-            return _membership
-        }
     }
     
-    private var _credits:Int!
+    private var _credits:Int = 1
     var credits:Int! {
-        set{
-            if newValue != self._credits {
-                self._credits = newValue
-                self.ref.child(userDataTypes.credits).setValue(self._credits)
-            }
-        }
         get{
             if self._credits < 0 {
                 return 0
@@ -82,8 +76,15 @@ class User{
                 return self._credits
             }
         }
+        set{
+            if newValue != self._credits {
+                self._credits = newValue
+                self.ref.child(userDataTypes.credits).setValue(self._credits)
+            }
+        }
     }
     
+    private var _currentPeriodStart:TimeInterval!
     var currentPeriodStart:TimeInterval! {
         get { return _currentPeriodStart }
         set {
@@ -94,7 +95,7 @@ class User{
         }
     }
     
-    private var _currentPeriodStart:TimeInterval!
+    private var _currentPeriodEnd:TimeInterval!
     var currentPeriodEnd:TimeInterval! {
         get { return _currentPeriodEnd }
         set {
@@ -104,7 +105,6 @@ class User{
             }
         }
     }
-    private var _currentPeriodEnd:TimeInterval!
 
     private var _userKey:String!
     var userKey:String!{
@@ -147,6 +147,7 @@ class User{
     
     private var _stripeID:String!
     var stripeID:String?{
+        get{ return _stripeID }
         set{
             var child:String
             if ConfigUtil.inTesting {
@@ -155,19 +156,17 @@ class User{
                 child = userDataTypes.stripeId
             }
             self.ref.child(child).setValue(newValue)
-
         }
-        get{ return _stripeID }
     }
     
     
 
     init( userKey: String , userData: Dictionary<String, AnyObject> ){
         self._userKey = userKey
-        self.updateData(userData: userData)
+        self.initializeData(userData: userData)
     }
     
-    func updateData(userData:Dictionary<String,AnyObject>){
+    func initializeData(userData:Dictionary<String,AnyObject>){
         
         self.ref = DataService.ds.REF_USER_CURRENT
         if let name = userData[userDataTypes.name] as? String {
@@ -194,45 +193,44 @@ class User{
         if let barsUsed = userData[userDataTypes.barsUsed] as? Dictionary<String,TimeInterval>{
             print("Bars used - \(barsUsed)")
             self._barsUsed = barsUsed
-        } else {
-            print("No bars used could not cast")
-            _barsUsed  = [:]
-        }
+        } else { print("User: No bars used could not cast") }
         
         if let membership = userData[userDataTypes.membership] as? String {
             self._membership = membership
-        } else {
-            self._membership = membershipLevels.basic
-            self.ref.child(userDataTypes.credits).setValue(self._membership)
-        }
+        } else { print("User: no membership in data") }
         
         if let credits = userData[userDataTypes.credits] as? Int {
             self._credits = credits
-        } else {
-            print("Backend: No Credits information on Firebase")
-            self._credits = ConfigUtil.BASIC_NUM_CREDITS
-            self.ref.child(userDataTypes.credits).setValue(self._credits)
-        }
+        } else { print("User: no credits in data" ) }
         
         if let currentPeriodStart = userData[userDataTypes.currentPeriodStart] as? TimeInterval {
             self._currentPeriodStart = currentPeriodStart
-            print("Backend: start date from FireBase")
+            print("User: start date from FireBase")
         } else {
             self.currentPeriodStart = NSDate().timeIntervalSince1970
-            print("Backend: added new arbitrary periodStart date")
+            print("User: added new arbitrary periodStart date")
         }
         
         if let currentPeriodEnd = userData[userDataTypes.currentPeriodEnd] as? TimeInterval {
             self._currentPeriodEnd = currentPeriodEnd
-            print("Backend: end date from FB")
-            
+            print("User: end date from FB")
         } else {
             self.currentPeriodEnd = NSDate().timeIntervalSince1970 + ConfigUtil.MONTH_IN_SEC
-            print("Backend: added new arbitrary periodEnd date")
+            print("User: added new arbitrary periodEnd date")
         }
         
         if let phoneNum = userData[userDataTypes.phoneNumber] as? String {
             self._phoneNumber = phoneNum
         }
+        //Notitify user observers, that info has updated so they can change UI etc
+        NotificationCenter.default.post(name: Notification.Name(rawValue: notificationKeys.userObserver.rawValue), object: self)
+
     }
+    
+    
+    func updateChildValues(data: Dictionary<String, AnyObject>){
+        self.ref.updateChildValues(data)
+    }
+    
+    
 }

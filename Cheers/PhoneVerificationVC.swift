@@ -74,7 +74,7 @@ class PhoneVerificationVC: UIViewController, UITextFieldDelegate {
                 print("Error authenticating phone num \(err.localizedDescription)")
             } else {
                 print("Successfully added users phone number- \(String(describing: user?.phoneNumber))")
-                UserService.sharedService.updateUser(data: [userDataTypes.phoneNumber: user!.phoneNumber!])
+                UserService.sharedService.getCurrentUser()?.phoneNumber = user?.phoneNumber
                 self.dismiss(animated: true, completion: nil)
             }
         })

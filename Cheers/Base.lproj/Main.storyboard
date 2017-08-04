@@ -230,7 +230,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="221"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e1n-h0-460" id="dRF-Zo-fkb">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="220.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="220.66666666666666"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEw-oq-9uQ">
@@ -338,7 +338,7 @@
                         <outlet property="renewDateLabel" destination="J3n-Xy-go2" id="pbv-v2-sAb"/>
                         <outlet property="tableView" destination="doG-Rr-BCS" id="MC7-0Z-FkI"/>
                         <outlet property="userNameLabel" destination="TQf-23-V5B" id="BUB-Lg-AFZ"/>
-                        <segue destination="FUQ-Ai-nDG" kind="presentation" identifier="toBarDetailSegue" id="PpL-oT-CxO"/>
+                        <segue destination="FUQ-Ai-nDG" kind="presentation" identifier="toBarDetailSegue" modalTransitionStyle="flipHorizontal" id="PpL-oT-CxO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aTR-ML-kOu" sceneMemberID="firstResponder"/>

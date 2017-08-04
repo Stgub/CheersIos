@@ -20,6 +20,7 @@ protocol  hasDataDict {
     var dataDict:[String:Any]{get set}
 }
 
+
 extension Date {
     func dayNumberOfWeek() -> Int? {
         return Calendar.current.dateComponents([.weekday], from: self).weekday

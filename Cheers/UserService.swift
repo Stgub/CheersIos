@@ -29,6 +29,10 @@ class UserService:NSObject {
         return _currentUser.stripeID
     }
     
+    func getMembershipLevel()-> String {
+        return _currentUser.membership
+    }
+    
     func setStripeId(id:String){
         self._currentUser.stripeID = id
     }
@@ -37,42 +41,37 @@ class UserService:NSObject {
         return _currentUser != nil
     }
     
-    func updateUserMembership(membership:String){
-        print("Updating user to: \(membership)")
-        self._currentUser.membership = membership
-    }
+
     
-    func updateUserCredits(credits:Int){
-        self._currentUser.credits = credits
-    }
-    
-    func updateUser(data:Dictionary<String,String>){
-        _currentUser.updateData(userData: data as Dictionary<String, AnyObject>)
-    }
-    
-    func updateUser(){
+    func updateUser(user:User){
         print(#function)
-        if _currentUser.membership == membershipLevels.premium {
+        if _currentUser.stripeID != nil {
             StripeAPIClient.sharedClient.updateCustomer(user: _currentUser)
         } else {
-            if _currentUser.currentPeriodEnd < NSDate().timeIntervalSince1970{
-                self.updateUserCredits(credits: 1)
-                let now =  NSDate().timeIntervalSince1970
-                let aMonth:TimeInterval = 60*60*24*30 // in seconds
-                if _currentUser.currentPeriodEnd + aMonth < now {
-                    _currentUser.currentPeriodEnd = _currentUser.currentPeriodEnd + aMonth
-                } else {
-                    _currentUser.currentPeriodEnd = now + aMonth
-                }
+            print("UserService: User has no stripe Id, setting membership to basic and checking dates")
+            user.membership = membershipLevels.basic
+            updateBasicUser(user:user)
+        }
+    }
+    //Updates periods without stripe data
+    func updateBasicUser(user:User){
+        print(#function)
+        if user.currentPeriodEnd < NSDate().timeIntervalSince1970{
+            user.credits = ConfigUtil.BASIC_NUM_CREDITS
+            let now =  NSDate().timeIntervalSince1970
+            if user.currentPeriodEnd + ConfigUtil.MONTH_IN_SEC < now {
+                user.currentPeriodEnd = user.currentPeriodEnd + ConfigUtil.MONTH_IN_SEC
+            } else {
+                user.currentPeriodEnd = now + ConfigUtil.MONTH_IN_SEC
             }
         }
     }
-    
+
     func updateUser(key:String,data:Dictionary<String, AnyObject>, completion:((Error?)-> Void)?){
         if let user = _currentUser {
             if let key = user.userKey {
                 if  key == key {
-                    _currentUser.updateData(userData: data)
+                    _currentUser.initializeData(userData: data)
                     print("Same user")
                 }
             } else {
@@ -85,10 +84,10 @@ class UserService:NSObject {
             _currentUser = newUser
             print("New User")
         }
+        self.updateUser(user:_currentUser)
         if completion != nil {
             completion!(nil)
         }
-        self.updateUser()
     }
 
     func redeemedDrink(bar:Bar, completion:@escaping (Error?)->Void){
@@ -104,12 +103,14 @@ class UserService:NSObject {
                 var barsUsed = self._currentUser.barsUsed
                 barsUsed[bar.key] = dateStamp
                 let updateData = [ userDataTypes.barsUsed: barsUsed,
-                                   userDataTypes.credits: self._currentUser.credits - 1 ] as [String : Any]
-                self._currentUser.ref.updateChildValues(updateData)
+                                   userDataTypes.credits: self._currentUser.credits - 1 ] as [String : AnyObject]
+                self._currentUser.updateChildValues(data: updateData)
                 completion(nil)
             }
         }
     }
+    
+    //MARK: Sign out and sign in methods 
     
     func signOut(){
         print(#function)

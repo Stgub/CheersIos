@@ -39,8 +39,6 @@ class MyFireBaseAPIClient:NSObject{
     {
         print(#function)
         print(DataService.ds.REF_USER_CURRENT)
-        
-        
         DataService.ds.REF_USER_CURRENT.observeSingleEvent(of: .value, with: { (snapshot) in
             print("Observed User")
             if !snapshot.exists() {
@@ -90,24 +88,6 @@ class MyFireBaseAPIClient:NSObject{
         print(#function)
         if let handle = observeUserHandle {
             DataService.ds.REF_USER_CURRENT.removeObserver(withHandle: handle)
-        }
-    }
-    
-    func saveUserImg(img:UIImage, path:String,returnBlock:@escaping (_ path:String)-> Void){
-        let metaData = StorageMetadata()
-        metaData.contentType = "image/jpg"
-        let data = UIImageJPEGRepresentation(img, 0.8)
-        DataService.ds.REF_USER_IMAGES.child(path).putData(data!, metadata: metaData){(metaData,error) in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }else{
-                //store downloadURL
-                let downloadURL = metaData!.downloadURL()!.absoluteString
-                //store downloadURL at database
-                returnBlock(downloadURL)
-            }
-            
         }
     }
 }
