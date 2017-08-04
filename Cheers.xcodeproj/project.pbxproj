@@ -58,6 +58,7 @@
 		56B963261F1E9A6900F63517 /* PrivacyPolicyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B963251F1E9A6800F63517 /* PrivacyPolicyVC.swift */; };
 		56DC61201ECF5DE4001279F9 /* ReferralVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DC611F1ECF5DE4001279F9 /* ReferralVC.swift */; };
 		56DC6A4A1EADAB9800449739 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DC6A491EADAB9800449739 /* UserService.swift */; };
+		56E4619D1F33FA6400E9BE92 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E4619C1F33FA6400E9BE92 /* Errors.swift */; };
 		56F0C7A01F27B5BB002C79F5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 56F0C79F1F27B5BB002C79F5 /* GoogleService-Info.plist */; };
 		56F78A5E1E6A600E000E10F4 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F78A5D1E6A600E000E10F4 /* HistoryTableViewCell.swift */; };
 		56FDE76F1E6523DA00BDE97F /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FDE76E1E6523DA00BDE97F /* HistoryVC.swift */; };
@@ -154,6 +155,7 @@
 		56B963251F1E9A6800F63517 /* PrivacyPolicyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyVC.swift; sourceTree = "<group>"; };
 		56DC611F1ECF5DE4001279F9 /* ReferralVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReferralVC.swift; sourceTree = "<group>"; };
 		56DC6A491EADAB9800449739 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		56E4619C1F33FA6400E9BE92 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		56F0C79F1F27B5BB002C79F5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		56F78A5D1E6A600E000E10F4 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		56FDE76E1E6523DA00BDE97F /* HistoryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				56FDE7721E666F9D00BDE97F /* Protocols.swift */,
 				5657A9711F0F28F1008CA2FF /* ConfigUtil.swift */,
 				5657A9751F146D7A008CA2FF /* BarUtil.swift */,
+				56E4619C1F33FA6400E9BE92 /* Errors.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -755,6 +758,7 @@
 				561DBAF31EE8ECA900D2DADD /* RecommendBarVC.swift in Sources */,
 				5657A9781F151577008CA2FF /* FinishEmailVC.swift in Sources */,
 				56DC6A4A1EADAB9800449739 /* UserService.swift in Sources */,
+				56E4619D1F33FA6400E9BE92 /* Errors.swift in Sources */,
 				5632C26B1E933716003C2D6B /* StripeAPIClient.swift in Sources */,
 				56B91B001E651A8C00CB40BB /* User.swift in Sources */,
 				56B00C3F1E70C9F400B64B71 /* CreateEmailLoginVC.swift in Sources */,

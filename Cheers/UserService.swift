@@ -39,11 +39,11 @@ class UserService:NSObject {
     
     func updateUserMembership(membership:String){
         print("Updating user to: \(membership)")
-        self._currentUser.ref.child(userDataTypes.membership).setValue(membership)
+        self._currentUser.membership = membership
     }
     
     func updateUserCredits(credits:Int){
-        self._currentUser.ref.child(userDataTypes.credits).setValue(credits)
+        self._currentUser.credits = credits
     }
     
     func updateUser(data:Dictionary<String,String>){
@@ -91,17 +91,22 @@ class UserService:NSObject {
         self.updateUser()
     }
 
-    func redeemedDrink(bar:Bar, completion:@escaping ()->Void){
+    func redeemedDrink(bar:Bar, completion:@escaping (Error?)->Void){
+        print(#function)
         let dateStamp = NSDate().timeIntervalSince1970
         DataService.ds.REF_USER_CURRENT.child(userDataTypes.barsUsed).child(bar.key).setValue(dateStamp){
             (error, ref) in
             if error != nil {
                 print("Chuck: Error redeeming -\(String(describing: error))")
+                completion(GeneralError(localizedDescription:(error?.localizedDescription)!))
             } else {
                 print("Successfully redeemed")
-                var updateData = [ userDataTypes.barsUsed: dateStamp,
+                var barsUsed = self._currentUser.barsUsed
+                barsUsed[bar.key] = dateStamp
+                let updateData = [ userDataTypes.barsUsed: barsUsed,
                                    userDataTypes.credits: self._currentUser.credits - 1 ] as [String : Any]
                 self._currentUser.ref.updateChildValues(updateData)
+                completion(nil)
             }
         }
     }
