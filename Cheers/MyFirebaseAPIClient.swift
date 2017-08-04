@@ -8,9 +8,7 @@
 
 import Foundation
 import Firebase
-struct userError:Error{
-    var localizedDescription: String
-}
+
 class MyFireBaseAPIClient:NSObject{
     static let sharedClient = MyFireBaseAPIClient()
     override init() { }
@@ -54,7 +52,7 @@ class MyFireBaseAPIClient:NSObject{
                 UserService.sharedService.updateUser(key: snapKey, data: userData, completion: completion)
                 self.startObservingUser()
             } else { print("Error - cast issue probably not a user")
-                completion(userError(localizedDescription: "Could not get user"))
+                completion(GeneralError(localizedDescription: "Could not get user"))
             }
         }) { (error) in
             print("Error: \(#function) \(error.localizedDescription)")

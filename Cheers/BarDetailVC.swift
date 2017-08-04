@@ -46,8 +46,12 @@ class BarDetailVC: UIViewController, hasBarVar {
     func redeemDrink(){
         print("CHUCK: User redeemed bar -\(bar.barName)")
         UserService.sharedService.redeemedDrink(bar:bar){
-            self.performSegue(withIdentifier: "drinkRedeemedSegue", sender: self)
-
+            error in
+            if error != nil {
+                presentUIAlert(sender: self, title: "Error Redeeming Drink", message: (error?.localizedDescription)!)
+            } else {
+                self.performSegue(withIdentifier: "drinkRedeemedSegue", sender: self)
+            }
         }
     }
     
@@ -116,6 +120,7 @@ class BarDetailVC: UIViewController, hasBarVar {
                 return
             }
             if isAvailable {
+                print("Bar available for redepmtion")
                 self.redeemDrinkBtn.setTitle("Have your server tap to redeem", for: .normal)
                 self.redeemDrinkBtn.isUserInteractionEnabled = true
                 self.redeemDrinkBtn.addTarget(self, action: #selector(self.redeemDrink), for: .touchUpInside)

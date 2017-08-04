@@ -49,7 +49,7 @@ class User{
     var myDbAPI: MyFireBaseAPIClient = MyFireBaseAPIClient.sharedClient
     var ref: DatabaseReference!
     
-    var _membership:String!
+    private var _membership:String!
     var membership:String!{
         set{
             if newValue != self._membership {
