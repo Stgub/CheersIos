@@ -147,7 +147,7 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
     }
     
     func retrieveCustomer(_ customerID:String, completion:@escaping (_ customer:STPCustomer? , _ error:Error?)-> Void){
-        print("/retrieveCustomer")
+        print(#function)
         let pathExtension = "/retrieveCustomer"
         let params: [String: Any] = ["customerID": customerID]
         let request = createRequest(pathExtension: pathExtension, params: params)
@@ -300,7 +300,7 @@ class StripeAPIClient:RESTClient, STPBackendAPIAdapter {
         let request = createRequest(pathExtension: pathExtension, params: params)
         let task = self.session.dataTask(with: request) { (data, urlResponse, error) in
             DispatchQueue.main.async {
-                let (decodedError, _) = self.decodeResponse(urlResponse,data:data!, error: error as NSError?)
+                let (decodedError, _) = self.decodeResponse(urlResponse,data:data, error: error as NSError?)
                 if decodedError != nil {
                     print("Backend: Error with default source -\(String(describing: error?.localizedDescription))")
                     completion(decodedError)

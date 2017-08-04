@@ -55,20 +55,16 @@ class CheckoutViewController: AsyncControllerBase, STPPaymentContextDelegate {
         super.init(coder: aDecoder)
         self.paymentContext.delegate = self
         self.paymentContext.hostViewController = self
-        self.paymentContext.paymentAmount = 1000 // This is in cents, i.e. $50 USD
+        self.paymentContext.paymentAmount = 1000 // This is in cents, i.e. $10 USD
 
     }
     
     func paymentContextDidChange(_ paymentContext: STPPaymentContext) {
-      //  self.paymentRow.loading = paymentContext.loading
         if let paymentMethod = paymentContext.selectedPaymentMethod {
-            //self.paymentRow.detail = paymentMethod.label
             purchaseBtnView.isHidden = false
             print("Payment label \(String(describing: paymentMethod))")
-        }
-        else {
+        } else {
             purchaseBtnView.isHidden = true
-            //self.paymentRow.detail = "Select Payment"
         }
 
     }
