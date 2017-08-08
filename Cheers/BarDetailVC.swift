@@ -96,14 +96,14 @@ class BarDetailVC: UIViewController, hasBarVar {
             print("ERROR: No current user")
             return
         }
-        if currentUser.phoneNumber == nil && !ConfigUtil.inTesting{
+        if currentUser.phoneNumber == nil && ConfigUtil.verifyPhoneOn && !ConfigUtil.inTesting{
             redeemDrinkBtn.setTitle("Verify Phone", for: .normal)
             redeemDrinkBtn.isUserInteractionEnabled = true
             redeemDrinkBtn.addTarget(self, action: #selector(self.verifyPhone), for: .touchUpInside)
         } else if currentUser.credits <= 0 {
             //User has no credits left to buy drins
             redeemDrinkBtn.setTitle("Upgrade to recieve more credits!", for: .normal)
-            redeemDrinkBtn.isUserInteractionEnabled = false
+            redeemDrinkBtn.isUserInteractionEnabled = true
             redeemDrinkBtn.addTarget(self, action: #selector(self.goToAccount),for: .touchUpInside)
         } else if !BarUtil.isBarAvailable(bar:bar) {
             //Bar has been used and is not available yet
