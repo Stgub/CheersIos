@@ -103,7 +103,7 @@ class BarDetailVC: UIViewController, hasBarVar {
         } else if currentUser.credits <= 0 {
             //User has no credits left to buy drins
             redeemDrinkBtn.setTitle("Upgrade to recieve more credits!", for: .normal)
-            redeemDrinkBtn.isUserInteractionEnabled = false
+            redeemDrinkBtn.isUserInteractionEnabled = true
             redeemDrinkBtn.addTarget(self, action: #selector(self.goToAccount),for: .touchUpInside)
         } else if !BarUtil.isBarAvailable(bar:bar) {
             //Bar has been used and is not available yet

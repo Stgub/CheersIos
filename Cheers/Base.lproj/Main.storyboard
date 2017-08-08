@@ -1200,8 +1200,8 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.54000000000000004" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Nice drink! Make sure you tip your server." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mke-wp-Tdf">
-                                        <rect key="frame" x="78" y="644" width="258.33333333333331" height="20"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nice drink! Make sure you tip your server." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mke-wp-Tdf">
+                                        <rect key="frame" x="78" y="466.66666666666663" width="258.33333333333331" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="bOa-WI-6UL"/>
                                         </constraints>
@@ -1218,8 +1218,8 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.87" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="HSS-Ga-u1A">
-                                        <rect key="frame" x="70" y="502" width="275" height="100"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="HSS-Ga-u1A">
+                                        <rect key="frame" x="70" y="396.66666666666663" width="275" height="59.999999999999943"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="x46-S8-bRp"/>
@@ -1241,6 +1241,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailingMargin" secondItem="Obi-Sp-7if" secondAttribute="trailing" constant="12" id="3cg-sL-Sux"/>
+                                    <constraint firstItem="HSS-Ga-u1A" firstAttribute="top" secondItem="Obi-Sp-7if" secondAttribute="bottom" constant="4" id="3de-w6-GzM"/>
                                     <constraint firstItem="YXR-aD-7YD" firstAttribute="centerX" secondItem="ZP6-wj-ntc" secondAttribute="centerX" id="9eV-sI-myQ"/>
                                     <constraint firstItem="lZb-cz-B2s" firstAttribute="top" secondItem="ZP6-wj-ntc" secondAttribute="top" id="A31-ec-t9N"/>
                                     <constraint firstItem="jO9-aY-gFO" firstAttribute="top" secondItem="vgc-mB-L8J" secondAttribute="bottom" constant="10" id="FRD-cS-GrR"/>
@@ -1267,7 +1268,6 @@
                                     <constraint firstItem="WXm-ib-lDC" firstAttribute="centerX" secondItem="ZP6-wj-ntc" secondAttribute="centerX" id="nKv-iK-u4W"/>
                                     <constraint firstItem="a8Y-yq-cYB" firstAttribute="top" secondItem="jO9-aY-gFO" secondAttribute="bottom" constant="20" id="pXe-g3-56P"/>
                                     <constraint firstItem="Obi-Sp-7if" firstAttribute="top" secondItem="MJ5-A2-iTE" secondAttribute="bottom" constant="10" id="sCh-hG-Jjj"/>
-                                    <constraint firstAttribute="bottom" secondItem="mke-wp-Tdf" secondAttribute="bottom" constant="10" id="vbx-Ky-bUD"/>
                                     <constraint firstItem="3Q4-Ex-bu3" firstAttribute="centerX" secondItem="ZP6-wj-ntc" secondAttribute="centerX" id="y41-Hn-eKe"/>
                                     <constraint firstItem="Obi-Sp-7if" firstAttribute="leading" secondItem="ZP6-wj-ntc" secondAttribute="leadingMargin" constant="12" id="yo6-Xy-ufC"/>
                                 </constraints>
