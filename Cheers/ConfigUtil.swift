@@ -24,8 +24,8 @@ class ConfigUtil{
     static let STRIPE_DEV_KEY =  "pk_test_vbIvPl0JdKlVqMlrILx3A8Sf" //test
     static let STRIPE_PROD_KEY = "pk_live_PuYngGgOA2VX11E7NqNZ1vW3" // Live
     static let APPLE_PAY_ID = "merchant.com.toast.stripe"
-    
-    static let inTesting = true
+    static let verifyPhoneOn = false
+    static let inTesting = false
     // true means no phone verification and test stripe keys
     // true uses test stripe IDs instead of normal stripe ids for from firebase 
     

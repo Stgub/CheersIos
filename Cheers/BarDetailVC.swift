@@ -96,7 +96,7 @@ class BarDetailVC: UIViewController, hasBarVar {
             print("ERROR: No current user")
             return
         }
-        if currentUser.phoneNumber == nil && !ConfigUtil.inTesting{
+        if currentUser.phoneNumber == nil && ConfigUtil.verifyPhoneOn && !ConfigUtil.inTesting{
             redeemDrinkBtn.setTitle("Verify Phone", for: .normal)
             redeemDrinkBtn.isUserInteractionEnabled = true
             redeemDrinkBtn.addTarget(self, action: #selector(self.verifyPhone), for: .touchUpInside)
