@@ -12,10 +12,15 @@ class BarTableViewCell: UITableViewCell {
     var bar:Bar!
     //var delegate:BarFeedVC!
     @IBOutlet weak var barNameLabel: UILabel!
+    @IBOutlet weak var shortDescriptionLabel: UILabel!
+    
     @IBOutlet weak var barImageView: UIImageView!
     @IBOutlet weak var barStreetLabel: UILabel!
     
     @IBOutlet weak var barAreaLabel: UILabel!
+    @IBOutlet weak var oneFreeDrinkIcon: UIImageView!
+    @IBOutlet weak var freeAppIcon: UIImageView!
+    @IBOutlet weak var genericDealIcon: UIImageView!
     /*
     @IBOutlet weak var freeDrinkBtn: UIButton!
     

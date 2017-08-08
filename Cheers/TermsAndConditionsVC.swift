@@ -12,12 +12,13 @@ class TermsAndConditionsVC: BaseMenuVC {
     @IBOutlet weak var leftMenuBtn: UIButton!
 
     @IBOutlet weak var webView: UIWebView!
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.attachMenuButton(menuButton: leftMenuBtn)
         webView.loadRequest(URLRequest(url: URL(string:ConfigUtil.TERMS_AND_CONDITIONS_URL)!))
     }
-
- 
-
+    
 }

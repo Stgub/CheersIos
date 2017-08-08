@@ -16,11 +16,13 @@ class Bar {
         static let imgUrl = "ImgUrl"
         static let barName = "barName"
         static let description = "description"
+        static let shortDescription = "shortDescription"
         static let locationStreet = "locationStreet"
         static let locationCity = "locationCity"
         static let locationState = "locationState"
         static let locationZipCode = "locationZipCode"
         static let phoneNumber = "phoneNumber"
+        static let deals = "deals"
         static let drinks = "drinks"
         static let hoursTime = "hoursTime"
         static let hoursAmPm = "hoursAmPm"
@@ -37,11 +39,12 @@ class Bar {
     var img:UIImage!
     var imgUrl:String!
     var description:String!
+    var shortDescription:String!
     var drinks: String!
     var hoursTime: Dictionary<String,String>!
     var hoursAmPm: Dictionary<String,String>!
     var availableDays:[String:Bool] = [:] //contains a string for each day of the week that it is available e.g. Monday, Tuesday
-
+    var deals:[String:Bool] = [:]
     
     init(barKey:String, dataDict:Dictionary<String,AnyObject>){
         self.key = barKey
@@ -67,6 +70,9 @@ class Bar {
         if let description = dataDict[dataTypes.description] as? String{
             self.description = description
         }
+        if let shortDescript = dataDict[dataTypes.shortDescription] as? String{
+            self.shortDescription = shortDescript
+        }
         if let drinks = dataDict[dataTypes.drinks] as? String{
             self.drinks = drinks
         }
@@ -82,6 +88,9 @@ class Bar {
         if let availableDays = dataDict[dataTypes.availableDays] as? [String:Bool]{
             self.availableDays = availableDays
         } else { print("**** Couldn't add bar available days" )}
+        if let deals = dataDict[dataTypes.deals] as? [String:Bool]{
+            self.deals = deals
+        }
 
     }
     func getImage(returnBlock:@escaping ()->()){

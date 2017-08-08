@@ -137,7 +137,12 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate,BarServi
         if let barStreet = bar.locationStreet {
             cell.barStreetLabel.text = barStreet
         } else {
-            cell.barStreetLabel.text = "No address"
+            cell.barStreetLabel.isHidden = true 
+        }
+        if let shortDescription = bar.shortDescription {
+            cell.shortDescriptionLabel.text = shortDescription
+        } else {
+            cell.shortDescriptionLabel.isHidden = true
         }
         var locationString = ""
         if let barCity = bar.locationCity {
@@ -149,6 +154,17 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate,BarServi
         if let barZipcode = bar.locationZipCode{
              locationString += " \(barZipcode)"
         }
+        for deal in bar.deals {
+            switch (deal.key) {
+                case "freeApp":
+                    cell.freeAppIcon.isHidden = false
+                case "oneFreeDrink":
+                    cell.oneFreeDrinkIcon.isHidden = false
+                default:
+                    cell.genericDealIcon.isHidden = false
+            }
+        }
+        
         cell.barAreaLabel.text = locationString
         
         bar.setImage(imageView: cell.barImageView!)

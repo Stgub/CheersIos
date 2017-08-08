@@ -230,7 +230,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="221"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e1n-h0-460" id="dRF-Zo-fkb">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="220.66666666666666"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="221"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEw-oq-9uQ">
@@ -280,16 +280,46 @@
                                                                 <constraint firstAttribute="trailing" secondItem="dTn-As-l8a" secondAttribute="trailing" constant="8" id="ucR-3M-ZrB"/>
                                                             </constraints>
                                                         </view>
+                                                        <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="oneFreeDrinkIcon" translatesAutoresizingMaskIntoConstraints="NO" id="6WP-j6-bhF">
+                                                            <rect key="frame" x="379" y="5" width="30" height="30"/>
+                                                            <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="30" id="aqt-JH-Av7"/>
+                                                                <constraint firstAttribute="height" constant="30" id="smf-2d-RMA"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="freeAppIcon" translatesAutoresizingMaskIntoConstraints="NO" id="vHj-pD-qOF">
+                                                            <rect key="frame" x="344" y="5" width="30" height="30"/>
+                                                            <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="30" id="76F-96-9UN"/>
+                                                                <constraint firstAttribute="height" constant="30" id="y8F-UX-eQ4"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="genericDealIcon" translatesAutoresizingMaskIntoConstraints="NO" id="xku-4j-HVF">
+                                                            <rect key="frame" x="306" y="5" width="30" height="30"/>
+                                                            <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="Abj-1s-hpf"/>
+                                                                <constraint firstAttribute="width" constant="30" id="PZ8-qB-nP6"/>
+                                                            </constraints>
+                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
+                                                        <constraint firstItem="xku-4j-HVF" firstAttribute="centerY" secondItem="vHj-pD-qOF" secondAttribute="centerY" id="5Eh-Ge-f29"/>
                                                         <constraint firstItem="Ov4-Lr-QQU" firstAttribute="top" secondItem="sEw-oq-9uQ" secondAttribute="top" id="DyH-5O-Jfj"/>
                                                         <constraint firstItem="mb3-sy-WWV" firstAttribute="leading" secondItem="sEw-oq-9uQ" secondAttribute="leading" id="Jxo-uq-wja"/>
+                                                        <constraint firstAttribute="trailing" secondItem="6WP-j6-bhF" secondAttribute="trailing" constant="5" id="YSp-z0-ptm"/>
                                                         <constraint firstAttribute="bottom" secondItem="mb3-sy-WWV" secondAttribute="bottom" id="dBf-Ji-l0x"/>
                                                         <constraint firstAttribute="bottom" secondItem="Ov4-Lr-QQU" secondAttribute="bottom" id="foA-8Y-RmV"/>
                                                         <constraint firstAttribute="trailing" secondItem="Ov4-Lr-QQU" secondAttribute="trailing" id="fpd-ae-cWM"/>
                                                         <constraint firstAttribute="trailing" secondItem="mb3-sy-WWV" secondAttribute="trailing" id="gKR-Tp-rl8"/>
+                                                        <constraint firstItem="6WP-j6-bhF" firstAttribute="leading" secondItem="vHj-pD-qOF" secondAttribute="trailing" constant="5" id="hkk-fE-SyE"/>
                                                         <constraint firstItem="Ov4-Lr-QQU" firstAttribute="leading" secondItem="sEw-oq-9uQ" secondAttribute="leading" id="qZy-qA-40n"/>
+                                                        <constraint firstItem="6WP-j6-bhF" firstAttribute="top" secondItem="sEw-oq-9uQ" secondAttribute="top" constant="5" id="sMc-oy-AAg"/>
+                                                        <constraint firstItem="vHj-pD-qOF" firstAttribute="leading" secondItem="xku-4j-HVF" secondAttribute="trailing" constant="5" id="vWi-BL-Zj7"/>
+                                                        <constraint firstItem="vHj-pD-qOF" firstAttribute="centerY" secondItem="6WP-j6-bhF" secondAttribute="centerY" id="yG8-p6-WWD"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -305,6 +335,10 @@
                                             <outlet property="barImageView" destination="Ov4-Lr-QQU" id="eEe-tw-tG4"/>
                                             <outlet property="barNameLabel" destination="qeI-wa-mkA" id="rxh-qG-lJZ"/>
                                             <outlet property="barStreetLabel" destination="fDV-dp-hLD" id="o33-EX-LTj"/>
+                                            <outlet property="freeAppIcon" destination="vHj-pD-qOF" id="j9e-mQ-TJE"/>
+                                            <outlet property="genericDealIcon" destination="xku-4j-HVF" id="gOd-Sh-uj2"/>
+                                            <outlet property="oneFreeDrinkIcon" destination="6WP-j6-bhF" id="Duk-Zm-8b1"/>
+                                            <outlet property="shortDescriptionLabel" destination="53G-wV-tQr" id="JBx-e2-aWc"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -675,7 +709,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6H3-6P-WFP" id="UeR-X4-UaQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="86.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="87"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32P-ih-Bfi">
@@ -1847,6 +1881,9 @@
     <resources>
         <image name="backBtn" width="40" height="23"/>
         <image name="burger2-1" width="38" height="18"/>
+        <image name="freeAppIcon" width="64" height="64"/>
+        <image name="genericDealIcon" width="128" height="128"/>
+        <image name="oneFreeDrinkIcon" width="128" height="128"/>
         <image name="toastLogo-1" width="170" height="116"/>
         <image name="toastLogoNoWordsGray" width="86" height="87"/>
         <image name="toastLogoScreen-1" width="229" height="79"/>
