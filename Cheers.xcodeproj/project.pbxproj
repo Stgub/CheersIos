@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1916ADFB1E733AC3003EACC2 /* textViewRoundCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1916ADFA1E733AC3003EACC2 /* textViewRoundCorner.swift */; };
 		193944761E9FEE3900557853 /* circlePP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193944751E9FEE3900557853 /* circlePP.swift */; };
+		194CAA791F3A6F6F00995CDB /* viewBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194CAA781F3A6F6F00995CDB /* viewBorder.swift */; };
 		199AF66D1E6F6DAA00FBBAD1 /* RoundedImageCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199AF66C1E6F6DAA00FBBAD1 /* RoundedImageCorner.swift */; };
 		199AF66F1E6F969F00FBBAD1 /* ContactUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199AF66E1E6F969F00FBBAD1 /* ContactUsVC.swift */; };
 		19BA3EEC1EEB1CAE00D07A96 /* ButtonTextLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BA3EEB1EEB1CAE00D07A96 /* ButtonTextLeft.swift */; };
@@ -100,6 +101,7 @@
 		1803AED7E78CBD054C9CC6C6 /* Pods-CheersUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CheersUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CheersUITests/Pods-CheersUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		1916ADFA1E733AC3003EACC2 /* textViewRoundCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = textViewRoundCorner.swift; sourceTree = "<group>"; };
 		193944751E9FEE3900557853 /* circlePP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = circlePP.swift; sourceTree = "<group>"; };
+		194CAA781F3A6F6F00995CDB /* viewBorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = viewBorder.swift; sourceTree = "<group>"; };
 		199AF66C1E6F6DAA00FBBAD1 /* RoundedImageCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedImageCorner.swift; sourceTree = "<group>"; };
 		199AF66E1E6F969F00FBBAD1 /* ContactUsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUsVC.swift; sourceTree = "<group>"; };
 		19BA3EEB1EEB1CAE00D07A96 /* ButtonTextLeft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTextLeft.swift; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 				19BA3EEB1EEB1CAE00D07A96 /* ButtonTextLeft.swift */,
 				19BA3EED1EEB1F7F00D07A96 /* viewRoundCorner.swift */,
 				563E81151EF0B11B00AB1AE4 /* XibView.swift */,
+				194CAA781F3A6F6F00995CDB /* viewBorder.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -753,6 +756,7 @@
 				56B963261F1E9A6900F63517 /* PrivacyPolicyVC.swift in Sources */,
 				5657A9701F055FDA008CA2FF /* BarService.swift in Sources */,
 				19FBCBB81E6379A600AA10B5 /* Shadow&RoundBtn.swift in Sources */,
+				194CAA791F3A6F6F00995CDB /* viewBorder.swift in Sources */,
 				56866CA31F27716100906EC6 /* FAQVC.swift in Sources */,
 				56B91B081E651C7700CB40BB /* GeneralFunctions.swift in Sources */,
 				56F78A5E1E6A600E000E10F4 /* HistoryTableViewCell.swift in Sources */,
