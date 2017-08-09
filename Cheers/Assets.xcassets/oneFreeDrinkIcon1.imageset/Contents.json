@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "freeAppIcon.jpeg",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "freeDrinkIcon.png",
       "scale" : "2x"
     },
     {
