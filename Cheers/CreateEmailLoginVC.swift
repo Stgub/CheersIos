@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 import SwiftKeychainWrapper
-class CreateEmailLoginVC: UIViewController,UITextFieldDelegate {
+class CreateEmailLoginVC:AsyncControllerBase, LoginController,UITextFieldDelegate {
 
     var userData:[String:AnyObject] = [:]
     @IBOutlet weak var emailField: UITextField!
@@ -46,9 +46,21 @@ class CreateEmailLoginVC: UIViewController,UITextFieldDelegate {
             userDataTypes.email: email as AnyObject,
             "password": password as AnyObject
             ]
-        performSegue(withIdentifier: "toFinishEmailSegue", sender: self)
-
+        self.startAsyncProcess()
+        UserService.sharedService.emailSignUp(loginController:self as! LoginController, email: email, password: password, userData:userData as! [String : String])
     }
+
+    //Call backs from Userservice when login fails or succeeds
+    func loginComplete(){
+        self.stopAsyncProcess()
+        GeneralFunctions.presentBarFeedVC(sender: self)
+    }
+    func loginFailed(title: String, message: String) {
+        self.stopAsyncProcess()
+        presentUIAlert(sender: self, title: title, message: message)
+    }
+
+    
 
 
     

@@ -480,7 +480,7 @@
                                     <constraint firstAttribute="height" constant="30" id="fRS-ls-OJE"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
-                                <state key="normal" title="Next">
+                                <state key="normal" title="Sign Up">
                                     <color key="titleColor" red="1" green="0.65490196079999996" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
@@ -584,7 +584,6 @@
                         <outlet property="nameField" destination="tMP-wx-lGz" id="Lfr-jA-xhS"/>
                         <outlet property="passwordConfirmField" destination="KC4-HN-00t" id="iKd-6L-2lZ"/>
                         <outlet property="passwordField" destination="tDa-fF-FCQ" id="HLp-sL-6da"/>
-                        <segue destination="rvR-Tu-JmB" kind="show" identifier="toFinishEmailSegue" id="Q7O-q5-oYF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ewr-5J-ERY" sceneMemberID="firstResponder"/>
@@ -868,7 +867,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mlH-pK-AQc" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1730.625" y="1431.338028169014"/>
+            <point key="canvasLocation" x="2156" y="1431"/>
         </scene>
         <!--Terms And Conditions-->
         <scene sceneID="ze9-qk-oaf">
