@@ -21,6 +21,7 @@ class BarTableViewCell: UITableViewCell {
     @IBOutlet weak var oneFreeDrinkIcon: UIImageView!
     @IBOutlet weak var freeAppIcon: UIImageView!
     @IBOutlet weak var genericDealIcon: UIImageView!
+    @IBOutlet weak var wineDealIcon: RoundedImageCorner!
     /*
     @IBOutlet weak var freeDrinkBtn: UIButton!
     

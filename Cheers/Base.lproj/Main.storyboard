@@ -309,6 +309,9 @@
                                                                 <constraint firstAttribute="width" constant="30" id="3S9-tc-rdt"/>
                                                                 <constraint firstAttribute="height" constant="30" id="b8j-em-BNM"/>
                                                             </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="" value="YES"/>
+                                                            </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -343,10 +346,11 @@
                                             <outlet property="barImageView" destination="Ov4-Lr-QQU" id="eEe-tw-tG4"/>
                                             <outlet property="barNameLabel" destination="qeI-wa-mkA" id="rxh-qG-lJZ"/>
                                             <outlet property="barStreetLabel" destination="fDV-dp-hLD" id="o33-EX-LTj"/>
-                                            <outlet property="freeAppIcon" destination="vHj-pD-qOF" id="j9e-mQ-TJE"/>
-                                            <outlet property="genericDealIcon" destination="xku-4j-HVF" id="gOd-Sh-uj2"/>
-                                            <outlet property="oneFreeDrinkIcon" destination="6WP-j6-bhF" id="Duk-Zm-8b1"/>
+                                            <outlet property="freeAppIcon" destination="vHj-pD-qOF" id="pOZ-Qi-Vpj"/>
+                                            <outlet property="genericDealIcon" destination="5MI-T6-PjD" id="Kz7-SN-me9"/>
+                                            <outlet property="oneFreeDrinkIcon" destination="6WP-j6-bhF" id="tyH-dN-LpC"/>
                                             <outlet property="shortDescriptionLabel" destination="53G-wV-tQr" id="JBx-e2-aWc"/>
+                                            <outlet property="wineDealIcon" destination="xku-4j-HVF" id="RBv-WG-ZtE"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1940,10 +1944,10 @@ Sun 11:30am - 12:30am</string>
     <resources>
         <image name="backBtn" width="40" height="23"/>
         <image name="burger2-1" width="38" height="18"/>
-        <image name="freeAppIcon" width="225" height="225"/>
-        <image name="genericDealIcon" width="600" height="600"/>
-        <image name="halfOffWineIcon" width="322" height="319"/>
-        <image name="oneFreeDrinkIcon" width="120" height="120"/>
+        <image name="freeAppIcon" width="64" height="64"/>
+        <image name="genericDealIcon" width="128" height="128"/>
+        <image name="halfOffWineIcon" width="256" height="256"/>
+        <image name="oneFreeDrinkIcon" width="128" height="128"/>
         <image name="toastLogo-1" width="170" height="116"/>
         <image name="toastLogoNoWordsGray" width="86" height="87"/>
         <image name="toastLogoScreen-1" width="229" height="79"/>
