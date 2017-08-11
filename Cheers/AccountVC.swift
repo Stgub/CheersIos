@@ -34,10 +34,8 @@ class AccountVC: BaseMenuVC, UITextFieldDelegate{
     private var isBasicMembership:Bool = true {
         didSet {
             if self.isBasicMembership {
-                membershiBtn.backgroundColor = TOAST_PRIMARY_COLOR
                 membershiBtn.setTitle("Join the club", for: .normal)
             } else {
-                membershiBtn.backgroundColor = UIColor.lightGray
                 membershiBtn.setTitle("Downgrade", for: .normal)
             }
         }

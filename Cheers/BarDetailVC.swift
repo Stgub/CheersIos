@@ -27,9 +27,9 @@ class BarDetailVC: UIViewController, hasBarVar {
     override func viewWillAppear(_ animated: Bool) {
         updateUI()
     }
-    override func viewWillDisappear(_ animated: Bool) {
+   /* override func viewWillDisappear(_ animated: Bool) {
         updateTimer.invalidate()
-    }
+    }*/
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +55,7 @@ class BarDetailVC: UIViewController, hasBarVar {
             }
         }
     }
-    
+    /*
     private var updateTimer = Timer()
     func updateTimeLabel(){
         if timeLeftBetweenDrinks() < 0 {
@@ -65,7 +65,7 @@ class BarDetailVC: UIViewController, hasBarVar {
             redeemDrinkBtn.setTitle("\(timeStringFromInterval(timeInterval: timeLeftBetweenDrinks()))", for: .normal)
         }
     }
-    
+    */
     func updateUI(){
         if let barName = bar.barName{
             barNameLabel.text = barName
@@ -90,7 +90,7 @@ class BarDetailVC: UIViewController, hasBarVar {
         
         //remove actions linked to button, if adding more there's a better way
         redeemDrinkBtn.removeTarget(nil, action: nil, for: .touchUpInside)
-        updateTimer.invalidate()
+        //updateTimer.invalidate()
         
         guard let currentUser = UserService.sharedService.getCurrentUser() else {
             print("ERROR: No current user")
@@ -109,12 +109,12 @@ class BarDetailVC: UIViewController, hasBarVar {
             //Bar has been used and is not available yet
             self.redeemDrinkBtn.setTitle("Drink Redeemed!", for: .normal) //, available again: \(getDateStringFromTimeStamp(date: dateAvailable))"
             self.redeemDrinkBtn.isUserInteractionEnabled = false
-        } else if timeLeftBetweenDrinks() > 0{
+        /*} else if timeLeftBetweenDrinks() > 0{
             //User has recently used a drink and must wait for TIME_BETWEEN_DRINKS
             redeemDrinkBtn.isUserInteractionEnabled = false
             updateTimeLabel()
             updateTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimeLabel), userInfo: nil, repeats: true)
-            
+            */
         } else{
             guard let dayNum = Date().dayNumberOfWeek(), let dayStr:String = weekDays(rawValue:dayNum)?.toString, let isAvailable:Bool = bar.availableDays[dayStr], isAvailable else {
                 self.redeemDrinkBtn.setTitle("Bar is not available today", for: .normal)

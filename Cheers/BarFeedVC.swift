@@ -53,7 +53,7 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate,BarServi
 
     override func viewWillAppear(_ animated: Bool) {
         updateUI()
-        drinkTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateDrinkTimer), userInfo: nil, repeats: true)
+    //    drinkTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateDrinkTimer), userInfo: nil, repeats: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -82,7 +82,7 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate,BarServi
     }
     
     func updateUI(){
-        self.updateDrinkTimer()
+       // self.updateDrinkTimer()
         GeneralFunctions.updateUserBanner(controller: self, nameL: userNameLabel,
                                           creditsL: creditsLabel,
                                           membershipB: membershipBtn,
@@ -91,7 +91,7 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate,BarServi
         tableView.reloadData()
     }
     
-    @objc private func updateDrinkTimer(){
+    /*@objc private func updateDrinkTimer(){
         let timeLeft = timeLeftBetweenDrinks()
         if timeLeft < 0 {
             drinkTimer.invalidate()
@@ -100,7 +100,7 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate,BarServi
             drinkTimeLeft.isHidden = false
             drinkTimeLeft.text = timeStringFromInterval(timeInterval: timeLeft)
         }
-    }
+    }*/
     
     
     /**
