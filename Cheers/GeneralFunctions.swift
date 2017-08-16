@@ -68,6 +68,16 @@ class GeneralFunctions:NSObject{
         let vc = storyboard.instantiateViewController(withIdentifier: "SignUpBarIntialVC")
         sender.present(vc, animated: true, completion: nil)
     }
+    static func presentTermsVC(sender:UIViewController){
+        let storyboard = UIStoryboard(name: myStoryboards.addBarFlow, bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "TermsAndConditionsVC")
+        sender.present(vc, animated: true, completion: nil)
+    }
+    static func presentPrivacyPolicyVC(sender:UIViewController){
+        let storyboard = UIStoryboard(name: myStoryboards.addBarFlow, bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "PrivacyPolicyVC")
+        sender.present(vc, animated: true, completion: nil)
+    }
     
 }
 

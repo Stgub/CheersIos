@@ -35,10 +35,23 @@ class SlideMenuVC: UIViewController, Menu, UITableViewDelegate, UITableViewDataS
        // MenuItem(title: "Refer a friend", storyboardID: "ReferralVC", storyboard: myStoryboards.main),
         MenuItem(title: "Recommend a Business", storyboardID: "RecommendBarVC", storyboard: myStoryboards.main),
         MenuItem(title: "FAQ", storyboardID: "FAQVC", storyboard: myStoryboards.main),
-        MenuItem(title: "Privacy Policy", storyboardID: "PrivacyPolicyVC", storyboard: myStoryboards.main),
-           MenuItem(title: "Terms and Conditions", storyboardID: "TermsAndConditionsVC", storyboard: myStoryboards.main),
-        MenuItem(title: "Sign Out", storyboardID: "signout", storyboard: "signout")
+ 
     ]
+    @IBAction func privacyPolicyBtnTapped(_ sender: Any) {
+        let item = MenuItem(title: "Privacy Policy", storyboardID: "PrivacyPolicyVC", storyboard: myStoryboards.main)
+        self.menuItemClicked(menuItem: item)
+    }
+    
+    @IBAction func termsBtnTapped(_ sender: Any) {
+        let item = MenuItem(title: "Terms and Conditions", storyboardID: "TermsAndConditionsVC", storyboard: myStoryboards.main)
+        self.menuItemClicked(menuItem: item)
+    }
+    
+    @IBAction func signOutBtnTapped(_ sender: Any) {
+        let item =  MenuItem(title: "Sign Out", storyboardID: "signout", storyboard: "signout")
+        self.menuItemClicked(menuItem: item)
+    }
+    
     
     @IBOutlet weak var btnMenu: UIButton!
 

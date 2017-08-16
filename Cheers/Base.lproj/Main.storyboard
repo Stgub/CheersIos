@@ -1340,7 +1340,7 @@ Sun 11:30am - 12:30am</string>
                         <outlet property="barPhoneNumLabel" destination="YXR-aD-7YD" id="uaU-YD-RtZ"/>
                         <outlet property="barStreetLabel" destination="lRh-j4-9s6" id="vMg-bU-rFu"/>
                         <outlet property="redeemDrinkBtn" destination="HSS-Ga-u1A" id="iaF-Rw-C1T"/>
-                        <segue destination="BYe-5v-7nG" kind="presentation" identifier="drinkRedeemedSegue" id="cpE-CC-jPc"/>
+                        <segue destination="BYe-5v-7nG" kind="presentation" identifier="perkRedeemedSegue" id="cpE-CC-jPc"/>
                         <segue destination="p3l-QE-4wm" kind="presentation" identifier="verifyPhoneSegue" id="AQq-eY-1jU"/>
                     </connections>
                 </viewController>

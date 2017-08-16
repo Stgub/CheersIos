@@ -45,13 +45,13 @@ class BarDetailVC: UIViewController, hasBarVar {
         GeneralFunctions.presentAccountVC(sender: self)
     }
     func redeemDrink(){
-        print("CHUCK: User redeemed bar -\(bar.barName)")
+        print("CHUCK: User redeemed perk -\(bar.barName)")
         UserService.sharedService.redeemedDrink(bar:bar){
             error in
             if error != nil {
-                presentUIAlert(sender: self, title: "Error Redeeming Drink", message: (error?.localizedDescription)!)
+                presentUIAlert(sender: self, title: "Error Redeeming Perk", message: (error?.localizedDescription)!)
             } else {
-                self.performSegue(withIdentifier: "drinkRedeemedSegue", sender: self)
+                self.performSegue(withIdentifier: "perkRedeemedSegue", sender: self)
             }
         }
     }
@@ -107,7 +107,7 @@ class BarDetailVC: UIViewController, hasBarVar {
             redeemDrinkBtn.addTarget(self, action: #selector(self.goToAccount),for: .touchUpInside)
         } else if !BarUtil.isBarAvailable(bar:bar) {
             //Bar has been used and is not available yet
-            self.redeemDrinkBtn.setTitle("Drink Redeemed!", for: .normal) //, available again: \(getDateStringFromTimeStamp(date: dateAvailable))"
+            self.redeemDrinkBtn.setTitle("Perk Redeemed!", for: .normal) //, available again: \(getDateStringFromTimeStamp(date: dateAvailable))"
             self.redeemDrinkBtn.isUserInteractionEnabled = false
         /*} else if timeLeftBetweenDrinks() > 0{
             //User has recently used a drink and must wait for TIME_BETWEEN_DRINKS
