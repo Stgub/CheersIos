@@ -160,6 +160,10 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate,BarServi
                     cell.freeAppIcon.isHidden = false
                 case "oneFreeDrink":
                     cell.oneFreeDrinkIcon.isHidden = false
+                case "buyOneGetOne":
+                    cell.genericDealIcon.isHidden = false
+                case "halfOffBottle":
+                    cell.wineDealIcon.isHidden = false
                 default:
                     cell.genericDealIcon.isHidden = false
             }
