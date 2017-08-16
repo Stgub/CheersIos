@@ -104,7 +104,7 @@ class BarDetailVC: UIViewController, hasBarVar {
         }
         redeemDrinkBtn.removeTarget(nil, action: nil, for: .touchUpInside)
 
-        if currentUser.phoneNumber == nil && ConfigUtil.verifyPhoneOn && !ConfigUtil.inTesting{
+        if currentUser.phoneNumber == nil && ConfigUtil.verifyPhoneOn{
             redeemDrinkBtn.setTitle("Verify Phone", for: .normal)
             redeemDrinkBtn.isUserInteractionEnabled = true
             redeemDrinkBtn.addTarget(self, action: #selector(self.verifyPhone), for: .touchUpInside)
