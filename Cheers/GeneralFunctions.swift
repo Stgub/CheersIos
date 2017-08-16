@@ -99,18 +99,18 @@ func getDateStringFromTimeStamp(date: TimeInterval)-> String{
 /**
  Used to update the timer labels
  *@Return: time between drinks or the time now if there are no bars used  */
-func timeLeftBetweenDrinks()->TimeInterval{
-    let timeNow = NSDate().timeIntervalSince1970
-    if let currentUser = UserService.sharedService.getCurrentUser(){
-        if let lastDrinkTime = currentUser.barsUsed.values.max() {
-            return TIME_BETWEEN_DRINKS - (timeNow - lastDrinkTime)
-        } else {
-            return -1
-        }
-    } else {
-        return -1
-    }
-}
+//func timeLeftBetweenDrinks()->TimeInterval{
+//    let timeNow = NSDate().timeIntervalSince1970
+//    if let currentUser = UserService.sharedService.getCurrentUser(){
+//        if let lastDrinkTime = currentUser.barsUsed.values.max() {
+//            return TIME_BETWEEN_DRINKS - (timeNow - lastDrinkTime)
+//        } else {
+//            return -1
+//        }
+//    } else {
+//        return -1
+//    }
+//}
 
 func timeStringFromInterval(timeInterval:TimeInterval)->String{
     let hrs = Int(timeInterval/(60*60))

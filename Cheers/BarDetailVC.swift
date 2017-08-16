@@ -79,10 +79,10 @@ class BarDetailVC: UIViewController, hasBarVar {
         if let barPhoneNum = bar.phoneNumber{
             barPhoneNumLabel.text = barPhoneNum
         }
-        if let barHours = bar.hoursTime{
-            if let barAmPm = bar.hoursAmPm{
-                barHoursLabel.text = Bar.getHoursParagraph(hoursDict: barHours, amPmDict: barAmPm)
-            }
+        if let hoursOpen = bar.hoursOpen{
+            barHoursLabel.text = BarUtil.getHoursParagraph(hoursOpen: hoursOpen)
+        } else {
+            barHoursLabel.isHidden = true 
         }
         if let barDescript = bar.description{
             barDescriptLabel.text = barDescript

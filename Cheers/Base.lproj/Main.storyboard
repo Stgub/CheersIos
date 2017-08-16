@@ -1116,7 +1116,7 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.54000000000000004" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXm-ib-lDC">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXm-ib-lDC">
                                                 <rect key="frame" x="10" y="261" width="394" height="58"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="58" id="gVX-2F-RP5"/>
@@ -1135,11 +1135,11 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.87" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jO9-aY-gFO">
-                                                <rect key="frame" x="127" y="419" width="160" height="140"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jO9-aY-gFO">
+                                                <rect key="frame" x="57" y="419" width="300" height="140"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="140" id="2Ac-LS-VdT"/>
-                                                    <constraint firstAttribute="width" constant="160" id="Ahs-ep-W19"/>
+                                                    <constraint firstAttribute="width" constant="300" id="Ahs-ep-W19"/>
                                                 </constraints>
                                                 <string key="text">Mon 11:30am - 12:30am
 Tues 11:30am - 12:30am

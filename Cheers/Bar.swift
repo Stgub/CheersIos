@@ -24,8 +24,7 @@ class Bar {
         static let phoneNumber = "phoneNumber"
         static let deals = "deals"
         static let drinks = "drinks"
-        static let hoursTime = "hoursTime"
-        static let hoursAmPm = "hoursAmPm"
+        static let hoursOpen = "hoursOpen"
         static let availableDays = "availableDays"
     }
     var refFB:DatabaseReference!
@@ -41,8 +40,7 @@ class Bar {
     var description:String!
     var shortDescription:String!
     var drinks: String!
-    var hoursTime: Dictionary<String,String>!
-    var hoursAmPm: Dictionary<String,String>!
+    var hoursOpen: Dictionary<String,Int>!
     var availableDays:[String:Bool] = [:] //contains a string for each day of the week that it is available e.g. Monday, Tuesday
     var deals:[String:Bool] = [:]
     
@@ -79,20 +77,21 @@ class Bar {
         if let imgUrl = dataDict[dataTypes.imgUrl] as? String{
             self.imgUrl = imgUrl
         }
-        if let hoursTime = dataDict[dataTypes.hoursTime] as? Dictionary<String,String>{
-            self.hoursTime = hoursTime
-        }
-        if let hoursAmPm = dataDict[dataTypes.hoursAmPm] as? Dictionary<String,String>{
-            self.hoursAmPm = hoursAmPm
-        }
+        if let hoursOpen = dataDict[dataTypes.hoursOpen]{
+            print(hoursOpen)
+            if let hoursOpen = hoursOpen as? Dictionary<String,Int>{
+                self.hoursOpen = hoursOpen
+            } else {print("Bar:\(barName) hoursOpen could not cast to dict")}
+        } else { print("Bar:\(barName) no hours found")}
         if let availableDays = dataDict[dataTypes.availableDays] as? [String:Bool]{
             self.availableDays = availableDays
+            
         } else { print("**** Couldn't add bar available days" )}
         if let deals = dataDict[dataTypes.deals] as? [String:Bool]{
             self.deals = deals
         }
-
     }
+    
     func getImage(returnBlock:@escaping ()->()){
         //print("Getting image for \(self.barName)")
         guard let imageUrl = self.imgUrl else {
@@ -130,24 +129,7 @@ class Bar {
             imageView.image = self.img
         }
     }
-    //used to get a paragraph of the bar hours for labels throughout the app
-    static func getHoursParagraph(hoursDict:Dictionary<String,String>,amPmDict:Dictionary<String,String>)-> String{
-        var barHoursPara = ""
-        barHoursPara += "Mon. \(hoursDict["monOpen"]!)\(amPmDict["monOpen"]!)-\(hoursDict["monClose"]!)\(amPmDict["monClose"]!)"
-        barHoursPara += ", "
-        barHoursPara += "Tue. \(hoursDict["tueOpen"]!)\(amPmDict["tueOpen"]!)-\(hoursDict["tueClose"]!)\(amPmDict["tueClose"]!)"
-        barHoursPara += ", "
-        barHoursPara += "Wed. \(hoursDict["wedOpen"]!)\(amPmDict["wedOpen"]!)-\(hoursDict["wedClose"]!)\(amPmDict["wedClose"]!)"
-        barHoursPara += ", "
-        barHoursPara += "Thurs. \(hoursDict["thuOpen"]!)\(amPmDict["thuOpen"]!)-\(hoursDict["thuClose"]!)\(amPmDict["thuClose"]!)"
-        barHoursPara += ", "
-        barHoursPara += "Fri. \(hoursDict["friOpen"]!)\(amPmDict["friOpen"]!)-\(hoursDict["friClose"]!)\(amPmDict["friClose"]!)"
-        barHoursPara += ", "
-        barHoursPara += "Sat. \(hoursDict["satOpen"]!)\(amPmDict["satOpen"]!)-\(hoursDict["satClose"]!)\(amPmDict["satClose"]!)"
-        barHoursPara += ", "
-        barHoursPara += "Sun. \(hoursDict["sunOpen"]!)\(amPmDict["sunOpen"]!)-\(hoursDict["sunClose"]!)\(amPmDict["sunClose"]!)"
-        return barHoursPara
-    }
+
  
 
 }

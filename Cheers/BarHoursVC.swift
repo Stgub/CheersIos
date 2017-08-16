@@ -92,8 +92,8 @@ class BarHoursVC: UIViewController, hasDataDict {
         for time in timeFields{
             hoursDict[time.accessibilityIdentifier!] = time.text!
         }
-        dataDict[Bar.dataTypes.hoursTime] = hoursDict
-        dataDict[Bar.dataTypes.hoursAmPm] = periodDict
+//        dataDict[Bar.dataTypes.hoursTime] = hoursDict
+//        dataDict[Bar.dataTypes.hoursAmPm] = periodDict
         dataDict[Bar.dataTypes.drinks] = drinksTextView.text!
 
         self.performSegue(withIdentifier: "nextBarSignUpSegue", sender: self)

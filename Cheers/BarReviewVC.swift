@@ -116,14 +116,10 @@ class BarReviewVC: UIViewController, hasDataDict {
             self.drinksLabel.text = drinks
             firebaseDict[Bar.dataTypes.drinks] = drinks as AnyObject
         }
-        if let hoursTime = dataDict[Bar.dataTypes.hoursTime] as? Dictionary<String,String>{
-            if let hoursAmPm = dataDict[Bar.dataTypes.hoursAmPm] as? Dictionary<String,String>{
-                firebaseDict[Bar.dataTypes.hoursTime] = hoursTime as AnyObject
-                firebaseDict[Bar.dataTypes.hoursAmPm] = hoursAmPm as AnyObject
-                self.barHoursLabel.text = Bar.getHoursParagraph(hoursDict: hoursTime, amPmDict: hoursAmPm)
-            }
-            
-        }
+//        if let hoursTime = dataDict[Bar.dataTypes.hoursOpen] as? Dictionary<String,String>{
+//                self.barHoursLabel.text = Bar.getHoursParagraph(hoursDict: hoursTime, amPmDict: hoursAmPm)
+//            
+//        }
         if let image = dataDict[Bar.dataTypes.img] as? UIImage {
             self.barImgView.image = image
 
