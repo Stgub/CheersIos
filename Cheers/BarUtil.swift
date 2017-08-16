@@ -34,27 +34,27 @@ public class BarUtil {
         var barHoursPara = ""
         var dayString = getDayString(hoursOpen: hoursOpen, dayAbbrv: "mon")
         if !dayString.isEmpty {
-            barHoursPara += "Mon. \(dayString),\n"
+            barHoursPara += "Mon. \(dayString)\n"
         }
         dayString = getDayString(hoursOpen: hoursOpen, dayAbbrv: "tues")
         if !dayString.isEmpty {
-            barHoursPara += "Tue. \(dayString),\n"
+            barHoursPara += "Tue. \(dayString)\n"
         }
         dayString = getDayString(hoursOpen: hoursOpen, dayAbbrv: "weds")
         if !dayString.isEmpty {
-            barHoursPara += "Wed. \(dayString),\n"
+            barHoursPara += "Wed. \(dayString)\n"
         }
         dayString = getDayString(hoursOpen: hoursOpen, dayAbbrv: "thu")
         if !dayString.isEmpty {
-            barHoursPara += "Thurs. \(dayString),\n"
+            barHoursPara += "Thurs. \(dayString)\n"
         }
         dayString = getDayString(hoursOpen: hoursOpen, dayAbbrv: "fri")
         if !dayString.isEmpty {
-            barHoursPara += "Fri. \(dayString),\n"
+            barHoursPara += "Fri. \(dayString)\n"
         }
         dayString = getDayString(hoursOpen: hoursOpen, dayAbbrv: "sat")
         if !dayString.isEmpty {
-            barHoursPara += "Sat. \(dayString),\n"
+            barHoursPara += "Sat. \(dayString)\n"
         }
         dayString = getDayString(hoursOpen: hoursOpen, dayAbbrv: "sat")
         if !dayString.isEmpty {

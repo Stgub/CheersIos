@@ -228,7 +228,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="221"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e1n-h0-460" id="dRF-Zo-fkb">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="220.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="220.66666666666666"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEw-oq-9uQ">
@@ -278,11 +278,11 @@
                                                                 <constraint firstAttribute="trailing" secondItem="dTn-As-l8a" secondAttribute="trailing" constant="8" id="ucR-3M-ZrB"/>
                                                             </constraints>
                                                         </view>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="uqm-wW-HJA">
-                                                            <rect key="frame" x="274" y="5" width="135" height="30"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="uqm-wW-HJA">
+                                                            <rect key="frame" x="274" y="5" width="0.0" height="0.0"/>
                                                             <subviews>
-                                                                <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.85000002384185791" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="genericDealIcon" translatesAutoresizingMaskIntoConstraints="NO" id="5MI-T6-PjD" customClass="RoundedImageCorner" customModule="Cheers" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                                                <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.85000002384185791" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="genericDealIcon" translatesAutoresizingMaskIntoConstraints="NO" id="5MI-T6-PjD" customClass="RoundedImageCorner" customModule="Cheers" customModuleProvider="target">
+                                                                    <rect key="frame" x="-409" y="-5" width="0.0" height="30"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="30" id="3S9-tc-rdt"/>
@@ -292,24 +292,24 @@
                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="" value="YES"/>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
-                                                                <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="halfOffWineIcon" translatesAutoresizingMaskIntoConstraints="NO" id="xku-4j-HVF" customClass="RoundedImageCorner" customModule="Cheers" customModuleProvider="target">
-                                                                    <rect key="frame" x="35" y="0.0" width="30" height="30"/>
+                                                                <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="halfOffWineIcon" translatesAutoresizingMaskIntoConstraints="NO" id="xku-4j-HVF" customClass="RoundedImageCorner" customModule="Cheers" customModuleProvider="target">
+                                                                    <rect key="frame" x="-409" y="-5" width="0.0" height="30"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="30" id="Abj-1s-hpf"/>
                                                                         <constraint firstAttribute="width" constant="30" id="PZ8-qB-nP6"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="freeAppIcon" translatesAutoresizingMaskIntoConstraints="NO" id="vHj-pD-qOF" customClass="RoundedImageCorner" customModule="Cheers" customModuleProvider="target">
-                                                                    <rect key="frame" x="70" y="0.0" width="30" height="30"/>
+                                                                <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="freeAppIcon" translatesAutoresizingMaskIntoConstraints="NO" id="vHj-pD-qOF" customClass="RoundedImageCorner" customModule="Cheers" customModuleProvider="target">
+                                                                    <rect key="frame" x="-409" y="-5" width="0.0" height="30"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="30" id="76F-96-9UN"/>
                                                                         <constraint firstAttribute="height" constant="30" id="y8F-UX-eQ4"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="oneFreeDrinkIcon" translatesAutoresizingMaskIntoConstraints="NO" id="6WP-j6-bhF" customClass="RoundedImageCorner" customModule="Cheers" customModuleProvider="target">
-                                                                    <rect key="frame" x="105" y="0.0" width="30" height="30"/>
+                                                                <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="oneFreeDrinkIcon" translatesAutoresizingMaskIntoConstraints="NO" id="6WP-j6-bhF" customClass="RoundedImageCorner" customModule="Cheers" customModuleProvider="target">
+                                                                    <rect key="frame" x="-409" y="-5" width="0.0" height="30"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="30" id="aqt-JH-Av7"/>
@@ -715,7 +715,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6H3-6P-WFP" id="UeR-X4-UaQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="86.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="86.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32P-ih-Bfi">
