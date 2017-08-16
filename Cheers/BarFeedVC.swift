@@ -156,13 +156,13 @@ class BarFeedVC: BaseMenuVC, UITableViewDataSource, UITableViewDelegate,BarServi
         }
         for deal in bar.deals {
             switch (deal.key) {
-                case "freeApp":
+                case dealTypes.freeApp:
                     cell.freeAppIcon.isHidden = false
-                case "oneFreeDrink":
+                case dealTypes.oneFreeDrink:
                     cell.oneFreeDrinkIcon.isHidden = false
-                case "buyOneGetOne":
+                case dealTypes.buyOneGetOne:
                     cell.genericDealIcon.isHidden = false
-                case "halfOffBottle":
+                case dealTypes.halfOffBottle:
                     cell.wineDealIcon.isHidden = false
                 default:
                     cell.genericDealIcon.isHidden = false

@@ -9,6 +9,12 @@
 import UIKit
 import Firebase
 
+struct dealTypes {
+    static let oneFreeDrink = "oneFreeDrink"
+    static let buyOneGetOne = "buyOneGetOne"
+    static let halfOffBottle = "halfOffBottle"
+    static let freeApp = "freeApp"
+}
 
 class Bar {
     struct dataTypes{
@@ -42,7 +48,7 @@ class Bar {
     var drinks: String!
     var hoursOpen: Dictionary<String,Int>!
     var availableDays:[String:Bool] = [:] //contains a string for each day of the week that it is available e.g. Monday, Tuesday
-    var deals:[String:Bool] = [:]
+    var deals:[String:String] = [:]
     
     init(barKey:String, dataDict:Dictionary<String,AnyObject>){
         self.key = barKey
@@ -78,7 +84,6 @@ class Bar {
             self.imgUrl = imgUrl
         }
         if let hoursOpen = dataDict[dataTypes.hoursOpen]{
-            print(hoursOpen)
             if let hoursOpen = hoursOpen as? Dictionary<String,Int>{
                 self.hoursOpen = hoursOpen
             } else {print("Bar:\(barName) hoursOpen could not cast to dict")}
@@ -87,9 +92,9 @@ class Bar {
             self.availableDays = availableDays
             
         } else { print("**** Couldn't add bar available days" )}
-        if let deals = dataDict[dataTypes.deals] as? [String:Bool]{
+        if let deals = dataDict[dataTypes.deals] as? [String:String]{
             self.deals = deals
-        }
+        } else { print("Bar:\(barName) no deals or could not cast")}
     }
     
     func getImage(returnBlock:@escaping ()->()){
