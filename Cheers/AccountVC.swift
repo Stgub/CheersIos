@@ -34,7 +34,7 @@ class AccountVC: BaseMenuVC, UITextFieldDelegate{
     private var isBasicMembership:Bool = true {
         didSet {
             if self.isBasicMembership {
-                membershiBtn.setTitle("Join the club", for: .normal)
+                membershiBtn.setTitle("Upgrade To Premium", for: .normal)
             } else {
                 membershiBtn.setTitle("Downgrade", for: .normal)
             }
